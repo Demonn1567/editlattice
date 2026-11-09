@@ -1,6 +1,6 @@
 # Harness Lineages Are Product Lines: code, data and results
 
-This repository accompanies the submission "Harness Lineages Are Product Lines: Exact, Replay-Coupled
+This material accompanies the submission "Harness Lineages Are Product Lines: Exact, Replay-Coupled
 Attribution, Distillation and Recombination of Self-Evolved Agent Harnesses". It contains the method, the
 experiment drivers, the registered analysis plan, the decision log and every result file from which the
 paper's numbers, tables and figures are generated.
