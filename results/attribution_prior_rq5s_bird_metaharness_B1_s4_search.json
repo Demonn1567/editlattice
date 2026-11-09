@@ -1,0 +1,210 @@
+{
+ "name": "prior_rq5s_bird_metaharness_B1_s4",
+ "split": "search",
+ "n_cells": 10,
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "describe_table"
+   ],
+   "diff": "@@ seed lines 56-56\n-     return f\"Table {table}: \" + \", \".join(parts)\n+     return f\"Table {table}: \" + \", \".join(parts) + f\"\\nAvailable columns: {', '.join([row[1] for row in rows])}\"\n"
+  },
+  {
+   "index": 1,
+   "items": [
+    "run_sql"
+   ],
+   "diff": "@@ seed lines 83-83\n-     \"\"\"Execute a query and return a text observation.\"\"\"\n+     \"\"\"Execute a query and return a text observation with column names and values.\"\"\"\n"
+  },
+  {
+   "index": 2,
+   "items": [
+    "run_sql"
+   ],
+   "diff": "@@ seed lines 88-88\n-     return format_rows(columns, rows, truncated)\n+     # Provide detailed observation with column names and values\n+     observation = \"Columns: \" + \", \".join(columns) + \"\\n\"\n+     observation += format_rows(columns, rows, truncated)\n+     return observation\n"
+  },
+  {
+   "index": 3,
+   "items": [
+    "verify_submission"
+   ],
+   "diff": "@@ seed lines 134-134\n-     \"\"\"Return None if the query runs, otherwise an error message.\"\"\"\n+     \"\"\"Return None if the query runs and returns a single row with a single value, otherwise an error message.\"\"\"\n"
+  },
+  {
+   "index": 4,
+   "items": [
+    "verify_submission"
+   ],
+   "diff": "@@ seed lines 136-136\n-         env.execute(clean_sql(sql), max_rows=1)\n+         columns, rows, truncated = env.execute(clean_sql(sql), max_rows=1)\n+         if len(columns) != 1:\n+             return f\"Your submitted query does not return a single value. It returns {len(columns)} columns.\"\n+         if not rows:\n+             return \"Your submitted query returned 0 rows. Check your filters and conditions.\"\n+         # Check if all rows have the same value in the only column\n+         first_value = rows[0][0]\n+         for row in rows:\n+             if row[0] != first_value:\n+                 return \"Your submitted query returns different values in different rows. Make sure your query returns a single value.\"\n+         # Allow multiple rows as long as all have the same value\n"
+  }
+ ],
+ "values": {
+  "": 0.5,
+  "0": 0.4,
+  "1": 0.5,
+  "2": 0.4,
+  "3": 0.5,
+  "4": 0.6,
+  "0,1": 0.4,
+  "0,2": 0.4,
+  "0,3": 0.4,
+  "0,4": 0.5,
+  "1,2": 0.4,
+  "1,3": 0.5,
+  "1,4": 0.6,
+  "2,3": 0.4,
+  "2,4": 0.6,
+  "3,4": 0.6,
+  "0,1,2": 0.4,
+  "0,1,3": 0.4,
+  "0,1,4": 0.5,
+  "0,2,3": 0.4,
+  "0,2,4": 0.5,
+  "0,3,4": 0.5,
+  "1,2,3": 0.4,
+  "1,2,4": 0.6,
+  "1,3,4": 0.6,
+  "2,3,4": 0.6,
+  "0,1,2,3": 0.4,
+  "0,1,2,4": 0.5,
+  "0,1,3,4": 0.5,
+  "0,2,3,4": 0.5,
+  "1,2,3,4": 0.6,
+  "0,1,2,3,4": 0.5
+ },
+ "shapley": {
+  "0": {
+   "value": -0.08333333333333331,
+   "low": -0.3333333333333333,
+   "high": 0.10000000000000003
+  },
+  "1": {
+   "value": 0.0,
+   "low": 0.0,
+   "high": 0.0
+  },
+  "2": {
+   "value": -0.033333333333333326,
+   "low": -0.15000000000000002,
+   "high": 0.049999999999999996
+  },
+  "3": {
+   "value": 0.0,
+   "low": 0.0,
+   "high": 0.0
+  },
+  "4": {
+   "value": 0.11666666666666667,
+   "low": 0.0,
+   "high": 0.33333333333333337
+  }
+ },
+ "interaction": {
+  "0,1": {
+   "value": 0.0,
+   "low": 0.0,
+   "high": 0.0
+  },
+  "0,2": {
+   "value": 0.04999999999999999,
+   "low": -0.25,
+   "high": 0.45
+  },
+  "0,3": {
+   "value": 0.0,
+   "low": 0.0,
+   "high": 0.0
+  },
+  "0,4": {
+   "value": -0.04999999999999999,
+   "low": -0.15000000000000002,
+   "high": 5.551115123125782e-17
+  },
+  "1,2": {
+   "value": 0.0,
+   "low": 0.0,
+   "high": 0.0
+  },
+  "1,3": {
+   "value": 0.0,
+   "low": 0.0,
+   "high": 0.0
+  },
+  "1,4": {
+   "value": 0.0,
+   "low": 0.0,
+   "high": 4.625929269271485e-18
+  },
+  "2,3": {
+   "value": 0.0,
+   "low": 0.0,
+   "high": 0.0
+  },
+  "2,4": {
+   "value": 0.04999999999999999,
+   "low": -2.7755575615628914e-17,
+   "high": 0.15
+  },
+  "3,4": {
+   "value": 0.0,
+   "low": 0.0,
+   "high": 4.625929269271485e-18
+  }
+ },
+ "mobius": {
+  "": 0.5,
+  "0": -0.09999999999999998,
+  "1": 0.0,
+  "2": -0.09999999999999998,
+  "3": 0.0,
+  "4": 0.09999999999999998,
+  "0,1": 0.0,
+  "0,2": 0.09999999999999998,
+  "0,3": 0.0,
+  "0,4": 0.0,
+  "1,2": 0.0,
+  "1,3": 0.0,
+  "1,4": 0.0,
+  "2,3": 0.0,
+  "2,4": 0.09999999999999998,
+  "3,4": 0.0,
+  "0,1,2": 0.0,
+  "0,1,3": 0.0,
+  "0,1,4": 0.0,
+  "0,2,3": 0.0,
+  "0,2,4": -0.09999999999999998,
+  "0,3,4": 0.0,
+  "1,2,3": 0.0,
+  "1,2,4": 0.0,
+  "1,3,4": 1.1102230246251565e-16,
+  "2,3,4": 0.0,
+  "0,1,2,3": 1.1102230246251565e-16,
+  "0,1,2,4": 1.1102230246251565e-16,
+  "0,1,3,4": 1.1102230246251565e-16,
+  "0,2,3,4": 1.1102230246251565e-16,
+  "1,2,3,4": -2.220446049250313e-16,
+  "0,1,2,3,4": 1.1102230246251565e-16
+ },
+ "loo": {
+  "0": -0.09999999999999998,
+  "1": 0.0,
+  "2": 0.0,
+  "3": 0.0,
+  "4": 0.09999999999999998
+ },
+ "loi": {
+  "0": -0.09999999999999998,
+  "1": 0.0,
+  "2": -0.09999999999999998,
+  "3": 0.0,
+  "4": 0.09999999999999998
+ },
+ "cost": {
+  "executions": 290,
+  "brute_force_runs": 320,
+  "generated_tokens": 0,
+  "nominal_tokens": 110800,
+  "mismatches": 0
+ }
+}

@@ -1,0 +1,345 @@
+{
+ "name": "phaseA3_lcb_metaharness_B1_s2_stmt",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "extract_code"
+   ],
+   "diff": "@@ seed lines 18-24\n-     \"\"\"The last ```python block, else the last code block, else None.\"\"\"\n-     if \"```python\" in reply:\n-         return reply.rsplit(\"```python\", 1)[1].split(\"```\", 1)[0].strip()\n-     if \"```\" in reply:\n-         parts = reply.split(\"```\")\n-         if len(parts) >= 3:\n-             return parts[-2].strip()\n+     \"\"\"Extract the last code block, handling language specifiers.\"\"\"\n+     parts = reply.split(\"```\")\n+     code_blocks = []\n+     for i in range(1, len(parts), 2):  # Only even-numbered code blocks\n+         code_block = parts[i]\n+         if '\\n' in code_block:\n+             code = code_block.split('\\n', 1)[1].strip()\n+         else:\n+             code = code_block.strip()\n+         code_blocks.append(code)\n+     if code_blocks:\n+         return code_blocks[-1]\n",
+   "hunks": [
+    {
+     "start": 17,
+     "end": 24,
+     "replacement": [
+      "    \"\"\"Extract the last code block, handling language specifiers.\"\"\"\n",
+      "    parts = reply.split(\"```\")\n",
+      "    code_blocks = []\n",
+      "    for i in range(1, len(parts), 2):  # Only even-numbered code blocks\n",
+      "        code_block = parts[i]\n",
+      "        if '\\n' in code_block:\n",
+      "            code = code_block.split('\\n', 1)[1].strip()\n",
+      "        else:\n",
+      "            code = code_block.strip()\n",
+      "        code_blocks.append(code)\n",
+      "    if code_blocks:\n",
+      "        return code_blocks[-1]\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 29-29\n-     prompt = f\"Problem: {task['title']}\\n\\n{task['question']}\"\n+     prompt = f\"Problem: {task['title']}\\n\\n{task['question']}\\n\\nExamples:\\n\" + \"\\n\".join([f\"Input: {ex['input']}\\nOutput: {ex['output']}\" for ex in task.get('public_tests', [])])\n",
+   "hunks": [
+    {
+     "start": 28,
+     "end": 29,
+     "replacement": [
+      "    prompt = f\"Problem: {task['title']}\\n\\n{task['question']}\\n\\nExamples:\\n\" + \"\\n\".join([f\"Input: {ex['input']}\\nOutput: {ex['output']}\" for ex in task.get('public_tests', [])])\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 31-31\n-     return {\"answer\": extract_code(reply)}\n+     code = extract_code(reply)\n+     \n+     # Test the generated code against public examples\n+     for example in task.get('public_tests', []):\n+         stdin = example['input']\n+         expected_output = example['output']\n+         \n+         result = env.run_python(code, stdin, timeout_seconds=6.0)\n+         \n+         # Check if the code ran successfully and produced the expected output\n+         if result.returncode != 0 or result.timed_out or result.stdout.strip() != expected_output:\n+             # If the code failed, ask the model to repair it\n+             error_msg = f\"Your code failed on input: {stdin}\\nExpected output: {expected_output}\\nActual output: {result.stdout.strip()}\"\n+             repair_prompt = f\"Problem: {task['title']}\\n\\n{task['question']}\\n\\nExamples:\\n\" + \"\\n\".join([f\"Input: {ex['input']}\\nOutput: {ex['output']}\" for ex in task.get('public_tests', [])]) + f\"\\n\\nFix the following Python code based on the error message:\\n\\n{code}\\n\\nError: {error_msg}\"\n+             reply = llm.chat([{\"role\": \"system\", \"content\": SYSTEM_PROMPT}, {\"role\": \"user\", \"content\": repair_prompt}])\n+             code = extract_code(reply)\n+     \n+     return {\"answer\": code}\n",
+   "hunks": [
+    {
+     "start": 30,
+     "end": 31,
+     "replacement": [
+      "    code = extract_code(reply)\n",
+      "    \n",
+      "    # Test the generated code against public examples\n",
+      "    for example in task.get('public_tests', []):\n",
+      "        stdin = example['input']\n",
+      "        expected_output = example['output']\n",
+      "        \n",
+      "        result = env.run_python(code, stdin, timeout_seconds=6.0)\n",
+      "        \n",
+      "        # Check if the code ran successfully and produced the expected output\n",
+      "        if result.returncode != 0 or result.timed_out or result.stdout.strip() != expected_output:\n",
+      "            # If the code failed, ask the model to repair it\n",
+      "            error_msg = f\"Your code failed on input: {stdin}\\nExpected output: {expected_output}\\nActual output: {result.stdout.strip()}\"\n",
+      "            repair_prompt = f\"Problem: {task['title']}\\n\\n{task['question']}\\n\\nExamples:\\n\" + \"\\n\".join([f\"Input: {ex['input']}\\nOutput: {ex['output']}\" for ex in task.get('public_tests', [])]) + f\"\\n\\nFix the following Python code based on the error message:\\n\\n{code}\\n\\nError: {error_msg}\"\n",
+      "            reply = llm.chat([{\"role\": \"system\", \"content\": SYSTEM_PROMPT}, {\"role\": \"user\", \"content\": repair_prompt}])\n",
+      "            code = extract_code(reply)\n",
+      "    \n",
+      "    return {\"answer\": code}\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {
+  "search": {
+   "seed": 0.19166666666666668,
+   "full": 0.23333333333333334,
+   "shapley": {
+    "0": {
+     "value": 0.0,
+     "low": -0.00416666666666667,
+     "high": 0.00416666666666667,
+     "p": 1.0
+    },
+    "1": {
+     "value": -0.004166666666666665,
+     "low": -0.025000000000000022,
+     "high": 0.01597222222222222,
+     "p": 0.668
+    },
+    "2": {
+     "value": 0.04583333333333332,
+     "low": 0.009722222222222205,
+     "high": 0.08541666666666667,
+     "p": 0.01
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": 0.0,
+     "low": -0.0062500000000000056,
+     "high": 0.0062500000000000056,
+     "p": 1.0
+    },
+    "0,2": {
+     "value": 0.0,
+     "low": -0.0062500000000000056,
+     "high": 0.0062500000000000056,
+     "p": 1.0
+    },
+    "1,2": {
+     "value": -0.016666666666666635,
+     "low": -0.05624999999999998,
+     "high": 0.02500000000000005,
+     "p": 0.438
+    }
+   },
+   "matters": {
+    "2": true,
+    "1": false,
+    "0": false
+   },
+   "interacts": {
+    "1,2": false,
+    "0,1": false,
+    "0,2": false
+   },
+   "loo": {
+    "0": 0.0,
+    "1": -0.012499999999999983,
+    "2": 0.037500000000000006
+   },
+   "loi": {
+    "0": 0.0,
+    "1": 0.004166666666666652,
+    "2": 0.05416666666666664
+   }
+  },
+  "heldout": {
+   "seed": 0.24705882352941178,
+   "full": 0.29705882352941176,
+   "shapley": {
+    "0": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1": {
+     "value": 0.011764705882352927,
+     "low": -0.026470588235294107,
+     "high": 0.04558823529411765,
+     "p": 0.51
+    },
+    "2": {
+     "value": 0.03823529411764706,
+     "low": 0.0176470588235294,
+     "high": 0.06617647058823528,
+     "p": 0.0
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "0,2": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,2": {
+     "value": 0.005882352941176505,
+     "low": -0.01764705882352946,
+     "high": 0.029411764705882387,
+     "p": 0.672
+    }
+   },
+   "matters": {
+    "2": true,
+    "1": false,
+    "0": false
+   },
+   "interacts": {
+    "1,2": false,
+    "0,1": false,
+    "0,2": false
+   },
+   "loo": {
+    "0": 0.0,
+    "1": 0.01470588235294118,
+    "2": 0.041176470588235314
+   },
+   "loi": {
+    "0": 0.0,
+    "1": 0.008823529411764675,
+    "2": 0.03529411764705881
+   }
+  },
+  "overfitting_units": []
+ },
+ "rq4": [
+  {
+   "delta": 0.02,
+   "method": "exact",
+   "product": [
+    2
+   ],
+   "units_kept": 1,
+   "queries": 8,
+   "search_value": 0.24583333333333332,
+   "heldout_value": 0.2823529411764706,
+   "heldout_full": 0.29705882352941176,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "greedy_backward",
+   "product": [
+    2
+   ],
+   "units_kept": 1,
+   "queries": 7,
+   "search_value": 0.24583333333333332,
+   "heldout_value": 0.2823529411764706,
+   "heldout_full": 0.29705882352941176,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "ddmin",
+   "product": [
+    2
+   ],
+   "units_kept": 1,
+   "queries": 5,
+   "search_value": 0.24583333333333332,
+   "heldout_value": 0.2823529411764706,
+   "heldout_full": 0.29705882352941176,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "loo_threshold",
+   "product": [
+    2
+   ],
+   "units_kept": 1,
+   "queries": 7,
+   "search_value": 0.24583333333333332,
+   "heldout_value": 0.2823529411764706,
+   "heldout_full": 0.29705882352941176,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "shapley_threshold",
+   "product": [
+    2
+   ],
+   "units_kept": 1,
+   "queries": 8,
+   "search_value": 0.24583333333333332,
+   "heldout_value": 0.2823529411764706,
+   "heldout_full": 0.29705882352941176,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.05,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 8,
+   "search_value": 0.19166666666666668,
+   "heldout_value": 0.24705882352941178,
+   "heldout_full": 0.29705882352941176,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.05,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 7,
+   "search_value": 0.19166666666666668,
+   "heldout_value": 0.24705882352941178,
+   "heldout_full": 0.29705882352941176,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.05,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 3,
+   "search_value": 0.19166666666666668,
+   "heldout_value": 0.24705882352941178,
+   "heldout_full": 0.29705882352941176,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.05,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 6,
+   "search_value": 0.19166666666666668,
+   "heldout_value": 0.24705882352941178,
+   "heldout_full": 0.29705882352941176,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.05,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 8,
+   "search_value": 0.19166666666666668,
+   "heldout_value": 0.24705882352941178,
+   "heldout_full": 0.29705882352941176,
+   "certified": false,
+   "pairs_used": 340
+  }
+ ],
+ "rq5": null
+}

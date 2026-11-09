@@ -1,0 +1,276 @@
+{
+ "name": "pooledA3_lcb",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "extract_code"
+   ],
+   "diff": "@@ seed lines 18-24\n-     \"\"\"The last ```python block, else the last code block, else None.\"\"\"\n-     if \"```python\" in reply:\n-         return reply.rsplit(\"```python\", 1)[1].split(\"```\", 1)[0].strip()\n-     if \"```\" in reply:\n-         parts = reply.split(\"```\")\n-         if len(parts) >= 3:\n-             return parts[-2].strip()\n+     \"\"\"Extract the last code block, handling language specifiers.\"\"\"\n+     parts = reply.split(\"```\")\n+     code_blocks = []\n+     for i in range(1, len(parts), 2):  # Only even-numbered code blocks\n+         code_block = parts[i]\n+         if '\\n' in code_block:\n+             code = code_block.split('\\n', 1)[1].strip()\n+         else:\n+             code = code_block.strip()\n+         code_blocks.append(code)\n+     if code_blocks:\n+         return code_blocks[-1]\n",
+   "hunks": [
+    {
+     "start": 17,
+     "end": 24,
+     "replacement": [
+      "    \"\"\"Extract the last code block, handling language specifiers.\"\"\"\n",
+      "    parts = reply.split(\"```\")\n",
+      "    code_blocks = []\n",
+      "    for i in range(1, len(parts), 2):  # Only even-numbered code blocks\n",
+      "        code_block = parts[i]\n",
+      "        if '\\n' in code_block:\n",
+      "            code = code_block.split('\\n', 1)[1].strip()\n",
+      "        else:\n",
+      "            code = code_block.strip()\n",
+      "        code_blocks.append(code)\n",
+      "    if code_blocks:\n",
+      "        return code_blocks[-1]\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 29-29\n-     prompt = f\"Problem: {task['title']}\\n\\n{task['question']}\"\n+     prompt = f\"Problem: {task['title']}\\n\\n{task['question']}\\n\\nExamples:\\n\" + \"\\n\".join([f\"Input: {ex['input']}\\nOutput: {ex['output']}\" for ex in task.get('public_tests', [])])\n",
+   "hunks": [
+    {
+     "start": 28,
+     "end": 29,
+     "replacement": [
+      "    prompt = f\"Problem: {task['title']}\\n\\n{task['question']}\\n\\nExamples:\\n\" + \"\\n\".join([f\"Input: {ex['input']}\\nOutput: {ex['output']}\" for ex in task.get('public_tests', [])])\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 31-31\n-     return {\"answer\": extract_code(reply)}\n+     code = extract_code(reply)\n+     \n+     # Test the generated code against public examples\n+     for example in task.get('public_tests', []):\n+         stdin = example['input']\n+         expected_output = example['output']\n+         \n+         result = env.run_python(code, stdin, timeout_seconds=6.0)\n+         \n+         # Check if the code ran successfully and produced the expected output\n+         if result.returncode != 0 or result.timed_out or result.stdout.strip() != expected_output:\n+             # If the code failed, ask the model to repair it\n+             error_msg = f\"Your code failed on input: {stdin}\\nExpected output: {expected_output}\\nActual output: {result.stdout.strip()}\"\n+             repair_prompt = f\"Problem: {task['title']}\\n\\n{task['question']}\\n\\nExamples:\\n\" + \"\\n\".join([f\"Input: {ex['input']}\\nOutput: {ex['output']}\" for ex in task.get('public_tests', [])]) + f\"\\n\\nFix the following Python code based on the error message:\\n\\n{code}\\n\\nError: {error_msg}\"\n+             reply = llm.chat([{\"role\": \"system\", \"content\": SYSTEM_PROMPT}, {\"role\": \"user\", \"content\": repair_prompt}])\n+             code = extract_code(reply)\n+     \n+     return {\"answer\": code}\n",
+   "hunks": [
+    {
+     "start": 30,
+     "end": 31,
+     "replacement": [
+      "    code = extract_code(reply)\n",
+      "    \n",
+      "    # Test the generated code against public examples\n",
+      "    for example in task.get('public_tests', []):\n",
+      "        stdin = example['input']\n",
+      "        expected_output = example['output']\n",
+      "        \n",
+      "        result = env.run_python(code, stdin, timeout_seconds=6.0)\n",
+      "        \n",
+      "        # Check if the code ran successfully and produced the expected output\n",
+      "        if result.returncode != 0 or result.timed_out or result.stdout.strip() != expected_output:\n",
+      "            # If the code failed, ask the model to repair it\n",
+      "            error_msg = f\"Your code failed on input: {stdin}\\nExpected output: {expected_output}\\nActual output: {result.stdout.strip()}\"\n",
+      "            repair_prompt = f\"Problem: {task['title']}\\n\\n{task['question']}\\n\\nExamples:\\n\" + \"\\n\".join([f\"Input: {ex['input']}\\nOutput: {ex['output']}\" for ex in task.get('public_tests', [])]) + f\"\\n\\nFix the following Python code based on the error message:\\n\\n{code}\\n\\nError: {error_msg}\"\n",
+      "            reply = llm.chat([{\"role\": \"system\", \"content\": SYSTEM_PROMPT}, {\"role\": \"user\", \"content\": repair_prompt}])\n",
+      "            code = extract_code(reply)\n",
+      "    \n",
+      "    return {\"answer\": code}\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 3,
+   "items": [
+    "extract_code"
+   ],
+   "diff": "@@ seed lines 23-24\n-         if len(parts) >= 3:\n-             return parts[-2].strip()\n+         code_blocks = parts[1::2]  # Extract all code blocks (odd indices starting from 1)\n+         if code_blocks:\n+             return code_blocks[-1].strip()\n",
+   "hunks": [
+    {
+     "start": 22,
+     "end": 24,
+     "replacement": [
+      "        code_blocks = parts[1::2]  # Extract all code blocks (odd indices starting from 1)\n",
+      "        if code_blocks:\n",
+      "            return code_blocks[-1].strip()\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 4,
+   "items": [
+    "extract_code"
+   ],
+   "diff": "@@ seed lines 18-18\n-     \"\"\"The last ```python block, else the last code block, else None.\"\"\"\n+     \"\"\"Extract code from model reply, handling both code blocks and 'Final answer:' format.\"\"\"\n+     # Handle 'Final answer: ...' format\n+     if \"Final answer:\" in reply:\n+         code_part = reply.split(\"Final answer:\", 1)[-1].strip()\n+         # If code_part contains triple backticks, extract the middle part\n+         if code_part.startswith(\"```\") and code_part.endswith(\"```\"):\n+             return code_part[3:-3].strip()\n+         return code_part  # Return raw code if no backticks\n+ \n+     # Fallback to code block extraction\n",
+   "hunks": [
+    {
+     "start": 17,
+     "end": 18,
+     "replacement": [
+      "    \"\"\"Extract code from model reply, handling both code blocks and 'Final answer:' format.\"\"\"\n",
+      "    # Handle 'Final answer: ...' format\n",
+      "    if \"Final answer:\" in reply:\n",
+      "        code_part = reply.split(\"Final answer:\", 1)[-1].strip()\n",
+      "        # If code_part contains triple backticks, extract the middle part\n",
+      "        if code_part.startswith(\"```\") and code_part.endswith(\"```\"):\n",
+      "            return code_part[3:-3].strip()\n",
+      "        return code_part  # Return raw code if no backticks\n",
+      "\n",
+      "    # Fallback to code block extraction\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 5,
+   "items": [
+    "extract_code"
+   ],
+   "diff": "@@ seed lines 19-25\n-     if \"```python\" in reply:\n-         return reply.rsplit(\"```python\", 1)[1].split(\"```\", 1)[0].strip()\n-     if \"```\" in reply:\n-         parts = reply.split(\"```\")\n-         if len(parts) >= 3:\n-             return parts[-2].strip()\n-     return None\n+     import re\n+     # Find all Python code blocks (```python ... ```), take last\n+     python_blocks = re.findall(r'```[ \\t]*python[ \\t]*([\\s\\S]*?)```[ \\t]*', reply, re.DOTALL)\n+     if python_blocks:\n+         return python_blocks[-1].strip()\n+     # Fallback: find any code block (``` ... ```), take last\n+     code_blocks = re.findall(r'```[ \\t]*([\\s\\S]*?)```[ \\t]*', reply)\n+     if code_blocks:\n+         return code_blocks[-1].strip()\n+     # Final fallback: return the entire reply stripped (if no code blocks found)\n+     return reply.strip()\n",
+   "hunks": [
+    {
+     "start": 18,
+     "end": 25,
+     "replacement": [
+      "    import re\n",
+      "    # Find all Python code blocks (```python ... ```), take last\n",
+      "    python_blocks = re.findall(r'```[ \\t]*python[ \\t]*([\\s\\S]*?)```[ \\t]*', reply, re.DOTALL)\n",
+      "    if python_blocks:\n",
+      "        return python_blocks[-1].strip()\n",
+      "    # Fallback: find any code block (``` ... ```), take last\n",
+      "    code_blocks = re.findall(r'```[ \\t]*([\\s\\S]*?)```[ \\t]*', reply)\n",
+      "    if code_blocks:\n",
+      "        return code_blocks[-1].strip()\n",
+      "    # Final fallback: return the entire reply stripped (if no code blocks found)\n",
+      "    return reply.strip()\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 6,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 29-29\n-     prompt = f\"Problem: {task['title']}\\n\\n{task['question']}\"\n+     prompt = f\"Problem: {task['title']}\\n\\n{task['question']}\\n\\nPublic examples:\\n\" + \"\\n\".join(\n+         [f\"Input: {test['input']}\\nOutput: {test['output']}\" for test in task[\"public_tests\"]]\n+     )\n",
+   "hunks": [
+    {
+     "start": 28,
+     "end": 29,
+     "replacement": [
+      "    prompt = f\"Problem: {task['title']}\\n\\n{task['question']}\\n\\nPublic examples:\\n\" + \"\\n\".join(\n",
+      "        [f\"Input: {test['input']}\\nOutput: {test['output']}\" for test in task[\"public_tests\"]]\n",
+      "    )\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 7,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 29-29\n-     prompt = f\"Problem: {task['title']}\\n\\n{task['question']}\"\n+     prompt = f\"\"\"Problem: {task['title']}\\n\\n{task['question']}\\n\\n\n+     Write a complete Python 3 program that:\n+     1. Reads input from standard input\n+     2. Processes the input to compute the correct answer\n+     3. Prints the answer to standard output\n+     4. Must pass all provided public test cases\n+     5. Must be enclosed in triple backticks (```python ... ```) to be properly formatted\n+     \n+     Public tests:\n+     \"\"\" + \"\\n\".join([f\"Input: {test['input']}\\nOutput: {test['output']}\" for test in task['public_tests']])\n",
+   "hunks": [
+    {
+     "start": 28,
+     "end": 29,
+     "replacement": [
+      "    prompt = f\"\"\"Problem: {task['title']}\\n\\n{task['question']}\\n\\n\n",
+      "    Write a complete Python 3 program that:\n",
+      "    1. Reads input from standard input\n",
+      "    2. Processes the input to compute the correct answer\n",
+      "    3. Prints the answer to standard output\n",
+      "    4. Must pass all provided public test cases\n",
+      "    5. Must be enclosed in triple backticks (```python ... ```) to be properly formatted\n",
+      "    \n",
+      "    Public tests:\n",
+      "    \"\"\" + \"\\n\".join([f\"Input: {test['input']}\\nOutput: {test['output']}\" for test in task['public_tests']])\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 8,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 31-31\n-     return {\"answer\": extract_code(reply)}\n+     code = extract_code(reply)\n+     if code is None:\n+         return {\"answer\": code}\n+     \n+     # Test code against public tests\n+     all_passed = True\n+     for test in task.get(\"public_tests\", []):\n+         input_str = test[\"input\"]\n+         expected_output = test[\"output\"]\n+         result = env.run_python(code, input_str, timeout_seconds=6.0)\n+         if result.returncode != 0 or result.timed_out:\n+             all_passed = False\n+             break\n+         actual_output = result.stdout\n+         expected_output = expected_output\n+         if actual_output != expected_output:\n+             all_passed = False\n+             break\n+     \n+     return {\"answer\": code}\n",
+   "hunks": [
+    {
+     "start": 30,
+     "end": 31,
+     "replacement": [
+      "    code = extract_code(reply)\n",
+      "    if code is None:\n",
+      "        return {\"answer\": code}\n",
+      "    \n",
+      "    # Test code against public tests\n",
+      "    all_passed = True\n",
+      "    for test in task.get(\"public_tests\", []):\n",
+      "        input_str = test[\"input\"]\n",
+      "        expected_output = test[\"output\"]\n",
+      "        result = env.run_python(code, input_str, timeout_seconds=6.0)\n",
+      "        if result.returncode != 0 or result.timed_out:\n",
+      "            all_passed = False\n",
+      "            break\n",
+      "        actual_output = result.stdout\n",
+      "        expected_output = expected_output\n",
+      "        if actual_output != expected_output:\n",
+      "            all_passed = False\n",
+      "            break\n",
+      "    \n",
+      "    return {\"answer\": code}\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {},
+ "rq4": [],
+ "rq5": {
+  "pool": [
+   "metaharness_B1_s2.log.jsonl",
+   "metaharness_B1_s3.log.jsonl",
+   "metaharness_B1_s4.log.jsonl",
+   "metaharness_B3_s1.log.jsonl",
+   "metaharness_B3_s2.log.jsonl",
+   "metaharness_B3_s3.log.jsonl",
+   "metaharness_B3_s4.log.jsonl"
+  ],
+  "best_pooled_product": [
+   2,
+   5,
+   6
+  ],
+  "best_single_run": 0,
+  "single_final_product": [
+   0,
+   1,
+   2
+  ],
+  "search": {
+   "pooled": 0.2625,
+   "single": 0.22916666666666666
+  },
+  "heldout": {
+   "pooled": 0.28823529411764703,
+   "single": 0.2823529411764706,
+   "all_single": {
+    "0": 0.2823529411764706,
+    "1": 0.2411764705882353,
+    "2": 0.2411764705882353,
+    "3": 0.2411764705882353,
+    "4": 0.2323529411764706,
+    "5": 0.22941176470588234,
+    "6": 0.2411764705882353
+   }
+  },
+  "difference": 0.00588235294117645,
+  "ci": [
+   -0.023529411764705882,
+   0.03823529411764706
+  ],
+  "superior_certified": false,
+  "pairs_used": 340
+ }
+}

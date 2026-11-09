@@ -1,0 +1,10 @@
+{
+ "gain": 0.0375,
+ "low": -0.125,
+ "high": 0.1875,
+ "seed_accuracy": 0.5125,
+ "final_accuracy": 0.55,
+ "real_gain": false,
+ "lattice": "planted_stmt_heldout.json",
+ "cells": 80
+}

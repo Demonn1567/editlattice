@@ -1,0 +1,1497 @@
+{
+ "name": "branched_lcb_stmt",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "SYSTEM_PROMPT"
+   ],
+   "diff": "@@ seed lines 17-16\n+ Avoid recursion deeper than a few thousand calls; use loops or an explicit stack instead.\n",
+   "hunks": [
+    {
+     "start": 16,
+     "end": 16,
+     "replacement": [
+      "Avoid recursion deeper than a few thousand calls; use loops or an explicit stack instead.\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "items": [
+    "failure_feedback"
+   ],
+   "diff": "@@ seed lines 36-36\n-         return \"Your program exceeded the time limit on this example.\\n\" + shown\n+         return (\"Your program exceeded the time limit on this example. Estimate the operation count from the constraints \"\n+                 \"and choose an algorithm that fits; read input with sys.stdin.\\n\" + shown)\n",
+   "hunks": [
+    {
+     "start": 35,
+     "end": 36,
+     "replacement": [
+      "        return (\"Your program exceeded the time limit on this example. Estimate the operation count from the constraints \"\n",
+      "                \"and choose an algorithm that fits; read input with sys.stdin.\\n\" + shown)\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "items": [
+    "failure_feedback"
+   ],
+   "diff": "@@ seed lines 38-38\n-         return \"Your program does not compile.\\n\" + shown\n+         return \"Your program does not compile. Check indentation, brackets and Python 3 syntax.\\n\" + shown\n",
+   "hunks": [
+    {
+     "start": 37,
+     "end": 38,
+     "replacement": [
+      "        return \"Your program does not compile. Check indentation, brackets and Python 3 syntax.\\n\" + shown\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 3,
+   "items": [
+    "failure_feedback"
+   ],
+   "diff": "@@ seed lines 40-40\n-         return \"Your program fails on this example.\\n\" + shown\n+         return \"Your program exceeds the recursion limit. Rewrite the recursion as a loop, or raise the limit with sys.setrecursionlimit and run the work in a thread with a larger stack.\\n\" + shown\n",
+   "hunks": [
+    {
+     "start": 39,
+     "end": 40,
+     "replacement": [
+      "        return \"Your program exceeds the recursion limit. Rewrite the recursion as a loop, or raise the limit with sys.setrecursionlimit and run the work in a thread with a larger stack.\\n\" + shown\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 4,
+   "items": [
+    "failure_feedback"
+   ],
+   "diff": "@@ seed lines 42-42\n-         return \"Your program fails on this example.\\n\" + shown\n+         return \"Your program reads past the end of a list. Check loop bounds, empty inputs and the number of input values.\\n\" + shown\n",
+   "hunks": [
+    {
+     "start": 41,
+     "end": 42,
+     "replacement": [
+      "        return \"Your program reads past the end of a list. Check loop bounds, empty inputs and the number of input values.\\n\" + shown\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 5,
+   "items": [
+    "failure_feedback"
+   ],
+   "diff": "@@ seed lines 44-44\n-         return \"Your program fails on this example.\\n\" + shown\n+         return \"Your program fails to convert a value. Split the input on whitespace and convert each token separately.\\n\" + shown\n",
+   "hunks": [
+    {
+     "start": 43,
+     "end": 44,
+     "replacement": [
+      "        return \"Your program fails to convert a value. Split the input on whitespace and convert each token separately.\\n\" + shown\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 6,
+   "items": [
+    "failure_feedback"
+   ],
+   "diff": "@@ seed lines 46-46\n-         return \"Your program fails on this example.\\n\" + shown\n+         return \"Your program looks up a missing key. Use dict.get or collections.defaultdict for keys that may be absent.\\n\" + shown\n",
+   "hunks": [
+    {
+     "start": 45,
+     "end": 46,
+     "replacement": [
+      "        return \"Your program looks up a missing key. Use dict.get or collections.defaultdict for keys that may be absent.\\n\" + shown\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 7,
+   "items": [
+    "failure_feedback"
+   ],
+   "diff": "@@ seed lines 48-48\n-         return \"Your program fails on this example.\\n\" + shown\n+         return \"Your program divides by zero. Handle the case where a divisor or a count is zero.\\n\" + shown\n",
+   "hunks": [
+    {
+     "start": 47,
+     "end": 48,
+     "replacement": [
+      "        return \"Your program divides by zero. Handle the case where a divisor or a count is zero.\\n\" + shown\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 8,
+   "items": [
+    "failure_feedback"
+   ],
+   "diff": "@@ seed lines 50-50\n-         return \"Your program fails on this example.\\n\" + shown\n+         return \"Your program crashes on this example. Read the traceback and fix the line it points to.\\n\" + shown\n",
+   "hunks": [
+    {
+     "start": 49,
+     "end": 50,
+     "replacement": [
+      "        return \"Your program crashes on this example. Read the traceback and fix the line it points to.\\n\" + shown\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 9,
+   "items": [
+    "failure_feedback"
+   ],
+   "diff": "@@ seed lines 52-52\n-         return \"Your program printed nothing on this example.\\n\" + shown\n+         return \"Your program printed nothing on this example. Make sure it calls its main function and prints the answer.\\n\" + shown\n",
+   "hunks": [
+    {
+     "start": 51,
+     "end": 52,
+     "replacement": [
+      "        return \"Your program printed nothing on this example. Make sure it calls its main function and prints the answer.\\n\" + shown\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 10,
+   "items": [
+    "failure_feedback"
+   ],
+   "diff": "@@ seed lines 54-54\n-     return \"Your program prints a wrong answer on this example.\\n\" + shown\n+     return (\"Your program prints a wrong answer on this example. Trace the example by hand, and check edge cases and \"\n+             \"the output format.\\n\" + shown)\n",
+   "hunks": [
+    {
+     "start": 53,
+     "end": 54,
+     "replacement": [
+      "    return (\"Your program prints a wrong answer on this example. Trace the example by hand, and check edge cases and \"\n",
+      "            \"the output format.\\n\" + shown)\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 11,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 64-64\n-             feedback = \"Your reply contains no program.\"\n+             feedback = \"Your reply contains no program. Write the complete program in one ```python code block.\"\n",
+   "hunks": [
+    {
+     "start": 63,
+     "end": 64,
+     "replacement": [
+      "            feedback = \"Your reply contains no program. Write the complete program in one ```python code block.\"\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {
+  "search": {
+   "seed": 0.2125,
+   "full": 0.2,
+   "shapley": {
+    "0": {
+     "value": -0.005555555555555662,
+     "low": -0.053472222222222136,
+     "high": 0.03819444444444478,
+     "p": 0.828
+    },
+    "1": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "4": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "5": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "6": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "8": {
+     "value": 0.0006944444444444428,
+     "low": 0.0,
+     "high": 0.0020833333333333272,
+     "p": 0.754
+    },
+    "9": {
+     "value": 0.0020833333333333437,
+     "low": 0.0,
+     "high": 0.006249999999999993,
+     "p": 0.725
+    },
+    "10": {
+     "value": -0.009722222222222337,
+     "low": -0.02638888888888926,
+     "high": 0.002083333333333308,
+     "p": 0.166
+    },
+    "11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "0,2": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "0,3": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "0,4": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "0,5": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "0,6": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "0,7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "0,8": {
+     "value": -0.0020833333333333476,
+     "low": -0.006249999999999995,
+     "high": 0.0,
+     "p": 0.754
+    },
+    "0,9": {
+     "value": 0.004166666666666672,
+     "low": 0.0,
+     "high": 0.012500000000000164,
+     "p": 0.725
+    },
+    "0,10": {
+     "value": 0.010416666666666833,
+     "low": -0.0041666666666666805,
+     "high": 0.027083333333333442,
+     "p": 0.256
+    },
+    "0,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,2": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,3": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,4": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,5": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,6": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,8": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,9": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,10": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,3": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,4": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,5": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,6": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,8": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,9": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,10": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3,4": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3,5": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3,6": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3,7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3,8": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3,9": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3,10": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "4,5": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "4,6": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "4,7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "4,8": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "4,9": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "4,10": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "4,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "5,6": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "5,7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "5,8": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "5,9": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "5,10": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "5,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "6,7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "6,8": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "6,9": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "6,10": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "6,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "7,8": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "7,9": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "7,10": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "7,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "8,9": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "8,10": {
+     "value": 0.0020833333333333177,
+     "low": 0.0,
+     "high": 0.006250000000000087,
+     "p": 0.754
+    },
+    "8,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "9,10": {
+     "value": 1.3877787807814472e-17,
+     "low": -1.3877787807814472e-17,
+     "high": 2.7755575615628944e-17,
+     "p": 1.0
+    },
+    "9,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "10,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "matters": {
+    "10": false,
+    "9": false,
+    "8": false,
+    "0": false,
+    "1": false,
+    "2": false,
+    "3": false,
+    "4": false,
+    "5": false,
+    "6": false,
+    "7": false,
+    "11": false
+   },
+   "interacts": {
+    "0,10": false,
+    "0,9": false,
+    "0,8": false,
+    "8,10": false,
+    "0,1": false,
+    "0,2": false,
+    "0,3": false,
+    "0,4": false,
+    "0,5": false,
+    "0,6": false,
+    "0,7": false,
+    "0,11": false,
+    "1,2": false,
+    "1,3": false,
+    "1,4": false,
+    "1,5": false,
+    "1,6": false,
+    "1,7": false,
+    "1,8": false,
+    "1,9": false,
+    "1,10": false,
+    "1,11": false,
+    "2,3": false,
+    "2,4": false,
+    "2,5": false,
+    "2,6": false,
+    "2,7": false,
+    "2,8": false,
+    "2,9": false,
+    "2,10": false,
+    "2,11": false,
+    "3,4": false,
+    "3,5": false,
+    "3,6": false,
+    "3,7": false,
+    "3,8": false,
+    "3,9": false,
+    "3,10": false,
+    "3,11": false,
+    "4,5": false,
+    "4,6": false,
+    "4,7": false,
+    "4,8": false,
+    "4,9": false,
+    "4,10": false,
+    "4,11": false,
+    "5,6": false,
+    "5,7": false,
+    "5,8": false,
+    "5,9": false,
+    "5,10": false,
+    "5,11": false,
+    "6,7": false,
+    "6,8": false,
+    "6,9": false,
+    "6,10": false,
+    "6,11": false,
+    "7,8": false,
+    "7,9": false,
+    "7,10": false,
+    "7,11": false,
+    "8,9": false,
+    "8,11": false,
+    "9,10": false,
+    "9,11": false,
+    "10,11": false
+   },
+   "loo": {
+    "0": 0.0,
+    "1": 0.0,
+    "2": 0.0,
+    "3": 0.0,
+    "4": 0.0,
+    "5": 0.0,
+    "6": 0.0,
+    "7": 0.0,
+    "8": 0.0,
+    "9": 0.00416666666666668,
+    "10": -0.004166666666666652,
+    "11": 0.0
+   },
+   "loi": {
+    "0": -0.012499999999999983,
+    "1": 0.0,
+    "2": 0.0,
+    "3": 0.0,
+    "4": 0.0,
+    "5": 0.0,
+    "6": 0.0,
+    "7": 0.0,
+    "8": 0.0,
+    "9": 0.0,
+    "10": -0.016666666666666663,
+    "11": 0.0
+   }
+  },
+  "heldout": {
+   "seed": 0.27058823529411763,
+   "full": 0.2823529411764706,
+   "shapley": {
+    "0": {
+     "value": 0.00784313725490193,
+     "low": -0.025980392156862424,
+     "high": 0.037254901960784494,
+     "p": 0.639
+    },
+    "1": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "4": {
+     "value": -0.0014705882352940586,
+     "low": -0.004411764705882338,
+     "high": 0.0,
+     "p": 0.726
+    },
+    "5": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "6": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "8": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "9": {
+     "value": 0.0034313725490196204,
+     "low": -0.002450980392156863,
+     "high": 0.0112745098039216,
+     "p": 0.344
+    },
+    "10": {
+     "value": 0.0019607843137255465,
+     "low": -0.0058823529411763074,
+     "high": 0.011274509803921726,
+     "p": 0.678
+    },
+    "11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "0,2": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "0,3": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "0,4": {
+     "value": 0.002941176470588256,
+     "low": 0.0,
+     "high": 0.008823529411764596,
+     "p": 0.726
+    },
+    "0,5": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "0,6": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "0,7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "0,8": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "0,9": {
+     "value": 0.010294117647058716,
+     "low": -0.0014705882352941296,
+     "high": 0.026470588235294027,
+     "p": 0.149
+    },
+    "0,10": {
+     "value": -0.02205882352941197,
+     "low": -0.05588235294117673,
+     "high": -0.0014705882352941243,
+     "p": 0.032
+    },
+    "0,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,2": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,3": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,4": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,5": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,6": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,8": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,9": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,10": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,3": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,4": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,5": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,6": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,8": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,9": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,10": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3,4": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3,5": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3,6": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3,7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3,8": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3,9": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3,10": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "4,5": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "4,6": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "4,7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "4,8": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "4,9": {
+     "value": 0.0,
+     "low": -1.8503717077085978e-17,
+     "high": 1.8503717077085978e-17,
+     "p": 1.0
+    },
+    "4,10": {
+     "value": 0.0,
+     "low": -2.775557561562887e-17,
+     "high": 2.775557561562887e-17,
+     "p": 1.0
+    },
+    "4,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "5,6": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "5,7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "5,8": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "5,9": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "5,10": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "5,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "6,7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "6,8": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "6,9": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "6,10": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "6,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "7,8": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "7,9": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "7,10": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "7,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "8,9": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "8,10": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "8,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "9,10": {
+     "value": 0.001470588235294102,
+     "low": -2.7755575615628944e-17,
+     "high": 0.004411764705882346,
+     "p": 0.514
+    },
+    "9,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "10,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "matters": {
+    "9": false,
+    "0": false,
+    "10": false,
+    "4": false,
+    "1": false,
+    "2": false,
+    "3": false,
+    "5": false,
+    "6": false,
+    "7": false,
+    "8": false,
+    "11": false
+   },
+   "interacts": {
+    "0,10": false,
+    "0,9": false,
+    "9,10": false,
+    "0,4": false,
+    "0,1": false,
+    "0,2": false,
+    "0,3": false,
+    "0,5": false,
+    "0,6": false,
+    "0,7": false,
+    "0,8": false,
+    "0,11": false,
+    "1,2": false,
+    "1,3": false,
+    "1,4": false,
+    "1,5": false,
+    "1,6": false,
+    "1,7": false,
+    "1,8": false,
+    "1,9": false,
+    "1,10": false,
+    "1,11": false,
+    "2,3": false,
+    "2,4": false,
+    "2,5": false,
+    "2,6": false,
+    "2,7": false,
+    "2,8": false,
+    "2,9": false,
+    "2,10": false,
+    "2,11": false,
+    "3,4": false,
+    "3,5": false,
+    "3,6": false,
+    "3,7": false,
+    "3,8": false,
+    "3,9": false,
+    "3,10": false,
+    "3,11": false,
+    "4,5": false,
+    "4,6": false,
+    "4,7": false,
+    "4,8": false,
+    "4,9": false,
+    "4,10": false,
+    "4,11": false,
+    "5,6": false,
+    "5,7": false,
+    "5,8": false,
+    "5,9": false,
+    "5,10": false,
+    "5,11": false,
+    "6,7": false,
+    "6,8": false,
+    "6,9": false,
+    "6,10": false,
+    "6,11": false,
+    "7,8": false,
+    "7,9": false,
+    "7,10": false,
+    "7,11": false,
+    "8,9": false,
+    "8,10": false,
+    "8,11": false,
+    "9,11": false,
+    "10,11": false
+   },
+   "loo": {
+    "0": 0.002941176470588225,
+    "1": 0.0,
+    "2": 0.0,
+    "3": 0.0,
+    "4": 0.0,
+    "5": 0.0,
+    "6": 0.0,
+    "7": 0.0,
+    "8": 0.0,
+    "9": 0.008823529411764675,
+    "10": -0.00882352941176473,
+    "11": 0.0
+   },
+   "loi": {
+    "0": 0.011764705882352955,
+    "1": 0.0,
+    "2": 0.0,
+    "3": 0.0,
+    "4": -0.002941176470588225,
+    "5": 0.0,
+    "6": 0.0,
+    "7": 0.0,
+    "8": 0.0,
+    "9": -0.002941176470588225,
+    "10": 0.011764705882352955,
+    "11": 0.0
+   }
+  },
+  "overfitting_units": []
+ },
+ "rq4": [
+  {
+   "delta": 0.02,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4096,
+   "search_value": 0.2125,
+   "heldout_value": 0.27058823529411763,
+   "heldout_full": 0.2823529411764706,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 79,
+   "search_value": 0.2125,
+   "heldout_value": 0.27058823529411763,
+   "heldout_full": 0.2823529411764706,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 5,
+   "search_value": 0.2125,
+   "heldout_value": 0.27058823529411763,
+   "heldout_full": 0.2823529411764706,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 15,
+   "search_value": 0.2125,
+   "heldout_value": 0.27058823529411763,
+   "heldout_full": 0.2823529411764706,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4096,
+   "search_value": 0.2125,
+   "heldout_value": 0.27058823529411763,
+   "heldout_full": 0.2823529411764706,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.05,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4096,
+   "search_value": 0.2125,
+   "heldout_value": 0.27058823529411763,
+   "heldout_full": 0.2823529411764706,
+   "certified": true,
+   "pairs_used": 51
+  },
+  {
+   "delta": 0.05,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 79,
+   "search_value": 0.2125,
+   "heldout_value": 0.27058823529411763,
+   "heldout_full": 0.2823529411764706,
+   "certified": true,
+   "pairs_used": 51
+  },
+  {
+   "delta": 0.05,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 5,
+   "search_value": 0.2125,
+   "heldout_value": 0.27058823529411763,
+   "heldout_full": 0.2823529411764706,
+   "certified": true,
+   "pairs_used": 51
+  },
+  {
+   "delta": 0.05,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 15,
+   "search_value": 0.2125,
+   "heldout_value": 0.27058823529411763,
+   "heldout_full": 0.2823529411764706,
+   "certified": true,
+   "pairs_used": 51
+  },
+  {
+   "delta": 0.05,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4096,
+   "search_value": 0.2125,
+   "heldout_value": 0.27058823529411763,
+   "heldout_full": 0.2823529411764706,
+   "certified": true,
+   "pairs_used": 51
+  }
+ ],
+ "rq5": null
+}

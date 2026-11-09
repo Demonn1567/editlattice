@@ -1,0 +1,279 @@
+{
+ "name": "phaseA2_gsmhard_metaharness_B1_s3_stmt",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "extract_answer"
+   ],
+   "diff": "@@ seed lines 14-14\n-     \"\"\"Text after the last 'Answer:', else the whole reply.\"\"\"\n+     \"\"\"Text after the last 'Answer:', else the whole reply. Also handles LaTeX-formatted answers like \\boxed{...}.\"\"\"\n",
+   "hunks": [
+    {
+     "start": 13,
+     "end": 14,
+     "replacement": [
+      "    \"\"\"Text after the last 'Answer:', else the whole reply. Also handles LaTeX-formatted answers like \\boxed{...}.\"\"\"\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "items": [
+    "extract_answer"
+   ],
+   "diff": "@@ seed lines 16-16\n-         return reply.rsplit(\"Answer:\", 1)[1].strip()\n+         # Extract the part after the last \"Answer:\"\n+         answer_part = reply.rsplit(\"Answer:\", 1)[1].strip()\n+         # Check if it's LaTeX boxed format\n+         if answer_part.startswith(\"\\\\boxed{\") and answer_part.endswith(\"}\"):\n+             return answer_part[7:-1].strip()\n+         # Fallback: look for the last occurrence of \"$$\\boxed{...}$$\" if \"Answer:\" is not properly followed\n+         start_idx = answer_part.rfind(\"$$\\boxed{\")\n+         if start_idx != -1:\n+             end_idx = answer_part.find(\"}\", start_idx)\n+             if end_idx != -1:\n+                 return answer_part[start_idx+7:end_idx].strip()\n+         # Also check for standalone boxed expressions\n+         start_idx = answer_part.rfind(\"\\\\boxed{\")\n+         if start_idx != -1:\n+             end_idx = answer_part.find(\"}\", start_idx)\n+             if end_idx != -1:\n+                 return answer_part[start_idx+7:end_idx].strip()\n+         # Check if it's just a number (for cases where the answer is not properly formatted)\n+         if answer_part.isdigit() or (answer_part[0] == '-' and answer_part[1:].isdigit()):\n+             return answer_part\n+         # Handle cases where the answer is written as \"The answer is X\" or similar\n+         if \"the answer is\" in answer_part.lower():\n+             answer_part = answer_part.split(\"the answer is\")[-1].strip()\n+             if answer_part.isdigit() or (answer_part[0] == '-' and answer_part[1:].isdigit()):\n+                 return answer_part\n+         return answer_part\n+         # Check if it's just a number (for cases where the answer is not properly formatted)\n+         if answer_part.isdigit() or (answer_part[0] == '-' and answer_part[1:].isdigit()):\n+             return answer_part\n+         # Handle cases where the answer is written as \"The answer is X\" or similar\n+         if \"the answer is\" in answer_part.lower():\n+             answer_part = answer_part.split(\"the answer is\")[-1].strip()\n+             if answer_part.isdigit() or (answer_part[0] == '-' and answer_part[1:].isdigit()):\n+                 return answer_part\n+         return answer_part\n",
+   "hunks": [
+    {
+     "start": 15,
+     "end": 16,
+     "replacement": [
+      "        # Extract the part after the last \"Answer:\"\n",
+      "        answer_part = reply.rsplit(\"Answer:\", 1)[1].strip()\n",
+      "        # Check if it's LaTeX boxed format\n",
+      "        if answer_part.startswith(\"\\\\boxed{\") and answer_part.endswith(\"}\"):\n",
+      "            return answer_part[7:-1].strip()\n",
+      "        # Fallback: look for the last occurrence of \"$$\\boxed{...}$$\" if \"Answer:\" is not properly followed\n",
+      "        start_idx = answer_part.rfind(\"$$\\boxed{\")\n",
+      "        if start_idx != -1:\n",
+      "            end_idx = answer_part.find(\"}\", start_idx)\n",
+      "            if end_idx != -1:\n",
+      "                return answer_part[start_idx+7:end_idx].strip()\n",
+      "        # Also check for standalone boxed expressions\n",
+      "        start_idx = answer_part.rfind(\"\\\\boxed{\")\n",
+      "        if start_idx != -1:\n",
+      "            end_idx = answer_part.find(\"}\", start_idx)\n",
+      "            if end_idx != -1:\n",
+      "                return answer_part[start_idx+7:end_idx].strip()\n",
+      "        # Check if it's just a number (for cases where the answer is not properly formatted)\n",
+      "        if answer_part.isdigit() or (answer_part[0] == '-' and answer_part[1:].isdigit()):\n",
+      "            return answer_part\n",
+      "        # Handle cases where the answer is written as \"The answer is X\" or similar\n",
+      "        if \"the answer is\" in answer_part.lower():\n",
+      "            answer_part = answer_part.split(\"the answer is\")[-1].strip()\n",
+      "            if answer_part.isdigit() or (answer_part[0] == '-' and answer_part[1:].isdigit()):\n",
+      "                return answer_part\n",
+      "        return answer_part\n",
+      "        # Check if it's just a number (for cases where the answer is not properly formatted)\n",
+      "        if answer_part.isdigit() or (answer_part[0] == '-' and answer_part[1:].isdigit()):\n",
+      "            return answer_part\n",
+      "        # Handle cases where the answer is written as \"The answer is X\" or similar\n",
+      "        if \"the answer is\" in answer_part.lower():\n",
+      "            answer_part = answer_part.split(\"the answer is\")[-1].strip()\n",
+      "            if answer_part.isdigit() or (answer_part[0] == '-' and answer_part[1:].isdigit()):\n",
+      "                return answer_part\n",
+      "        return answer_part\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {
+  "search": {
+   "seed": 0.5583333333333333,
+   "full": 0.5583333333333333,
+   "shapley": {
+    "0": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "matters": {
+    "0": false,
+    "1": false
+   },
+   "interacts": {
+    "0,1": false
+   },
+   "loo": {
+    "0": 0.0,
+    "1": 0.0
+   },
+   "loi": {
+    "0": 0.0,
+    "1": 0.0
+   }
+  },
+  "heldout": {
+   "seed": 0.56,
+   "full": 0.56,
+   "shapley": {
+    "0": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "matters": {
+    "0": false,
+    "1": false
+   },
+   "interacts": {
+    "0,1": false
+   },
+   "loo": {
+    "0": 0.0,
+    "1": 0.0
+   },
+   "loi": {
+    "0": 0.0,
+    "1": 0.0
+   }
+  },
+  "overfitting_units": []
+ },
+ "rq4": [
+  {
+   "delta": 0.02,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.5583333333333333,
+   "heldout_value": 0.56,
+   "heldout_full": 0.56,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.5583333333333333,
+   "heldout_value": 0.56,
+   "heldout_full": 0.56,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 3,
+   "search_value": 0.5583333333333333,
+   "heldout_value": 0.56,
+   "heldout_full": 0.56,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 5,
+   "search_value": 0.5583333333333333,
+   "heldout_value": 0.56,
+   "heldout_full": 0.56,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.5583333333333333,
+   "heldout_value": 0.56,
+   "heldout_full": 0.56,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.05,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.5583333333333333,
+   "heldout_value": 0.56,
+   "heldout_full": 0.56,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.5583333333333333,
+   "heldout_value": 0.56,
+   "heldout_full": 0.56,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 3,
+   "search_value": 0.5583333333333333,
+   "heldout_value": 0.56,
+   "heldout_full": 0.56,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 5,
+   "search_value": 0.5583333333333333,
+   "heldout_value": 0.56,
+   "heldout_full": 0.56,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.5583333333333333,
+   "heldout_value": 0.56,
+   "heldout_full": 0.56,
+   "certified": true,
+   "pairs_used": 121
+  }
+ ],
+ "rq5": null
+}

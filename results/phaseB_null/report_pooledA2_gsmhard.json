@@ -1,0 +1,260 @@
+{
+ "name": "pooledA2_gsmhard",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "extract_answer"
+   ],
+   "diff": "@@ seed lines 14-14\n-     \"\"\"Text after the last 'Answer:', else the whole reply.\"\"\"\n+     \"\"\"Extract answer from LaTeX boxed notation or 'Answer:' format.\"\"\"\n+     # Check for LaTeX boxed answer\n+     if \"$$\" in reply:\n+         start = reply.rfind(\"$$\")\n+         if start != -1:\n+             end = reply.find(\"$$\", start + 2)\n+             if end != -1:\n+                 return reply[start+2:end].strip()\n+     \n+     # Fallback to 'Answer:' format\n",
+   "hunks": [
+    {
+     "start": 13,
+     "end": 14,
+     "replacement": [
+      "    \"\"\"Extract answer from LaTeX boxed notation or 'Answer:' format.\"\"\"\n",
+      "    # Check for LaTeX boxed answer\n",
+      "    if \"$$\" in reply:\n",
+      "        start = reply.rfind(\"$$\")\n",
+      "        if start != -1:\n",
+      "            end = reply.find(\"$$\", start + 2)\n",
+      "            if end != -1:\n",
+      "                return reply[start+2:end].strip()\n",
+      "    \n",
+      "    # Fallback to 'Answer:' format\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "items": [
+    "extract_answer"
+   ],
+   "diff": "@@ seed lines 17-17\n-     return reply.strip()\n+     \n+     # Fallback to extracting numeric value from the last line\n+     last_line = reply.strip().split('\\n')[-1]\n+     # Try to find a numeric value in the last line\n+     import re\n+     match = re.search(r'[-+]?\\d*\\.?\\d+', last_line)\n+     if match:\n+         return match.group(0)\n+     # Return the whole reply if no numeric value is found\n+     return last_line\n",
+   "hunks": [
+    {
+     "start": 16,
+     "end": 17,
+     "replacement": [
+      "    \n",
+      "    # Fallback to extracting numeric value from the last line\n",
+      "    last_line = reply.strip().split('\\n')[-1]\n",
+      "    # Try to find a numeric value in the last line\n",
+      "    import re\n",
+      "    match = re.search(r'[-+]?\\d*\\.?\\d+', last_line)\n",
+      "    if match:\n",
+      "        return match.group(0)\n",
+      "    # Return the whole reply if no numeric value is found\n",
+      "    return last_line\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "items": [
+    "extract_answer"
+   ],
+   "diff": "@@ seed lines 14-14\n-     \"\"\"Text after the last 'Answer:', else the whole reply.\"\"\"\n+     \"\"\"Text after the last 'Answer:', else the whole reply. Also handles LaTeX-formatted answers like \\boxed{...}.\"\"\"\n",
+   "hunks": [
+    {
+     "start": 13,
+     "end": 14,
+     "replacement": [
+      "    \"\"\"Text after the last 'Answer:', else the whole reply. Also handles LaTeX-formatted answers like \\boxed{...}.\"\"\"\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 3,
+   "items": [
+    "extract_answer"
+   ],
+   "diff": "@@ seed lines 16-16\n-         return reply.rsplit(\"Answer:\", 1)[1].strip()\n+         # Extract the part after the last \"Answer:\"\n+         answer_part = reply.rsplit(\"Answer:\", 1)[1].strip()\n+         # Check if it's LaTeX boxed format\n+         if answer_part.startswith(\"\\\\boxed{\") and answer_part.endswith(\"}\"):\n+             return answer_part[7:-1].strip()\n+         # Fallback: look for the last occurrence of \"$$\\boxed{...}$$\" if \"Answer:\" is not properly followed\n+         start_idx = answer_part.rfind(\"$$\\boxed{\")\n+         if start_idx != -1:\n+             end_idx = answer_part.find(\"}\", start_idx)\n+             if end_idx != -1:\n+                 return answer_part[start_idx+7:end_idx].strip()\n+         # Also check for standalone boxed expressions\n+         start_idx = answer_part.rfind(\"\\\\boxed{\")\n+         if start_idx != -1:\n+             end_idx = answer_part.find(\"}\", start_idx)\n+             if end_idx != -1:\n+                 return answer_part[start_idx+7:end_idx].strip()\n+         # Check if it's just a number (for cases where the answer is not properly formatted)\n+         if answer_part.isdigit() or (answer_part[0] == '-' and answer_part[1:].isdigit()):\n+             return answer_part\n+         # Handle cases where the answer is written as \"The answer is X\" or similar\n+         if \"the answer is\" in answer_part.lower():\n+             answer_part = answer_part.split(\"the answer is\")[-1].strip()\n+             if answer_part.isdigit() or (answer_part[0] == '-' and answer_part[1:].isdigit()):\n+                 return answer_part\n+         return answer_part\n+         # Check if it's just a number (for cases where the answer is not properly formatted)\n+         if answer_part.isdigit() or (answer_part[0] == '-' and answer_part[1:].isdigit()):\n+             return answer_part\n+         # Handle cases where the answer is written as \"The answer is X\" or similar\n+         if \"the answer is\" in answer_part.lower():\n+             answer_part = answer_part.split(\"the answer is\")[-1].strip()\n+             if answer_part.isdigit() or (answer_part[0] == '-' and answer_part[1:].isdigit()):\n+                 return answer_part\n+         return answer_part\n",
+   "hunks": [
+    {
+     "start": 15,
+     "end": 16,
+     "replacement": [
+      "        # Extract the part after the last \"Answer:\"\n",
+      "        answer_part = reply.rsplit(\"Answer:\", 1)[1].strip()\n",
+      "        # Check if it's LaTeX boxed format\n",
+      "        if answer_part.startswith(\"\\\\boxed{\") and answer_part.endswith(\"}\"):\n",
+      "            return answer_part[7:-1].strip()\n",
+      "        # Fallback: look for the last occurrence of \"$$\\boxed{...}$$\" if \"Answer:\" is not properly followed\n",
+      "        start_idx = answer_part.rfind(\"$$\\boxed{\")\n",
+      "        if start_idx != -1:\n",
+      "            end_idx = answer_part.find(\"}\", start_idx)\n",
+      "            if end_idx != -1:\n",
+      "                return answer_part[start_idx+7:end_idx].strip()\n",
+      "        # Also check for standalone boxed expressions\n",
+      "        start_idx = answer_part.rfind(\"\\\\boxed{\")\n",
+      "        if start_idx != -1:\n",
+      "            end_idx = answer_part.find(\"}\", start_idx)\n",
+      "            if end_idx != -1:\n",
+      "                return answer_part[start_idx+7:end_idx].strip()\n",
+      "        # Check if it's just a number (for cases where the answer is not properly formatted)\n",
+      "        if answer_part.isdigit() or (answer_part[0] == '-' and answer_part[1:].isdigit()):\n",
+      "            return answer_part\n",
+      "        # Handle cases where the answer is written as \"The answer is X\" or similar\n",
+      "        if \"the answer is\" in answer_part.lower():\n",
+      "            answer_part = answer_part.split(\"the answer is\")[-1].strip()\n",
+      "            if answer_part.isdigit() or (answer_part[0] == '-' and answer_part[1:].isdigit()):\n",
+      "                return answer_part\n",
+      "        return answer_part\n",
+      "        # Check if it's just a number (for cases where the answer is not properly formatted)\n",
+      "        if answer_part.isdigit() or (answer_part[0] == '-' and answer_part[1:].isdigit()):\n",
+      "            return answer_part\n",
+      "        # Handle cases where the answer is written as \"The answer is X\" or similar\n",
+      "        if \"the answer is\" in answer_part.lower():\n",
+      "            answer_part = answer_part.split(\"the answer is\")[-1].strip()\n",
+      "            if answer_part.isdigit() or (answer_part[0] == '-' and answer_part[1:].isdigit()):\n",
+      "                return answer_part\n",
+      "        return answer_part\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 4,
+   "items": [
+    "extract_answer"
+   ],
+   "diff": "@@ seed lines 14-16\n-     \"\"\"Text after the last 'Answer:', else the whole reply.\"\"\"\n-     if \"Answer:\" in reply:\n-         return reply.rsplit(\"Answer:\", 1)[1].strip()\n+     \"\"\"Extract the final answer from the model's reply, ensuring it's a valid number.\"\"\"\n+     # Find the last occurrence of 'Answer:'\n+     answer_index = reply.rfind(\"Answer:\")\n+     if answer_index != -1:\n+         # Extract the answer and strip whitespace\n+         answer_part = reply[answer_index + len(\"Answer:\") :].strip()\n+         # Check if the answer is a number\n+         try:\n+             # Try converting to float\n+             answer = float(answer_part)\n+             # Check if it's a whole number\n+             if answer.is_integer():\n+                 return str(int(answer))\n+             return str(answer)\n+         except ValueError:\n+             pass  # Not a valid number\n+     # If no answer is found or it's not a number, return the whole reply\n",
+   "hunks": [
+    {
+     "start": 13,
+     "end": 16,
+     "replacement": [
+      "    \"\"\"Extract the final answer from the model's reply, ensuring it's a valid number.\"\"\"\n",
+      "    # Find the last occurrence of 'Answer:'\n",
+      "    answer_index = reply.rfind(\"Answer:\")\n",
+      "    if answer_index != -1:\n",
+      "        # Extract the answer and strip whitespace\n",
+      "        answer_part = reply[answer_index + len(\"Answer:\") :].strip()\n",
+      "        # Check if the answer is a number\n",
+      "        try:\n",
+      "            # Try converting to float\n",
+      "            answer = float(answer_part)\n",
+      "            # Check if it's a whole number\n",
+      "            if answer.is_integer():\n",
+      "                return str(int(answer))\n",
+      "            return str(answer)\n",
+      "        except ValueError:\n",
+      "            pass  # Not a valid number\n",
+      "    # If no answer is found or it's not a number, return the whole reply\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 5,
+   "items": [
+    "extract_answer"
+   ],
+   "diff": "@@ seed lines 14-14\n-     \"\"\"Text after the last 'Answer:', else the whole reply.\"\"\"\n+     \"\"\"Extract the last numerical value from the reply as the answer.\"\"\"\n+     # Check if the reply contains 'Answer:'\n",
+   "hunks": [
+    {
+     "start": 13,
+     "end": 14,
+     "replacement": [
+      "    \"\"\"Extract the last numerical value from the reply as the answer.\"\"\"\n",
+      "    # Check if the reply contains 'Answer:'\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 6,
+   "items": [
+    "extract_answer"
+   ],
+   "diff": "@@ seed lines 16-16\n-         return reply.rsplit(\"Answer:\", 1)[1].strip()\n+         answer_part = reply.rsplit(\"Answer:\", 1)[1].strip()\n+         # Try to parse it as a number\n+         try:\n+             return str(float(answer_part))\n+         except ValueError:\n+             # If parsing fails, return the stripped answer_part\n+             return answer_part.strip()\n+     # If no 'Answer:' found, try to extract content from \\boxed{} notation\n+     import re\n+     match = re.search(r'\\\\boxed{([^}]*)}', reply)\n+     if match:\n+         return match.group(1).strip()\n+     # Fallback: try to extract the last number from the reply\n+     match = re.search(r'([+-]?\\d+[\\d,.]*)$', reply)\n+     if match:\n+         return match.group(1).strip()\n",
+   "hunks": [
+    {
+     "start": 15,
+     "end": 16,
+     "replacement": [
+      "        answer_part = reply.rsplit(\"Answer:\", 1)[1].strip()\n",
+      "        # Try to parse it as a number\n",
+      "        try:\n",
+      "            return str(float(answer_part))\n",
+      "        except ValueError:\n",
+      "            # If parsing fails, return the stripped answer_part\n",
+      "            return answer_part.strip()\n",
+      "    # If no 'Answer:' found, try to extract content from \\boxed{} notation\n",
+      "    import re\n",
+      "    match = re.search(r'\\\\boxed{([^}]*)}', reply)\n",
+      "    if match:\n",
+      "        return match.group(1).strip()\n",
+      "    # Fallback: try to extract the last number from the reply\n",
+      "    match = re.search(r'([+-]?\\d+[\\d,.]*)$', reply)\n",
+      "    if match:\n",
+      "        return match.group(1).strip()\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 7,
+   "items": [
+    "extract_answer"
+   ],
+   "diff": "@@ seed lines 15-16\n-     if \"Answer:\" in reply:\n-         return reply.rsplit(\"Answer:\", 1)[1].strip()\n+     # Use a regex to find the last occurrence of a number after 'Answer:' pattern\n+     import re\n+     match = re.search(r'Answer:\\s*([0-9.]+)', reply, re.MULTILINE | re.DOTALL)\n+     if match:\n+         return match.group(1).strip()\n",
+   "hunks": [
+    {
+     "start": 14,
+     "end": 16,
+     "replacement": [
+      "    # Use a regex to find the last occurrence of a number after 'Answer:' pattern\n",
+      "    import re\n",
+      "    match = re.search(r'Answer:\\s*([0-9.]+)', reply, re.MULTILINE | re.DOTALL)\n",
+      "    if match:\n",
+      "        return match.group(1).strip()\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {},
+ "rq4": [],
+ "rq5": {
+  "pool": [
+   "metaharness_B1_s2.log.jsonl",
+   "metaharness_B1_s3.log.jsonl",
+   "metaharness_B1_s4.log.jsonl",
+   "metaharness_B3_s1.log.jsonl",
+   "metaharness_B3_s2.log.jsonl"
+  ],
+  "best_pooled_product": [],
+  "best_single_run": 0,
+  "single_final_product": [
+   0,
+   1
+  ],
+  "search": {
+   "pooled": 0.5416666666666666,
+   "single": 0.5416666666666666
+  },
+  "heldout": {
+   "pooled": 0.575,
+   "single": 0.575,
+   "all_single": {
+    "0": 0.575,
+    "1": 0.575,
+    "2": 0.575,
+    "3": 0.575,
+    "4": 0.56375
+   }
+  },
+  "difference": 0.0,
+  "ci": [
+   0.0,
+   0.0
+  ],
+  "superior_certified": false,
+  "pairs_used": 800
+ }
+}

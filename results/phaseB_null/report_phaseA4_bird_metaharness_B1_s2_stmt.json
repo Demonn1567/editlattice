@@ -1,0 +1,203 @@
+{
+ "name": "phaseA4_bird_metaharness_B1_s2_stmt",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "schema_text"
+   ],
+   "diff": "@@ seed lines 26-26\n-         lines.append(f\"Table {table}: {described}\")\n+         lines.append(f\"Table {table}: {described} (Columns: {', '.join(info[1] for info in info_rows)})\")\n",
+   "hunks": [
+    {
+     "start": 25,
+     "end": 26,
+     "replacement": [
+      "        lines.append(f\"Table {table}: {described} (Columns: {', '.join(info[1] for info in info_rows)})\")\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {
+  "search": {
+   "seed": 0.25416666666666665,
+   "full": 0.275,
+   "shapley": {
+    "0": {
+     "value": 0.02083333333333337,
+     "low": -0.00416666666666668,
+     "high": 0.0625,
+     "p": 0.281
+    }
+   },
+   "interaction": {},
+   "matters": {
+    "0": false
+   },
+   "interacts": {},
+   "loo": {
+    "0": 0.02083333333333337
+   },
+   "loi": {
+    "0": 0.02083333333333337
+   }
+  },
+  "heldout": {
+   "seed": 0.29020100502512564,
+   "full": 0.3027638190954774,
+   "shapley": {
+    "0": {
+     "value": 0.012562814070351758,
+     "low": -0.021356783919598,
+     "high": 0.04773869346733667,
+     "p": 0.518
+    }
+   },
+   "interaction": {},
+   "matters": {
+    "0": false
+   },
+   "interacts": {},
+   "loo": {
+    "0": 0.012562814070351758
+   },
+   "loi": {
+    "0": 0.012562814070351758
+   }
+  },
+  "overfitting_units": []
+ },
+ "rq4": [
+  {
+   "delta": 0.02,
+   "method": "exact",
+   "product": [
+    0
+   ],
+   "units_kept": 1,
+   "queries": 2,
+   "search_value": 0.275,
+   "heldout_value": 0.3027638190954774,
+   "heldout_full": 0.3027638190954774,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "greedy_backward",
+   "product": [
+    0
+   ],
+   "units_kept": 1,
+   "queries": 2,
+   "search_value": 0.275,
+   "heldout_value": 0.3027638190954774,
+   "heldout_full": 0.3027638190954774,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "ddmin",
+   "product": [
+    0
+   ],
+   "units_kept": 1,
+   "queries": 2,
+   "search_value": 0.275,
+   "heldout_value": 0.3027638190954774,
+   "heldout_full": 0.3027638190954774,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "loo_threshold",
+   "product": [
+    0
+   ],
+   "units_kept": 1,
+   "queries": 4,
+   "search_value": 0.275,
+   "heldout_value": 0.3027638190954774,
+   "heldout_full": 0.3027638190954774,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "shapley_threshold",
+   "product": [
+    0
+   ],
+   "units_kept": 1,
+   "queries": 2,
+   "search_value": 0.275,
+   "heldout_value": 0.3027638190954774,
+   "heldout_full": 0.3027638190954774,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.05,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.25416666666666665,
+   "heldout_value": 0.29020100502512564,
+   "heldout_full": 0.3027638190954774,
+   "certified": true,
+   "pairs_used": 691
+  },
+  {
+   "delta": 0.05,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.25416666666666665,
+   "heldout_value": 0.29020100502512564,
+   "heldout_full": 0.3027638190954774,
+   "certified": true,
+   "pairs_used": 691
+  },
+  {
+   "delta": 0.05,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.25416666666666665,
+   "heldout_value": 0.29020100502512564,
+   "heldout_full": 0.3027638190954774,
+   "certified": true,
+   "pairs_used": 691
+  },
+  {
+   "delta": 0.05,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.25416666666666665,
+   "heldout_value": 0.29020100502512564,
+   "heldout_full": 0.3027638190954774,
+   "certified": true,
+   "pairs_used": 691
+  },
+  {
+   "delta": 0.05,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.25416666666666665,
+   "heldout_value": 0.29020100502512564,
+   "heldout_full": 0.3027638190954774,
+   "certified": true,
+   "pairs_used": 691
+  }
+ ],
+ "rq5": null
+}

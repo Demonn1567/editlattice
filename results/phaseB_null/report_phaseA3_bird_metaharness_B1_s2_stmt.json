@@ -1,0 +1,221 @@
+{
+ "name": "phaseA3_bird_metaharness_B1_s2_stmt",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "schema_text"
+   ],
+   "diff": "@@ seed lines 25-26\n-         described = \", \".join(f\"{info[1]} ({info[2]})\" for info in info_rows)\n-         lines.append(f\"Table {table}: {described}\")\n+         described = \", \".join(f'\"{info[1]}\"' + f\" ({info[2]})\" + (\" (PRIMARY KEY)\" if info[4] else \"\") for info in info_rows)\n+         lines.append(\"Note: Use double quotes around column names with spaces or special characters in SQL queries.\")\n+         fk_columns, fk_rows, fk_truncated = env.execute(f'PRAGMA foreign_key_list(\"{table}\")', max_rows=200)\n+         fk_info = []\n+         for fk_row in fk_rows:\n+             fk_info.append(f\"{fk_row[2]} -> {fk_row[4]}.{fk_row[5]}\")\n+         if fk_info:\n+             described += \"\\nForeign keys (used to join tables):\\n  \" + \"\\n  \".join(fk_info)\n+         lines.append(f\"Table \\\"{table}\\\": {described}\")\n",
+   "hunks": [
+    {
+     "start": 24,
+     "end": 26,
+     "replacement": [
+      "        described = \", \".join(f'\"{info[1]}\"' + f\" ({info[2]})\" + (\" (PRIMARY KEY)\" if info[4] else \"\") for info in info_rows)\n",
+      "        lines.append(\"Note: Use double quotes around column names with spaces or special characters in SQL queries.\")\n",
+      "        fk_columns, fk_rows, fk_truncated = env.execute(f'PRAGMA foreign_key_list(\"{table}\")', max_rows=200)\n",
+      "        fk_info = []\n",
+      "        for fk_row in fk_rows:\n",
+      "            fk_info.append(f\"{fk_row[2]} -> {fk_row[4]}.{fk_row[5]}\")\n",
+      "        if fk_info:\n",
+      "            described += \"\\nForeign keys (used to join tables):\\n  \" + \"\\n  \".join(fk_info)\n",
+      "        lines.append(f\"Table \\\"{table}\\\": {described}\")\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {
+  "search": {
+   "seed": 0.2625,
+   "full": 0.31666666666666665,
+   "shapley": {
+    "0": {
+     "value": 0.05416666666666664,
+     "low": -0.016666666666666663,
+     "high": 0.12916666666666668,
+     "p": 0.137
+    }
+   },
+   "interaction": {},
+   "matters": {
+    "0": false
+   },
+   "interacts": {},
+   "loo": {
+    "0": 0.05416666666666664
+   },
+   "loi": {
+    "0": 0.05416666666666664
+   }
+  },
+  "heldout": {
+   "seed": 0.2964824120603015,
+   "full": 0.3165829145728643,
+   "shapley": {
+    "0": {
+     "value": 0.02010050251256279,
+     "low": -0.02889447236180903,
+     "high": 0.07035175879396982,
+     "p": 0.449
+    }
+   },
+   "interaction": {},
+   "matters": {
+    "0": false
+   },
+   "interacts": {},
+   "loo": {
+    "0": 0.02010050251256279
+   },
+   "loi": {
+    "0": 0.02010050251256279
+   }
+  },
+  "overfitting_units": []
+ },
+ "rq4": [
+  {
+   "delta": 0.02,
+   "method": "exact",
+   "product": [
+    0
+   ],
+   "units_kept": 1,
+   "queries": 2,
+   "search_value": 0.31666666666666665,
+   "heldout_value": 0.3165829145728643,
+   "heldout_full": 0.3165829145728643,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "greedy_backward",
+   "product": [
+    0
+   ],
+   "units_kept": 1,
+   "queries": 2,
+   "search_value": 0.31666666666666665,
+   "heldout_value": 0.3165829145728643,
+   "heldout_full": 0.3165829145728643,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "ddmin",
+   "product": [
+    0
+   ],
+   "units_kept": 1,
+   "queries": 2,
+   "search_value": 0.31666666666666665,
+   "heldout_value": 0.3165829145728643,
+   "heldout_full": 0.3165829145728643,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "loo_threshold",
+   "product": [
+    0
+   ],
+   "units_kept": 1,
+   "queries": 4,
+   "search_value": 0.31666666666666665,
+   "heldout_value": 0.3165829145728643,
+   "heldout_full": 0.3165829145728643,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "shapley_threshold",
+   "product": [
+    0
+   ],
+   "units_kept": 1,
+   "queries": 2,
+   "search_value": 0.31666666666666665,
+   "heldout_value": 0.3165829145728643,
+   "heldout_full": 0.3165829145728643,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.05,
+   "method": "exact",
+   "product": [
+    0
+   ],
+   "units_kept": 1,
+   "queries": 2,
+   "search_value": 0.31666666666666665,
+   "heldout_value": 0.3165829145728643,
+   "heldout_full": 0.3165829145728643,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "greedy_backward",
+   "product": [
+    0
+   ],
+   "units_kept": 1,
+   "queries": 2,
+   "search_value": 0.31666666666666665,
+   "heldout_value": 0.3165829145728643,
+   "heldout_full": 0.3165829145728643,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "ddmin",
+   "product": [
+    0
+   ],
+   "units_kept": 1,
+   "queries": 2,
+   "search_value": 0.31666666666666665,
+   "heldout_value": 0.3165829145728643,
+   "heldout_full": 0.3165829145728643,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "loo_threshold",
+   "product": [
+    0
+   ],
+   "units_kept": 1,
+   "queries": 4,
+   "search_value": 0.31666666666666665,
+   "heldout_value": 0.3165829145728643,
+   "heldout_full": 0.3165829145728643,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "shapley_threshold",
+   "product": [
+    0
+   ],
+   "units_kept": 1,
+   "queries": 2,
+   "search_value": 0.31666666666666665,
+   "heldout_value": 0.3165829145728643,
+   "heldout_full": 0.3165829145728643,
+   "certified": true,
+   "pairs_used": 121
+  }
+ ],
+ "rq5": null
+}

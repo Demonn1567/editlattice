@@ -1,0 +1,228 @@
+{
+ "name": "pooledA4_lcb",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "SYSTEM_PROMPT"
+   ],
+   "diff": "@@ seed lines 14-14\n- Put the whole program in one ```python code block.\"\"\"\n+ Ensure the code is enclosed in a single ```python code block and contains all necessary logic, including a complete main function that processes all input and handles all edge cases.\n+ The program must be fully functional and pass all public tests.\"\"\"\n",
+   "hunks": [
+    {
+     "start": 13,
+     "end": 14,
+     "replacement": [
+      "Ensure the code is enclosed in a single ```python code block and contains all necessary logic, including a complete main function that processes all input and handles all edge cases.\n",
+      "The program must be fully functional and pass all public tests.\"\"\"\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 31-31\n-     return {\"answer\": extract_code(reply)}\n+     code = extract_code(reply)\n+     if code is None:\n+         return {\"answer\": \"\"}\n+     \n+     # Run generated code against all public tests to ensure correctness\n+     all_passed = True\n+     for test in task[\"public_tests\"]:\n+         stdin = test[\"input\"]\n+         expected_output = test[\"output\"]\n+         result = env.run_python(code, stdin, timeout_seconds=6.0)\n+         if result.stdout.strip() != expected_output.strip():\n+             all_passed = False\n+             break\n+     \n+     if all_passed:\n+         return {\"answer\": code}\n+     else:\n+         return {\"answer\": code}\n",
+   "hunks": [
+    {
+     "start": 30,
+     "end": 31,
+     "replacement": [
+      "    code = extract_code(reply)\n",
+      "    if code is None:\n",
+      "        return {\"answer\": \"\"}\n",
+      "    \n",
+      "    # Run generated code against all public tests to ensure correctness\n",
+      "    all_passed = True\n",
+      "    for test in task[\"public_tests\"]:\n",
+      "        stdin = test[\"input\"]\n",
+      "        expected_output = test[\"output\"]\n",
+      "        result = env.run_python(code, stdin, timeout_seconds=6.0)\n",
+      "        if result.stdout.strip() != expected_output.strip():\n",
+      "            all_passed = False\n",
+      "            break\n",
+      "    \n",
+      "    if all_passed:\n",
+      "        return {\"answer\": code}\n",
+      "    else:\n",
+      "        return {\"answer\": code}\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 31-31\n-     return {\"answer\": extract_code(reply)}\n+     code = extract_code(reply)\n+     if code:\n+         passed = True\n+         for test in task[\"public_tests\"]:\n+             stdin = test[\"input\"]\n+             expected_output = test[\"output\"]\n+             try:\n+                 result = env.run_python(code, stdin, timeout_seconds=5.0)\n+                 actual_output = result.stdout.strip()\n+                 if actual_output != expected_output:\n+                     passed = False\n+                     break\n+             except:\n+                 passed = False\n+                 break\n+         if passed:\n+             return {\"answer\": code}\n+     return {\"answer\": code}\n",
+   "hunks": [
+    {
+     "start": 30,
+     "end": 31,
+     "replacement": [
+      "    code = extract_code(reply)\n",
+      "    if code:\n",
+      "        passed = True\n",
+      "        for test in task[\"public_tests\"]:\n",
+      "            stdin = test[\"input\"]\n",
+      "            expected_output = test[\"output\"]\n",
+      "            try:\n",
+      "                result = env.run_python(code, stdin, timeout_seconds=5.0)\n",
+      "                actual_output = result.stdout.strip()\n",
+      "                if actual_output != expected_output:\n",
+      "                    passed = False\n",
+      "                    break\n",
+      "            except:\n",
+      "                passed = False\n",
+      "                break\n",
+      "        if passed:\n",
+      "            return {\"answer\": code}\n",
+      "    return {\"answer\": code}\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 3,
+   "items": [
+    "SYSTEM_PROMPT"
+   ],
+   "diff": "@@ seed lines 14-13\n+ Ensure the code includes all required logic to solve the problem correctly, handles edge cases, and is fully functional. Include a main function and ensure that it is called at the end of the program.\n",
+   "hunks": [
+    {
+     "start": 13,
+     "end": 13,
+     "replacement": [
+      "Ensure the code includes all required logic to solve the problem correctly, handles edge cases, and is fully functional. Include a main function and ensure that it is called at the end of the program.\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 4,
+   "items": [
+    "SYSTEM_PROMPT"
+   ],
+   "diff": "@@ seed lines 13-13\n- Write a complete Python 3 program that reads the input from standard input and prints the answer to standard output.\n+ Write a complete Python 3 program that reads all input at once using sys.stdin.read(), splits it into tokens, and processes them. Print the answer to standard output.\n+ Ensure your code is fully formed, syntactically correct, and includes all necessary logic to handle all test cases, including edge cases.\n",
+   "hunks": [
+    {
+     "start": 12,
+     "end": 13,
+     "replacement": [
+      "Write a complete Python 3 program that reads all input at once using sys.stdin.read(), splits it into tokens, and processes them. Print the answer to standard output.\n",
+      "Ensure your code is fully formed, syntactically correct, and includes all necessary logic to handle all test cases, including edge cases.\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 5,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 29-29\n-     prompt = f\"Problem: {task['title']}\\n\\n{task['question']}\"\n+     prompt = f\"Problem: {task['title']}\\n\\n{task['question']}\\n\\nPublic tests:\\n\"\n+     for test in task['public_tests']:\n+         prompt += f\"Input: {test['input']}, Output: {test['output']}\\n\"\n+     prompt += \"Use the public tests provided in the task to validate your solution.\"\n",
+   "hunks": [
+    {
+     "start": 28,
+     "end": 29,
+     "replacement": [
+      "    prompt = f\"Problem: {task['title']}\\n\\n{task['question']}\\n\\nPublic tests:\\n\"\n",
+      "    for test in task['public_tests']:\n",
+      "        prompt += f\"Input: {test['input']}, Output: {test['output']}\\n\"\n",
+      "    prompt += \"Use the public tests provided in the task to validate your solution.\"\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 6,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 31-31\n-     return {\"answer\": extract_code(reply)}\n+     code = extract_code(reply)\n+     if code is None:\n+         return {\"answer\": \"\"}\n+     return {\"answer\": code}\n",
+   "hunks": [
+    {
+     "start": 30,
+     "end": 31,
+     "replacement": [
+      "    code = extract_code(reply)\n",
+      "    if code is None:\n",
+      "        return {\"answer\": \"\"}\n",
+      "    return {\"answer\": code}\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 7,
+   "items": [
+    "SYSTEM_PROMPT"
+   ],
+   "diff": "@@ seed lines 14-14\n- Put the whole program in one ```python code block.\"\"\"\n+ Ensure the code includes a main function, reads all input at once using sys.stdin.read(), splits it into a list of lines, and processes them correctly.\n+ Fully implements the logic, and includes all required print statements.\n+ Put the whole program in one ```python code block. For example:\n+ ```python\n+ import sys\n+ \n+ def main():\n+     input = sys.stdin.read()\n+     # process input\n+     print(\"result\")\n+ ```\"\"\"\n",
+   "hunks": [
+    {
+     "start": 13,
+     "end": 14,
+     "replacement": [
+      "Ensure the code includes a main function, reads all input at once using sys.stdin.read(), splits it into a list of lines, and processes them correctly.\n",
+      "Fully implements the logic, and includes all required print statements.\n",
+      "Put the whole program in one ```python code block. For example:\n",
+      "```python\n",
+      "import sys\n",
+      "\n",
+      "def main():\n",
+      "    input = sys.stdin.read()\n",
+      "    # process input\n",
+      "    print(\"result\")\n",
+      "```\"\"\"\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {},
+ "rq4": [],
+ "rq5": {
+  "pool": [
+   "metaharness_B1_s2.log.jsonl",
+   "metaharness_B1_s3.log.jsonl",
+   "metaharness_B1_s4.log.jsonl",
+   "metaharness_B3_s2.log.jsonl",
+   "metaharness_B3_s3.log.jsonl",
+   "metaharness_B3_s4.log.jsonl"
+  ],
+  "best_pooled_product": [
+   5
+  ],
+  "best_single_run": 3,
+  "single_final_product": [
+   4,
+   5
+  ],
+  "search": {
+   "pooled": 0.21666666666666667,
+   "single": 0.2125
+  },
+  "heldout": {
+   "pooled": 0.2735294117647059,
+   "single": 0.24705882352941178,
+   "all_single": {
+    "0": 0.26176470588235295,
+    "1": 0.2529411764705882,
+    "2": 0.24411764705882352,
+    "3": 0.24705882352941178,
+    "4": 0.2529411764705882,
+    "5": 0.2529411764705882
+   }
+  },
+  "difference": 0.026470588235294135,
+  "ci": [
+   -0.008823529411764706,
+   0.061764705882352944
+  ],
+  "superior_certified": false,
+  "pairs_used": 340
+ }
+}

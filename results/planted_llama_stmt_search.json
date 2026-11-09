@@ -1,0 +1,10117 @@
+{
+ "name": "planted_llama_stmt",
+ "benchmark": "gsmhard",
+ "split": "search",
+ "n_tasks": 40,
+ "replicates": 2,
+ "model": "mlx-community/Meta-Llama-3.1-8B-Instruct-4bit",
+ "params": {
+  "temperature": 0.7,
+  "top_p": 0.95,
+  "max_tokens": 768
+ },
+ "namespace": "planted_llama",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "SYSTEM_PROMPT"
+   ],
+   "diff": "@@ seed lines 8-9\n- SYSTEM_PROMPT = \"\"\"Solve the math word problem.\n- Think step by step, then end your reply with a final line of the form:\n+ SYSTEM_PROMPT = \"\"\"Solve the math word problem by writing a short Python program that prints only the final number.\n+ Put the program in one ```python code block, then end your reply with a final line of the form:\n",
+   "hunks": [
+    {
+     "start": 7,
+     "end": 9,
+     "replacement": [
+      "SYSTEM_PROMPT = \"\"\"Solve the math word problem by writing a short Python program that prints only the final number.\n",
+      "Put the program in one ```python code block, then end your reply with a final line of the form:\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "items": [
+    "extract_answer"
+   ],
+   "diff": "@@ seed lines 16-16\n-         return reply.rsplit(\"Answer:\", 1)[1].strip()\n+         return reply.rsplit(\"Answer:\", 1)[1].strip().split(\".\")[0]\n",
+   "hunks": [
+    {
+     "start": 15,
+     "end": 16,
+     "replacement": [
+      "        return reply.rsplit(\"Answer:\", 1)[1].strip().split(\".\")[0]\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 22-21\n+     if \"```python\" in reply:\n+         code = reply.split(\"```python\", 1)[1].split(\"```\", 1)[0]\n+         result = env.run_python(code)\n+         if result.returncode == 0 and result.stdout.strip():\n+             return {\"answer\": result.stdout.strip().splitlines()[-1]}\n",
+   "hunks": [
+    {
+     "start": 21,
+     "end": 21,
+     "replacement": [
+      "    if \"```python\" in reply:\n",
+      "        code = reply.split(\"```python\", 1)[1].split(\"```\", 1)[0]\n",
+      "        result = env.run_python(code)\n",
+      "        if result.returncode == 0 and result.stdout.strip():\n",
+      "            return {\"answer\": result.stdout.strip().splitlines()[-1]}\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 3,
+   "items": [
+    "<new>"
+   ],
+   "diff": "@@ seed lines 23-22\n+ \n+ \n+ def describe_units(value):\n+     \"\"\"Format a quantity with its unit (not used by solve).\"\"\"\n+     return f\"{value} units\"\n",
+   "hunks": [
+    {
+     "start": 22,
+     "end": 22,
+     "replacement": [
+      "\n",
+      "\n",
+      "def describe_units(value):\n",
+      "    \"\"\"Format a quantity with its unit (not used by solve).\"\"\"\n",
+      "    return f\"{value} units\"\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "seed_source": "\"\"\"Seed harness for word problems: one model call, answer read from the last line.\n\nThe model is asked to reason briefly and end with 'Answer: <number>'. Running code, checking\nthe result, retrying and voting are left for evolution to discover; the environment offers\n``env.run_python(code)`` for harnesses that want it.\n\"\"\"\n\nSYSTEM_PROMPT = \"\"\"Solve the math word problem.\nThink step by step, then end your reply with a final line of the form:\nAnswer: <number>\"\"\"\n\n\ndef extract_answer(reply):\n    \"\"\"Text after the last 'Answer:', else the whole reply.\"\"\"\n    if \"Answer:\" in reply:\n        return reply.rsplit(\"Answer:\", 1)[1].strip()\n    return reply.strip()\n\n\ndef solve(task, llm, env):\n    reply = llm.chat([{\"role\": \"system\", \"content\": SYSTEM_PROMPT}, {\"role\": \"user\", \"content\": task[\"question\"]}])\n    return {\"answer\": extract_answer(reply)}\n",
+ "depends": {
+  "SYSTEM_PROMPT": [
+   0
+  ],
+  "solve": [
+   2
+  ],
+  "describe_units": [
+   3
+  ]
+ },
+ "global_units": [],
+ "statement_level": true,
+ "grouped_by_items": false,
+ "pool": [],
+ "origin": null,
+ "conflicts": [],
+ "marked_units": [
+  1
+ ],
+ "seconds": 3042.3,
+ "cells": [
+  {
+   "task_id": "gsmh-842",
+   "replicate": 0,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 239,
+     "nominal_tokens_out": 239,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 129,
+     "nominal_tokens_out": 129,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 239,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 239,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 129,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 129,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 239,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-842",
+   "replicate": 1,
+   "outcomes": {
+    "3": 1,
+    "": 1,
+    "0,3": 0,
+    "0": 0,
+    "1": 1,
+    "1,3": 1,
+    "2,3": 1,
+    "2": 1,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0,
+    "1,2,3": 1,
+    "1,2": 1
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 239,
+     "nominal_tokens_out": 239,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 345,
+     "nominal_tokens_out": 345,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 239,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 239,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 345,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 345,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 239,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-1009",
+   "replicate": 0,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 123,
+     "nominal_tokens_out": 123,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 101,
+     "nominal_tokens_out": 101,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 123,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 123,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 101,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 101,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 123,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-1009",
+   "replicate": 1,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 93,
+     "nominal_tokens_out": 93,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 104,
+     "nominal_tokens_out": 104,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 93,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 93,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 104,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 104,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 93,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-989",
+   "replicate": 0,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 173,
+     "nominal_tokens_out": 173,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 135,
+     "nominal_tokens_out": 135,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 173,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 173,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 135,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 135,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 173,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-989",
+   "replicate": 1,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 168,
+     "nominal_tokens_out": 168,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 82,
+     "nominal_tokens_out": 82,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 168,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 168,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 82,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 82,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 168,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-809",
+   "replicate": 0,
+   "outcomes": {
+    "3": 1,
+    "": 1,
+    "0,3": 1,
+    "0": 1,
+    "1": 1,
+    "1,3": 1,
+    "2,3": 1,
+    "2": 1,
+    "0,1": 1,
+    "0,1,3": 1,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 1,
+    "1,2": 1
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 173,
+     "nominal_tokens_out": 173,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 116,
+     "nominal_tokens_out": 116,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 173,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 173,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 116,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 116,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 173,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-809",
+   "replicate": 1,
+   "outcomes": {
+    "3": 1,
+    "": 1,
+    "0,3": 0,
+    "0": 0,
+    "1": 1,
+    "1,3": 1,
+    "2,3": 1,
+    "2": 1,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 1,
+    "1,2": 1
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 193,
+     "nominal_tokens_out": 193,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 122,
+     "nominal_tokens_out": 122,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 193,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 193,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 122,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 122,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 193,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-148",
+   "replicate": 0,
+   "outcomes": {
+    "1": 0,
+    "3": 0,
+    "": 0,
+    "1,3": 0,
+    "0,3": 0,
+    "0": 0,
+    "2,3": 0,
+    "1,2,3": 0,
+    "2": 0,
+    "1,2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 768,
+     "nominal_tokens_out": 768,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 159,
+     "nominal_tokens_out": 159,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 768,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 159,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 159,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-148",
+   "replicate": 1,
+   "outcomes": {
+    "3": 1,
+    "": 1,
+    "0,3": 0,
+    "0": 0,
+    "1": 1,
+    "1,3": 1,
+    "2,3": 1,
+    "2": 1,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 1,
+    "1,2": 1
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 212,
+     "nominal_tokens_out": 212,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 141,
+     "nominal_tokens_out": 141,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 212,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 212,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 141,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 141,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 212,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-1256",
+   "replicate": 0,
+   "outcomes": {
+    "3": 1,
+    "": 1,
+    "0,3": 0,
+    "0": 0,
+    "1": 1,
+    "1,3": 1,
+    "2,3": 1,
+    "2": 1,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 1,
+    "1,2": 1
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 146,
+     "nominal_tokens_out": 146,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 127,
+     "nominal_tokens_out": 127,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 146,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 146,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 127,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 127,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 146,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-1256",
+   "replicate": 1,
+   "outcomes": {
+    "3": 1,
+    "": 1,
+    "0,3": 0,
+    "0": 0,
+    "1": 1,
+    "1,3": 1,
+    "2,3": 1,
+    "2": 1,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 1,
+    "1,2": 1
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 144,
+     "nominal_tokens_out": 144,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 92,
+     "nominal_tokens_out": 92,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 144,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 144,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 92,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 92,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 144,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-757",
+   "replicate": 0,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 234,
+     "nominal_tokens_out": 234,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 115,
+     "nominal_tokens_out": 115,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 234,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 234,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 115,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 115,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 234,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-757",
+   "replicate": 1,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 275,
+     "nominal_tokens_out": 275,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 92,
+     "nominal_tokens_out": 92,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 275,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 275,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 92,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 92,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 275,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-272",
+   "replicate": 0,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 441,
+     "nominal_tokens_out": 441,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 174,
+     "nominal_tokens_out": 174,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 441,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 441,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 174,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 174,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 441,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-272",
+   "replicate": 1,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 404,
+     "nominal_tokens_out": 404,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 196,
+     "nominal_tokens_out": 196,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 404,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 404,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 196,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 196,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 404,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-184",
+   "replicate": 0,
+   "outcomes": {
+    "1": 0,
+    "3": 0,
+    "": 0,
+    "1,3": 0,
+    "0,3": 0,
+    "0": 0,
+    "2,3": 0,
+    "1,2,3": 0,
+    "2": 0,
+    "1,2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 768,
+     "nominal_tokens_out": 768,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 105,
+     "nominal_tokens_out": 105,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 768,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 105,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 105,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-184",
+   "replicate": 1,
+   "outcomes": {
+    "3": 1,
+    "": 1,
+    "0,3": 0,
+    "0": 0,
+    "1": 1,
+    "1,3": 1,
+    "2,3": 1,
+    "2": 1,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 1,
+    "1,2": 1
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 84,
+     "nominal_tokens_out": 84,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 104,
+     "nominal_tokens_out": 104,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 84,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 84,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 104,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 104,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 84,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-1115",
+   "replicate": 0,
+   "outcomes": {
+    "3": 1,
+    "": 1,
+    "0,3": 0,
+    "0": 0,
+    "1": 1,
+    "1,3": 1,
+    "2,3": 1,
+    "2": 1,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0,
+    "1,2,3": 1,
+    "1,2": 1
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 168,
+     "nominal_tokens_out": 168,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 102,
+     "nominal_tokens_out": 102,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 168,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 168,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 102,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 102,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 168,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-1115",
+   "replicate": 1,
+   "outcomes": {
+    "3": 1,
+    "": 1,
+    "0,3": 0,
+    "0": 0,
+    "1": 1,
+    "1,3": 1,
+    "2,3": 1,
+    "2": 1,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 1,
+    "1,2": 1
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 125,
+     "nominal_tokens_out": 125,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 105,
+     "nominal_tokens_out": 105,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 125,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 125,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 105,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 105,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 125,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-63",
+   "replicate": 0,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 139,
+     "nominal_tokens_out": 139,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 129,
+     "nominal_tokens_out": 129,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 139,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 139,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 129,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 129,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 139,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-63",
+   "replicate": 1,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 169,
+     "nominal_tokens_out": 169,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 122,
+     "nominal_tokens_out": 122,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 169,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 169,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 122,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 122,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 169,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-1154",
+   "replicate": 0,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 352,
+     "nominal_tokens_out": 352,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 183,
+     "nominal_tokens_out": 183,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 352,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 352,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 183,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 183,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 352,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-1154",
+   "replicate": 1,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 639,
+     "nominal_tokens_out": 639,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 240,
+     "nominal_tokens_out": 240,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 639,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 639,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 240,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 240,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 639,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-0",
+   "replicate": 0,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 694,
+     "nominal_tokens_out": 694,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 94,
+     "nominal_tokens_out": 94,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 694,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 694,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 94,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 94,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 694,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-0",
+   "replicate": 1,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 369,
+     "nominal_tokens_out": 369,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 122,
+     "nominal_tokens_out": 122,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 369,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 369,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 122,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 122,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 369,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-320",
+   "replicate": 0,
+   "outcomes": {
+    "3": 1,
+    "": 1,
+    "0,3": 0,
+    "0": 0,
+    "1": 1,
+    "1,3": 1,
+    "2,3": 1,
+    "2": 1,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 1,
+    "1,2": 1
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 202,
+     "nominal_tokens_out": 202,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 173,
+     "nominal_tokens_out": 173,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 202,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 202,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 173,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 173,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 202,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-320",
+   "replicate": 1,
+   "outcomes": {
+    "3": 1,
+    "": 1,
+    "0,3": 0,
+    "0": 0,
+    "1": 1,
+    "1,3": 1,
+    "2,3": 1,
+    "2": 1,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 1,
+    "1,2": 1
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 359,
+     "nominal_tokens_out": 359,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 207,
+     "nominal_tokens_out": 207,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 359,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 359,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 207,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 207,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 359,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-1206",
+   "replicate": 0,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 168,
+     "nominal_tokens_out": 168,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 137,
+     "nominal_tokens_out": 137,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 168,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 168,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 137,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 137,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 168,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-1206",
+   "replicate": 1,
+   "outcomes": {
+    "1": 0,
+    "3": 0,
+    "": 0,
+    "1,3": 0,
+    "0,3": 0,
+    "0": 0,
+    "2,3": 0,
+    "1,2,3": 0,
+    "2": 0,
+    "1,2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 768,
+     "nominal_tokens_out": 768,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 150,
+     "nominal_tokens_out": 150,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 768,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 150,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 150,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-1071",
+   "replicate": 0,
+   "outcomes": {
+    "1": 0,
+    "3": 0,
+    "": 0,
+    "1,3": 0,
+    "0,3": 0,
+    "0": 0,
+    "2,3": 0,
+    "1,2,3": 0,
+    "2": 0,
+    "1,2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 768,
+     "nominal_tokens_out": 768,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 224,
+     "nominal_tokens_out": 224,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 768,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 224,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 224,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-1071",
+   "replicate": 1,
+   "outcomes": {
+    "1": 0,
+    "3": 0,
+    "": 0,
+    "1,3": 0,
+    "0,3": 0,
+    "0": 0,
+    "2,3": 0,
+    "1,2,3": 0,
+    "2": 0,
+    "1,2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 768,
+     "nominal_tokens_out": 768,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 254,
+     "nominal_tokens_out": 254,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 768,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 254,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 254,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-254",
+   "replicate": 0,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 190,
+     "nominal_tokens_out": 190,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 133,
+     "nominal_tokens_out": 133,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 190,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 190,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 133,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 133,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 190,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-254",
+   "replicate": 1,
+   "outcomes": {
+    "3": 1,
+    "": 1,
+    "0,3": 0,
+    "0": 0,
+    "1": 1,
+    "1,3": 1,
+    "2,3": 1,
+    "2": 1,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 1,
+    "1,2": 1
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 136,
+     "nominal_tokens_out": 136,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 208,
+     "nominal_tokens_out": 208,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 136,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 136,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 208,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 208,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 136,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-673",
+   "replicate": 0,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 166,
+     "nominal_tokens_out": 166,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 107,
+     "nominal_tokens_out": 107,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 166,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 166,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 107,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 107,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 166,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-673",
+   "replicate": 1,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 112,
+     "nominal_tokens_out": 112,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 122,
+     "nominal_tokens_out": 122,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 112,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 112,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 122,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 122,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 112,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-917",
+   "replicate": 0,
+   "outcomes": {
+    "3": 1,
+    "": 1,
+    "0,3": 0,
+    "0": 0,
+    "1": 1,
+    "1,3": 1,
+    "2,3": 1,
+    "2": 1,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 1,
+    "1,2": 1
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 138,
+     "nominal_tokens_out": 138,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 84,
+     "nominal_tokens_out": 84,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 138,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 138,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 84,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 84,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 138,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-917",
+   "replicate": 1,
+   "outcomes": {
+    "3": 1,
+    "": 1,
+    "0,3": 0,
+    "0": 0,
+    "1": 1,
+    "1,3": 1,
+    "2,3": 1,
+    "2": 1,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 1,
+    "1,2": 1
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 101,
+     "nominal_tokens_out": 101,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 94,
+     "nominal_tokens_out": 94,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 101,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 101,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 94,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 94,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 101,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-1244",
+   "replicate": 0,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 292,
+     "nominal_tokens_out": 292,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 78,
+     "nominal_tokens_out": 78,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 292,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 292,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 78,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 78,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 292,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-1244",
+   "replicate": 1,
+   "outcomes": {
+    "1": 0,
+    "3": 0,
+    "": 0,
+    "1,3": 0,
+    "0,3": 0,
+    "0": 0,
+    "2,3": 0,
+    "1,2,3": 0,
+    "2": 0,
+    "1,2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 299,
+     "nominal_tokens_out": 299,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 96,
+     "nominal_tokens_out": 96,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 299,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 96,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 96,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-651",
+   "replicate": 0,
+   "outcomes": {
+    "3": 1,
+    "": 1,
+    "0,3": 0,
+    "0": 0,
+    "1": 1,
+    "1,3": 1,
+    "2,3": 1,
+    "2": 1,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 1,
+    "1,2": 1
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 265,
+     "nominal_tokens_out": 265,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 143,
+     "nominal_tokens_out": 143,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 265,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 265,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 143,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 143,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 265,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-651",
+   "replicate": 1,
+   "outcomes": {
+    "3": 1,
+    "": 1,
+    "0,3": 0,
+    "0": 0,
+    "1": 1,
+    "1,3": 1,
+    "2,3": 1,
+    "2": 1,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 1,
+    "1,2": 1
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 177,
+     "nominal_tokens_out": 177,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 135,
+     "nominal_tokens_out": 135,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 177,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 177,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 135,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 135,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 177,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-709",
+   "replicate": 0,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 279,
+     "nominal_tokens_out": 279,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 124,
+     "nominal_tokens_out": 124,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 279,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 279,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 124,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 124,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 279,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-709",
+   "replicate": 1,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 260,
+     "nominal_tokens_out": 260,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 138,
+     "nominal_tokens_out": 138,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 260,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 260,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 138,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 138,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 260,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-965",
+   "replicate": 0,
+   "outcomes": {
+    "3": 1,
+    "": 1,
+    "0,3": 0,
+    "0": 0,
+    "1": 1,
+    "1,3": 1,
+    "2,3": 1,
+    "2": 1,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 1,
+    "1,2": 1
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 131,
+     "nominal_tokens_out": 131,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 169,
+     "nominal_tokens_out": 169,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 131,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 131,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 169,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 169,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 131,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-965",
+   "replicate": 1,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 113,
+     "nominal_tokens_out": 113,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 130,
+     "nominal_tokens_out": 130,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 113,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 113,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 130,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 130,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 113,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-725",
+   "replicate": 0,
+   "outcomes": {
+    "3": 1,
+    "": 1,
+    "0,3": 0,
+    "0": 0,
+    "1": 1,
+    "1,3": 1,
+    "2,3": 1,
+    "2": 1,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 1,
+    "1,2": 1
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 222,
+     "nominal_tokens_out": 222,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 187,
+     "nominal_tokens_out": 187,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 222,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 222,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 187,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 187,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 222,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-725",
+   "replicate": 1,
+   "outcomes": {
+    "3": 1,
+    "": 1,
+    "0,3": 0,
+    "0": 0,
+    "1": 1,
+    "1,3": 1,
+    "2,3": 1,
+    "2": 1,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 1,
+    "1,2": 1
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 178,
+     "nominal_tokens_out": 178,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 150,
+     "nominal_tokens_out": 150,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 178,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 178,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 150,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 150,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 178,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-939",
+   "replicate": 0,
+   "outcomes": {
+    "1": 0,
+    "3": 0,
+    "": 0,
+    "1,3": 0,
+    "0,3": 0,
+    "0": 0,
+    "2,3": 0,
+    "1,2,3": 0,
+    "2": 0,
+    "1,2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 285,
+     "nominal_tokens_out": 285,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 188,
+     "nominal_tokens_out": 188,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 285,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 188,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 188,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-939",
+   "replicate": 1,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 303,
+     "nominal_tokens_out": 303,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 162,
+     "nominal_tokens_out": 162,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 303,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 303,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 162,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 162,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 303,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-121",
+   "replicate": 0,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 187,
+     "nominal_tokens_out": 187,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 207,
+     "nominal_tokens_out": 207,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 187,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 187,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 207,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 207,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 187,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-121",
+   "replicate": 1,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 136,
+     "nominal_tokens_out": 136,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 145,
+     "nominal_tokens_out": 145,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 136,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 136,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 145,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 145,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 136,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-844",
+   "replicate": 0,
+   "outcomes": {
+    "3": 1,
+    "": 1,
+    "0,3": 0,
+    "0": 0,
+    "1": 1,
+    "1,3": 1,
+    "2,3": 1,
+    "2": 1,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0,
+    "1,2,3": 1,
+    "1,2": 1
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 182,
+     "nominal_tokens_out": 182,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 34,
+     "nominal_tokens_out": 34,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 182,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 182,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 34,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 34,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 182,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-844",
+   "replicate": 1,
+   "outcomes": {
+    "3": 1,
+    "": 1,
+    "0,3": 1,
+    "0": 1,
+    "1": 1,
+    "1,3": 1,
+    "2,3": 1,
+    "2": 1,
+    "0,1": 1,
+    "0,1,3": 1,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 1,
+    "1,2": 1
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 183,
+     "nominal_tokens_out": 183,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 88,
+     "nominal_tokens_out": 88,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 183,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 183,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 88,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 88,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 183,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-1037",
+   "replicate": 0,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 575,
+     "nominal_tokens_out": 575,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 201,
+     "nominal_tokens_out": 201,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 575,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 575,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 201,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 201,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 575,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-1037",
+   "replicate": 1,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 241,
+     "nominal_tokens_out": 241,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 197,
+     "nominal_tokens_out": 197,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 241,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 241,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 197,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 197,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 241,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-396",
+   "replicate": 0,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 183,
+     "nominal_tokens_out": 183,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 96,
+     "nominal_tokens_out": 96,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 183,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 183,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 96,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 96,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 183,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-396",
+   "replicate": 1,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 203,
+     "nominal_tokens_out": 203,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 110,
+     "nominal_tokens_out": 110,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 203,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 203,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 110,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 110,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 203,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-662",
+   "replicate": 0,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 309,
+     "nominal_tokens_out": 309,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 163,
+     "nominal_tokens_out": 163,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 309,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 309,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 163,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 163,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 309,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-662",
+   "replicate": 1,
+   "outcomes": {
+    "1": 0,
+    "3": 0,
+    "": 0,
+    "1,3": 0,
+    "0,3": 0,
+    "0": 0,
+    "2,3": 0,
+    "1,2,3": 0,
+    "2": 0,
+    "1,2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 768,
+     "nominal_tokens_out": 768,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 124,
+     "nominal_tokens_out": 124,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 768,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 124,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 124,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-901",
+   "replicate": 0,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 282,
+     "nominal_tokens_out": 282,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 153,
+     "nominal_tokens_out": 153,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 282,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 282,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 153,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 153,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 282,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-901",
+   "replicate": 1,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 276,
+     "nominal_tokens_out": 276,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 156,
+     "nominal_tokens_out": 156,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 276,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 276,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 156,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 156,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 276,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-999",
+   "replicate": 0,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 320,
+     "nominal_tokens_out": 320,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 136,
+     "nominal_tokens_out": 136,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 320,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 320,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 136,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 136,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 320,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-999",
+   "replicate": 1,
+   "outcomes": {
+    "1": 0,
+    "3": 0,
+    "": 0,
+    "1,3": 0,
+    "0,3": 0,
+    "0": 0,
+    "2,3": 0,
+    "1,2,3": 0,
+    "2": 0,
+    "1,2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 768,
+     "nominal_tokens_out": 768,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 124,
+     "nominal_tokens_out": 124,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 768,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 124,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 124,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-926",
+   "replicate": 0,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 170,
+     "nominal_tokens_out": 170,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 120,
+     "nominal_tokens_out": 120,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 170,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 170,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 120,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 120,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 170,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-926",
+   "replicate": 1,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 197,
+     "nominal_tokens_out": 197,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 128,
+     "nominal_tokens_out": 128,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 197,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 197,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 128,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 128,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 197,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-332",
+   "replicate": 0,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 192,
+     "nominal_tokens_out": 192,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 164,
+     "nominal_tokens_out": 164,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 192,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 192,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 164,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 164,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 192,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-332",
+   "replicate": 1,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 247,
+     "nominal_tokens_out": 247,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 175,
+     "nominal_tokens_out": 175,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 247,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 247,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 175,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 175,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 247,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-335",
+   "replicate": 0,
+   "outcomes": {
+    "1": 0,
+    "3": 0,
+    "": 0,
+    "1,3": 0,
+    "0,3": 0,
+    "0": 0,
+    "2,3": 0,
+    "1,2,3": 0,
+    "2": 0,
+    "1,2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 401,
+     "nominal_tokens_out": 401,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 124,
+     "nominal_tokens_out": 124,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 401,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 124,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 124,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-335",
+   "replicate": 1,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 241,
+     "nominal_tokens_out": 241,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 144,
+     "nominal_tokens_out": 144,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 241,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 241,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 144,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 144,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 241,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-630",
+   "replicate": 0,
+   "outcomes": {
+    "1": 0,
+    "3": 0,
+    "": 0,
+    "1,3": 0,
+    "0,3": 0,
+    "0": 0,
+    "2,3": 0,
+    "1,2,3": 0,
+    "2": 0,
+    "1,2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 361,
+     "nominal_tokens_out": 361,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 174,
+     "nominal_tokens_out": 174,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 361,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 174,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 174,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-630",
+   "replicate": 1,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 247,
+     "nominal_tokens_out": 247,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 114,
+     "nominal_tokens_out": 114,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 247,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 247,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 114,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 114,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 247,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-1281",
+   "replicate": 0,
+   "outcomes": {
+    "1": 0,
+    "3": 0,
+    "": 0,
+    "1,3": 0,
+    "0,3": 0,
+    "0": 0,
+    "2,3": 0,
+    "1,2,3": 0,
+    "2": 0,
+    "1,2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 768,
+     "nominal_tokens_out": 768,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 158,
+     "nominal_tokens_out": 158,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 768,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 158,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 158,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-1281",
+   "replicate": 1,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 164,
+     "nominal_tokens_out": 164,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 92,
+     "nominal_tokens_out": 92,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 164,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 164,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 92,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 92,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 164,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-1131",
+   "replicate": 0,
+   "outcomes": {
+    "3": 1,
+    "": 1,
+    "0,3": 0,
+    "0": 0,
+    "1": 1,
+    "1,3": 1,
+    "2,3": 1,
+    "2": 1,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0,
+    "1,2,3": 1,
+    "1,2": 1
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 247,
+     "nominal_tokens_out": 247,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 120,
+     "nominal_tokens_out": 120,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 247,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 247,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 120,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 120,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 247,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-1131",
+   "replicate": 1,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 0,
+    "0,2,3": 0,
+    "0,2": 0,
+    "0,1,2,3": 0,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 141,
+     "nominal_tokens_out": 141,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 103,
+     "nominal_tokens_out": 103,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 141,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 141,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 103,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 103,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 141,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-792",
+   "replicate": 0,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 179,
+     "nominal_tokens_out": 179,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 80,
+     "nominal_tokens_out": 80,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 179,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 179,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 80,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 80,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 179,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-792",
+   "replicate": 1,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 263,
+     "nominal_tokens_out": 263,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 80,
+     "nominal_tokens_out": 80,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 263,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 263,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 80,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 80,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 263,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-62",
+   "replicate": 0,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 223,
+     "nominal_tokens_out": 223,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 87,
+     "nominal_tokens_out": 87,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 223,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 223,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 87,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 87,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 223,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  },
+  {
+   "task_id": "gsmh-62",
+   "replicate": 1,
+   "outcomes": {
+    "3": 0,
+    "": 0,
+    "0,3": 0,
+    "0": 0,
+    "1": 0,
+    "1,3": 0,
+    "2,3": 0,
+    "2": 0,
+    "0,1": 0,
+    "0,1,3": 0,
+    "0,1,2": 1,
+    "0,2,3": 1,
+    "0,2": 1,
+    "0,1,2,3": 1,
+    "1,2,3": 0,
+    "1,2": 0
+   },
+   "executions": [
+    {
+     "product": [],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 177,
+     "nominal_tokens_out": 177,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 66,
+     "nominal_tokens_out": 66,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 177,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 177,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      1
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 66,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      0,
+      2
+     ],
+     "reads": [
+      0,
+      2
+     ],
+     "outcome": 1,
+     "tokens_out": 0,
+     "nominal_tokens_out": 66,
+     "n_llm_calls": 1,
+     "error": ""
+    },
+    {
+     "product": [
+      1,
+      2
+     ],
+     "reads": [
+      0,
+      1,
+      2
+     ],
+     "outcome": 0,
+     "tokens_out": 0,
+     "nominal_tokens_out": 177,
+     "n_llm_calls": 1,
+     "error": ""
+    }
+   ],
+   "mismatches": []
+  }
+ ]
+}

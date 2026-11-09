@@ -1,0 +1,392 @@
+{
+ "name": "planted_stmt",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "SYSTEM_PROMPT"
+   ],
+   "diff": "@@ seed lines 8-9\n- SYSTEM_PROMPT = \"\"\"Solve the math word problem.\n- Think step by step, then end your reply with a final line of the form:\n+ SYSTEM_PROMPT = \"\"\"Solve the math word problem by writing a short Python program that prints only the final number.\n+ Put the program in one ```python code block, then end your reply with a final line of the form:\n",
+   "hunks": [
+    {
+     "start": 7,
+     "end": 9,
+     "replacement": [
+      "SYSTEM_PROMPT = \"\"\"Solve the math word problem by writing a short Python program that prints only the final number.\n",
+      "Put the program in one ```python code block, then end your reply with a final line of the form:\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "items": [
+    "extract_answer"
+   ],
+   "diff": "@@ seed lines 16-16\n-         return reply.rsplit(\"Answer:\", 1)[1].strip()\n+         return reply.rsplit(\"Answer:\", 1)[1].strip().split(\".\")[0]\n",
+   "hunks": [
+    {
+     "start": 15,
+     "end": 16,
+     "replacement": [
+      "        return reply.rsplit(\"Answer:\", 1)[1].strip().split(\".\")[0]\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 22-21\n+     if \"```python\" in reply:\n+         code = reply.split(\"```python\", 1)[1].split(\"```\", 1)[0]\n+         result = env.run_python(code)\n+         if result.returncode == 0 and result.stdout.strip():\n+             return {\"answer\": result.stdout.strip().splitlines()[-1]}\n",
+   "hunks": [
+    {
+     "start": 21,
+     "end": 21,
+     "replacement": [
+      "    if \"```python\" in reply:\n",
+      "        code = reply.split(\"```python\", 1)[1].split(\"```\", 1)[0]\n",
+      "        result = env.run_python(code)\n",
+      "        if result.returncode == 0 and result.stdout.strip():\n",
+      "            return {\"answer\": result.stdout.strip().splitlines()[-1]}\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 3,
+   "items": [
+    "<new>"
+   ],
+   "diff": "@@ seed lines 23-22\n+ \n+ \n+ def describe_units(value):\n+     \"\"\"Format a quantity with its unit (not used by solve).\"\"\"\n+     return f\"{value} units\"\n",
+   "hunks": [
+    {
+     "start": 22,
+     "end": 22,
+     "replacement": [
+      "\n",
+      "\n",
+      "def describe_units(value):\n",
+      "    \"\"\"Format a quantity with its unit (not used by solve).\"\"\"\n",
+      "    return f\"{value} units\"\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {
+  "search": {
+   "seed": 0.6,
+   "full": 0.5375,
+   "shapley": {
+    "0": {
+     "value": -0.23958333333333331,
+     "low": -0.3666666666666667,
+     "high": -0.11458333333333331,
+     "p": 0.0
+    },
+    "1": {
+     "value": -0.020833333333333322,
+     "low": -0.054166666666666655,
+     "high": 0.0,
+     "p": 0.26
+    },
+    "2": {
+     "value": 0.19791666666666663,
+     "low": 0.13333333333333333,
+     "high": 0.26874999999999993,
+     "p": 0.0
+    },
+    "3": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": 0.03125,
+     "low": 0.0,
+     "high": 0.08749999999999997,
+     "p": 0.26
+    },
+    "0,2": {
+     "value": 0.39374999999999993,
+     "low": 0.26249999999999996,
+     "high": 0.5374999999999999,
+     "p": 0.0
+    },
+    "0,3": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,2": {
+     "value": 0.006249999999999991,
+     "low": -1.3877787807814457e-17,
+     "high": 0.018750000000000003,
+     "p": 0.499
+    },
+    "1,3": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,3": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "matters": {
+    "0": true,
+    "2": true,
+    "1": false,
+    "3": false
+   },
+   "interacts": {
+    "0,2": true,
+    "0,1": false,
+    "1,2": false,
+    "0,3": false,
+    "1,3": false,
+    "2,3": false
+   },
+   "loo": {
+    "0": -0.025000000000000022,
+    "1": 0.0,
+    "2": 0.39999999999999997,
+    "3": 0.0
+   },
+   "loi": {
+    "0": -0.44999999999999996,
+    "1": -0.03749999999999998,
+    "2": 0.0,
+    "3": 0.0
+   }
+  },
+  "heldout": {
+   "seed": 0.5125,
+   "full": 0.55,
+   "shapley": {
+    "0": {
+     "value": -0.12083333333333332,
+     "low": -0.2708333333333333,
+     "high": 0.016666666666666663,
+     "p": 0.091
+    },
+    "1": {
+     "value": -0.002083333333333286,
+     "low": -0.05833333333333332,
+     "high": 0.04999999999999999,
+     "p": 0.922
+    },
+    "2": {
+     "value": 0.16041666666666668,
+     "low": 0.09583333333333333,
+     "high": 0.22291666666666668,
+     "p": 0.0
+    },
+    "3": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": 0.09374999999999994,
+     "low": 0.0062500000000000056,
+     "high": 0.19374999999999998,
+     "p": 0.039
+    },
+    "0,2": {
+     "value": 0.31875,
+     "low": 0.1875,
+     "high": 0.44375,
+     "p": 0.0
+    },
+    "0,3": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,2": {
+     "value": 0.0062500000000000324,
+     "low": -2.7755575615628914e-17,
+     "high": 0.018750000000000017,
+     "p": 0.437
+    },
+    "1,3": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,3": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "matters": {
+    "2": true,
+    "0": false,
+    "1": false,
+    "3": false
+   },
+   "interacts": {
+    "0,2": true,
+    "0,1": false,
+    "1,2": false,
+    "0,3": false,
+    "1,3": false,
+    "2,3": false
+   },
+   "loo": {
+    "0": 0.08750000000000002,
+    "1": 0.050000000000000044,
+    "2": 0.32500000000000007,
+    "3": 0.0
+   },
+   "loi": {
+    "0": -0.32499999999999996,
+    "1": -0.04999999999999993,
+    "2": 0.0,
+    "3": 0.0
+   }
+  },
+  "overfitting_units": []
+ },
+ "rq4": [
+  {
+   "delta": 0.02,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 16,
+   "search_value": 0.6,
+   "heldout_value": 0.5125,
+   "heldout_full": 0.55,
+   "certified": false,
+   "pairs_used": 80
+  },
+  {
+   "delta": 0.02,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 11,
+   "search_value": 0.6,
+   "heldout_value": 0.5125,
+   "heldout_full": 0.55,
+   "certified": false,
+   "pairs_used": 80
+  },
+  {
+   "delta": 0.02,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 5,
+   "search_value": 0.6,
+   "heldout_value": 0.5125,
+   "heldout_full": 0.55,
+   "certified": false,
+   "pairs_used": 80
+  },
+  {
+   "delta": 0.02,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 7,
+   "search_value": 0.6,
+   "heldout_value": 0.5125,
+   "heldout_full": 0.55,
+   "certified": false,
+   "pairs_used": 80
+  },
+  {
+   "delta": 0.02,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 16,
+   "search_value": 0.6,
+   "heldout_value": 0.5125,
+   "heldout_full": 0.55,
+   "certified": false,
+   "pairs_used": 80
+  },
+  {
+   "delta": 0.05,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 16,
+   "search_value": 0.6,
+   "heldout_value": 0.5125,
+   "heldout_full": 0.55,
+   "certified": false,
+   "pairs_used": 80
+  },
+  {
+   "delta": 0.05,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 11,
+   "search_value": 0.6,
+   "heldout_value": 0.5125,
+   "heldout_full": 0.55,
+   "certified": false,
+   "pairs_used": 80
+  },
+  {
+   "delta": 0.05,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 5,
+   "search_value": 0.6,
+   "heldout_value": 0.5125,
+   "heldout_full": 0.55,
+   "certified": false,
+   "pairs_used": 80
+  },
+  {
+   "delta": 0.05,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 7,
+   "search_value": 0.6,
+   "heldout_value": 0.5125,
+   "heldout_full": 0.55,
+   "certified": false,
+   "pairs_used": 80
+  },
+  {
+   "delta": 0.05,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 16,
+   "search_value": 0.6,
+   "heldout_value": 0.5125,
+   "heldout_full": 0.55,
+   "certified": false,
+   "pairs_used": 80
+  }
+ ],
+ "rq5": null
+}

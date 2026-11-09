@@ -1,0 +1,99 @@
+{
+ "name": "prior_rq5_bird_metaharness_B3_s4",
+ "split": "search",
+ "n_cells": 10,
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "execute_tool"
+   ],
+   "diff": "@@ seed lines 147-146\n+         # Check if the query references existing columns\n+         try:\n+             env.execute(clean_sql(argument), max_rows=1)\n+         except Exception as error:\n+             return f\"Error: {error}. Check your query for column references.\"\n"
+  },
+  {
+   "index": 1,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 168-167\n+             # Check if the query references existing columns\n+             try:\n+                 env.execute(clean_sql(argument), max_rows=1)\n+             except Exception as error:\n+                 messages.append({\"role\": \"user\", \"content\": f\"Error: {error}. Check your query for column references.\"})\n+                 continue\n"
+  },
+  {
+   "index": 2,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 174-173\n+             # Check if the query references existing columns\n+             try:\n+                 env.execute(clean_sql(argument), max_rows=1)\n+             except Exception as error:\n+                 messages.append({\"role\": \"user\", \"content\": f\"Error: {error}. Check your query for column references.\"})\n+                 continue\n"
+  }
+ ],
+ "values": {
+  "": 0.5,
+  "0": 0.5,
+  "1": 0.5,
+  "2": 0.5,
+  "0,1": 0.5,
+  "0,2": 0.5,
+  "1,2": 0.5,
+  "0,1,2": 0.5
+ },
+ "shapley": {
+  "0": {
+   "value": 0.0,
+   "low": 0.0,
+   "high": 0.0
+  },
+  "1": {
+   "value": 0.0,
+   "low": 0.0,
+   "high": 0.0
+  },
+  "2": {
+   "value": 0.0,
+   "low": 0.0,
+   "high": 0.0
+  }
+ },
+ "interaction": {
+  "0,1": {
+   "value": 0.0,
+   "low": 0.0,
+   "high": 0.0
+  },
+  "0,2": {
+   "value": 0.0,
+   "low": 0.0,
+   "high": 0.0
+  },
+  "1,2": {
+   "value": 0.0,
+   "low": 0.0,
+   "high": 0.0
+  }
+ },
+ "mobius": {
+  "": 0.5,
+  "0": 0.0,
+  "1": 0.0,
+  "2": 0.0,
+  "0,1": 0.0,
+  "0,2": 0.0,
+  "1,2": 0.0,
+  "0,1,2": 0.0
+ },
+ "loo": {
+  "0": 0.0,
+  "1": 0.0,
+  "2": 0.0
+ },
+ "loi": {
+  "0": 0.0,
+  "1": 0.0,
+  "2": 0.0
+ },
+ "cost": {
+  "executions": 80,
+  "brute_force_runs": 80,
+  "generated_tokens": 0,
+  "nominal_tokens": 33422,
+  "mismatches": 0
+ }
+}

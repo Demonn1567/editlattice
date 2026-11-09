@@ -1,0 +1,332 @@
+{
+ "name": "phaseA3_gsmhard_metaharness_B1_s3_stmt",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "extract_answer"
+   ],
+   "diff": "@@ seed lines 13-12\n+ import re\n+ \n",
+   "hunks": [
+    {
+     "start": 12,
+     "end": 12,
+     "replacement": [
+      "import re\n",
+      "\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "items": [
+    "extract_answer"
+   ],
+   "diff": "@@ seed lines 15-16\n-     if \"Answer:\" in reply:\n-         return reply.rsplit(\"Answer:\", 1)[1].strip()\n+     # Check for LaTeX boxed answers (e.g., $$\\boxed{26}$$)\n+     latex_match = re.search(r'\\$\\$\\\\boxed{([^}]*)}\\$\\$', reply)\n+     if latex_match:\n+         return latex_match.group(1).strip()\n+     \n+     # Fallback to \"Answer: ...\" format (case-insensitive)\n+     answer_match = re.search(r'answer:\\s*([^\\n]*)', reply, re.IGNORECASE)\n+     if answer_match:\n+         answer_text = answer_match.group(1).strip()\n+         # Check if answer_text is a valid numeric expression (allowing commas)\n+         if re.fullmatch(r'[+-]?(\\d{1,3}(?:,\\d{3})*\\.?\\d*|\\.\\d+)', answer_text):\n+             return answer_text\n+     \n+     # Fallback to standalone number at end of reply (allowing commas)\n+     match = re.search(r'([+-]?(\\d{1,3}(?:,\\d{3})*\\.?\\d*|\\.\\d+))$', reply)\n+     if match:\n+         return match.group(1).strip()\n+     \n",
+   "hunks": [
+    {
+     "start": 14,
+     "end": 16,
+     "replacement": [
+      "    # Check for LaTeX boxed answers (e.g., $$\\boxed{26}$$)\n",
+      "    latex_match = re.search(r'\\$\\$\\\\boxed{([^}]*)}\\$\\$', reply)\n",
+      "    if latex_match:\n",
+      "        return latex_match.group(1).strip()\n",
+      "    \n",
+      "    # Fallback to \"Answer: ...\" format (case-insensitive)\n",
+      "    answer_match = re.search(r'answer:\\s*([^\\n]*)', reply, re.IGNORECASE)\n",
+      "    if answer_match:\n",
+      "        answer_text = answer_match.group(1).strip()\n",
+      "        # Check if answer_text is a valid numeric expression (allowing commas)\n",
+      "        if re.fullmatch(r'[+-]?(\\d{1,3}(?:,\\d{3})*\\.?\\d*|\\.\\d+)', answer_text):\n",
+      "            return answer_text\n",
+      "    \n",
+      "    # Fallback to standalone number at end of reply (allowing commas)\n",
+      "    match = re.search(r'([+-]?(\\d{1,3}(?:,\\d{3})*\\.?\\d*|\\.\\d+))$', reply)\n",
+      "    if match:\n",
+      "        return match.group(1).strip()\n",
+      "    \n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 22-22\n-     return {\"answer\": extract_answer(reply)}\n+     answer_text = extract_answer(reply)\n+     try:\n+         # Evaluate the extracted answer as Python code\n+         answer = eval(answer_text)\n+         return {\"answer\": answer}\n+     except:\n+         # Fallback to the raw extracted text if evaluation fails\n+         return {\"answer\": answer_text}\n",
+   "hunks": [
+    {
+     "start": 21,
+     "end": 22,
+     "replacement": [
+      "    answer_text = extract_answer(reply)\n",
+      "    try:\n",
+      "        # Evaluate the extracted answer as Python code\n",
+      "        answer = eval(answer_text)\n",
+      "        return {\"answer\": answer}\n",
+      "    except:\n",
+      "        # Fallback to the raw extracted text if evaluation fails\n",
+      "        return {\"answer\": answer_text}\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {
+  "search": {
+   "seed": 0.55,
+   "full": 0.5291666666666667,
+   "shapley": {
+    "0": {
+     "value": 0.2645833333333333,
+     "low": 0.20833333333333334,
+     "high": 0.325,
+     "p": 0.0
+    },
+    "1": {
+     "value": -0.2854166666666667,
+     "low": -0.3479166666666667,
+     "high": -0.22499999999999995,
+     "p": 0.0
+    },
+    "2": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": 0.5291666666666667,
+     "low": 0.4166666666666667,
+     "high": 0.65,
+     "p": 0.0
+    },
+    "0,2": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,2": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "matters": {
+    "0": true,
+    "1": true,
+    "2": false
+   },
+   "interacts": {
+    "0,1": true,
+    "0,2": false,
+    "1,2": false
+   },
+   "loo": {
+    "0": 0.5291666666666667,
+    "1": -0.02083333333333337,
+    "2": 0.0
+   },
+   "loi": {
+    "0": 0.0,
+    "1": -0.55,
+    "2": 0.0
+   }
+  },
+  "heldout": {
+   "seed": 0.58375,
+   "full": 0.55125,
+   "shapley": {
+    "0": {
+     "value": 0.27708333333333335,
+     "low": 0.24624999999999997,
+     "high": 0.30937499999999996,
+     "p": 0.0
+    },
+    "1": {
+     "value": -0.30229166666666657,
+     "low": -0.33625000000000005,
+     "high": -0.2697916666666666,
+     "p": 0.0
+    },
+    "2": {
+     "value": -0.007291666666666696,
+     "low": -0.015624999999999981,
+     "high": -0.0010416666666666814,
+     "p": 0.016
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": 0.555625,
+     "low": 0.49375,
+     "high": 0.619375,
+     "p": 0.0
+    },
+    "0,2": {
+     "value": -0.004375000000000018,
+     "low": -0.009374999999999994,
+     "high": -0.0006249999999999867,
+     "p": 0.016
+    },
+    "1,2": {
+     "value": 0.004375000000000018,
+     "low": 0.0006249999999999867,
+     "high": 0.009374999999999967,
+     "p": 0.016
+    }
+   },
+   "matters": {
+    "0": true,
+    "1": true,
+    "2": true
+   },
+   "interacts": {
+    "0,1": true,
+    "0,2": true,
+    "1,2": true
+   },
+   "loo": {
+    "0": 0.55125,
+    "1": -0.023749999999999938,
+    "2": -0.008750000000000036
+   },
+   "loi": {
+    "0": 0.0,
+    "1": -0.58375,
+    "2": -0.008750000000000036
+   }
+  },
+  "overfitting_units": []
+ },
+ "rq4": [
+  {
+   "delta": 0.02,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 8,
+   "search_value": 0.55,
+   "heldout_value": 0.58375,
+   "heldout_full": 0.55125,
+   "certified": true,
+   "pairs_used": 93
+  },
+  {
+   "delta": 0.02,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 7,
+   "search_value": 0.55,
+   "heldout_value": 0.58375,
+   "heldout_full": 0.55125,
+   "certified": true,
+   "pairs_used": 93
+  },
+  {
+   "delta": 0.02,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 3,
+   "search_value": 0.55,
+   "heldout_value": 0.58375,
+   "heldout_full": 0.55125,
+   "certified": true,
+   "pairs_used": 93
+  },
+  {
+   "delta": 0.02,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 6,
+   "search_value": 0.55,
+   "heldout_value": 0.58375,
+   "heldout_full": 0.55125,
+   "certified": true,
+   "pairs_used": 93
+  },
+  {
+   "delta": 0.02,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 8,
+   "search_value": 0.55,
+   "heldout_value": 0.58375,
+   "heldout_full": 0.55125,
+   "certified": true,
+   "pairs_used": 93
+  },
+  {
+   "delta": 0.05,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 8,
+   "search_value": 0.55,
+   "heldout_value": 0.58375,
+   "heldout_full": 0.55125,
+   "certified": true,
+   "pairs_used": 65
+  },
+  {
+   "delta": 0.05,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 7,
+   "search_value": 0.55,
+   "heldout_value": 0.58375,
+   "heldout_full": 0.55125,
+   "certified": true,
+   "pairs_used": 65
+  },
+  {
+   "delta": 0.05,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 3,
+   "search_value": 0.55,
+   "heldout_value": 0.58375,
+   "heldout_full": 0.55125,
+   "certified": true,
+   "pairs_used": 65
+  },
+  {
+   "delta": 0.05,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 6,
+   "search_value": 0.55,
+   "heldout_value": 0.58375,
+   "heldout_full": 0.55125,
+   "certified": true,
+   "pairs_used": 65
+  },
+  {
+   "delta": 0.05,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 8,
+   "search_value": 0.55,
+   "heldout_value": 0.58375,
+   "heldout_full": 0.55125,
+   "certified": true,
+   "pairs_used": 65
+  }
+ ],
+ "rq5": null
+}

@@ -1,0 +1,417 @@
+{
+ "truth": {
+  "0": -0.12083333333333332,
+  "1": -0.002083333333333286,
+  "2": 0.16041666666666668,
+  "3": 0.0
+ },
+ "budgets": [
+  80,
+  160,
+  320,
+  640,
+  1280
+ ],
+ "rows": [
+  {
+   "budget": 80,
+   "regime": "coupled",
+   "estimator": "permutation",
+   "mae": 0.0765962089810774,
+   "mae_sd": 0.03931011828850923,
+   "runs": 80.0
+  },
+  {
+   "budget": 80,
+   "regime": "coupled",
+   "estimator": "kernelshap",
+   "mae": 0.081321535084127,
+   "mae_sd": 0.035087490308687914,
+   "runs": 80.0
+  },
+  {
+   "budget": 80,
+   "regime": "coupled",
+   "estimator": "plugin_exact",
+   "mae": 0.07177083333333331,
+   "mae_sd": 0.037410048366047326,
+   "runs": 80.0
+  },
+  {
+   "budget": 80,
+   "regime": "coupled",
+   "estimator": "loo",
+   "mae": 0.08744791666666667,
+   "mae_sd": 0.05064522379826541,
+   "runs": 80.0
+  },
+  {
+   "budget": 80,
+   "regime": "coupled",
+   "estimator": "loi",
+   "mae": 0.10359375,
+   "mae_sd": 0.031745165519401014,
+   "runs": 80.0
+  },
+  {
+   "budget": 80,
+   "regime": "independent",
+   "estimator": "permutation",
+   "mae": 0.14760416666666662,
+   "mae_sd": 0.06679520486053704,
+   "runs": 80.0
+  },
+  {
+   "budget": 80,
+   "regime": "independent",
+   "estimator": "kernelshap",
+   "mae": 0.15532930634834283,
+   "mae_sd": 0.07721863408776498,
+   "runs": 80.0
+  },
+  {
+   "budget": 80,
+   "regime": "independent",
+   "estimator": "plugin_exact",
+   "mae": 0.10218749999999999,
+   "mae_sd": 0.035012863459575674,
+   "runs": 80.0
+  },
+  {
+   "budget": 80,
+   "regime": "independent",
+   "estimator": "loo",
+   "mae": 0.16958333333333334,
+   "mae_sd": 0.05596339019096918,
+   "runs": 80.0
+  },
+  {
+   "budget": 80,
+   "regime": "independent",
+   "estimator": "loi",
+   "mae": 0.2046875,
+   "mae_sd": 0.10334703580184475,
+   "runs": 80.0
+  },
+  {
+   "budget": 160,
+   "regime": "coupled",
+   "estimator": "permutation",
+   "mae": 0.05193190555574455,
+   "mae_sd": 0.02750993961950611,
+   "runs": 160.0
+  },
+  {
+   "budget": 160,
+   "regime": "coupled",
+   "estimator": "kernelshap",
+   "mae": 0.058388064783025606,
+   "mae_sd": 0.03196950778408603,
+   "runs": 160.0
+  },
+  {
+   "budget": 160,
+   "regime": "coupled",
+   "estimator": "plugin_exact",
+   "mae": 0.04734374999999998,
+   "mae_sd": 0.03189180350930923,
+   "runs": 160.0
+  },
+  {
+   "budget": 160,
+   "regime": "coupled",
+   "estimator": "loo",
+   "mae": 0.101171875,
+   "mae_sd": 0.04091505527366271,
+   "runs": 160.0
+  },
+  {
+   "budget": 160,
+   "regime": "coupled",
+   "estimator": "loi",
+   "mae": 0.10494791666666665,
+   "mae_sd": 0.024427860684148477,
+   "runs": 160.0
+  },
+  {
+   "budget": 160,
+   "regime": "independent",
+   "estimator": "permutation",
+   "mae": 0.11979166666666666,
+   "mae_sd": 0.038097098168874875,
+   "runs": 150.0
+  },
+  {
+   "budget": 160,
+   "regime": "independent",
+   "estimator": "kernelshap",
+   "mae": 0.09217547558352392,
+   "mae_sd": 0.031581161164335306,
+   "runs": 160.0
+  },
+  {
+   "budget": 160,
+   "regime": "independent",
+   "estimator": "plugin_exact",
+   "mae": 0.07901041666666668,
+   "mae_sd": 0.027856112419573992,
+   "runs": 160.0
+  },
+  {
+   "budget": 160,
+   "regime": "independent",
+   "estimator": "loo",
+   "mae": 0.13234375000000004,
+   "mae_sd": 0.05748497218325605,
+   "runs": 160.0
+  },
+  {
+   "budget": 160,
+   "regime": "independent",
+   "estimator": "loi",
+   "mae": 0.16158854166666664,
+   "mae_sd": 0.052010072172819326,
+   "runs": 160.0
+  },
+  {
+   "budget": 320,
+   "regime": "coupled",
+   "estimator": "permutation",
+   "mae": 0.042111072997779664,
+   "mae_sd": 0.018685475041580947,
+   "runs": 320.0
+  },
+  {
+   "budget": 320,
+   "regime": "coupled",
+   "estimator": "kernelshap",
+   "mae": 0.044157189212208285,
+   "mae_sd": 0.020511606298025606,
+   "runs": 320.0
+  },
+  {
+   "budget": 320,
+   "regime": "coupled",
+   "estimator": "plugin_exact",
+   "mae": 0.03578125,
+   "mae_sd": 0.017400121103306212,
+   "runs": 320.0
+  },
+  {
+   "budget": 320,
+   "regime": "coupled",
+   "estimator": "loo",
+   "mae": 0.109375,
+   "mae_sd": 0.018462972340775742,
+   "runs": 320.0
+  },
+  {
+   "budget": 320,
+   "regime": "coupled",
+   "estimator": "loi",
+   "mae": 0.09966145833333333,
+   "mae_sd": 0.014645769432945002,
+   "runs": 320.0
+  },
+  {
+   "budget": 320,
+   "regime": "independent",
+   "estimator": "permutation",
+   "mae": 0.09083333333333332,
+   "mae_sd": 0.03757891003164762,
+   "runs": 300.0
+  },
+  {
+   "budget": 320,
+   "regime": "independent",
+   "estimator": "kernelshap",
+   "mae": 0.10189616103975666,
+   "mae_sd": 0.05342859837866165,
+   "runs": 320.0
+  },
+  {
+   "budget": 320,
+   "regime": "independent",
+   "estimator": "plugin_exact",
+   "mae": 0.05088541666666665,
+   "mae_sd": 0.01852080696942255,
+   "runs": 320.0
+  },
+  {
+   "budget": 320,
+   "regime": "independent",
+   "estimator": "loo",
+   "mae": 0.11082031249999999,
+   "mae_sd": 0.050115661782873126,
+   "runs": 320.0
+  },
+  {
+   "budget": 320,
+   "regime": "independent",
+   "estimator": "loi",
+   "mae": 0.15475260416666664,
+   "mae_sd": 0.04225872291340731,
+   "runs": 320.0
+  },
+  {
+   "budget": 640,
+   "regime": "coupled",
+   "estimator": "permutation",
+   "mae": 0.03140287356061812,
+   "mae_sd": 0.013295643054523713,
+   "runs": 640.0
+  },
+  {
+   "budget": 640,
+   "regime": "coupled",
+   "estimator": "kernelshap",
+   "mae": 0.03417671740104382,
+   "mae_sd": 0.010737708676690895,
+   "runs": 640.0
+  },
+  {
+   "budget": 640,
+   "regime": "coupled",
+   "estimator": "plugin_exact",
+   "mae": 0.023541666666666662,
+   "mae_sd": 0.007279752170690064,
+   "runs": 640.0
+  },
+  {
+   "budget": 640,
+   "regime": "coupled",
+   "estimator": "loo",
+   "mae": 0.1111328125,
+   "mae_sd": 0.016631406997920192,
+   "runs": 640.0
+  },
+  {
+   "budget": 640,
+   "regime": "coupled",
+   "estimator": "loi",
+   "mae": 0.09956380208333333,
+   "mae_sd": 0.012253377297495168,
+   "runs": 640.0
+  },
+  {
+   "budget": 640,
+   "regime": "independent",
+   "estimator": "permutation",
+   "mae": 0.07354166666666666,
+   "mae_sd": 0.03875140006431309,
+   "runs": 600.0
+  },
+  {
+   "budget": 640,
+   "regime": "independent",
+   "estimator": "kernelshap",
+   "mae": 0.07201818323823905,
+   "mae_sd": 0.039998204298007524,
+   "runs": 640.0
+  },
+  {
+   "budget": 640,
+   "regime": "independent",
+   "estimator": "plugin_exact",
+   "mae": 0.049687499999999996,
+   "mae_sd": 0.013352443986651532,
+   "runs": 640.0
+  },
+  {
+   "budget": 640,
+   "regime": "independent",
+   "estimator": "loo",
+   "mae": 0.09203124999999997,
+   "mae_sd": 0.027656893677773096,
+   "runs": 640.0
+  },
+  {
+   "budget": 640,
+   "regime": "independent",
+   "estimator": "loi",
+   "mae": 0.1478255208333333,
+   "mae_sd": 0.03674125483140678,
+   "runs": 640.0
+  },
+  {
+   "budget": 1280,
+   "regime": "coupled",
+   "estimator": "permutation",
+   "mae": 0.024007605765515007,
+   "mae_sd": 0.009087322642925333,
+   "runs": 1280.0
+  },
+  {
+   "budget": 1280,
+   "regime": "coupled",
+   "estimator": "kernelshap",
+   "mae": 0.029653929283625174,
+   "mae_sd": 0.015777483878346384,
+   "runs": 1280.0
+  },
+  {
+   "budget": 1280,
+   "regime": "coupled",
+   "estimator": "plugin_exact",
+   "mae": 0.01859375,
+   "mae_sd": 0.006688400445609795,
+   "runs": 1280.0
+  },
+  {
+   "budget": 1280,
+   "regime": "coupled",
+   "estimator": "loo",
+   "mae": 0.10859375,
+   "mae_sd": 0.012865446527636293,
+   "runs": 1280.0
+  },
+  {
+   "budget": 1280,
+   "regime": "coupled",
+   "estimator": "loi",
+   "mae": 0.09990234375,
+   "mae_sd": 0.01434948855030288,
+   "runs": 1280.0
+  },
+  {
+   "budget": 1280,
+   "regime": "independent",
+   "estimator": "permutation",
+   "mae": 0.051302083333333325,
+   "mae_sd": 0.02192918635995695,
+   "runs": 1200.0
+  },
+  {
+   "budget": 1280,
+   "regime": "independent",
+   "estimator": "kernelshap",
+   "mae": 0.06098277962794265,
+   "mae_sd": 0.016718964266021017,
+   "runs": 1280.0
+  },
+  {
+   "budget": 1280,
+   "regime": "independent",
+   "estimator": "plugin_exact",
+   "mae": 0.03861979166666667,
+   "mae_sd": 0.010831924738151859,
+   "runs": 1280.0
+  },
+  {
+   "budget": 1280,
+   "regime": "independent",
+   "estimator": "loo",
+   "mae": 0.10166015625,
+   "mae_sd": 0.022829641930156935,
+   "runs": 1280.0
+  },
+  {
+   "budget": 1280,
+   "regime": "independent",
+   "estimator": "loi",
+   "mae": 0.15180989583333332,
+   "mae_sd": 0.02994288907074228,
+   "runs": 1280.0
+  }
+ ]
+}

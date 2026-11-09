@@ -1,0 +1,201 @@
+{
+ "name": "phaseA2_bird_metaharness_B3_s1_stmt",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 44-44\n-     return {\"answer\": extract_sql(reply)}\n+     sql = extract_sql(reply)\n+     columns, rows, truncated = env.execute(sql, max_rows=50)\n+     if rows:\n+         return {\"answer\": sql}\n+     else:\n+         feedback = f\"The query did not return results. Please refine your query based on the following information:\\n- Columns: {columns}\\n- Rows: {rows}\"\n+         new_prompt = f\"Database schema:\\n{schema_text(env)}\\n\\nQuestion: {task['question']}\\nHint: {task['evidence']}\\n\\n{feedback}\"\n+         refined_reply = llm.chat([{\"role\": \"system\", \"content\": SYSTEM_PROMPT}, {\"role\": \"user\", \"content\": new_prompt}])\n+         return {\"answer\": extract_sql(refined_reply)}\n",
+   "hunks": [
+    {
+     "start": 43,
+     "end": 44,
+     "replacement": [
+      "    sql = extract_sql(reply)\n",
+      "    columns, rows, truncated = env.execute(sql, max_rows=50)\n",
+      "    if rows:\n",
+      "        return {\"answer\": sql}\n",
+      "    else:\n",
+      "        feedback = f\"The query did not return results. Please refine your query based on the following information:\\n- Columns: {columns}\\n- Rows: {rows}\"\n",
+      "        new_prompt = f\"Database schema:\\n{schema_text(env)}\\n\\nQuestion: {task['question']}\\nHint: {task['evidence']}\\n\\n{feedback}\"\n",
+      "        refined_reply = llm.chat([{\"role\": \"system\", \"content\": SYSTEM_PROMPT}, {\"role\": \"user\", \"content\": new_prompt}])\n",
+      "        return {\"answer\": extract_sql(refined_reply)}\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {
+  "search": {
+   "seed": 0.25416666666666665,
+   "full": 0.25416666666666665,
+   "shapley": {
+    "0": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "interaction": {},
+   "matters": {
+    "0": false
+   },
+   "interacts": {},
+   "loo": {
+    "0": 0.0
+   },
+   "loi": {
+    "0": 0.0
+   }
+  },
+  "heldout": {
+   "seed": 0.2964824120603015,
+   "full": 0.3128140703517588,
+   "shapley": {
+    "0": {
+     "value": 0.016331658291457274,
+     "low": 0.003768844221105516,
+     "high": 0.03140703517587945,
+     "p": 0.003
+    }
+   },
+   "interaction": {},
+   "matters": {
+    "0": true
+   },
+   "interacts": {},
+   "loo": {
+    "0": 0.016331658291457274
+   },
+   "loi": {
+    "0": 0.016331658291457274
+   }
+  },
+  "overfitting_units": []
+ },
+ "rq4": [
+  {
+   "delta": 0.02,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.25416666666666665,
+   "heldout_value": 0.2964824120603015,
+   "heldout_full": 0.3128140703517588,
+   "certified": false,
+   "pairs_used": 796
+  },
+  {
+   "delta": 0.02,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.25416666666666665,
+   "heldout_value": 0.2964824120603015,
+   "heldout_full": 0.3128140703517588,
+   "certified": false,
+   "pairs_used": 796
+  },
+  {
+   "delta": 0.02,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.25416666666666665,
+   "heldout_value": 0.2964824120603015,
+   "heldout_full": 0.3128140703517588,
+   "certified": false,
+   "pairs_used": 796
+  },
+  {
+   "delta": 0.02,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.25416666666666665,
+   "heldout_value": 0.2964824120603015,
+   "heldout_full": 0.3128140703517588,
+   "certified": false,
+   "pairs_used": 796
+  },
+  {
+   "delta": 0.02,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.25416666666666665,
+   "heldout_value": 0.2964824120603015,
+   "heldout_full": 0.3128140703517588,
+   "certified": false,
+   "pairs_used": 796
+  },
+  {
+   "delta": 0.05,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.25416666666666665,
+   "heldout_value": 0.2964824120603015,
+   "heldout_full": 0.3128140703517588,
+   "certified": true,
+   "pairs_used": 259
+  },
+  {
+   "delta": 0.05,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.25416666666666665,
+   "heldout_value": 0.2964824120603015,
+   "heldout_full": 0.3128140703517588,
+   "certified": true,
+   "pairs_used": 259
+  },
+  {
+   "delta": 0.05,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.25416666666666665,
+   "heldout_value": 0.2964824120603015,
+   "heldout_full": 0.3128140703517588,
+   "certified": true,
+   "pairs_used": 259
+  },
+  {
+   "delta": 0.05,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.25416666666666665,
+   "heldout_value": 0.2964824120603015,
+   "heldout_full": 0.3128140703517588,
+   "certified": true,
+   "pairs_used": 259
+  },
+  {
+   "delta": 0.05,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.25416666666666665,
+   "heldout_value": 0.2964824120603015,
+   "heldout_full": 0.3128140703517588,
+   "certified": true,
+   "pairs_used": 259
+  }
+ ],
+ "rq5": null
+}

@@ -1,0 +1,10 @@
+{
+ "gain": 0.06281407035175879,
+ "low": 0.01256281407035176,
+ "high": 0.11306532663316583,
+ "seed_accuracy": 0.29020100502512564,
+ "final_accuracy": 0.3530150753768844,
+ "real_gain": true,
+ "lattice": "phaseA3_bird_metaharness_B3_s1_stmt_heldout.json",
+ "cells": 796
+}

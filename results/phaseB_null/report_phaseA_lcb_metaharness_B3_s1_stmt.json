@@ -1,0 +1,209 @@
+{
+ "name": "phaseA_lcb_metaharness_B3_s1_stmt",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 31-31\n-     return {\"answer\": extract_code(reply)}\n+     code = extract_code(reply)\n+     if code is not None:\n+         try:\n+             # Attempt to compile the code to check for syntax errors\n+             compile(code, '<string>', 'exec')\n+         except SyntaxError:\n+             # If there's a syntax error, return an empty string\n+             return {\"answer\": \"\"}\n+     # Run the code against the public tests\n+     for test in task[\"public_tests\"]:\n+         stdin = test[\"input\"]\n+         result = env.run_python(code, stdin, timeout_seconds=5)\n+         if result.timed_out or result.returncode != 0:\n+             return {\"answer\": \"\"}\n+         if result.stdout.strip() != test[\"output\"].strip():\n+             return {\"answer\": \"\"}\n+     return {\"answer\": code}\n",
+   "hunks": [
+    {
+     "start": 30,
+     "end": 31,
+     "replacement": [
+      "    code = extract_code(reply)\n",
+      "    if code is not None:\n",
+      "        try:\n",
+      "            # Attempt to compile the code to check for syntax errors\n",
+      "            compile(code, '<string>', 'exec')\n",
+      "        except SyntaxError:\n",
+      "            # If there's a syntax error, return an empty string\n",
+      "            return {\"answer\": \"\"}\n",
+      "    # Run the code against the public tests\n",
+      "    for test in task[\"public_tests\"]:\n",
+      "        stdin = test[\"input\"]\n",
+      "        result = env.run_python(code, stdin, timeout_seconds=5)\n",
+      "        if result.timed_out or result.returncode != 0:\n",
+      "            return {\"answer\": \"\"}\n",
+      "        if result.stdout.strip() != test[\"output\"].strip():\n",
+      "            return {\"answer\": \"\"}\n",
+      "    return {\"answer\": code}\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {
+  "search": {
+   "seed": 0.19583333333333333,
+   "full": 0.17916666666666667,
+   "shapley": {
+    "0": {
+     "value": -0.016666666666666663,
+     "low": -0.05000000000000002,
+     "high": 0.0,
+     "p": 0.754
+    }
+   },
+   "interaction": {},
+   "matters": {
+    "0": false
+   },
+   "interacts": {},
+   "loo": {
+    "0": -0.016666666666666663
+   },
+   "loi": {
+    "0": -0.016666666666666663
+   }
+  },
+  "heldout": {
+   "seed": 0.2676470588235294,
+   "full": 0.2676470588235294,
+   "shapley": {
+    "0": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "interaction": {},
+   "matters": {
+    "0": false
+   },
+   "interacts": {},
+   "loo": {
+    "0": 0.0
+   },
+   "loi": {
+    "0": 0.0
+   }
+  },
+  "overfitting_units": []
+ },
+ "rq4": [
+  {
+   "delta": 0.02,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.2676470588235294,
+   "heldout_full": 0.2676470588235294,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.2676470588235294,
+   "heldout_full": 0.2676470588235294,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.2676470588235294,
+   "heldout_full": 0.2676470588235294,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.2676470588235294,
+   "heldout_full": 0.2676470588235294,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.2676470588235294,
+   "heldout_full": 0.2676470588235294,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.05,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.2676470588235294,
+   "heldout_full": 0.2676470588235294,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.2676470588235294,
+   "heldout_full": 0.2676470588235294,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.2676470588235294,
+   "heldout_full": 0.2676470588235294,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.2676470588235294,
+   "heldout_full": 0.2676470588235294,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.2676470588235294,
+   "heldout_full": 0.2676470588235294,
+   "certified": true,
+   "pairs_used": 121
+  }
+ ],
+ "rq5": null
+}

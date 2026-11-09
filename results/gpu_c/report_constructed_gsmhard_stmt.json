@@ -1,0 +1,341 @@
+{
+ "name": "constructed_gsmhard_stmt",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "SYSTEM_PROMPT"
+   ],
+   "diff": "@@ seed lines 8-8\n- SYSTEM_PROMPT = \"\"\"Solve the math word problem.\n+ SYSTEM_PROMPT = \"\"\"Solve the math word problem. The numbers can be very large: compute exactly.\n",
+   "hunks": [
+    {
+     "start": 7,
+     "end": 8,
+     "replacement": [
+      "SYSTEM_PROMPT = \"\"\"Solve the math word problem. The numbers can be very large: compute exactly.\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "items": [
+    "extract_answer"
+   ],
+   "diff": "@@ seed lines 16-17\n-         return reply.rsplit(\"Answer:\", 1)[1].strip()\n-     return reply.strip()\n+         text = reply.rsplit(\"Answer:\", 1)[1].strip()\n+     else:\n+         text = reply.strip()\n+     return text.replace(\",\", \"\").replace(\"$\", \"\").strip()\n",
+   "hunks": [
+    {
+     "start": 15,
+     "end": 17,
+     "replacement": [
+      "        text = reply.rsplit(\"Answer:\", 1)[1].strip()\n",
+      "    else:\n",
+      "        text = reply.strip()\n",
+      "    return text.replace(\",\", \"\").replace(\"$\", \"\").strip()\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 22-21\n+     # Program-aided answer (PAL): write a program, run it, and prefer its printed result.\n+     program_prompt = (\"Write a Python 3 program that computes the answer to the math word problem and prints only \"\n+                       \"the final number. Put the program in one ```python code block.\")\n+     for attempt in range(2):\n+         code_reply = llm.chat([{\"role\": \"system\", \"content\": program_prompt}, {\"role\": \"user\", \"content\": task[\"question\"]}])\n+         if \"```python\" in code_reply:\n+             code = code_reply.rsplit(\"```python\", 1)[1].split(\"```\", 1)[0]\n+             result = env.run_python(code)\n+             lines = result.stdout.strip().splitlines()\n+             if result.returncode == 0 and not result.timed_out and lines:\n+                 reply = \"Answer: \" + lines[-1]\n+                 break\n",
+   "hunks": [
+    {
+     "start": 21,
+     "end": 21,
+     "replacement": [
+      "    # Program-aided answer (PAL): write a program, run it, and prefer its printed result.\n",
+      "    program_prompt = (\"Write a Python 3 program that computes the answer to the math word problem and prints only \"\n",
+      "                      \"the final number. Put the program in one ```python code block.\")\n",
+      "    for attempt in range(2):\n",
+      "        code_reply = llm.chat([{\"role\": \"system\", \"content\": program_prompt}, {\"role\": \"user\", \"content\": task[\"question\"]}])\n",
+      "        if \"```python\" in code_reply:\n",
+      "            code = code_reply.rsplit(\"```python\", 1)[1].split(\"```\", 1)[0]\n",
+      "            result = env.run_python(code)\n",
+      "            lines = result.stdout.strip().splitlines()\n",
+      "            if result.returncode == 0 and not result.timed_out and lines:\n",
+      "                reply = \"Answer: \" + lines[-1]\n",
+      "                break\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {
+  "search": {
+   "seed": 0.5666666666666667,
+   "full": 0.6291666666666667,
+   "shapley": {
+    "0": {
+     "value": 0.01874999999999999,
+     "low": -0.00833333333333336,
+     "high": 0.04791666666666666,
+     "p": 0.225
+    },
+    "1": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2": {
+     "value": 0.043750000000000004,
+     "low": -0.062499999999999944,
+     "high": 0.14791666666666664,
+     "p": 0.393
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "0,2": {
+     "value": -0.03749999999999998,
+     "low": -0.09583333333333333,
+     "high": 0.01666666666666672,
+     "p": 0.225
+    },
+    "1,2": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "matters": {
+    "0": false,
+    "2": false,
+    "1": false
+   },
+   "interacts": {
+    "0,2": false,
+    "0,1": false,
+    "1,2": false
+   },
+   "loo": {
+    "0": 0.0,
+    "1": 0.0,
+    "2": 0.025000000000000022
+   },
+   "loi": {
+    "0": 0.03749999999999998,
+    "1": 0.0,
+    "2": 0.0625
+   }
+  },
+  "heldout": {
+   "seed": 0.58,
+   "full": 0.61375,
+   "shapley": {
+    "0": {
+     "value": 0.010624999999999996,
+     "low": -0.0037500000000000307,
+     "high": 0.026249999999999992,
+     "p": 0.179
+    },
+    "1": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2": {
+     "value": 0.023125000000000062,
+     "low": -0.03187500000000004,
+     "high": 0.07812500000000004,
+     "p": 0.417
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "0,2": {
+     "value": -0.02124999999999999,
+     "low": -0.05249999999999999,
+     "high": 0.007500000000000062,
+     "p": 0.179
+    },
+    "1,2": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "matters": {
+    "0": false,
+    "2": false,
+    "1": false
+   },
+   "interacts": {
+    "0,2": false,
+    "0,1": false,
+    "1,2": false
+   },
+   "loo": {
+    "0": 0.0,
+    "1": 0.0,
+    "2": 0.012500000000000067
+   },
+   "loi": {
+    "0": 0.02124999999999999,
+    "1": 0.0,
+    "2": 0.03375000000000006
+   }
+  },
+  "overfitting_units": []
+ },
+ "rq4": [
+  {
+   "delta": 0.02,
+   "method": "exact",
+   "product": [
+    2
+   ],
+   "units_kept": 1,
+   "queries": 8,
+   "search_value": 0.6291666666666667,
+   "heldout_value": 0.61375,
+   "heldout_full": 0.61375,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "greedy_backward",
+   "product": [
+    2
+   ],
+   "units_kept": 1,
+   "queries": 7,
+   "search_value": 0.6291666666666667,
+   "heldout_value": 0.61375,
+   "heldout_full": 0.61375,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "ddmin",
+   "product": [
+    2
+   ],
+   "units_kept": 1,
+   "queries": 5,
+   "search_value": 0.6291666666666667,
+   "heldout_value": 0.61375,
+   "heldout_full": 0.61375,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "loo_threshold",
+   "product": [
+    2
+   ],
+   "units_kept": 1,
+   "queries": 7,
+   "search_value": 0.6291666666666667,
+   "heldout_value": 0.61375,
+   "heldout_full": 0.61375,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "shapley_threshold",
+   "product": [
+    2
+   ],
+   "units_kept": 1,
+   "queries": 8,
+   "search_value": 0.6291666666666667,
+   "heldout_value": 0.61375,
+   "heldout_full": 0.61375,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.05,
+   "method": "exact",
+   "product": [
+    2
+   ],
+   "units_kept": 1,
+   "queries": 8,
+   "search_value": 0.6291666666666667,
+   "heldout_value": 0.61375,
+   "heldout_full": 0.61375,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "greedy_backward",
+   "product": [
+    2
+   ],
+   "units_kept": 1,
+   "queries": 7,
+   "search_value": 0.6291666666666667,
+   "heldout_value": 0.61375,
+   "heldout_full": 0.61375,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "ddmin",
+   "product": [
+    0
+   ],
+   "units_kept": 1,
+   "queries": 3,
+   "search_value": 0.6041666666666666,
+   "heldout_value": 0.60125,
+   "heldout_full": 0.61375,
+   "certified": false,
+   "pairs_used": 800
+  },
+  {
+   "delta": 0.05,
+   "method": "loo_threshold",
+   "product": [
+    2
+   ],
+   "units_kept": 1,
+   "queries": 7,
+   "search_value": 0.6291666666666667,
+   "heldout_value": 0.61375,
+   "heldout_full": 0.61375,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "shapley_threshold",
+   "product": [
+    2
+   ],
+   "units_kept": 1,
+   "queries": 8,
+   "search_value": 0.6291666666666667,
+   "heldout_value": 0.61375,
+   "heldout_full": 0.61375,
+   "certified": true,
+   "pairs_used": 121
+  }
+ ],
+ "rq5": null
+}

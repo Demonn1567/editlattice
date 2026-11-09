@@ -1,0 +1,26 @@
+# Smoke test of the evolution pipeline on the GPU (not an experiment).
+experiment: gain_smoke_gsmhard
+benchmark: gsmhard
+seed_harness: src/editlattice/seed_harnesses/math_direct.py
+n_search: 10
+n_validation: 6
+n_streams: 1000
+k_char: 4
+max_iterations: 3
+total_budget_runs: 300
+proposers: [metaharness]
+gates:
+- name: B1
+- name: B3
+  repeats: 2
+seeds: [1]
+parallel_jobs: 2
+seed_mode: request
+backend: {name: vllm-local, base_url: http://localhost:8000/v1, model: Qwen/Qwen3-4B-AWQ}
+proposer_backend: {name: vllm-local-proposer, base_url: http://localhost:8100/v1, model: Qwen/Qwen3-8B-AWQ}
+params: {temperature: 0.7, top_p: 0.95, max_tokens: 768, chat_template_kwargs: {enable_thinking: false}}
+proposer_params: {temperature: 0.7, top_p: 0.95, max_tokens: 3072, chat_template_kwargs: {enable_thinking: false}}
+max_llm_calls: 12
+tuned_choices:
+  B1: gate_greedy()
+  B3: gate_self_harness(repeats=2)

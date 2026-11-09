@@ -1,0 +1,256 @@
+{
+ "name": "phaseA3_bird_metaharness_B3_s3_stmt",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "schema_text"
+   ],
+   "diff": "@@ seed lines 17-17\n-     \"\"\"Every user table with its columns and types.\"\"\"\n+     \"\"\"Every user table with its columns and types, in a structured format.\"\"\"\n",
+   "hunks": [
+    {
+     "start": 16,
+     "end": 17,
+     "replacement": [
+      "    \"\"\"Every user table with its columns and types, in a structured format.\"\"\"\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "items": [
+    "schema_text"
+   ],
+   "diff": "@@ seed lines 25-26\n-         described = \", \".join(f\"{info[1]} ({info[2]})\" for info in info_rows)\n-         lines.append(f\"Table {table}: {described}\")\n+         described = \"\\n  - \".join(f\"{info[1]} ({info[2]})\" for info in info_rows)\n+         lines.append(f\"- Table: {table}\\n  - {described}\")\n",
+   "hunks": [
+    {
+     "start": 24,
+     "end": 26,
+     "replacement": [
+      "        described = \"\\n  - \".join(f\"{info[1]} ({info[2]})\" for info in info_rows)\n",
+      "        lines.append(f\"- Table: {table}\\n  - {described}\")\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {
+  "search": {
+   "seed": 0.2625,
+   "full": 0.3,
+   "shapley": {
+    "0": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1": {
+     "value": 0.03749999999999998,
+     "low": -0.004166666666666652,
+     "high": 0.09166666666666667,
+     "p": 0.152
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "matters": {
+    "1": false,
+    "0": false
+   },
+   "interacts": {
+    "0,1": false
+   },
+   "loo": {
+    "0": 0.0,
+    "1": 0.03749999999999998
+   },
+   "loi": {
+    "0": 0.0,
+    "1": 0.03749999999999998
+   }
+  },
+  "heldout": {
+   "seed": 0.2952261306532663,
+   "full": 0.32160804020100503,
+   "shapley": {
+    "0": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1": {
+     "value": 0.026381909547738724,
+     "low": -0.006281407035175879,
+     "high": 0.06281407035175879,
+     "p": 0.131
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "matters": {
+    "1": false,
+    "0": false
+   },
+   "interacts": {
+    "0,1": false
+   },
+   "loo": {
+    "0": 0.0,
+    "1": 0.026381909547738724
+   },
+   "loi": {
+    "0": 0.0,
+    "1": 0.026381909547738724
+   }
+  },
+  "overfitting_units": []
+ },
+ "rq4": [
+  {
+   "delta": 0.02,
+   "method": "exact",
+   "product": [
+    1
+   ],
+   "units_kept": 1,
+   "queries": 4,
+   "search_value": 0.3,
+   "heldout_value": 0.32160804020100503,
+   "heldout_full": 0.32160804020100503,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "greedy_backward",
+   "product": [
+    1
+   ],
+   "units_kept": 1,
+   "queries": 4,
+   "search_value": 0.3,
+   "heldout_value": 0.32160804020100503,
+   "heldout_full": 0.32160804020100503,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "ddmin",
+   "product": [
+    1
+   ],
+   "units_kept": 1,
+   "queries": 4,
+   "search_value": 0.3,
+   "heldout_value": 0.32160804020100503,
+   "heldout_full": 0.32160804020100503,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "loo_threshold",
+   "product": [
+    1
+   ],
+   "units_kept": 1,
+   "queries": 6,
+   "search_value": 0.3,
+   "heldout_value": 0.32160804020100503,
+   "heldout_full": 0.32160804020100503,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "shapley_threshold",
+   "product": [
+    1
+   ],
+   "units_kept": 1,
+   "queries": 4,
+   "search_value": 0.3,
+   "heldout_value": 0.32160804020100503,
+   "heldout_full": 0.32160804020100503,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.05,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.2625,
+   "heldout_value": 0.2952261306532663,
+   "heldout_full": 0.32160804020100503,
+   "certified": true,
+   "pairs_used": 380
+  },
+  {
+   "delta": 0.05,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.2625,
+   "heldout_value": 0.2952261306532663,
+   "heldout_full": 0.32160804020100503,
+   "certified": true,
+   "pairs_used": 380
+  },
+  {
+   "delta": 0.05,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 3,
+   "search_value": 0.2625,
+   "heldout_value": 0.2952261306532663,
+   "heldout_full": 0.32160804020100503,
+   "certified": true,
+   "pairs_used": 380
+  },
+  {
+   "delta": 0.05,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 5,
+   "search_value": 0.2625,
+   "heldout_value": 0.2952261306532663,
+   "heldout_full": 0.32160804020100503,
+   "certified": true,
+   "pairs_used": 380
+  },
+  {
+   "delta": 0.05,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.2625,
+   "heldout_value": 0.2952261306532663,
+   "heldout_full": 0.32160804020100503,
+   "certified": true,
+   "pairs_used": 380
+  }
+ ],
+ "rq5": null
+}

@@ -1,0 +1,73 @@
+{
+ "benchmark": "gsmhard",
+ "n_tasks": 200,
+ "replicates": 4,
+ "model": "Qwen/Qwen3-4B-AWQ",
+ "loops": [
+  {
+   "loop": "metaharness_B1_s1",
+   "accepted": 0,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B1_s2",
+   "accepted": 2,
+   "gain": -0.00125,
+   "low": -0.00375,
+   "high": 0.0,
+   "seed_accuracy": 0.57375,
+   "final_accuracy": 0.5725,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B1_s3",
+   "accepted": 6,
+   "gain": 0.0,
+   "low": 0.0,
+   "high": 0.0,
+   "seed_accuracy": 0.57375,
+   "final_accuracy": 0.57375,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B1_s4",
+   "accepted": 4,
+   "gain": 0.0,
+   "low": 0.0,
+   "high": 0.0,
+   "seed_accuracy": 0.57375,
+   "final_accuracy": 0.57375,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B3_s1",
+   "accepted": 3,
+   "gain": 0.0,
+   "low": 0.0,
+   "high": 0.0,
+   "seed_accuracy": 0.57375,
+   "final_accuracy": 0.57375,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B3_s2",
+   "accepted": 2,
+   "gain": -0.015,
+   "low": -0.02875,
+   "high": -0.005,
+   "seed_accuracy": 0.57375,
+   "final_accuracy": 0.55875,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B3_s3",
+   "accepted": 0,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B3_s4",
+   "accepted": 0,
+   "real_gain": false
+  }
+ ]
+}

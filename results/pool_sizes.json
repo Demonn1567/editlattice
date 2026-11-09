@@ -1,0 +1,62 @@
+{
+ "A_gsmhard": {
+  "lineages": 7,
+  "units": 10,
+  "products": 124
+ },
+ "A_lcb": {
+  "lineages": 8,
+  "units": 17,
+  "products": 5184
+ },
+ "A_bird": {
+  "lineages": 6,
+  "units": 11,
+  "products": 300
+ },
+ "A2_gsmhard": {
+  "lineages": 5,
+  "units": 8,
+  "products": 34
+ },
+ "A2_lcb": {
+  "lineages": 7,
+  "units": 11,
+  "products": 62
+ },
+ "A2_bird": {
+  "lineages": 6,
+  "units": 11,
+  "products": 432
+ },
+ "A3_gsmhard": {
+  "lineages": 6,
+  "units": 11,
+  "products": 288
+ },
+ "A3_lcb": {
+  "lineages": 7,
+  "units": 9,
+  "products": 84
+ },
+ "A3_bird": {
+  "lineages": 7,
+  "units": 13,
+  "products": 432
+ },
+ "A4_gsmhard": {
+  "lineages": 4,
+  "units": 6,
+  "products": 21
+ },
+ "A4_lcb": {
+  "lineages": 6,
+  "units": 8,
+  "products": 64
+ },
+ "A4_bird": {
+  "lineages": 8,
+  "units": 12,
+  "products": 660
+ }
+}

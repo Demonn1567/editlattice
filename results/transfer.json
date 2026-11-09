@@ -1,0 +1,1011 @@
+{
+ "planted": {
+  "settings": {
+   "Qwen3-4B MLX 4-bit T0.7 (Mac)": {
+    "cells": 80,
+    "seed": 0.5125,
+    "full": 0.55,
+    "shapley": {
+     "0": -0.12083333333333332,
+     "1": -0.002083333333333286,
+     "2": 0.16041666666666668,
+     "3": 0.0
+    },
+    "interaction": {
+     "0,1": 0.09374999999999994,
+     "0,2": 0.31875,
+     "0,3": 0.0,
+     "1,2": 0.0062500000000000324,
+     "1,3": 0.0,
+     "2,3": 0.0
+    },
+    "top_unit": 2
+   },
+   "Llama-3.1-8B MLX 4-bit T0.7 (Mac)": {
+    "cells": 80,
+    "seed": 0.2875,
+    "full": 0.625,
+    "shapley": {
+     "0": 0.05625000000000002,
+     "1": 0.006250000000000005,
+     "2": 0.275,
+     "3": 0.0
+    },
+    "interaction": {
+     "0,1": -0.012500000000000011,
+     "0,2": 0.55,
+     "0,3": 0.0,
+     "1,2": 2.0816681711721685e-17,
+     "1,3": 0.0,
+     "2,3": 0.0
+    },
+    "top_unit": 2
+   },
+   "Qwen3-4B AWQ T0.7": {
+    "cells": 800,
+    "seed": 0.585,
+    "full": 0.60625,
+    "shapley": {
+     "0": -0.17083333333333334,
+     "1": -0.023958333333333325,
+     "2": 0.21604166666666666,
+     "3": 0.0
+    },
+    "interaction": {
+     "0,1": 0.046875,
+     "0,2": 0.431875,
+     "0,3": 0.0,
+     "1,2": 0.0006250000000000144,
+     "1,3": 0.0,
+     "2,3": 0.0
+    },
+    "top_unit": 2
+   },
+   "Qwen3-4B AWQ T1.0": {
+    "cells": 800,
+    "seed": 0.57875,
+    "full": 0.60875,
+    "shapley": {
+     "0": -0.1710416666666666,
+     "1": -0.02229166666666665,
+     "2": 0.22333333333333333,
+     "3": 0.0
+    },
+    "interaction": {
+     "0,1": 0.03750000000000003,
+     "0,2": 0.44625,
+     "0,3": 0.0,
+     "1,2": 0.0012500000000000289,
+     "1,3": 0.0,
+     "2,3": 0.0
+    },
+    "top_unit": 2
+   },
+   "Qwen3-4B bf16 T0.7": {
+    "cells": 800,
+    "seed": 0.60375,
+    "full": 0.685,
+    "shapley": {
+     "0": -0.14749999999999996,
+     "1": -0.02499999999999999,
+     "2": 0.25375000000000003,
+     "3": 0.0
+    },
+    "interaction": {
+     "0,1": 0.04375000000000001,
+     "0,2": 0.50625,
+     "0,3": 0.0,
+     "1,2": 0.0037499999999999756,
+     "1,3": 0.0,
+     "2,3": 0.0
+    },
+    "top_unit": 2
+   },
+   "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)": {
+    "cells": 800,
+    "seed": 0.3225,
+    "full": 0.63375,
+    "shapley": {
+     "0": 0.025208333333333346,
+     "1": -0.0016666666666666694,
+     "2": 0.28770833333333334,
+     "3": 0.0
+    },
+    "interaction": {
+     "0,1": 0.007500000000000006,
+     "0,2": 0.5762499999999999,
+     "0,3": 0.0,
+     "1,2": -0.0025000000000000265,
+     "1,3": 0.0,
+     "2,3": 0.0
+    },
+    "top_unit": 2
+   }
+  },
+  "pairs": [
+   {
+    "first": "Qwen3-4B MLX 4-bit T0.7 (Mac)",
+    "second": "Llama-3.1-8B MLX 4-bit T0.7 (Mac)",
+    "spearman": 0.19999999999999998
+   },
+   {
+    "first": "Qwen3-4B MLX 4-bit T0.7 (Mac)",
+    "second": "Qwen3-4B AWQ T0.7",
+    "spearman": 1.0
+   },
+   {
+    "first": "Qwen3-4B MLX 4-bit T0.7 (Mac)",
+    "second": "Qwen3-4B AWQ T1.0",
+    "spearman": 1.0
+   },
+   {
+    "first": "Qwen3-4B MLX 4-bit T0.7 (Mac)",
+    "second": "Qwen3-4B bf16 T0.7",
+    "spearman": 1.0
+   },
+   {
+    "first": "Qwen3-4B MLX 4-bit T0.7 (Mac)",
+    "second": "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)",
+    "spearman": 0.39999999999999997
+   },
+   {
+    "first": "Llama-3.1-8B MLX 4-bit T0.7 (Mac)",
+    "second": "Qwen3-4B AWQ T0.7",
+    "spearman": 0.19999999999999998
+   },
+   {
+    "first": "Llama-3.1-8B MLX 4-bit T0.7 (Mac)",
+    "second": "Qwen3-4B AWQ T1.0",
+    "spearman": 0.19999999999999998
+   },
+   {
+    "first": "Llama-3.1-8B MLX 4-bit T0.7 (Mac)",
+    "second": "Qwen3-4B bf16 T0.7",
+    "spearman": 0.19999999999999998
+   },
+   {
+    "first": "Llama-3.1-8B MLX 4-bit T0.7 (Mac)",
+    "second": "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)",
+    "spearman": 0.7999999999999999
+   },
+   {
+    "first": "Qwen3-4B AWQ T0.7",
+    "second": "Qwen3-4B AWQ T1.0",
+    "spearman": 1.0
+   },
+   {
+    "first": "Qwen3-4B AWQ T0.7",
+    "second": "Qwen3-4B bf16 T0.7",
+    "spearman": 1.0
+   },
+   {
+    "first": "Qwen3-4B AWQ T0.7",
+    "second": "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)",
+    "spearman": 0.39999999999999997
+   },
+   {
+    "first": "Qwen3-4B AWQ T1.0",
+    "second": "Qwen3-4B bf16 T0.7",
+    "spearman": 1.0
+   },
+   {
+    "first": "Qwen3-4B AWQ T1.0",
+    "second": "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)",
+    "spearman": 0.39999999999999997
+   },
+   {
+    "first": "Qwen3-4B bf16 T0.7",
+    "second": "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)",
+    "spearman": 0.39999999999999997
+   }
+  ],
+  "same_top_unit": true
+ },
+ "constructed_gsmhard": {
+  "settings": {
+   "Qwen3-4B AWQ T0.7": {
+    "cells": 800,
+    "seed": 0.58,
+    "full": 0.61375,
+    "shapley": {
+     "0": 0.010624999999999996,
+     "1": 0.0,
+     "2": 0.023125000000000062
+    },
+    "interaction": {
+     "0,1": 0.0,
+     "0,2": -0.02124999999999999,
+     "1,2": 0.0
+    },
+    "top_unit": 2
+   },
+   "Qwen3-4B AWQ T1.0": {
+    "cells": 800,
+    "seed": 0.57625,
+    "full": 0.64125,
+    "shapley": {
+     "0": 0.0025000000000000022,
+     "1": 0.0,
+     "2": 0.06249999999999993
+    },
+    "interaction": {
+     "0,1": 0.0,
+     "0,2": -0.0050000000000000044,
+     "1,2": 0.0
+    },
+    "top_unit": 2
+   },
+   "Qwen3-4B bf16 T0.7": {
+    "cells": 800,
+    "seed": 0.58125,
+    "full": 0.66125,
+    "shapley": {
+     "0": 0.017500000000000016,
+     "1": 0.0,
+     "2": 0.06249999999999994
+    },
+    "interaction": {
+     "0,1": 0.0,
+     "0,2": -0.03749999999999998,
+     "1,2": 0.0
+    },
+    "top_unit": 2
+   },
+   "Llama-3.1-8B MLX 4-bit T0.7 (Mac, exploratory)": {
+    "cells": 800,
+    "seed": 0.305,
+    "full": 0.61625,
+    "shapley": {
+     "0": 0.014166666666666678,
+     "1": 0.000416666666666667,
+     "2": 0.29666666666666663
+    },
+    "interaction": {
+     "0,1": 0.0012500000000000011,
+     "0,2": -0.028750000000000026,
+     "1,2": -0.0012500000000000011
+    },
+    "top_unit": 2
+   },
+   "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)": {
+    "cells": 800,
+    "seed": 0.325,
+    "full": 0.60375,
+    "shapley": {
+     "0": 0.000416666666666667,
+     "1": 0.0010416666666666536,
+     "2": 0.27729166666666666
+    },
+    "interaction": {
+     "0,1": 0.0012500000000000011,
+     "0,2": -0.0012500000000000011,
+     "1,2": -0.0024999999999999745
+    },
+    "top_unit": 2
+   }
+  },
+  "pairs": [
+   {
+    "first": "Qwen3-4B AWQ T0.7",
+    "second": "Qwen3-4B AWQ T1.0",
+    "spearman": 1.0
+   },
+   {
+    "first": "Qwen3-4B AWQ T0.7",
+    "second": "Qwen3-4B bf16 T0.7",
+    "spearman": 1.0
+   },
+   {
+    "first": "Qwen3-4B AWQ T0.7",
+    "second": "Llama-3.1-8B MLX 4-bit T0.7 (Mac, exploratory)",
+    "spearman": 1.0
+   },
+   {
+    "first": "Qwen3-4B AWQ T0.7",
+    "second": "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)",
+    "spearman": 0.5
+   },
+   {
+    "first": "Qwen3-4B AWQ T1.0",
+    "second": "Qwen3-4B bf16 T0.7",
+    "spearman": 1.0
+   },
+   {
+    "first": "Qwen3-4B AWQ T1.0",
+    "second": "Llama-3.1-8B MLX 4-bit T0.7 (Mac, exploratory)",
+    "spearman": 1.0
+   },
+   {
+    "first": "Qwen3-4B AWQ T1.0",
+    "second": "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)",
+    "spearman": 0.5
+   },
+   {
+    "first": "Qwen3-4B bf16 T0.7",
+    "second": "Llama-3.1-8B MLX 4-bit T0.7 (Mac, exploratory)",
+    "spearman": 1.0
+   },
+   {
+    "first": "Qwen3-4B bf16 T0.7",
+    "second": "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)",
+    "spearman": 0.5
+   },
+   {
+    "first": "Llama-3.1-8B MLX 4-bit T0.7 (Mac, exploratory)",
+    "second": "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)",
+    "spearman": 0.5
+   }
+  ],
+  "same_top_unit": true
+ },
+ "constructed_lcb": {
+  "settings": {
+   "Qwen3-4B AWQ T0.7": {
+    "cells": 340,
+    "seed": 0.23823529411764705,
+    "full": 0.2676470588235294,
+    "shapley": {
+     "0": 0.010294117647058829,
+     "1": -0.005882352941176464,
+     "2": 0.024999999999999994
+    },
+    "interaction": {
+     "0,1": -0.019117647058823573,
+     "0,2": 0.0014705882352940985,
+     "1,2": -0.007352941176470562
+    },
+    "top_unit": 2
+   },
+   "Qwen3-4B AWQ T1.0": {
+    "cells": 340,
+    "seed": 0.23823529411764705,
+    "full": 0.2735294117647059,
+    "shapley": {
+     "0": 0.006862745098039247,
+     "1": -0.0019607843137254832,
+     "2": 0.0303921568627451
+    },
+    "interaction": {
+     "0,1": -0.030882352941176472,
+     "0,2": -0.007352941176470562,
+     "1,2": -0.0014705882352941124
+    },
+    "top_unit": 2
+   },
+   "Qwen3-4B bf16 T0.7": {
+    "cells": 340,
+    "seed": 0.27647058823529413,
+    "full": 0.3088235294117647,
+    "shapley": {
+     "0": -0.0009803921568627325,
+     "1": 0.0004901960784313526,
+     "2": 0.03284313725490196
+    },
+    "interaction": {
+     "0,1": -0.01323529411764704,
+     "0,2": -0.0014705882352940847,
+     "1,2": -0.010294117647058815
+    },
+    "top_unit": 2
+   },
+   "Llama-3.1-8B MLX 4-bit T0.7 (Mac, exploratory)": {
+    "cells": 340,
+    "seed": 0.1264705882352941,
+    "full": 0.15294117647058825,
+    "shapley": {
+     "0": 0.0004901960784313799,
+     "1": 0.0004901960784313799,
+     "2": 0.025490196078431372
+    },
+    "interaction": {
+     "0,1": 0.008823529411764716,
+     "0,2": -0.005882352941176464,
+     "1,2": -1.3877787807814457e-17
+    },
+    "top_unit": 2
+   },
+   "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)": {
+    "cells": 340,
+    "seed": 0.1323529411764706,
+    "full": 0.19705882352941176,
+    "shapley": {
+     "0": 0.00784313725490196,
+     "1": 0.015196078431372537,
+     "2": 0.04166666666666667
+    },
+    "interaction": {
+     "0,1": 0.011764705882352927,
+     "0,2": -0.0058823529411764774,
+     "1,2": -0.002941176470588225
+    },
+    "top_unit": 2
+   }
+  },
+  "pairs": [
+   {
+    "first": "Qwen3-4B AWQ T0.7",
+    "second": "Qwen3-4B AWQ T1.0",
+    "spearman": 1.0
+   },
+   {
+    "first": "Qwen3-4B AWQ T0.7",
+    "second": "Qwen3-4B bf16 T0.7",
+    "spearman": 0.5
+   },
+   {
+    "first": "Qwen3-4B AWQ T0.7",
+    "second": "Llama-3.1-8B MLX 4-bit T0.7 (Mac, exploratory)",
+    "spearman": 0.8660254037844387
+   },
+   {
+    "first": "Qwen3-4B AWQ T0.7",
+    "second": "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)",
+    "spearman": 0.5
+   },
+   {
+    "first": "Qwen3-4B AWQ T1.0",
+    "second": "Qwen3-4B bf16 T0.7",
+    "spearman": 0.5
+   },
+   {
+    "first": "Qwen3-4B AWQ T1.0",
+    "second": "Llama-3.1-8B MLX 4-bit T0.7 (Mac, exploratory)",
+    "spearman": 0.8660254037844387
+   },
+   {
+    "first": "Qwen3-4B AWQ T1.0",
+    "second": "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)",
+    "spearman": 0.5
+   },
+   {
+    "first": "Qwen3-4B bf16 T0.7",
+    "second": "Llama-3.1-8B MLX 4-bit T0.7 (Mac, exploratory)",
+    "spearman": 0.8660254037844387
+   },
+   {
+    "first": "Qwen3-4B bf16 T0.7",
+    "second": "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)",
+    "spearman": 1.0
+   },
+   {
+    "first": "Llama-3.1-8B MLX 4-bit T0.7 (Mac, exploratory)",
+    "second": "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)",
+    "spearman": 0.8660254037844387
+   }
+  ],
+  "same_top_unit": true
+ },
+ "constructed_bird": {
+  "settings": {
+   "Qwen3-4B AWQ T0.7": {
+    "cells": 796,
+    "seed": 0.30402010050251255,
+    "full": 0.3706030150753769,
+    "shapley": {
+     "0": -0.009212730318257959,
+     "1": 0.03287269681742046,
+     "2": 0.04292294807370185
+    },
+    "interaction": {
+     "0,1": -0.028266331658291455,
+     "0,2": 0.014447236180904544,
+     "1,2": -0.0018844221105527859
+    },
+    "top_unit": 2
+   },
+   "Qwen3-4B AWQ T1.0": {
+    "cells": 796,
+    "seed": 0.27638190954773867,
+    "full": 0.3655778894472362,
+    "shapley": {
+     "0": -0.003559463986599657,
+     "1": 0.04480737018425461,
+     "2": 0.04794807370184255
+    },
+    "interaction": {
+     "0,1": -0.028266331658291455,
+     "0,2": 0.0031407035175879394,
+     "1,2": -0.010678391959799027
+    },
+    "top_unit": 2
+   },
+   "Qwen3-4B bf16 T0.7": {
+    "cells": 796,
+    "seed": 0.35804020100502515,
+    "full": 0.435929648241206,
+    "shapley": {
+     "0": -0.015912897822445583,
+     "1": 0.04564489112227805,
+     "2": 0.048157453936348384
+    },
+    "interaction": {
+     "0,1": 0.01570351758793967,
+     "0,2": 0.005653266331658274,
+     "1,2": -0.00942211055276379
+    },
+    "top_unit": 2
+   },
+   "Llama-3.1-8B MLX 4-bit T0.7 (Mac, exploratory)": {
+    "cells": 796,
+    "seed": 0.30904522613065327,
+    "full": 0.35678391959798994,
+    "shapley": {
+     "0": -0.013609715242881078,
+     "1": -0.008584589614740384,
+     "2": 0.06993299832495813
+    },
+    "interaction": {
+     "0,1": 0.04773869346733667,
+     "0,2": 0.013819095477386911,
+     "1,2": 0.026381909547738724
+    },
+    "top_unit": 2
+   },
+   "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)": {
+    "cells": 796,
+    "seed": 0.2814070351758794,
+    "full": 0.36055276381909546,
+    "shapley": {
+     "0": 0.008165829145728627,
+     "1": 0.005025125628140689,
+     "2": 0.06595477386934674
+    },
+    "interaction": {
+     "0,1": 0.020100502512562818,
+     "0,2": -0.003768844221105544,
+     "1,2": 0.015075376884422093
+    },
+    "top_unit": 2
+   }
+  },
+  "pairs": [
+   {
+    "first": "Qwen3-4B AWQ T0.7",
+    "second": "Qwen3-4B AWQ T1.0",
+    "spearman": 1.0
+   },
+   {
+    "first": "Qwen3-4B AWQ T0.7",
+    "second": "Qwen3-4B bf16 T0.7",
+    "spearman": 1.0
+   },
+   {
+    "first": "Qwen3-4B AWQ T0.7",
+    "second": "Llama-3.1-8B MLX 4-bit T0.7 (Mac, exploratory)",
+    "spearman": 1.0
+   },
+   {
+    "first": "Qwen3-4B AWQ T0.7",
+    "second": "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)",
+    "spearman": 0.5
+   },
+   {
+    "first": "Qwen3-4B AWQ T1.0",
+    "second": "Qwen3-4B bf16 T0.7",
+    "spearman": 1.0
+   },
+   {
+    "first": "Qwen3-4B AWQ T1.0",
+    "second": "Llama-3.1-8B MLX 4-bit T0.7 (Mac, exploratory)",
+    "spearman": 1.0
+   },
+   {
+    "first": "Qwen3-4B AWQ T1.0",
+    "second": "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)",
+    "spearman": 0.5
+   },
+   {
+    "first": "Qwen3-4B bf16 T0.7",
+    "second": "Llama-3.1-8B MLX 4-bit T0.7 (Mac, exploratory)",
+    "spearman": 1.0
+   },
+   {
+    "first": "Qwen3-4B bf16 T0.7",
+    "second": "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)",
+    "spearman": 0.5
+   },
+   {
+    "first": "Llama-3.1-8B MLX 4-bit T0.7 (Mac, exploratory)",
+    "second": "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)",
+    "spearman": 0.5
+   }
+  ],
+  "same_top_unit": true
+ },
+ "phaseA3_lcb_metaharness_B1_s2": {
+  "settings": {
+   "Qwen3-4B AWQ T0.7": {
+    "cells": 340,
+    "seed": 0.24705882352941178,
+    "full": 0.29705882352941176,
+    "shapley": {
+     "0": 0.0,
+     "1": 0.011764705882352927,
+     "2": 0.03823529411764706
+    },
+    "interaction": {
+     "0,1": 0.0,
+     "0,2": 0.0,
+     "1,2": 0.005882352941176505
+    },
+    "top_unit": 2
+   },
+   "Qwen3-4B AWQ T1.0": {
+    "cells": 340,
+    "seed": 0.2323529411764706,
+    "full": 0.3029411764705882,
+    "shapley": {
+     "0": 0.0,
+     "1": 0.03088235294117644,
+     "2": 0.039705882352941174
+    },
+    "interaction": {
+     "0,1": 0.0,
+     "0,2": 0.0,
+     "1,2": -0.01470588235294118
+    },
+    "top_unit": 2
+   },
+   "Qwen3-4B bf16 T0.7": {
+    "cells": 340,
+    "seed": 0.2647058823529412,
+    "full": 0.3088235294117647,
+    "shapley": {
+     "0": 0.0,
+     "1": 0.01617647058823532,
+     "2": 0.02794117647058822
+    },
+    "interaction": {
+     "0,1": 0.0,
+     "0,2": 0.0,
+     "1,2": -0.02058823529411763
+    },
+    "top_unit": 2
+   },
+   "Llama-3.1-8B MLX 4-bit T0.7 (Mac, exploratory)": {
+    "cells": 340,
+    "seed": 0.1323529411764706,
+    "full": 0.14411764705882352,
+    "shapley": {
+     "0": 0.0,
+     "1": -0.010294117647058829,
+     "2": 0.022058823529411756
+    },
+    "interaction": {
+     "0,1": 0.0,
+     "0,2": 0.0,
+     "1,2": -0.008823529411764702
+    },
+    "top_unit": 2
+   },
+   "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)": {
+    "cells": 340,
+    "seed": 0.13823529411764707,
+    "full": 0.17647058823529413,
+    "shapley": {
+     "0": -0.002450980392156854,
+     "1": 0.01225490196078431,
+     "2": 0.028431372549019604
+    },
+    "interaction": {
+     "0,1": -0.004411764705882337,
+     "0,2": -0.0014705882352941124,
+     "1,2": -0.00735294117647059
+    },
+    "top_unit": 2
+   }
+  },
+  "pairs": [
+   {
+    "first": "Qwen3-4B AWQ T0.7",
+    "second": "Qwen3-4B AWQ T1.0",
+    "spearman": 1.0
+   },
+   {
+    "first": "Qwen3-4B AWQ T0.7",
+    "second": "Qwen3-4B bf16 T0.7",
+    "spearman": 1.0
+   },
+   {
+    "first": "Qwen3-4B AWQ T0.7",
+    "second": "Llama-3.1-8B MLX 4-bit T0.7 (Mac, exploratory)",
+    "spearman": 0.5
+   },
+   {
+    "first": "Qwen3-4B AWQ T0.7",
+    "second": "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)",
+    "spearman": 1.0
+   },
+   {
+    "first": "Qwen3-4B AWQ T1.0",
+    "second": "Qwen3-4B bf16 T0.7",
+    "spearman": 1.0
+   },
+   {
+    "first": "Qwen3-4B AWQ T1.0",
+    "second": "Llama-3.1-8B MLX 4-bit T0.7 (Mac, exploratory)",
+    "spearman": 0.5
+   },
+   {
+    "first": "Qwen3-4B AWQ T1.0",
+    "second": "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)",
+    "spearman": 1.0
+   },
+   {
+    "first": "Qwen3-4B bf16 T0.7",
+    "second": "Llama-3.1-8B MLX 4-bit T0.7 (Mac, exploratory)",
+    "spearman": 0.5
+   },
+   {
+    "first": "Qwen3-4B bf16 T0.7",
+    "second": "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)",
+    "spearman": 1.0
+   },
+   {
+    "first": "Llama-3.1-8B MLX 4-bit T0.7 (Mac, exploratory)",
+    "second": "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)",
+    "spearman": 0.5
+   }
+  ],
+  "same_top_unit": true
+ },
+ "phaseA3_bird_metaharness_B1_s1": {
+  "settings": {
+   "Qwen3-4B AWQ T0.7": {
+    "cells": 796,
+    "seed": 0.2864321608040201,
+    "full": 0.33291457286432163,
+    "shapley": {
+     "0": 0.03329145728643218,
+     "1": 0.013190954773869334
+    },
+    "interaction": {
+     "0,1": -0.0012562814070351536
+    },
+    "top_unit": 0
+   },
+   "Qwen3-4B AWQ T1.0": {
+    "cells": 796,
+    "seed": 0.2914572864321608,
+    "full": 0.3203517587939699,
+    "shapley": {
+     "0": 0.02261306532663318,
+     "1": 0.006281407035175907
+    },
+    "interaction": {
+     "0,1": -0.0025125628140703626
+    },
+    "top_unit": 0
+   },
+   "Qwen3-4B bf16 T0.7": {
+    "cells": 796,
+    "seed": 0.36432160804020103,
+    "full": 0.37814070351758794,
+    "shapley": {
+     "0": 0.035804020100502515,
+     "1": -0.021984924623115604
+    },
+    "interaction": {
+     "0,1": -0.016331658291457274
+    },
+    "top_unit": 0
+   },
+   "Llama-3.1-8B MLX 4-bit T0.7 (Mac, exploratory)": {
+    "cells": 796,
+    "seed": 0.2914572864321608,
+    "full": 0.24120603015075376,
+    "shapley": {
+     "0": -0.05402010050251256,
+     "1": 0.00376884422110553
+    },
+    "interaction": {
+     "0,1": 0.01507537688442212
+    },
+    "top_unit": 1
+   },
+   "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)": {
+    "cells": 796,
+    "seed": 0.2675879396984925,
+    "full": 0.24120603015075376,
+    "shapley": {
+     "0": -0.03643216080402012,
+     "1": 0.010050251256281395
+    },
+    "interaction": {
+     "0,1": -0.005025125628140725
+    },
+    "top_unit": 1
+   }
+  },
+  "pairs": [
+   {
+    "first": "Qwen3-4B AWQ T0.7",
+    "second": "Qwen3-4B AWQ T1.0",
+    "spearman": 0.9999999999999999
+   },
+   {
+    "first": "Qwen3-4B AWQ T0.7",
+    "second": "Qwen3-4B bf16 T0.7",
+    "spearman": 0.9999999999999999
+   },
+   {
+    "first": "Qwen3-4B AWQ T0.7",
+    "second": "Llama-3.1-8B MLX 4-bit T0.7 (Mac, exploratory)",
+    "spearman": -0.9999999999999999
+   },
+   {
+    "first": "Qwen3-4B AWQ T0.7",
+    "second": "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)",
+    "spearman": -0.9999999999999999
+   },
+   {
+    "first": "Qwen3-4B AWQ T1.0",
+    "second": "Qwen3-4B bf16 T0.7",
+    "spearman": 0.9999999999999999
+   },
+   {
+    "first": "Qwen3-4B AWQ T1.0",
+    "second": "Llama-3.1-8B MLX 4-bit T0.7 (Mac, exploratory)",
+    "spearman": -0.9999999999999999
+   },
+   {
+    "first": "Qwen3-4B AWQ T1.0",
+    "second": "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)",
+    "spearman": -0.9999999999999999
+   },
+   {
+    "first": "Qwen3-4B bf16 T0.7",
+    "second": "Llama-3.1-8B MLX 4-bit T0.7 (Mac, exploratory)",
+    "spearman": -0.9999999999999999
+   },
+   {
+    "first": "Qwen3-4B bf16 T0.7",
+    "second": "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)",
+    "spearman": -0.9999999999999999
+   },
+   {
+    "first": "Llama-3.1-8B MLX 4-bit T0.7 (Mac, exploratory)",
+    "second": "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)",
+    "spearman": 0.9999999999999999
+   }
+  ],
+  "same_top_unit": false
+ },
+ "phaseA3_bird_metaharness_B3_s1": {
+  "settings": {
+   "Qwen3-4B AWQ T0.7": {
+    "cells": 796,
+    "seed": 0.29020100502512564,
+    "full": 0.3530150753768844,
+    "shapley": {
+     "0": -0.0018844221105527867,
+     "1": 0.0,
+     "2": 0.06469849246231157
+    },
+    "interaction": {
+     "0,1": 0.0,
+     "0,2": 0.031407035175879394,
+     "1,2": 0.0
+    },
+    "top_unit": 2
+   },
+   "Qwen3-4B AWQ T1.0": {
+    "cells": 796,
+    "seed": 0.2952261306532663,
+    "full": 0.33040201005025127,
+    "shapley": {
+     "0": -0.02449748743718591,
+     "1": 0.0,
+     "2": 0.05967336683417088
+    },
+    "interaction": {
+     "0,1": 0.0,
+     "0,2": 0.006281407035175823,
+     "1,2": 0.0
+    },
+    "top_unit": 2
+   },
+   "Qwen3-4B bf16 T0.7": {
+    "cells": 796,
+    "seed": 0.3555276381909548,
+    "full": 0.34673366834170855,
+    "shapley": {
+     "0": 0.015075376884422119,
+     "1": 0.0,
+     "2": -0.02386934673366836
+    },
+    "interaction": {
+     "0,1": 0.0,
+     "0,2": 0.012562814070351758,
+     "1,2": 0.0
+    },
+    "top_unit": 0
+   },
+   "Llama-3.1-8B MLX 4-bit T0.7 (Mac, exploratory)": {
+    "cells": 796,
+    "seed": 0.2889447236180904,
+    "full": 0.2751256281407035,
+    "shapley": {
+     "0": -0.02135678391959797,
+     "1": 0.0,
+     "2": 0.007537688442211059
+    },
+    "interaction": {
+     "0,1": 0.0,
+     "0,2": 0.040201005025125636,
+     "1,2": 0.0
+    },
+    "top_unit": 2
+   },
+   "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)": {
+    "cells": 796,
+    "seed": 0.2776381909547739,
+    "full": 0.2814070351758794,
+    "shapley": {
+     "0": -0.006909547738693456,
+     "1": 0.0,
+     "2": 0.010678391959798972
+    },
+    "interaction": {
+     "0,1": 0.0,
+     "0,2": 0.011306532663316604,
+     "1,2": 0.0
+    },
+    "top_unit": 2
+   }
+  },
+  "pairs": [
+   {
+    "first": "Qwen3-4B AWQ T0.7",
+    "second": "Qwen3-4B AWQ T1.0",
+    "spearman": 1.0
+   },
+   {
+    "first": "Qwen3-4B AWQ T0.7",
+    "second": "Qwen3-4B bf16 T0.7",
+    "spearman": -1.0
+   },
+   {
+    "first": "Qwen3-4B AWQ T0.7",
+    "second": "Llama-3.1-8B MLX 4-bit T0.7 (Mac, exploratory)",
+    "spearman": 1.0
+   },
+   {
+    "first": "Qwen3-4B AWQ T0.7",
+    "second": "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)",
+    "spearman": 1.0
+   },
+   {
+    "first": "Qwen3-4B AWQ T1.0",
+    "second": "Qwen3-4B bf16 T0.7",
+    "spearman": -1.0
+   },
+   {
+    "first": "Qwen3-4B AWQ T1.0",
+    "second": "Llama-3.1-8B MLX 4-bit T0.7 (Mac, exploratory)",
+    "spearman": 1.0
+   },
+   {
+    "first": "Qwen3-4B AWQ T1.0",
+    "second": "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)",
+    "spearman": 1.0
+   },
+   {
+    "first": "Qwen3-4B bf16 T0.7",
+    "second": "Llama-3.1-8B MLX 4-bit T0.7 (Mac, exploratory)",
+    "spearman": -1.0
+   },
+   {
+    "first": "Qwen3-4B bf16 T0.7",
+    "second": "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)",
+    "spearman": -1.0
+   },
+   {
+    "first": "Llama-3.1-8B MLX 4-bit T0.7 (Mac, exploratory)",
+    "second": "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)",
+    "spearman": 1.0
+   }
+  ],
+  "same_top_unit": false
+ }
+}

@@ -1,0 +1,245 @@
+{
+ "name": "phaseA_lcb_metaharness_B1_s1_stmt",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "SYSTEM_PROMPT"
+   ],
+   "diff": "@@ seed lines 14-14\n- Put the whole program in one ```python code block.\"\"\"\n+ Ensure your code handles all edge cases and constraints. Put the whole program in one ```python code block.\"\"\"\n",
+   "hunks": [
+    {
+     "start": 13,
+     "end": 14,
+     "replacement": [
+      "Ensure your code handles all edge cases and constraints. Put the whole program in one ```python code block.\"\"\"\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 29-29\n-     prompt = f\"Problem: {task['title']}\\n\\n{task['question']}\"\n+     prompt = f\"Problem: {task['title']}\\n\\n{task['question']}\\n\\nMake sure your code passes all the test cases provided in the task.\"\n",
+   "hunks": [
+    {
+     "start": 28,
+     "end": 29,
+     "replacement": [
+      "    prompt = f\"Problem: {task['title']}\\n\\n{task['question']}\\n\\nMake sure your code passes all the test cases provided in the task.\"\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {
+  "search": {
+   "seed": 0.20416666666666666,
+   "full": 0.19583333333333333,
+   "shapley": {
+    "0": {
+     "value": -0.016666666666666663,
+     "low": -0.033333333333333354,
+     "high": -0.00208333333333334,
+     "p": 0.025
+    },
+    "1": {
+     "value": 0.008333333333333331,
+     "low": -0.012500000000000011,
+     "high": 0.03333333333333334,
+     "p": 0.526
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": 0.05833333333333335,
+     "low": 0.008333333333333331,
+     "high": 0.12083333333333335,
+     "p": 0.031
+    }
+   },
+   "matters": {
+    "0": true,
+    "1": false
+   },
+   "interacts": {
+    "0,1": true
+   },
+   "loo": {
+    "0": 0.012500000000000011,
+    "1": 0.037500000000000006
+   },
+   "loi": {
+    "0": -0.04583333333333334,
+    "1": -0.020833333333333343
+   }
+  },
+  "heldout": {
+   "seed": 0.23823529411764705,
+   "full": 0.2676470588235294,
+   "shapley": {
+    "0": {
+     "value": 0.01764705882352942,
+     "low": -0.011764705882352927,
+     "high": 0.047058823529411764,
+     "p": 0.221
+    },
+    "1": {
+     "value": 0.011764705882352941,
+     "low": -0.005882352941176464,
+     "high": 0.027941176470588247,
+     "p": 0.201
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": 0.017647058823529377,
+     "low": -0.011764705882352955,
+     "high": 0.04999999999999999,
+     "p": 0.287
+    }
+   },
+   "matters": {
+    "1": false,
+    "0": false
+   },
+   "interacts": {
+    "0,1": false
+   },
+   "loo": {
+    "0": 0.026470588235294107,
+    "1": 0.02058823529411763
+   },
+   "loi": {
+    "0": 0.00882352941176473,
+    "1": 0.0029411764705882526
+   }
+  },
+  "overfitting_units": []
+ },
+ "rq4": [
+  {
+   "delta": 0.02,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.20416666666666666,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.2676470588235294,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.20416666666666666,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.2676470588235294,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.20416666666666666,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.2676470588235294,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 5,
+   "search_value": 0.20416666666666666,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.2676470588235294,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.20416666666666666,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.2676470588235294,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.05,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.20416666666666666,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.2676470588235294,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.05,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.20416666666666666,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.2676470588235294,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.05,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 3,
+   "search_value": 0.20416666666666666,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.2676470588235294,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.05,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 5,
+   "search_value": 0.20416666666666666,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.2676470588235294,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.05,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.20416666666666666,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.2676470588235294,
+   "certified": false,
+   "pairs_used": 340
+  }
+ ],
+ "rq5": null
+}

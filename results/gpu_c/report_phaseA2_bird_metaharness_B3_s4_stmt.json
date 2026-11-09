@@ -1,0 +1,206 @@
+{
+ "name": "phaseA2_bird_metaharness_B3_s4_stmt",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 44-44\n-     return {\"answer\": extract_sql(reply)}\n+     sql = extract_sql(reply)\n+     columns, rows, truncated = env.execute(sql, max_rows=50)\n+     if not truncated and rows:\n+         return {\"answer\": sql}\n+     else:\n+         # Extract the actual SQL error message if it exists\n+         if columns and columns[0].startswith(\"SQLError:\"):\n+             error_msg = columns[0][len(\"SQLError: \"):]\n+         else:\n+             error_msg = \"Query executed but returned no rows.\"\n+         feedback = f\"Error: {error_msg}. Please revise your query.\"\n+         revised_prompt = f\"Database schema:\\n{schema_text(env)}\\n\\nQuestion: {task['question']}\\nHint: {task['evidence']}\\n\\nYour initial query was: {sql}\\n\\n{feedback}\"\n+         revised_reply = llm.chat([{\"role\": \"system\", \"content\": SYSTEM_PROMPT}, {\"role\": \"user\", \"content\": revised_prompt}])\n+         return {\"answer\": extract_sql(revised_reply)}\n",
+   "hunks": [
+    {
+     "start": 43,
+     "end": 44,
+     "replacement": [
+      "    sql = extract_sql(reply)\n",
+      "    columns, rows, truncated = env.execute(sql, max_rows=50)\n",
+      "    if not truncated and rows:\n",
+      "        return {\"answer\": sql}\n",
+      "    else:\n",
+      "        # Extract the actual SQL error message if it exists\n",
+      "        if columns and columns[0].startswith(\"SQLError:\"):\n",
+      "            error_msg = columns[0][len(\"SQLError: \"):]\n",
+      "        else:\n",
+      "            error_msg = \"Query executed but returned no rows.\"\n",
+      "        feedback = f\"Error: {error_msg}. Please revise your query.\"\n",
+      "        revised_prompt = f\"Database schema:\\n{schema_text(env)}\\n\\nQuestion: {task['question']}\\nHint: {task['evidence']}\\n\\nYour initial query was: {sql}\\n\\n{feedback}\"\n",
+      "        revised_reply = llm.chat([{\"role\": \"system\", \"content\": SYSTEM_PROMPT}, {\"role\": \"user\", \"content\": revised_prompt}])\n",
+      "        return {\"answer\": extract_sql(revised_reply)}\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {
+  "search": {
+   "seed": 0.25,
+   "full": 0.25833333333333336,
+   "shapley": {
+    "0": {
+     "value": 0.00833333333333336,
+     "low": 0.0,
+     "high": 0.025000000000000022,
+     "p": 0.764
+    }
+   },
+   "interaction": {},
+   "matters": {
+    "0": false
+   },
+   "interacts": {},
+   "loo": {
+    "0": 0.00833333333333336
+   },
+   "loi": {
+    "0": 0.00833333333333336
+   }
+  },
+  "heldout": {
+   "seed": 0.3065326633165829,
+   "full": 0.31155778894472363,
+   "shapley": {
+    "0": {
+     "value": 0.005025125628140725,
+     "low": 0.0,
+     "high": 0.01507537688442212,
+     "p": 0.776
+    }
+   },
+   "interaction": {},
+   "matters": {
+    "0": false
+   },
+   "interacts": {},
+   "loo": {
+    "0": 0.005025125628140725
+   },
+   "loi": {
+    "0": 0.005025125628140725
+   }
+  },
+  "overfitting_units": []
+ },
+ "rq4": [
+  {
+   "delta": 0.02,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.25,
+   "heldout_value": 0.3065326633165829,
+   "heldout_full": 0.31155778894472363,
+   "certified": true,
+   "pairs_used": 516
+  },
+  {
+   "delta": 0.02,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.25,
+   "heldout_value": 0.3065326633165829,
+   "heldout_full": 0.31155778894472363,
+   "certified": true,
+   "pairs_used": 516
+  },
+  {
+   "delta": 0.02,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.25,
+   "heldout_value": 0.3065326633165829,
+   "heldout_full": 0.31155778894472363,
+   "certified": true,
+   "pairs_used": 516
+  },
+  {
+   "delta": 0.02,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.25,
+   "heldout_value": 0.3065326633165829,
+   "heldout_full": 0.31155778894472363,
+   "certified": true,
+   "pairs_used": 516
+  },
+  {
+   "delta": 0.02,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.25,
+   "heldout_value": 0.3065326633165829,
+   "heldout_full": 0.31155778894472363,
+   "certified": true,
+   "pairs_used": 516
+  },
+  {
+   "delta": 0.05,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.25,
+   "heldout_value": 0.3065326633165829,
+   "heldout_full": 0.31155778894472363,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.25,
+   "heldout_value": 0.3065326633165829,
+   "heldout_full": 0.31155778894472363,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.25,
+   "heldout_value": 0.3065326633165829,
+   "heldout_full": 0.31155778894472363,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.25,
+   "heldout_value": 0.3065326633165829,
+   "heldout_full": 0.31155778894472363,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.25,
+   "heldout_value": 0.3065326633165829,
+   "heldout_full": 0.31155778894472363,
+   "certified": true,
+   "pairs_used": 121
+  }
+ ],
+ "rq5": null
+}

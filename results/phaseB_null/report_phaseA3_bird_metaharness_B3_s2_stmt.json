@@ -1,0 +1,325 @@
+{
+ "name": "phaseA3_bird_metaharness_B3_s2_stmt",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "SYSTEM_PROMPT"
+   ],
+   "diff": "@@ seed lines 13-12\n+ Use SQLite-specific functions for date handling, like `strftime('%Y', column)` to extract years.\n+ Use subqueries when comparing columns to aggregate functions like MIN, MAX, or SUM.\n",
+   "hunks": [
+    {
+     "start": 12,
+     "end": 12,
+     "replacement": [
+      "Use SQLite-specific functions for date handling, like `strftime('%Y', column)` to extract years.\n",
+      "Use subqueries when comparing columns to aggregate functions like MIN, MAX, or SUM.\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "items": [
+    "schema_text"
+   ],
+   "diff": "@@ seed lines 25-25\n-         described = \", \".join(f\"{info[1]} ({info[2]})\" for info in info_rows)\n+         described = \", \".join(f'\"{table}.{info[1]}\" ({info[2]})' for info in info_rows)\n",
+   "hunks": [
+    {
+     "start": 24,
+     "end": 25,
+     "replacement": [
+      "        described = \", \".join(f'\"{table}.{info[1]}\" ({info[2]})' for info in info_rows)\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 44-44\n-     return {\"answer\": extract_sql(reply)}\n+     sql = extract_sql(reply)\n+     # Validate the generated SQL by executing it\n+     try:\n+         columns, rows, truncated = env.execute(sql, max_rows=50)\n+         return {\"answer\": sql, \"columns\": columns, \"rows\": rows, \"truncated\": truncated}\n+     except Exception as e:\n+         # If execution fails, return the SQL with an error flag\n+         return {\"answer\": sql, \"error\": str(e)}\n",
+   "hunks": [
+    {
+     "start": 43,
+     "end": 44,
+     "replacement": [
+      "    sql = extract_sql(reply)\n",
+      "    # Validate the generated SQL by executing it\n",
+      "    try:\n",
+      "        columns, rows, truncated = env.execute(sql, max_rows=50)\n",
+      "        return {\"answer\": sql, \"columns\": columns, \"rows\": rows, \"truncated\": truncated}\n",
+      "    except Exception as e:\n",
+      "        # If execution fails, return the SQL with an error flag\n",
+      "        return {\"answer\": sql, \"error\": str(e)}\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {
+  "search": {
+   "seed": 0.25833333333333336,
+   "full": 0.29583333333333334,
+   "shapley": {
+    "0": {
+     "value": 0.006250000000000005,
+     "low": -0.03749999999999999,
+     "high": 0.05833333333333332,
+     "p": 0.821
+    },
+    "1": {
+     "value": 0.031249999999999972,
+     "low": -0.0333333333333333,
+     "high": 0.10208333333333333,
+     "p": 0.345
+    },
+    "2": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": -0.05416666666666664,
+     "low": -0.15833333333333335,
+     "high": 0.041666666666666685,
+     "p": 0.295
+    },
+    "0,2": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,2": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "matters": {
+    "1": false,
+    "0": false,
+    "2": false
+   },
+   "interacts": {
+    "0,1": false,
+    "0,2": false,
+    "1,2": false
+   },
+   "loo": {
+    "0": -0.020833333333333315,
+    "1": 0.004166666666666652,
+    "2": 0.0
+   },
+   "loi": {
+    "0": 0.033333333333333326,
+    "1": 0.05833333333333329,
+    "2": 0.0
+   }
+  },
+  "heldout": {
+   "seed": 0.29396984924623115,
+   "full": 0.2814070351758794,
+   "shapley": {
+    "0": {
+     "value": -0.01193467336683418,
+     "low": -0.04396984924623115,
+     "high": 0.018844221105527637,
+     "p": 0.429
+    },
+    "1": {
+     "value": -0.0006281407035175772,
+     "low": -0.035175879396984924,
+     "high": 0.03329145728643218,
+     "p": 0.954
+    },
+    "2": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": -0.023869346733668362,
+     "low": -0.07035175879396988,
+     "high": 0.017587939698492483,
+     "p": 0.285
+    },
+    "0,2": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,2": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "matters": {
+    "0": false,
+    "1": false,
+    "2": false
+   },
+   "interacts": {
+    "0,1": false,
+    "0,2": false,
+    "1,2": false
+   },
+   "loo": {
+    "0": -0.023869346733668362,
+    "1": -0.012562814070351758,
+    "2": 0.0
+   },
+   "loi": {
+    "0": 0.0,
+    "1": 0.011306532663316604,
+    "2": 0.0
+   }
+  },
+  "overfitting_units": []
+ },
+ "rq4": [
+  {
+   "delta": 0.02,
+   "method": "exact",
+   "product": [
+    1
+   ],
+   "units_kept": 1,
+   "queries": 8,
+   "search_value": 0.31666666666666665,
+   "heldout_value": 0.30527638190954776,
+   "heldout_full": 0.2814070351758794,
+   "certified": true,
+   "pairs_used": 638
+  },
+  {
+   "delta": 0.02,
+   "method": "greedy_backward",
+   "product": [
+    1
+   ],
+   "units_kept": 1,
+   "queries": 7,
+   "search_value": 0.31666666666666665,
+   "heldout_value": 0.30527638190954776,
+   "heldout_full": 0.2814070351758794,
+   "certified": true,
+   "pairs_used": 638
+  },
+  {
+   "delta": 0.02,
+   "method": "ddmin",
+   "product": [
+    0
+   ],
+   "units_kept": 1,
+   "queries": 3,
+   "search_value": 0.2916666666666667,
+   "heldout_value": 0.29396984924623115,
+   "heldout_full": 0.2814070351758794,
+   "certified": true,
+   "pairs_used": 185
+  },
+  {
+   "delta": 0.02,
+   "method": "loo_threshold",
+   "product": [
+    1
+   ],
+   "units_kept": 1,
+   "queries": 7,
+   "search_value": 0.31666666666666665,
+   "heldout_value": 0.30527638190954776,
+   "heldout_full": 0.2814070351758794,
+   "certified": true,
+   "pairs_used": 638
+  },
+  {
+   "delta": 0.02,
+   "method": "shapley_threshold",
+   "product": [
+    1
+   ],
+   "units_kept": 1,
+   "queries": 8,
+   "search_value": 0.31666666666666665,
+   "heldout_value": 0.30527638190954776,
+   "heldout_full": 0.2814070351758794,
+   "certified": true,
+   "pairs_used": 638
+  },
+  {
+   "delta": 0.05,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 8,
+   "search_value": 0.25833333333333336,
+   "heldout_value": 0.29396984924623115,
+   "heldout_full": 0.2814070351758794,
+   "certified": true,
+   "pairs_used": 204
+  },
+  {
+   "delta": 0.05,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 7,
+   "search_value": 0.25833333333333336,
+   "heldout_value": 0.29396984924623115,
+   "heldout_full": 0.2814070351758794,
+   "certified": true,
+   "pairs_used": 204
+  },
+  {
+   "delta": 0.05,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 3,
+   "search_value": 0.25833333333333336,
+   "heldout_value": 0.29396984924623115,
+   "heldout_full": 0.2814070351758794,
+   "certified": true,
+   "pairs_used": 204
+  },
+  {
+   "delta": 0.05,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 6,
+   "search_value": 0.25833333333333336,
+   "heldout_value": 0.29396984924623115,
+   "heldout_full": 0.2814070351758794,
+   "certified": true,
+   "pairs_used": 204
+  },
+  {
+   "delta": 0.05,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 8,
+   "search_value": 0.25833333333333336,
+   "heldout_value": 0.29396984924623115,
+   "heldout_full": 0.2814070351758794,
+   "certified": true,
+   "pairs_used": 204
+  }
+ ],
+ "rq5": null
+}

@@ -1,0 +1,78 @@
+{
+ "benchmark": "bird",
+ "n_tasks": 199,
+ "replicates": 4,
+ "model": "Qwen/Qwen3-4B-AWQ",
+ "loops": [
+  {
+   "loop": "metaharness_B1_s1",
+   "accepted": 3,
+   "gain": -0.06155778894472362,
+   "low": -0.11306532663316583,
+   "high": -0.010050251256281407,
+   "seed_accuracy": 0.3027638190954774,
+   "final_accuracy": 0.24120603015075376,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B1_s2",
+   "accepted": 0,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B1_s3",
+   "accepted": 4,
+   "gain": -0.026381909547738693,
+   "low": -0.06281407035175879,
+   "high": 0.00628140703517588,
+   "seed_accuracy": 0.3027638190954774,
+   "final_accuracy": 0.27638190954773867,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B1_s4",
+   "accepted": 0,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B3_s1",
+   "accepted": 1,
+   "gain": 0.010050251256281407,
+   "low": 0.0,
+   "high": 0.02512562814070352,
+   "seed_accuracy": 0.3027638190954774,
+   "final_accuracy": 0.3128140703517588,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B3_s2",
+   "accepted": 5,
+   "gain": 0.035175879396984924,
+   "low": -0.016331658291457288,
+   "high": 0.08793969849246232,
+   "seed_accuracy": 0.3027638190954774,
+   "final_accuracy": 0.3379396984924623,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B3_s3",
+   "accepted": 1,
+   "gain": -0.001256281407035176,
+   "low": -0.04271356783919598,
+   "high": 0.038944723618090454,
+   "seed_accuracy": 0.3027638190954774,
+   "final_accuracy": 0.3015075376884422,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B3_s4",
+   "accepted": 3,
+   "gain": 0.0037688442211055275,
+   "low": -0.0037688442211055275,
+   "high": 0.01507537688442211,
+   "seed_accuracy": 0.3027638190954774,
+   "final_accuracy": 0.3065326633165829,
+   "real_gain": false
+  }
+ ]
+}

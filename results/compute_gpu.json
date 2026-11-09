@@ -1,0 +1,40 @@
+{
+ "host": "anonymous",
+ "lattices": {
+  "Qwen/Qwen3-4B-AWQ": {
+   "files": 312,
+   "seconds": 318760.9999999999,
+   "executions": 2200326,
+   "generated_tokens": 60975941,
+   "nominal_tokens": 446206054
+  },
+  "Qwen/Qwen3-4B": {
+   "files": 7,
+   "seconds": 12266.199999999999,
+   "executions": 33324,
+   "generated_tokens": 3728504,
+   "nominal_tokens": 9261875
+  },
+  "hugging-quants/Meta-Llama-3.1-8B-Instruct-AWQ-INT4": {
+   "files": 14,
+   "seconds": 10520.199999999999,
+   "executions": 33662,
+   "generated_tokens": 5090040,
+   "nominal_tokens": 10590853
+  }
+ },
+ "evolution_hours": {
+  "stage2:A:gsmhard": 1.68,
+  "stage2b:A:lcb": 7.38,
+  "stage2b:A:bird": 0.75,
+  "stage3:A2:gsmhard": 6.45,
+  "stage3:A2:lcb": 9.37,
+  "stage3b:A2:bird": 4.86,
+  "stage4:A3:gsmhard": 25.86,
+  "stage4:A3:lcb": 30.11,
+  "stage4:A3:bird": 16.52,
+  "stage5:A4:gsmhard": 0.0,
+  "stage5:A4:lcb": 10.95,
+  "stage5:A4:bird": 17.5
+ }
+}

@@ -1,0 +1,10 @@
+{
+ "gain": 0.065,
+ "low": 0.0125,
+ "high": 0.11875,
+ "seed_accuracy": 0.57625,
+ "final_accuracy": 0.64125,
+ "real_gain": true,
+ "lattice": "constructed_gsmhard_t1_stmt_heldout.json",
+ "cells": 800
+}

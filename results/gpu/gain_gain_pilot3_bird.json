@@ -1,0 +1,83 @@
+{
+ "benchmark": "bird",
+ "n_tasks": 199,
+ "replicates": 4,
+ "model": "Qwen/Qwen3-4B-AWQ",
+ "loops": [
+  {
+   "loop": "metaharness_B1_s1",
+   "accepted": 5,
+   "gain": 0.05402010050251256,
+   "low": 0.010050251256281407,
+   "high": 0.09673366834170855,
+   "seed_accuracy": 0.29773869346733667,
+   "final_accuracy": 0.35175879396984927,
+   "real_gain": true
+  },
+  {
+   "loop": "metaharness_B1_s2",
+   "accepted": 6,
+   "gain": 0.022613065326633167,
+   "low": -0.03015075376884422,
+   "high": 0.07663316582914573,
+   "seed_accuracy": 0.29773869346733667,
+   "final_accuracy": 0.3203517587939699,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B1_s3",
+   "accepted": 5,
+   "gain": 0.02135678391959799,
+   "low": -0.018844221105527637,
+   "high": 0.06407035175879397,
+   "seed_accuracy": 0.29773869346733667,
+   "final_accuracy": 0.31909547738693467,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B1_s4",
+   "accepted": 1,
+   "gain": -0.005025125628140704,
+   "low": -0.04522613065326633,
+   "high": 0.032663316582914576,
+   "seed_accuracy": 0.29773869346733667,
+   "final_accuracy": 0.292713567839196,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B3_s1",
+   "accepted": 2,
+   "gain": 0.05150753768844221,
+   "low": 0.001256281407035176,
+   "high": 0.10050251256281408,
+   "seed_accuracy": 0.29773869346733667,
+   "final_accuracy": 0.3492462311557789,
+   "real_gain": true
+  },
+  {
+   "loop": "metaharness_B3_s2",
+   "accepted": 5,
+   "gain": -0.007537688442211055,
+   "low": -0.059045226130653265,
+   "high": 0.04020100502512563,
+   "seed_accuracy": 0.29773869346733667,
+   "final_accuracy": 0.29020100502512564,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B3_s3",
+   "accepted": 1,
+   "gain": 0.018844221105527637,
+   "low": -0.01507537688442211,
+   "high": 0.05527638190954774,
+   "seed_accuracy": 0.29773869346733667,
+   "final_accuracy": 0.3165829145728643,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B3_s4",
+   "accepted": 0,
+   "real_gain": false
+  }
+ ]
+}

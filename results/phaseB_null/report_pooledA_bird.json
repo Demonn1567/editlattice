@@ -1,0 +1,267 @@
+{
+ "name": "pooledA_bird",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "schema_text"
+   ],
+   "diff": "@@ seed lines 26-26\n-         lines.append(f\"Table {table}: {described}\")\n+         lines.append(f\"Table {table}: {described} (Columns: {', '.join(f'{info[1]} ({info[2]})' for info in info_rows)})\")\n",
+   "hunks": [
+    {
+     "start": 25,
+     "end": 26,
+     "replacement": [
+      "        lines.append(f\"Table {table}: {described} (Columns: {', '.join(f'{info[1]} ({info[2]})' for info in info_rows)})\")\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 44-44\n-     return {\"answer\": extract_sql(reply)}\n+     sql = extract_sql(reply)\n+     # Ensure the SQL is complete and properly formatted\n+     if not sql or not sql.strip().startswith(\"SELECT\") or not sql.endswith(\";\"):\n+         sql = \"SELECT * FROM sqlite_master;\"\n+     return {\"answer\": sql}\n",
+   "hunks": [
+    {
+     "start": 43,
+     "end": 44,
+     "replacement": [
+      "    sql = extract_sql(reply)\n",
+      "    # Ensure the SQL is complete and properly formatted\n",
+      "    if not sql or not sql.strip().startswith(\"SELECT\") or not sql.endswith(\";\"):\n",
+      "        sql = \"SELECT * FROM sqlite_master;\"\n",
+      "    return {\"answer\": sql}\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 44-44\n-     return {\"answer\": extract_sql(reply)}\n+     sql = extract_sql(reply)\n+     # Validate SQL against schema to catch syntax errors or invalid column names\n+     try:\n+         env.execute(sql, max_rows=1)\n+     except Exception as e:\n+         # If there's an error, return the original SQL with a note\n+         return {\"answer\": f\"Error: {str(e)}\\nOriginal SQL:\\n{sql}\"}\n+     return {\"answer\": sql}\n",
+   "hunks": [
+    {
+     "start": 43,
+     "end": 44,
+     "replacement": [
+      "    sql = extract_sql(reply)\n",
+      "    # Validate SQL against schema to catch syntax errors or invalid column names\n",
+      "    try:\n",
+      "        env.execute(sql, max_rows=1)\n",
+      "    except Exception as e:\n",
+      "        # If there's an error, return the original SQL with a note\n",
+      "        return {\"answer\": f\"Error: {str(e)}\\nOriginal SQL:\\n{sql}\"}\n",
+      "    return {\"answer\": sql}\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 3,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 42-42\n-     prompt = f\"Database schema:\\n{schema_text(env)}\\n\\nQuestion: {task['question']}\\nHint: {task['evidence']}\"\n+     prompt = f\"Database schema:\\n{schema_text(env)}\\n\\nQuestion: {task['question']}\\nHint: {task['evidence']}\\n\\nYour task is to write an SQL query that answers this question using the database schema provided. Make sure to use the hint to guide your query, and ensure your query is semantically correct and returns the expected result.\"\n",
+   "hunks": [
+    {
+     "start": 41,
+     "end": 42,
+     "replacement": [
+      "    prompt = f\"Database schema:\\n{schema_text(env)}\\n\\nQuestion: {task['question']}\\nHint: {task['evidence']}\\n\\nYour task is to write an SQL query that answers this question using the database schema provided. Make sure to use the hint to guide your query, and ensure your query is semantically correct and returns the expected result.\"\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 4,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 44-44\n-     return {\"answer\": extract_sql(reply)}\n+     sql = extract_sql(reply)\n+     if not sql or sql.strip().endswith(';'):\n+         return {\"answer\": sql}\n+     return {\"answer\": sql + \";\"}\n",
+   "hunks": [
+    {
+     "start": 43,
+     "end": 44,
+     "replacement": [
+      "    sql = extract_sql(reply)\n",
+      "    if not sql or sql.strip().endswith(';'):\n",
+      "        return {\"answer\": sql}\n",
+      "    return {\"answer\": sql + \";\"}\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 5,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 44-44\n-     return {\"answer\": extract_sql(reply)}\n+     sql = extract_sql(reply)\n+     \n+     # Properly quote string values in WHERE clauses\n+     def quote_value(value):\n+         if isinstance(value, str):\n+             return f\"'{value}'\"\n+         return value\n+     \n+     # Replace values in WHERE clauses with quoted values\n+     import re\n+     where_pattern = re.compile(r'WHERE\\s+([^=]+)=([^ ]+)')\n+     def replace_where(match):\n+         key = match.group(1)\n+         value = match.group(2)\n+         return f\"WHERE {key}={quote_value(value)}\"\n+     \n+     sql = where_pattern.sub(replace_where, sql)\n+     \n+     return {\"answer\": sql}\n",
+   "hunks": [
+    {
+     "start": 43,
+     "end": 44,
+     "replacement": [
+      "    sql = extract_sql(reply)\n",
+      "    \n",
+      "    # Properly quote string values in WHERE clauses\n",
+      "    def quote_value(value):\n",
+      "        if isinstance(value, str):\n",
+      "            return f\"'{value}'\"\n",
+      "        return value\n",
+      "    \n",
+      "    # Replace values in WHERE clauses with quoted values\n",
+      "    import re\n",
+      "    where_pattern = re.compile(r'WHERE\\s+([^=]+)=([^ ]+)')\n",
+      "    def replace_where(match):\n",
+      "        key = match.group(1)\n",
+      "        value = match.group(2)\n",
+      "        return f\"WHERE {key}={quote_value(value)}\"\n",
+      "    \n",
+      "    sql = where_pattern.sub(replace_where, sql)\n",
+      "    \n",
+      "    return {\"answer\": sql}\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 6,
+   "items": [
+    "SYSTEM_PROMPT"
+   ],
+   "diff": "@@ seed lines 13-12\n+ Consider joining tables when necessary.\n",
+   "hunks": [
+    {
+     "start": 12,
+     "end": 12,
+     "replacement": [
+      "Consider joining tables when necessary.\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 7,
+   "items": [
+    "extract_sql"
+   ],
+   "diff": "@@ seed lines 33-33\n-         return reply.rsplit(\"```sql\", 1)[1].split(\"```\", 1)[0].strip()\n+         sql_block = reply.split(\"```sql\", 1)[1]\n+         return sql_block.split(\"```\", 1)[0].strip()\n",
+   "hunks": [
+    {
+     "start": 32,
+     "end": 33,
+     "replacement": [
+      "        sql_block = reply.split(\"```sql\", 1)[1]\n",
+      "        return sql_block.split(\"```\", 1)[0].strip()\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 8,
+   "items": [
+    "extract_sql"
+   ],
+   "diff": "@@ seed lines 35-34\n+         sql_block = reply.split(\"```\", 1)[1]\n+         return sql_block.split(\"```\", 1)[0].strip()\n",
+   "hunks": [
+    {
+     "start": 34,
+     "end": 34,
+     "replacement": [
+      "        sql_block = reply.split(\"```\", 1)[1]\n",
+      "        return sql_block.split(\"```\", 1)[0].strip()\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 9,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 42-42\n-     prompt = f\"Database schema:\\n{schema_text(env)}\\n\\nQuestion: {task['question']}\\nHint: {task['evidence']}\"\n+     prompt = f\"Database schema:\\n{schema_text(env)}\\n\\nQuestion: {task['question']}\\nHint: {task['evidence']}\\n\\nUse this hint to construct your query.\"\n",
+   "hunks": [
+    {
+     "start": 41,
+     "end": 42,
+     "replacement": [
+      "    prompt = f\"Database schema:\\n{schema_text(env)}\\n\\nQuestion: {task['question']}\\nHint: {task['evidence']}\\n\\nUse this hint to construct your query.\"\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 10,
+   "items": [
+    "extract_sql"
+   ],
+   "diff": "@@ seed lines 31-37\n-     \"\"\"The last ```sql block, else the last code block, else the whole reply.\"\"\"\n-     if \"```sql\" in reply:\n-         return reply.rsplit(\"```sql\", 1)[1].split(\"```\", 1)[0].strip()\n-     if \"```\" in reply:\n-         parts = reply.split(\"```\")\n-         if len(parts) >= 3:\n-             return parts[-2].strip()\n+     \"\"\"The last SQL block, whether marked with ```sql or not.\"\"\"\n+     # Use regular expression to find the last SQL block\n+     import re\n+     sql_block = re.search(r'```(?:sql)?\\n?(.*?)\\n?```', reply, re.DOTALL)\n+     if sql_block:\n+         return sql_block.group(1).strip()\n",
+   "hunks": [
+    {
+     "start": 30,
+     "end": 37,
+     "replacement": [
+      "    \"\"\"The last SQL block, whether marked with ```sql or not.\"\"\"\n",
+      "    # Use regular expression to find the last SQL block\n",
+      "    import re\n",
+      "    sql_block = re.search(r'```(?:sql)?\\n?(.*?)\\n?```', reply, re.DOTALL)\n",
+      "    if sql_block:\n",
+      "        return sql_block.group(1).strip()\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {},
+ "rq4": [],
+ "rq5": {
+  "pool": [
+   "metaharness_B1_s1.log.jsonl",
+   "metaharness_B1_s2.log.jsonl",
+   "metaharness_B1_s3.log.jsonl",
+   "metaharness_B3_s2.log.jsonl",
+   "metaharness_B3_s3.log.jsonl",
+   "metaharness_B3_s4.log.jsonl"
+  ],
+  "best_pooled_product": [
+   0,
+   6,
+   9
+  ],
+  "best_single_run": 4,
+  "single_final_product": [
+   6,
+   7,
+   8,
+   9
+  ],
+  "search": {
+   "pooled": 0.325,
+   "single": 0.32083333333333336
+  },
+  "heldout": {
+   "pooled": 0.34045226130653267,
+   "single": 0.3203517587939699,
+   "all_single": {
+    "0": 0.32160804020100503,
+    "1": 0.3065326633165829,
+    "2": 0.30904522613065327,
+    "3": 0.3065326633165829,
+    "4": 0.3203517587939699,
+    "5": 0.3065326633165829
+   }
+  },
+  "difference": 0.02010050251256279,
+  "ci": [
+   -0.001256281407035176,
+   0.04271356783919598
+  ],
+  "superior_certified": false,
+  "pairs_used": 796
+ }
+}

@@ -1,0 +1,257 @@
+{
+ "name": "phaseA4_bird_metaharness_B1_s4_stmt",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "schema_text"
+   ],
+   "diff": "@@ seed lines 24-25\n-         info_columns, info_rows, info_truncated = env.execute(f'PRAGMA table_info(\"{table}\")', max_rows=200)\n-         described = \", \".join(f\"{info[1]} ({info[2]})\" for info in info_rows)\n+         described = env.description(table)\n",
+   "hunks": [
+    {
+     "start": 23,
+     "end": 25,
+     "replacement": [
+      "        described = env.description(table)\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "items": [
+    "extract_sql"
+   ],
+   "diff": "@@ seed lines 31-38\n-     \"\"\"The last ```sql block, else the last code block, else the whole reply.\"\"\"\n-     if \"```sql\" in reply:\n-         return reply.rsplit(\"```sql\", 1)[1].split(\"```\", 1)[0].strip()\n-     if \"```\" in reply:\n-         parts = reply.split(\"```\")\n-         if len(parts) >= 3:\n-             return parts[-2].strip()\n-     return reply.strip()\n+     \"\"\"Extract SQL from the last ```sql block using regex for robust parsing.\"\"\"\n+     import re\n+     match = re.search(r'```sql(.*?)```', reply, re.DOTALL)\n+     if match:\n+         sql = match.group(1).strip()\n+         if sql and sql.startswith('SELECT'):\n+             return sql\n+     match = re.search(r'```(.*?)```', reply, re.DOTALL)\n+     if match:\n+         sql = match.group(1).strip()\n+         if sql and sql.startswith('SELECT'):\n+             return sql\n+     return ''\n",
+   "hunks": [
+    {
+     "start": 30,
+     "end": 38,
+     "replacement": [
+      "    \"\"\"Extract SQL from the last ```sql block using regex for robust parsing.\"\"\"\n",
+      "    import re\n",
+      "    match = re.search(r'```sql(.*?)```', reply, re.DOTALL)\n",
+      "    if match:\n",
+      "        sql = match.group(1).strip()\n",
+      "        if sql and sql.startswith('SELECT'):\n",
+      "            return sql\n",
+      "    match = re.search(r'```(.*?)```', reply, re.DOTALL)\n",
+      "    if match:\n",
+      "        sql = match.group(1).strip()\n",
+      "        if sql and sql.startswith('SELECT'):\n",
+      "            return sql\n",
+      "    return ''\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {
+  "search": {
+   "seed": 0.25,
+   "full": 0.25,
+   "shapley": {
+    "0": {
+     "value": 0.0,
+     "low": -0.054166666666666696,
+     "high": 0.05833333333333335,
+     "p": 1.0
+    },
+    "1": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "matters": {
+    "0": false,
+    "1": false
+   },
+   "interacts": {
+    "0,1": false
+   },
+   "loo": {
+    "0": 0.0,
+    "1": 0.0
+   },
+   "loi": {
+    "0": 0.0,
+    "1": 0.0
+   }
+  },
+  "heldout": {
+   "seed": 0.2864321608040201,
+   "full": 0.22236180904522612,
+   "shapley": {
+    "0": {
+     "value": -0.06030150753768847,
+     "low": -0.10427135678391956,
+     "high": -0.018844221105527637,
+     "p": 0.001
+    },
+    "1": {
+     "value": -0.00376884422110553,
+     "low": -0.010050251256281409,
+     "high": 0.0,
+     "p": 0.261
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": -0.007537688442211032,
+     "low": -0.020100502512562846,
+     "high": 0.0,
+     "p": 0.261
+    }
+   },
+   "matters": {
+    "0": true,
+    "1": false
+   },
+   "interacts": {
+    "0,1": false
+   },
+   "loo": {
+    "0": -0.064070351758794,
+    "1": -0.00753768844221106
+   },
+   "loi": {
+    "0": -0.05653266331658294,
+    "1": 0.0
+   }
+  },
+  "overfitting_units": []
+ },
+ "rq4": [
+  {
+   "delta": 0.02,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.25,
+   "heldout_value": 0.2864321608040201,
+   "heldout_full": 0.22236180904522612,
+   "certified": true,
+   "pairs_used": 421
+  },
+  {
+   "delta": 0.02,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.25,
+   "heldout_value": 0.2864321608040201,
+   "heldout_full": 0.22236180904522612,
+   "certified": true,
+   "pairs_used": 421
+  },
+  {
+   "delta": 0.02,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 3,
+   "search_value": 0.25,
+   "heldout_value": 0.2864321608040201,
+   "heldout_full": 0.22236180904522612,
+   "certified": true,
+   "pairs_used": 421
+  },
+  {
+   "delta": 0.02,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 5,
+   "search_value": 0.25,
+   "heldout_value": 0.2864321608040201,
+   "heldout_full": 0.22236180904522612,
+   "certified": true,
+   "pairs_used": 421
+  },
+  {
+   "delta": 0.02,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.25,
+   "heldout_value": 0.2864321608040201,
+   "heldout_full": 0.22236180904522612,
+   "certified": true,
+   "pairs_used": 421
+  },
+  {
+   "delta": 0.05,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.25,
+   "heldout_value": 0.2864321608040201,
+   "heldout_full": 0.22236180904522612,
+   "certified": true,
+   "pairs_used": 80
+  },
+  {
+   "delta": 0.05,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.25,
+   "heldout_value": 0.2864321608040201,
+   "heldout_full": 0.22236180904522612,
+   "certified": true,
+   "pairs_used": 80
+  },
+  {
+   "delta": 0.05,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 3,
+   "search_value": 0.25,
+   "heldout_value": 0.2864321608040201,
+   "heldout_full": 0.22236180904522612,
+   "certified": true,
+   "pairs_used": 80
+  },
+  {
+   "delta": 0.05,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 5,
+   "search_value": 0.25,
+   "heldout_value": 0.2864321608040201,
+   "heldout_full": 0.22236180904522612,
+   "certified": true,
+   "pairs_used": 80
+  },
+  {
+   "delta": 0.05,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.25,
+   "heldout_value": 0.2864321608040201,
+   "heldout_full": 0.22236180904522612,
+   "certified": true,
+   "pairs_used": 80
+  }
+ ],
+ "rq5": null
+}

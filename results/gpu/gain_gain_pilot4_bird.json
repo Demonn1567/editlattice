@@ -1,0 +1,88 @@
+{
+ "benchmark": "bird",
+ "n_tasks": 199,
+ "replicates": 4,
+ "model": "Qwen/Qwen3-4B-AWQ",
+ "loops": [
+  {
+   "loop": "metaharness_B1_s1",
+   "accepted": 2,
+   "gain": -0.01507537688442211,
+   "low": -0.038944723618090454,
+   "high": 0.008793969849246231,
+   "seed_accuracy": 0.29773869346733667,
+   "final_accuracy": 0.28266331658291455,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B1_s2",
+   "accepted": 1,
+   "gain": 0.010050251256281407,
+   "low": -0.018844221105527637,
+   "high": 0.0414572864321608,
+   "seed_accuracy": 0.29773869346733667,
+   "final_accuracy": 0.30778894472361806,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B1_s3",
+   "accepted": 4,
+   "gain": -0.008793969849246231,
+   "low": -0.06030150753768844,
+   "high": 0.0414572864321608,
+   "seed_accuracy": 0.29773869346733667,
+   "final_accuracy": 0.2889447236180904,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B1_s4",
+   "accepted": 3,
+   "gain": -0.08417085427135679,
+   "low": -0.13316582914572864,
+   "high": -0.038944723618090454,
+   "seed_accuracy": 0.29773869346733667,
+   "final_accuracy": 0.2135678391959799,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B3_s1",
+   "accepted": 3,
+   "gain": 0.0,
+   "low": 0.0,
+   "high": 0.0,
+   "seed_accuracy": 0.29773869346733667,
+   "final_accuracy": 0.29773869346733667,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B3_s2",
+   "accepted": 2,
+   "gain": -0.018844221105527637,
+   "low": -0.059045226130653265,
+   "high": 0.02135678391959799,
+   "seed_accuracy": 0.29773869346733667,
+   "final_accuracy": 0.27889447236180903,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B3_s3",
+   "accepted": 1,
+   "gain": 0.03015075376884422,
+   "low": -0.013819095477386936,
+   "high": 0.07412060301507538,
+   "seed_accuracy": 0.29773869346733667,
+   "final_accuracy": 0.3278894472361809,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B3_s4",
+   "accepted": 4,
+   "gain": 0.011306532663316583,
+   "low": -0.0364321608040201,
+   "high": 0.05778894472361809,
+   "seed_accuracy": 0.29773869346733667,
+   "final_accuracy": 0.30904522613065327,
+   "real_gain": false
+  }
+ ]
+}

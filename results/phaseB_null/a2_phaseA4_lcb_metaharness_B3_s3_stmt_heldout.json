@@ -1,0 +1,517 @@
+{
+ "summary": {
+  "pairs": 70,
+  "replayed_accuracy": 0.21428571428571427,
+  "fresh_accuracy": 0.22857142857142856,
+  "products_with_p_below_0.05": 0,
+  "products": 2
+ },
+ "rows": [
+  {
+   "product": "",
+   "n": 33,
+   "replayed": 0.21212121212121213,
+   "fresh": 0.18181818181818182,
+   "fisher_p": 1.0
+  },
+  {
+   "product": "0",
+   "n": 37,
+   "replayed": 0.21621621621621623,
+   "fresh": 0.2702702702702703,
+   "fisher_p": 0.7870266149596514
+  }
+ ],
+ "pairs": [
+  {
+   "product": "0",
+   "task_id": "lcb-abc398_c",
+   "replicate": 2,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc390_a",
+   "replicate": 3,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc377_a",
+   "replicate": 0,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-arc189_c",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-arc189_c",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-arc192_a",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-arc192_a",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc395_f",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc395_f",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc395_f",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc398_a",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 1
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc390_b",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc390_b",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc380_c",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc375_f",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc388_d",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-arc193_a",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc387_f",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-arc187_b",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-arc187_b",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc378_g",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc378_g",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc393_e",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc393_e",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-arc190_c",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc396_d",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc380_d",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-arc195_b",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc391_a",
+   "replicate": 3,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc389_a",
+   "replicate": 1,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc397_d",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc397_d",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc380_a",
+   "replicate": 0,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc387_c",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc387_c",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc376_f",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc375_d",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc377_f",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc374_d",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc374_d",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc376_d",
+   "replicate": 2,
+   "replayed": 1.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc390_g",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc390_g",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc391_b",
+   "replicate": 0,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc391_b",
+   "replicate": 0,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc400_g",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc392_b",
+   "replicate": 3,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc388_f",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc382_f",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc396_a",
+   "replicate": 1,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-arc194_c",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-arc194_c",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-arc194_c",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc394_b",
+   "replicate": 1,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc392_c",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc386_a",
+   "replicate": 2,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc385_b",
+   "replicate": 3,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-arc188_c",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc394_d",
+   "replicate": 3,
+   "replayed": 1.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-arc188_a",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-arc193_d",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-arc193_d",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc386_f",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-arc192_e",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc390_f",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc390_d",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc390_d",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc390_d",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc390_d",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc393_f",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  }
+ ]
+}

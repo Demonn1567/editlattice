@@ -1,0 +1,581 @@
+{
+ "rows": [
+  {
+   "lineage": "rq5_bird_metaharness_B1_s1",
+   "name_level": {
+    "units": 2,
+    "products": 4,
+    "cells": 10,
+    "executions": 40,
+    "brute_force": 40,
+    "generated_tokens": 1859,
+    "nominal_tokens": 16372,
+    "mismatches": 0,
+    "checked": 40,
+    "marked_units": []
+   },
+   "statement_level": {
+    "units": 2,
+    "products": 4,
+    "cells": 10,
+    "executions": 20,
+    "brute_force": 40,
+    "generated_tokens": 0,
+    "nominal_tokens": 8186,
+    "mismatches": 0,
+    "checked": 40,
+    "marked_units": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "lineage": "rq5_bird_metaharness_B1_s2",
+   "name_level": {
+    "units": 3,
+    "products": 8,
+    "cells": 10,
+    "executions": 80,
+    "brute_force": 80,
+    "generated_tokens": 0,
+    "nominal_tokens": 32024,
+    "mismatches": 0,
+    "checked": 80,
+    "marked_units": []
+   },
+   "statement_level": {
+    "units": 3,
+    "products": 8,
+    "cells": 10,
+    "executions": 76,
+    "brute_force": 80,
+    "generated_tokens": 0,
+    "nominal_tokens": 28568,
+    "mismatches": 0,
+    "checked": 80,
+    "marked_units": [
+     0,
+     1,
+     2
+    ]
+   }
+  },
+  {
+   "lineage": "rq5_bird_metaharness_B1_s4",
+   "name_level": {
+    "units": 1,
+    "products": 2,
+    "cells": 10,
+    "executions": 20,
+    "brute_force": 20,
+    "generated_tokens": 390,
+    "nominal_tokens": 7772,
+    "mismatches": 0,
+    "checked": 20,
+    "marked_units": []
+   },
+   "statement_level": {
+    "units": 1,
+    "products": 2,
+    "cells": 10,
+    "executions": 11,
+    "brute_force": 20,
+    "generated_tokens": 0,
+    "nominal_tokens": 4633,
+    "mismatches": 0,
+    "checked": 20,
+    "marked_units": [
+     0
+    ]
+   }
+  },
+  {
+   "lineage": "rq5_bird_metaharness_B3_s1",
+   "name_level": {
+    "units": 1,
+    "products": 2,
+    "cells": 10,
+    "executions": 20,
+    "brute_force": 20,
+    "generated_tokens": 688,
+    "nominal_tokens": 8694,
+    "mismatches": 0,
+    "checked": 20,
+    "marked_units": []
+   },
+   "statement_level": {
+    "units": 1,
+    "products": 2,
+    "cells": 10,
+    "executions": 19,
+    "brute_force": 20,
+    "generated_tokens": 0,
+    "nominal_tokens": 7830,
+    "mismatches": 0,
+    "checked": 20,
+    "marked_units": [
+     0
+    ]
+   }
+  },
+  {
+   "lineage": "rq5_bird_metaharness_B3_s3",
+   "name_level": {
+    "units": 2,
+    "products": 4,
+    "cells": 10,
+    "executions": 40,
+    "brute_force": 40,
+    "generated_tokens": 814,
+    "nominal_tokens": 16392,
+    "mismatches": 0,
+    "checked": 40,
+    "marked_units": []
+   },
+   "statement_level": {
+    "units": 2,
+    "products": 4,
+    "cells": 10,
+    "executions": 11,
+    "brute_force": 40,
+    "generated_tokens": 0,
+    "nominal_tokens": 5057,
+    "mismatches": 0,
+    "checked": 40,
+    "marked_units": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "lineage": "rq5_bird_metaharness_B3_s4",
+   "name_level": {
+    "units": 3,
+    "products": 8,
+    "cells": 10,
+    "executions": 80,
+    "brute_force": 80,
+    "generated_tokens": 0,
+    "nominal_tokens": 33422,
+    "mismatches": 0,
+    "checked": 80,
+    "marked_units": []
+   },
+   "statement_level": {
+    "units": 3,
+    "products": 8,
+    "cells": 10,
+    "executions": 80,
+    "brute_force": 80,
+    "generated_tokens": 0,
+    "nominal_tokens": 33422,
+    "mismatches": 0,
+    "checked": 80,
+    "marked_units": []
+   }
+  },
+  {
+   "lineage": "rq5_bird_metaharness_B4_s1",
+   "name_level": {
+    "units": 1,
+    "products": 2,
+    "cells": 10,
+    "executions": 20,
+    "brute_force": 20,
+    "generated_tokens": 0,
+    "nominal_tokens": 8006,
+    "mismatches": 0,
+    "checked": 20,
+    "marked_units": []
+   },
+   "statement_level": {
+    "units": 1,
+    "products": 2,
+    "cells": 10,
+    "executions": 20,
+    "brute_force": 20,
+    "generated_tokens": 0,
+    "nominal_tokens": 8006,
+    "mismatches": 0,
+    "checked": 20,
+    "marked_units": []
+   }
+  },
+  {
+   "lineage": "rq5_bird_metaharness_B4_s2",
+   "name_level": {
+    "units": 2,
+    "products": 4,
+    "cells": 10,
+    "executions": 19,
+    "brute_force": 40,
+    "generated_tokens": 0,
+    "nominal_tokens": 7142,
+    "mismatches": 0,
+    "checked": 40,
+    "marked_units": []
+   },
+   "statement_level": {
+    "units": 2,
+    "products": 4,
+    "cells": 10,
+    "executions": 19,
+    "brute_force": 40,
+    "generated_tokens": 0,
+    "nominal_tokens": 7142,
+    "mismatches": 0,
+    "checked": 40,
+    "marked_units": []
+   }
+  },
+  {
+   "lineage": "rq5_bird_metaharness_B4_s3",
+   "name_level": {
+    "units": 2,
+    "products": 4,
+    "cells": 10,
+    "executions": 40,
+    "brute_force": 40,
+    "generated_tokens": 762,
+    "nominal_tokens": 16288,
+    "mismatches": 0,
+    "checked": 40,
+    "marked_units": []
+   },
+   "statement_level": {
+    "units": 2,
+    "products": 4,
+    "cells": 10,
+    "executions": 40,
+    "brute_force": 40,
+    "generated_tokens": 0,
+    "nominal_tokens": 16288,
+    "mismatches": 0,
+    "checked": 40,
+    "marked_units": [
+     1
+    ]
+   }
+  },
+  {
+   "lineage": "rq5_bird_metaharness_B4_s4",
+   "name_level": {
+    "units": 2,
+    "products": 4,
+    "cells": 10,
+    "executions": 40,
+    "brute_force": 40,
+    "generated_tokens": 0,
+    "nominal_tokens": 16012,
+    "mismatches": 0,
+    "checked": 40,
+    "marked_units": []
+   },
+   "statement_level": {
+    "units": 2,
+    "products": 4,
+    "cells": 10,
+    "executions": 20,
+    "brute_force": 40,
+    "generated_tokens": 0,
+    "nominal_tokens": 8006,
+    "mismatches": 0,
+    "checked": 40,
+    "marked_units": [
+     0
+    ]
+   }
+  },
+  {
+   "lineage": "rq5s_bird_metaharness_B1_s1",
+   "name_level": {
+    "units": 3,
+    "products": 8,
+    "cells": 10,
+    "executions": 80,
+    "brute_force": 80,
+    "generated_tokens": 5979,
+    "nominal_tokens": 36256,
+    "mismatches": 0,
+    "checked": 80,
+    "marked_units": []
+   },
+   "statement_level": {
+    "units": 3,
+    "products": 8,
+    "cells": 10,
+    "executions": 46,
+    "brute_force": 80,
+    "generated_tokens": 0,
+    "nominal_tokens": 22984,
+    "mismatches": 0,
+    "checked": 80,
+    "marked_units": [
+     1
+    ]
+   }
+  },
+  {
+   "lineage": "rq5s_bird_metaharness_B1_s3",
+   "name_level": {
+    "units": 4,
+    "products": 16,
+    "cells": 10,
+    "executions": 146,
+    "brute_force": 160,
+    "generated_tokens": 0,
+    "nominal_tokens": 51952,
+    "mismatches": 0,
+    "checked": 160,
+    "marked_units": []
+   },
+   "statement_level": {
+    "units": 4,
+    "products": 16,
+    "cells": 10,
+    "executions": 146,
+    "brute_force": 160,
+    "generated_tokens": 0,
+    "nominal_tokens": 51952,
+    "mismatches": 0,
+    "checked": 160,
+    "marked_units": [
+     0,
+     2
+    ]
+   }
+  },
+  {
+   "lineage": "rq5s_bird_metaharness_B1_s4",
+   "name_level": {
+    "units": 5,
+    "products": 32,
+    "cells": 10,
+    "executions": 290,
+    "brute_force": 320,
+    "generated_tokens": 0,
+    "nominal_tokens": 110800,
+    "mismatches": 0,
+    "checked": 320,
+    "marked_units": []
+   },
+   "statement_level": {
+    "units": 5,
+    "products": 32,
+    "cells": 10,
+    "executions": 290,
+    "brute_force": 320,
+    "generated_tokens": 0,
+    "nominal_tokens": 110800,
+    "mismatches": 0,
+    "checked": 320,
+    "marked_units": [
+     1,
+     3
+    ]
+   }
+  },
+  {
+   "lineage": "rq5s_bird_metaharness_B1_s5",
+   "name_level": {
+    "units": 2,
+    "products": 4,
+    "cells": 10,
+    "executions": 40,
+    "brute_force": 40,
+    "generated_tokens": 3605,
+    "nominal_tokens": 16568,
+    "mismatches": 0,
+    "checked": 40,
+    "marked_units": []
+   },
+   "statement_level": {
+    "units": 2,
+    "products": 4,
+    "cells": 10,
+    "executions": 40,
+    "brute_force": 40,
+    "generated_tokens": 0,
+    "nominal_tokens": 16568,
+    "mismatches": 0,
+    "checked": 40,
+    "marked_units": [
+     1
+    ]
+   }
+  },
+  {
+   "lineage": "rq5s_bird_metaharness_B1_s6",
+   "name_level": {
+    "units": 3,
+    "products": 8,
+    "cells": 10,
+    "executions": 60,
+    "brute_force": 80,
+    "generated_tokens": 0,
+    "nominal_tokens": 19290,
+    "mismatches": 0,
+    "checked": 80,
+    "marked_units": []
+   },
+   "statement_level": {
+    "units": 3,
+    "products": 8,
+    "cells": 10,
+    "executions": 60,
+    "brute_force": 80,
+    "generated_tokens": 0,
+    "nominal_tokens": 19290,
+    "mismatches": 0,
+    "checked": 80,
+    "marked_units": [
+     1
+    ]
+   }
+  },
+  {
+   "lineage": "rq5s_bird_metaharness_B3_s1",
+   "name_level": {
+    "units": 3,
+    "products": 8,
+    "cells": 10,
+    "executions": 67,
+    "brute_force": 80,
+    "generated_tokens": 2911,
+    "nominal_tokens": 21501,
+    "mismatches": 0,
+    "checked": 80,
+    "marked_units": []
+   },
+   "statement_level": {
+    "units": 3,
+    "products": 8,
+    "cells": 10,
+    "executions": 67,
+    "brute_force": 80,
+    "generated_tokens": 0,
+    "nominal_tokens": 21501,
+    "mismatches": 0,
+    "checked": 80,
+    "marked_units": []
+   }
+  },
+  {
+   "lineage": "rq5s_bird_metaharness_B3_s2",
+   "name_level": {
+    "units": 2,
+    "products": 4,
+    "cells": 10,
+    "executions": 40,
+    "brute_force": 40,
+    "generated_tokens": 1394,
+    "nominal_tokens": 16750,
+    "mismatches": 0,
+    "checked": 40,
+    "marked_units": []
+   },
+   "statement_level": {
+    "units": 2,
+    "products": 4,
+    "cells": 10,
+    "executions": 40,
+    "brute_force": 40,
+    "generated_tokens": 0,
+    "nominal_tokens": 16750,
+    "mismatches": 0,
+    "checked": 40,
+    "marked_units": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "lineage": "rq5s_bird_metaharness_B3_s3",
+   "name_level": {
+    "units": 3,
+    "products": 8,
+    "cells": 10,
+    "executions": 80,
+    "brute_force": 80,
+    "generated_tokens": 3981,
+    "nominal_tokens": 31936,
+    "mismatches": 0,
+    "checked": 80,
+    "marked_units": []
+   },
+   "statement_level": {
+    "units": 3,
+    "products": 8,
+    "cells": 10,
+    "executions": 80,
+    "brute_force": 80,
+    "generated_tokens": 0,
+    "nominal_tokens": 31936,
+    "mismatches": 0,
+    "checked": 80,
+    "marked_units": [
+     1
+    ]
+   }
+  },
+  {
+   "lineage": "rq5s_bird_metaharness_B3_s4",
+   "name_level": {
+    "units": 1,
+    "products": 2,
+    "cells": 10,
+    "executions": 19,
+    "brute_force": 20,
+    "generated_tokens": 0,
+    "nominal_tokens": 7142,
+    "mismatches": 0,
+    "checked": 20,
+    "marked_units": []
+   },
+   "statement_level": {
+    "units": 1,
+    "products": 2,
+    "cells": 10,
+    "executions": 19,
+    "brute_force": 20,
+    "generated_tokens": 0,
+    "nominal_tokens": 7142,
+    "mismatches": 0,
+    "checked": 20,
+    "marked_units": []
+   }
+  },
+  {
+   "lineage": "rq5s_bird_metaharness_B3_s5",
+   "name_level": {
+    "units": 2,
+    "products": 4,
+    "cells": 10,
+    "executions": 39,
+    "brute_force": 40,
+    "generated_tokens": 5556,
+    "nominal_tokens": 16165,
+    "mismatches": 0,
+    "checked": 40,
+    "marked_units": []
+   },
+   "statement_level": {
+    "units": 2,
+    "products": 4,
+    "cells": 10,
+    "executions": 23,
+    "brute_force": 40,
+    "generated_tokens": 0,
+    "nominal_tokens": 10320,
+    "mismatches": 0,
+    "checked": 40,
+    "marked_units": [
+     1
+    ]
+   }
+  }
+ ]
+}

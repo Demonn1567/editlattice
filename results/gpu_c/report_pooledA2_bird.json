@@ -1,0 +1,269 @@
+{
+ "name": "pooledA2_bird",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "schema_text"
+   ],
+   "diff": "@@ seed lines 17-17\n-     \"\"\"Every user table with its columns and types.\"\"\"\n+     \"\"\"Every user table with its columns and types, using env.description() for structured format.\"\"\"\n",
+   "hunks": [
+    {
+     "start": 16,
+     "end": 17,
+     "replacement": [
+      "    \"\"\"Every user table with its columns and types, using env.description() for structured format.\"\"\"\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "items": [
+    "schema_text"
+   ],
+   "diff": "@@ seed lines 24-26\n-         info_columns, info_rows, info_truncated = env.execute(f'PRAGMA table_info(\"{table}\")', max_rows=200)\n-         described = \", \".join(f\"{info[1]} ({info[2]})\" for info in info_rows)\n-         lines.append(f\"Table {table}: {described}\")\n+         # Use env.description() to get structured column descriptions\n+         desc = env.description(table)\n+         if desc:\n+             lines.append(f\"Table {table}:\\n{desc}\")\n",
+   "hunks": [
+    {
+     "start": 23,
+     "end": 26,
+     "replacement": [
+      "        # Use env.description() to get structured column descriptions\n",
+      "        desc = env.description(table)\n",
+      "        if desc:\n",
+      "            lines.append(f\"Table {table}:\\n{desc}\")\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "items": [
+    "extract_sql"
+   ],
+   "diff": "@@ seed lines 31-37\n-     \"\"\"The last ```sql block, else the last code block, else the whole reply.\"\"\"\n-     if \"```sql\" in reply:\n-         return reply.rsplit(\"```sql\", 1)[1].split(\"```\", 1)[0].strip()\n-     if \"```\" in reply:\n-         parts = reply.split(\"```\")\n-         if len(parts) >= 3:\n-             return parts[-2].strip()\n+     \"\"\"Extract the last SQL block from the reply, preferring ```sql blocks.\"\"\"\n+     import re\n+     # Use regular expression to find all SQL code blocks\n+     sql_blocks = re.findall(r'```sql(.*?)```', reply, re.DOTALL)\n+     if sql_blocks:\n+         # Return the last SQL block, even if it's cut off\n+         return sql_blocks[-1].strip()\n+     # Fallback: find all code blocks (``` ... ```), extract their content\n+     code_blocks = re.findall(r'```()(.*?)```', reply, re.DOTALL)\n+     if code_blocks:\n+         return code_blocks[-1][1].strip()\n+     # Fallback: return the entire reply if no code blocks found\n",
+   "hunks": [
+    {
+     "start": 30,
+     "end": 37,
+     "replacement": [
+      "    \"\"\"Extract the last SQL block from the reply, preferring ```sql blocks.\"\"\"\n",
+      "    import re\n",
+      "    # Use regular expression to find all SQL code blocks\n",
+      "    sql_blocks = re.findall(r'```sql(.*?)```', reply, re.DOTALL)\n",
+      "    if sql_blocks:\n",
+      "        # Return the last SQL block, even if it's cut off\n",
+      "        return sql_blocks[-1].strip()\n",
+      "    # Fallback: find all code blocks (``` ... ```), extract their content\n",
+      "    code_blocks = re.findall(r'```()(.*?)```', reply, re.DOTALL)\n",
+      "    if code_blocks:\n",
+      "        return code_blocks[-1][1].strip()\n",
+      "    # Fallback: return the entire reply if no code blocks found\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 3,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 42-42\n-     prompt = f\"Database schema:\\n{schema_text(env)}\\n\\nQuestion: {task['question']}\\nHint: {task['evidence']}\"\n+     prompt = f\"Database schema:\\n{schema_text(env)}\\n\\nUse the schema information to construct a valid SQL query that answers the question.\\n\\nQuestion: {task['question']}\\nHint: {task['evidence']}\"\n",
+   "hunks": [
+    {
+     "start": 41,
+     "end": 42,
+     "replacement": [
+      "    prompt = f\"Database schema:\\n{schema_text(env)}\\n\\nUse the schema information to construct a valid SQL query that answers the question.\\n\\nQuestion: {task['question']}\\nHint: {task['evidence']}\"\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 4,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 42-42\n-     prompt = f\"Database schema:\\n{schema_text(env)}\\n\\nQuestion: {task['question']}\\nHint: {task['evidence']}\"\n+     prompt = f\"Database schema:\\n{schema_text(env)}\\n\\nQuestion: {task['question']}\\nHint: {task['evidence']}\\n\\nPlease generate an initial SQLite query. Then show the execution of the query using env.execute(sql, max_rows), inspect the results, and refine your query as needed. Provide the final query as your answer, including the execution step and refinement process.\"\n",
+   "hunks": [
+    {
+     "start": 41,
+     "end": 42,
+     "replacement": [
+      "    prompt = f\"Database schema:\\n{schema_text(env)}\\n\\nQuestion: {task['question']}\\nHint: {task['evidence']}\\n\\nPlease generate an initial SQLite query. Then show the execution of the query using env.execute(sql, max_rows), inspect the results, and refine your query as needed. Provide the final query as your answer, including the execution step and refinement process.\"\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 5,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 44-44\n-     return {\"answer\": extract_sql(reply)}\n+     sql = extract_sql(reply)\n+     columns, rows, truncated = env.execute(sql, max_rows=50)\n+     if rows:\n+         return {\"answer\": sql}\n+     else:\n+         feedback = f\"The query did not return results. Please refine your query based on the following information:\\n- Columns: {columns}\\n- Rows: {rows}\"\n+         new_prompt = f\"Database schema:\\n{schema_text(env)}\\n\\nQuestion: {task['question']}\\nHint: {task['evidence']}\\n\\n{feedback}\"\n+         refined_reply = llm.chat([{\"role\": \"system\", \"content\": SYSTEM_PROMPT}, {\"role\": \"user\", \"content\": new_prompt}])\n+         return {\"answer\": extract_sql(refined_reply)}\n",
+   "hunks": [
+    {
+     "start": 43,
+     "end": 44,
+     "replacement": [
+      "    sql = extract_sql(reply)\n",
+      "    columns, rows, truncated = env.execute(sql, max_rows=50)\n",
+      "    if rows:\n",
+      "        return {\"answer\": sql}\n",
+      "    else:\n",
+      "        feedback = f\"The query did not return results. Please refine your query based on the following information:\\n- Columns: {columns}\\n- Rows: {rows}\"\n",
+      "        new_prompt = f\"Database schema:\\n{schema_text(env)}\\n\\nQuestion: {task['question']}\\nHint: {task['evidence']}\\n\\n{feedback}\"\n",
+      "        refined_reply = llm.chat([{\"role\": \"system\", \"content\": SYSTEM_PROMPT}, {\"role\": \"user\", \"content\": new_prompt}])\n",
+      "        return {\"answer\": extract_sql(refined_reply)}\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 6,
+   "items": [
+    "SYSTEM_PROMPT"
+   ],
+   "diff": "@@ seed lines 12-12\n- Write one SQLite query that answers the user's question.\n+ \n+ Write a complete and correct SQLite query that answers the user's question. Your query should:\n+ 1. Select the required data\n+ 2. Use appropriate JOINs if needed\n+ 3. Apply WHERE conditions as needed\n+ 4. Use correct SQL syntax\n+ \n",
+   "hunks": [
+    {
+     "start": 11,
+     "end": 12,
+     "replacement": [
+      "\n",
+      "Write a complete and correct SQLite query that answers the user's question. Your query should:\n",
+      "1. Select the required data\n",
+      "2. Use appropriate JOINs if needed\n",
+      "3. Apply WHERE conditions as needed\n",
+      "4. Use correct SQL syntax\n",
+      "\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 7,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 42-42\n-     prompt = f\"Database schema:\\n{schema_text(env)}\\n\\nQuestion: {task['question']}\\nHint: {task['evidence']}\"\n+     prompt = f\"Database schema:\\n{schema_text(env)}\\n\\nColumn descriptions:\\n{env.description('client') if env.description('client') else 'N/A'}\\n{env.description('disp') if env.description('disp') else 'N/A'}\\n{env.description('district') if env.description('district') else 'N/A'}\\n{env.description('superhero') if env.description('superhero') else 'N/A'}\\n{env.description('colour') if env.description('colour') else 'N/A'}\\n{env.description('drivers') if env.description('drivers') else 'N/A'}\\n{env.description('qualifying') if env.description('qualifying') else 'N/A'}\\n{env.description('races') if env.description('races') else 'N/A'}\\n{env.description('Patient') if env.description('Patient') else 'N/A'}\\n{env.description('Laboratory') if env.description('Laboratory') else 'N/A'}\\n\\nDetailed column info:\\n{env.execute('PRAGMA table_info(client)')[1] if env.execute('PRAGMA table_info(client)')[1] else 'N/A'}\\n{env.execute('PRAGMA table_info(disp)')[1] if env.execute('PRAGMA table_info(disp)')[1] else 'N/A'}\\n{env.execute('PRAGMA table_info(district)')[1] if env.execute('PRAGMA table_info(district)')[1] else 'N/A'}\\n{env.execute('PRAGMA table_info(superhero)')[1] if env.execute('PRAGMA table_info(superhero)')[1] else 'N/A'}\\n{env.execute('PRAGMA table_info(colour)')[1] if env.execute('PRAGMA table_info(colour)')[1] else 'N/A'}\\n{env.execute('PRAGMA table_info(drivers)')[1] if env.execute('PRAGMA table_info(drivers)')[1] else 'N/A'}\\n{env.execute('PRAGMA table_info(qualifying)')[1] if env.execute('PRAGMA table_info(qualifying)')[1] else 'N/A'}\\n{env.execute('PRAGMA table_info(races)')[1] if env.execute('PRAGMA table_info(races)')[1] else 'N/A'}\\n{env.execute('PRAGMA table_info(Patient)')[1] if env.execute('PRAGMA table_info(Patient)')[1] else 'N/A'}\\n{env.execute('PRAGMA table_info(Laboratory)')[1] if env.execute('PRAGMA table_info(Laboratory)')[1] else 'N/A'}\\n\\nSQL Syntax Guidelines:\\n- Use BETWEEN for time ranges (e.g., Time BETWEEN '08:00:00' AND '09:00:00')\\n- Use WHERE with string comparisons (e.g., Diagnosis = 'RA')\\n- Use EXTRACT(YEAR FROM Birthday) for year extraction\\n- Use COUNT(CASE WHEN ... THEN 1 END) for conditional counting\\n- Use JOINs to combine related tables\\n- Use AS to give aliases to columns\\n\\nQuestion: {task['question']}\\nHint: {task['evidence']}\"\n",
+   "hunks": [
+    {
+     "start": 41,
+     "end": 42,
+     "replacement": [
+      "    prompt = f\"Database schema:\\n{schema_text(env)}\\n\\nColumn descriptions:\\n{env.description('client') if env.description('client') else 'N/A'}\\n{env.description('disp') if env.description('disp') else 'N/A'}\\n{env.description('district') if env.description('district') else 'N/A'}\\n{env.description('superhero') if env.description('superhero') else 'N/A'}\\n{env.description('colour') if env.description('colour') else 'N/A'}\\n{env.description('drivers') if env.description('drivers') else 'N/A'}\\n{env.description('qualifying') if env.description('qualifying') else 'N/A'}\\n{env.description('races') if env.description('races') else 'N/A'}\\n{env.description('Patient') if env.description('Patient') else 'N/A'}\\n{env.description('Laboratory') if env.description('Laboratory') else 'N/A'}\\n\\nDetailed column info:\\n{env.execute('PRAGMA table_info(client)')[1] if env.execute('PRAGMA table_info(client)')[1] else 'N/A'}\\n{env.execute('PRAGMA table_info(disp)')[1] if env.execute('PRAGMA table_info(disp)')[1] else 'N/A'}\\n{env.execute('PRAGMA table_info(district)')[1] if env.execute('PRAGMA table_info(district)')[1] else 'N/A'}\\n{env.execute('PRAGMA table_info(superhero)')[1] if env.execute('PRAGMA table_info(superhero)')[1] else 'N/A'}\\n{env.execute('PRAGMA table_info(colour)')[1] if env.execute('PRAGMA table_info(colour)')[1] else 'N/A'}\\n{env.execute('PRAGMA table_info(drivers)')[1] if env.execute('PRAGMA table_info(drivers)')[1] else 'N/A'}\\n{env.execute('PRAGMA table_info(qualifying)')[1] if env.execute('PRAGMA table_info(qualifying)')[1] else 'N/A'}\\n{env.execute('PRAGMA table_info(races)')[1] if env.execute('PRAGMA table_info(races)')[1] else 'N/A'}\\n{env.execute('PRAGMA table_info(Patient)')[1] if env.execute('PRAGMA table_info(Patient)')[1] else 'N/A'}\\n{env.execute('PRAGMA table_info(Laboratory)')[1] if env.execute('PRAGMA table_info(Laboratory)')[1] else 'N/A'}\\n\\nSQL Syntax Guidelines:\\n- Use BETWEEN for time ranges (e.g., Time BETWEEN '08:00:00' AND '09:00:00')\\n- Use WHERE with string comparisons (e.g., Diagnosis = 'RA')\\n- Use EXTRACT(YEAR FROM Birthday) for year extraction\\n- Use COUNT(CASE WHEN ... THEN 1 END) for conditional counting\\n- Use JOINs to combine related tables\\n- Use AS to give aliases to columns\\n\\nQuestion: {task['question']}\\nHint: {task['evidence']}\"\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 8,
+   "items": [
+    "schema_text"
+   ],
+   "diff": "@@ seed lines 17-17\n-     \"\"\"Every user table with its columns and types.\"\"\"\n+     \"\"\"Every user table with its columns and types and descriptions.\"\"\"\n",
+   "hunks": [
+    {
+     "start": 16,
+     "end": 17,
+     "replacement": [
+      "    \"\"\"Every user table with its columns and types and descriptions.\"\"\"\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 9,
+   "items": [
+    "schema_text"
+   ],
+   "diff": "@@ seed lines 26-26\n-         lines.append(f\"Table {table}: {described}\")\n+         desc = env.description(table)\n+         lines.append(f\"Table {table}: {described} | {desc}\")\n",
+   "hunks": [
+    {
+     "start": 25,
+     "end": 26,
+     "replacement": [
+      "        desc = env.description(table)\n",
+      "        lines.append(f\"Table {table}: {described} | {desc}\")\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 10,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 44-44\n-     return {\"answer\": extract_sql(reply)}\n+     sql = extract_sql(reply)\n+     columns, rows, truncated = env.execute(sql, max_rows=50)\n+     if not truncated and rows:\n+         return {\"answer\": sql}\n+     else:\n+         # Extract the actual SQL error message if it exists\n+         if columns and columns[0].startswith(\"SQLError:\"):\n+             error_msg = columns[0][len(\"SQLError: \"):]\n+         else:\n+             error_msg = \"Query executed but returned no rows.\"\n+         feedback = f\"Error: {error_msg}. Please revise your query.\"\n+         revised_prompt = f\"Database schema:\\n{schema_text(env)}\\n\\nQuestion: {task['question']}\\nHint: {task['evidence']}\\n\\nYour initial query was: {sql}\\n\\n{feedback}\"\n+         revised_reply = llm.chat([{\"role\": \"system\", \"content\": SYSTEM_PROMPT}, {\"role\": \"user\", \"content\": revised_prompt}])\n+         return {\"answer\": extract_sql(revised_reply)}\n",
+   "hunks": [
+    {
+     "start": 43,
+     "end": 44,
+     "replacement": [
+      "    sql = extract_sql(reply)\n",
+      "    columns, rows, truncated = env.execute(sql, max_rows=50)\n",
+      "    if not truncated and rows:\n",
+      "        return {\"answer\": sql}\n",
+      "    else:\n",
+      "        # Extract the actual SQL error message if it exists\n",
+      "        if columns and columns[0].startswith(\"SQLError:\"):\n",
+      "            error_msg = columns[0][len(\"SQLError: \"):]\n",
+      "        else:\n",
+      "            error_msg = \"Query executed but returned no rows.\"\n",
+      "        feedback = f\"Error: {error_msg}. Please revise your query.\"\n",
+      "        revised_prompt = f\"Database schema:\\n{schema_text(env)}\\n\\nQuestion: {task['question']}\\nHint: {task['evidence']}\\n\\nYour initial query was: {sql}\\n\\n{feedback}\"\n",
+      "        revised_reply = llm.chat([{\"role\": \"system\", \"content\": SYSTEM_PROMPT}, {\"role\": \"user\", \"content\": revised_prompt}])\n",
+      "        return {\"answer\": extract_sql(revised_reply)}\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {},
+ "rq4": [],
+ "rq5": {
+  "pool": [
+   "metaharness_B1_s1.log.jsonl",
+   "metaharness_B1_s3.log.jsonl",
+   "metaharness_B3_s1.log.jsonl",
+   "metaharness_B3_s2.log.jsonl",
+   "metaharness_B3_s3.log.jsonl",
+   "metaharness_B3_s4.log.jsonl"
+  ],
+  "best_pooled_product": [
+   5,
+   6,
+   7,
+   9
+  ],
+  "best_single_run": 3,
+  "single_final_product": [
+   6,
+   7
+  ],
+  "search": {
+   "pooled": 0.3625,
+   "single": 0.3375
+  },
+  "heldout": {
+   "pooled": 0.3316582914572864,
+   "single": 0.3442211055276382,
+   "all_single": {
+    "0": 0.24874371859296482,
+    "1": 0.2914572864321608,
+    "2": 0.30778894472361806,
+    "3": 0.3442211055276382,
+    "4": 0.31155778894472363,
+    "5": 0.30527638190954776
+   }
+  },
+  "difference": -0.012562814070351758,
+  "ci": [
+   -0.038944723618090454,
+   0.01507537688442211
+  ],
+  "superior_certified": false,
+  "pairs_used": 796
+ }
+}

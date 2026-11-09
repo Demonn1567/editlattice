@@ -1,0 +1,56 @@
+{
+ "prior": {
+  "lattices": 40,
+  "units_min": 1,
+  "units_max": 5,
+  "executions": 2387,
+  "brute_force": 2720,
+  "generated_tokens": 27939,
+  "nominal_tokens": 926865
+ },
+ "planted": {
+  "lattices": 12,
+  "units_min": 4,
+  "units_max": 4,
+  "executions": 28730,
+  "brute_force": 66560,
+  "generated_tokens": 485631,
+  "nominal_tokens": 6339246
+ },
+ "constructed": {
+  "lattices": 18,
+  "units_min": 3,
+  "units_max": 3,
+  "executions": 83200,
+  "brute_force": 83200,
+  "generated_tokens": 12307913,
+  "nominal_tokens": 28081864
+ },
+ "evolved": {
+  "lattices": 166,
+  "units_min": 1,
+  "units_max": 4,
+  "executions": 296292,
+  "brute_force": 316944,
+  "generated_tokens": 32637772,
+  "nominal_tokens": 72937258
+ },
+ "pooled": {
+  "lattices": 20,
+  "units_min": 6,
+  "units_max": 13,
+  "executions": 1795984,
+  "brute_force": 1813384,
+  "generated_tokens": 22085559,
+  "nominal_tokens": 338795921
+ },
+ "branched": {
+  "lattices": 4,
+  "units_min": 12,
+  "units_max": 12,
+  "executions": 8662,
+  "brute_force": 6619136,
+  "generated_tokens": 3214042,
+  "nominal_tokens": 4610435
+ }
+}

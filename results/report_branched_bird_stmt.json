@@ -1,0 +1,1502 @@
+{
+ "name": "branched_bird_stmt",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "SYSTEM_PROMPT"
+   ],
+   "diff": "@@ seed lines 16-15\n+ Quote table and column names that contain spaces or punctuation with double quotes.\n",
+   "hunks": [
+    {
+     "start": 15,
+     "end": 15,
+     "replacement": [
+      "Quote table and column names that contain spaces or punctuation with double quotes.\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "items": [
+    "schema_text"
+   ],
+   "diff": "@@ seed lines 28-28\n-         described = \", \".join(f\"{info[1]} ({info[2]})\" for info in info_rows)\n+         described = \", \".join(f\"{info[1]} ({info[2]}{', primary key' if info[5] else ''})\" for info in info_rows)\n",
+   "hunks": [
+    {
+     "start": 27,
+     "end": 28,
+     "replacement": [
+      "        described = \", \".join(f\"{info[1]} ({info[2]}{', primary key' if info[5] else ''})\" for info in info_rows)\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "items": [
+    "error_feedback"
+   ],
+   "diff": "@@ seed lines 50-50\n-         return f\"The query failed: {message}\"\n+         return (f\"The query failed: {message}. Use only column names listed in the schema, attach each column to the table \"\n+                 \"that has it, and quote names that contain spaces or punctuation with double quotes.\")\n",
+   "hunks": [
+    {
+     "start": 49,
+     "end": 50,
+     "replacement": [
+      "        return (f\"The query failed: {message}. Use only column names listed in the schema, attach each column to the table \"\n",
+      "                \"that has it, and quote names that contain spaces or punctuation with double quotes.\")\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 3,
+   "items": [
+    "error_feedback"
+   ],
+   "diff": "@@ seed lines 52-52\n-         return f\"The query failed: {message}\"\n+         return f\"The query failed: {message}. Use the exact table names of the schema, quoted with double quotes if needed.\"\n",
+   "hunks": [
+    {
+     "start": 51,
+     "end": 52,
+     "replacement": [
+      "        return f\"The query failed: {message}. Use the exact table names of the schema, quoted with double quotes if needed.\"\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 4,
+   "items": [
+    "error_feedback"
+   ],
+   "diff": "@@ seed lines 54-54\n-         return f\"The query failed: {message}\"\n+         return f\"The query failed: {message}. Give every table an alias and prefix every column with its table's alias.\"\n",
+   "hunks": [
+    {
+     "start": 53,
+     "end": 54,
+     "replacement": [
+      "        return f\"The query failed: {message}. Give every table an alias and prefix every column with its table's alias.\"\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 5,
+   "items": [
+    "error_feedback"
+   ],
+   "diff": "@@ seed lines 56-56\n-         return f\"The query failed: {message}\"\n+         return (f\"The query failed: {message}. SQLite has no YEAR, MONTH, DATEDIFF or CONCAT; use STRFTIME, JULIANDAY, \"\n+                 \"SUBSTR, CAST and the || operator instead.\")\n",
+   "hunks": [
+    {
+     "start": 55,
+     "end": 56,
+     "replacement": [
+      "        return (f\"The query failed: {message}. SQLite has no YEAR, MONTH, DATEDIFF or CONCAT; use STRFTIME, JULIANDAY, \"\n",
+      "                \"SUBSTR, CAST and the || operator instead.\")\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 6,
+   "items": [
+    "error_feedback"
+   ],
+   "diff": "@@ seed lines 58-58\n-         return f\"The query failed: {message}\"\n+         return (f\"The query failed: {message}. Aggregates cannot appear in WHERE; filter groups with HAVING, or compute \"\n+                 \"the aggregate in a subquery.\")\n",
+   "hunks": [
+    {
+     "start": 57,
+     "end": 58,
+     "replacement": [
+      "        return (f\"The query failed: {message}. Aggregates cannot appear in WHERE; filter groups with HAVING, or compute \"\n",
+      "                \"the aggregate in a subquery.\")\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 7,
+   "items": [
+    "error_feedback"
+   ],
+   "diff": "@@ seed lines 60-60\n-         return f\"The query failed: {message}\"\n+         return (f\"The query failed: {message}. Check that every quote and parenthesis is closed; string values take single \"\n+                 \"quotes and names take double quotes.\")\n",
+   "hunks": [
+    {
+     "start": 59,
+     "end": 60,
+     "replacement": [
+      "        return (f\"The query failed: {message}. Check that every quote and parenthesis is closed; string values take single \"\n",
+      "                \"quotes and names take double quotes.\")\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 8,
+   "items": [
+    "error_feedback"
+   ],
+   "diff": "@@ seed lines 62-62\n-         return f\"The query failed: {message}\"\n+         return (f\"The query failed: {message}. Write standard SQLite: LIMIT instead of TOP, no square brackets, and one \"\n+                 \"statement only.\")\n",
+   "hunks": [
+    {
+     "start": 61,
+     "end": 62,
+     "replacement": [
+      "        return (f\"The query failed: {message}. Write standard SQLite: LIMIT instead of TOP, no square brackets, and one \"\n",
+      "                \"statement only.\")\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 9,
+   "items": [
+    "error_feedback"
+   ],
+   "diff": "@@ seed lines 64-64\n-     return f\"The query failed: {message}\"\n+     return f\"The query failed: {message}. Read the error, compare the query with the schema and simplify it.\"\n",
+   "hunks": [
+    {
+     "start": 63,
+     "end": 64,
+     "replacement": [
+      "    return f\"The query failed: {message}. Read the error, compare the query with the schema and simplify it.\"\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 10,
+   "items": [
+    "result_feedback"
+   ],
+   "diff": "@@ seed lines 70-70\n-         return \"The query returned no rows.\"\n+         return (\"The query returned no rows. Check the literal values against the example rows and the hint: case, \"\n+                 \"spelling, date format and units must match the stored data.\")\n",
+   "hunks": [
+    {
+     "start": 69,
+     "end": 70,
+     "replacement": [
+      "        return (\"The query returned no rows. Check the literal values against the example rows and the hint: case, \"\n",
+      "                \"spelling, date format and units must match the stored data.\")\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 11,
+   "items": [
+    "result_feedback"
+   ],
+   "diff": "@@ seed lines 72-72\n-         return \"The query returned only NULL values.\"\n+         return (\"The query returned only NULL values. Check the join conditions and the column you select; an aggregate \"\n+                 \"over no matching rows returns NULL.\")\n",
+   "hunks": [
+    {
+     "start": 71,
+     "end": 72,
+     "replacement": [
+      "        return (\"The query returned only NULL values. Check the join conditions and the column you select; an aggregate \"\n",
+      "                \"over no matching rows returns NULL.\")\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {
+  "search": {
+   "seed": 0.4125,
+   "full": 0.37083333333333335,
+   "shapley": {
+    "0": {
+     "value": -0.022569444444444677,
+     "low": -0.06458333333333374,
+     "high": 0.026041666666666605,
+     "p": 0.33
+    },
+    "1": {
+     "value": 0.005208333333333435,
+     "low": -0.038194444444444496,
+     "high": 0.05416666666666608,
+     "p": 0.878
+    },
+    "2": {
+     "value": -0.023958333333333453,
+     "low": -0.054861111111110764,
+     "high": -0.00138888888888888,
+     "p": 0.042
+    },
+    "3": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "4": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "5": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "6": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "8": {
+     "value": -0.0020833333333333173,
+     "low": -0.009027777777777895,
+     "high": 0.0027777777777777896,
+     "p": 0.624
+    },
+    "9": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "10": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "11": {
+     "value": 0.0017361111111111017,
+     "low": 0.0,
+     "high": 0.005208333333333434,
+     "p": 0.736
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": -0.03680555555555578,
+     "low": -0.09444444444444437,
+     "high": 0.013194444444444425,
+     "p": 0.174
+    },
+    "0,2": {
+     "value": 0.0027777777777777566,
+     "low": -0.02013888888888887,
+     "high": 0.029166666666666653,
+     "p": 0.872
+    },
+    "0,3": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "0,4": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "0,5": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "0,6": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "0,7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "0,8": {
+     "value": 0.010416666666666637,
+     "low": 0.0,
+     "high": 0.02500000000000028,
+     "p": 0.1
+    },
+    "0,9": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "0,10": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "0,11": {
+     "value": -0.0013888888888888926,
+     "low": -0.004166666666666682,
+     "high": 0.0,
+     "p": 0.736
+    },
+    "1,2": {
+     "value": 0.0006944444444444329,
+     "low": -0.017361111111111268,
+     "high": 0.01944444444444445,
+     "p": 0.937
+    },
+    "1,3": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,4": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,5": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,6": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,8": {
+     "value": -0.0020833333333332704,
+     "low": -0.008333333333333368,
+     "high": 0.004166666666666687,
+     "p": 0.627
+    },
+    "1,9": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,10": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,11": {
+     "value": 0.0006944444444444428,
+     "low": 0.0,
+     "high": 0.002083333333333338,
+     "p": 0.736
+    },
+    "2,3": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,4": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,5": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,6": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,8": {
+     "value": 3.238150488490036e-17,
+     "low": -2.775557561562887e-17,
+     "high": 2.7755575615628944e-17,
+     "p": 1.0
+    },
+    "2,9": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,10": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,11": {
+     "value": -0.0034722222222222225,
+     "low": -0.010416666666666807,
+     "high": 0.0,
+     "p": 0.736
+    },
+    "3,4": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3,5": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3,6": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3,7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3,8": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3,9": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3,10": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "4,5": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "4,6": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "4,7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "4,8": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "4,9": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "4,10": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "4,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "5,6": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "5,7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "5,8": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "5,9": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "5,10": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "5,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "6,7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "6,8": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "6,9": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "6,10": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "6,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "7,8": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "7,9": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "7,10": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "7,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "8,9": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "8,10": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "8,11": {
+     "value": -1.387778780781447e-17,
+     "low": -1.8503717077085914e-17,
+     "high": 1.8503717077085914e-17,
+     "p": 1.0
+    },
+    "9,10": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "9,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "10,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "matters": {
+    "2": false,
+    "0": false,
+    "8": false,
+    "11": false,
+    "1": false,
+    "3": false,
+    "4": false,
+    "5": false,
+    "6": false,
+    "7": false,
+    "9": false,
+    "10": false
+   },
+   "interacts": {
+    "0,8": false,
+    "0,1": false,
+    "1,8": false,
+    "0,11": false,
+    "1,11": false,
+    "2,11": false,
+    "0,2": false,
+    "1,2": false,
+    "0,3": false,
+    "0,4": false,
+    "0,5": false,
+    "0,6": false,
+    "0,7": false,
+    "0,9": false,
+    "0,10": false,
+    "1,3": false,
+    "1,4": false,
+    "1,5": false,
+    "1,6": false,
+    "1,7": false,
+    "1,9": false,
+    "1,10": false,
+    "2,3": false,
+    "2,4": false,
+    "2,5": false,
+    "2,6": false,
+    "2,7": false,
+    "2,8": false,
+    "2,9": false,
+    "2,10": false,
+    "3,4": false,
+    "3,5": false,
+    "3,6": false,
+    "3,7": false,
+    "3,8": false,
+    "3,9": false,
+    "3,10": false,
+    "3,11": false,
+    "4,5": false,
+    "4,6": false,
+    "4,7": false,
+    "4,8": false,
+    "4,9": false,
+    "4,10": false,
+    "4,11": false,
+    "5,6": false,
+    "5,7": false,
+    "5,8": false,
+    "5,9": false,
+    "5,10": false,
+    "5,11": false,
+    "6,7": false,
+    "6,8": false,
+    "6,9": false,
+    "6,10": false,
+    "6,11": false,
+    "7,8": false,
+    "7,9": false,
+    "7,10": false,
+    "7,11": false,
+    "8,9": false,
+    "8,10": false,
+    "8,11": false,
+    "9,10": false,
+    "9,11": false,
+    "10,11": false
+   },
+   "loo": {
+    "0": -0.029166666666666674,
+    "1": -0.008333333333333304,
+    "2": -0.020833333333333315,
+    "3": 0.0,
+    "4": 0.0,
+    "5": 0.0,
+    "6": 0.0,
+    "7": 0.0,
+    "8": 0.004166666666666707,
+    "9": 0.0,
+    "10": 0.0,
+    "11": 0.0
+   },
+   "loi": {
+    "0": -0.004166666666666652,
+    "1": 0.029166666666666674,
+    "2": -0.020833333333333315,
+    "3": 0.0,
+    "4": 0.0,
+    "5": 0.0,
+    "6": 0.0,
+    "7": 0.0,
+    "8": -0.004166666666666652,
+    "9": 0.0,
+    "10": 0.0,
+    "11": 0.004166666666666707
+   }
+  },
+  "heldout": {
+   "seed": 0.36809045226130654,
+   "full": 0.3454773869346734,
+   "shapley": {
+    "0": {
+     "value": -0.023764656616415518,
+     "low": -0.04868090452261291,
+     "high": -0.0021984924623115643,
+     "p": 0.025
+    },
+    "1": {
+     "value": 0.0013609715242880991,
+     "low": -0.018425460636515876,
+     "high": 0.022822445561138632,
+     "p": 0.894
+    },
+    "2": {
+     "value": -0.0027219430485761957,
+     "low": -0.010050251256281591,
+     "high": 0.004606365159128939,
+     "p": 0.459
+    },
+    "3": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "4": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "5": {
+     "value": -0.0010469011725293231,
+     "low": -0.00408291457286439,
+     "high": 0.0009422110552763747,
+     "p": 0.753
+    },
+    "6": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "8": {
+     "value": 0.0018844221105527902,
+     "low": -0.0014656616415410543,
+     "high": 0.007642378559464126,
+     "p": 0.671
+    },
+    "9": {
+     "value": 0.0006281407035176014,
+     "low": 0.0,
+     "high": 0.0018844221105527728,
+     "p": 0.728
+    },
+    "10": {
+     "value": 0.0010469011725293095,
+     "low": -0.005234505862646632,
+     "high": 0.009003350083752106,
+     "p": 0.768
+    },
+    "11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": -0.0180067001675042,
+     "low": -0.045016750418760625,
+     "high": 0.008375209380234495,
+     "p": 0.186
+    },
+    "0,2": {
+     "value": -0.001256281407035168,
+     "low": -0.01381909547738714,
+     "high": 0.010050251256281473,
+     "p": 0.901
+    },
+    "0,3": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "0,4": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "0,5": {
+     "value": 0.0023031825795644953,
+     "low": 0.0,
+     "high": 0.005862646566164124,
+     "p": 0.279
+    },
+    "0,6": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "0,7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "0,8": {
+     "value": 0.003559463986599648,
+     "low": 0.0004187604690117212,
+     "high": 0.007537688442211051,
+     "p": 0.041
+    },
+    "0,9": {
+     "value": 1.3877787807814455e-17,
+     "low": -1.3877787807814455e-17,
+     "high": 1.480297366166875e-17,
+     "p": 1.0
+    },
+    "0,10": {
+     "value": 0.004606365159128984,
+     "low": -0.0014656616415410343,
+     "high": 0.013819095477386889,
+     "p": 0.195
+    },
+    "0,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,2": {
+     "value": 0.0025125628140703557,
+     "low": -0.005025125628140742,
+     "high": 0.010678391959798913,
+     "p": 0.512
+    },
+    "1,3": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,4": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,5": {
+     "value": -0.002093802345058606,
+     "low": -0.005653266331658279,
+     "high": 0.0,
+     "p": 0.279
+    },
+    "1,6": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,8": {
+     "value": -0.0020938023450586415,
+     "low": -0.006281407035175766,
+     "high": 0.0008375209380234515,
+     "p": 0.283
+    },
+    "1,9": {
+     "value": 0.0012562814070352128,
+     "low": 0.0,
+     "high": 0.0037688442211055067,
+     "p": 0.728
+    },
+    "1,10": {
+     "value": 0.0008375209380234475,
+     "low": -0.0018844221105527653,
+     "high": 0.0037688442211055275,
+     "p": 0.52
+    },
+    "1,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,3": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,4": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,5": {
+     "value": -1.8503717077085907e-18,
+     "low": -1.4802973661668775e-17,
+     "high": 1.665334536937734e-17,
+     "p": 1.0
+    },
+    "2,6": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "2,8": {
+     "value": 1.3877787807814455e-17,
+     "low": -1.9428902930940275e-17,
+     "high": 2.035408878479458e-17,
+     "p": 1.0
+    },
+    "2,9": {
+     "value": 1.2027416100105863e-17,
+     "low": -1.5728159515523057e-17,
+     "high": 1.4802973661668763e-17,
+     "p": 1.0
+    },
+    "2,10": {
+     "value": 2.7755575615628923e-18,
+     "low": -2.0354088784794535e-17,
+     "high": 2.1279274638648906e-17,
+     "p": 1.0
+    },
+    "2,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3,4": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3,5": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3,6": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3,7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3,8": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3,9": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3,10": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "3,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "4,5": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "4,6": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "4,7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "4,8": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "4,9": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "4,10": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "4,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "5,6": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "5,7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "5,8": {
+     "value": -0.0006281407035175752,
+     "low": -0.0018844221105527724,
+     "high": 1.1102230246251577e-17,
+     "p": 0.529
+    },
+    "5,9": {
+     "value": -4.81482486096809e-35,
+     "low": -4.6259292692714784e-18,
+     "high": 4.625929269271481e-18,
+     "p": 1.0
+    },
+    "5,10": {
+     "value": 0.0016750418760469142,
+     "low": -2.775557561562888e-18,
+     "high": 0.0050251256281407175,
+     "p": 0.61
+    },
+    "5,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "6,7": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "6,8": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "6,9": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "6,10": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "6,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "7,8": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "7,9": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "7,10": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "7,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "8,9": {
+     "value": -1.2027416100105912e-17,
+     "low": -1.295260195396016e-17,
+     "high": 1.3877787807814455e-17,
+     "p": 1.0
+    },
+    "8,10": {
+     "value": 0.0004187604690117341,
+     "low": -1.2027416100105868e-17,
+     "high": 0.0012562814070351913,
+     "p": 0.387
+    },
+    "8,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "9,10": {
+     "value": -4.81482486096809e-35,
+     "low": -1.3877787807814457e-17,
+     "high": 1.4802973661668763e-17,
+     "p": 1.0
+    },
+    "9,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "10,11": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "matters": {
+    "0": false,
+    "2": false,
+    "8": false,
+    "9": false,
+    "5": false,
+    "10": false,
+    "1": false,
+    "3": false,
+    "4": false,
+    "6": false,
+    "7": false,
+    "11": false
+   },
+   "interacts": {
+    "0,8": false,
+    "0,1": false,
+    "0,10": false,
+    "0,5": false,
+    "1,5": false,
+    "1,8": false,
+    "8,10": false,
+    "1,2": false,
+    "1,10": false,
+    "5,8": false,
+    "5,10": false,
+    "1,9": false,
+    "0,2": false,
+    "0,3": false,
+    "0,4": false,
+    "0,6": false,
+    "0,7": false,
+    "0,9": false,
+    "0,11": false,
+    "1,3": false,
+    "1,4": false,
+    "1,6": false,
+    "1,7": false,
+    "1,11": false,
+    "2,3": false,
+    "2,4": false,
+    "2,5": false,
+    "2,6": false,
+    "2,7": false,
+    "2,8": false,
+    "2,9": false,
+    "2,10": false,
+    "2,11": false,
+    "3,4": false,
+    "3,5": false,
+    "3,6": false,
+    "3,7": false,
+    "3,8": false,
+    "3,9": false,
+    "3,10": false,
+    "3,11": false,
+    "4,5": false,
+    "4,6": false,
+    "4,7": false,
+    "4,8": false,
+    "4,9": false,
+    "4,10": false,
+    "4,11": false,
+    "5,6": false,
+    "5,7": false,
+    "5,9": false,
+    "5,11": false,
+    "6,7": false,
+    "6,8": false,
+    "6,9": false,
+    "6,10": false,
+    "6,11": false,
+    "7,8": false,
+    "7,9": false,
+    "7,10": false,
+    "7,11": false,
+    "8,9": false,
+    "8,11": false,
+    "9,10": false,
+    "9,11": false,
+    "10,11": false
+   },
+   "loo": {
+    "0": -0.027638190954773822,
+    "1": -0.006281407035175879,
+    "2": -0.002512562814070307,
+    "3": 0.0,
+    "4": 0.0,
+    "5": 0.0,
+    "6": 0.0,
+    "7": 0.0,
+    "8": 0.0025125628140703626,
+    "9": 0.001256281407035209,
+    "10": 0.006281407035175879,
+    "11": 0.0
+   },
+   "loi": {
+    "0": -0.018844221105527637,
+    "1": 0.011306532663316549,
+    "2": -0.003768844221105516,
+    "3": 0.0,
+    "4": 0.0,
+    "5": -0.001256281407035209,
+    "6": 0.0,
+    "7": 0.0,
+    "8": 0.0012562814070351536,
+    "9": 0.0,
+    "10": -0.001256281407035209,
+    "11": 0.0
+   }
+  },
+  "overfitting_units": []
+ },
+ "rq4": [
+  {
+   "delta": 0.02,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4096,
+   "search_value": 0.4125,
+   "heldout_value": 0.36809045226130654,
+   "heldout_full": 0.3454773869346734,
+   "certified": true,
+   "pairs_used": 432
+  },
+  {
+   "delta": 0.02,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 79,
+   "search_value": 0.4125,
+   "heldout_value": 0.36809045226130654,
+   "heldout_full": 0.3454773869346734,
+   "certified": true,
+   "pairs_used": 432
+  },
+  {
+   "delta": 0.02,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 5,
+   "search_value": 0.4125,
+   "heldout_value": 0.36809045226130654,
+   "heldout_full": 0.3454773869346734,
+   "certified": true,
+   "pairs_used": 432
+  },
+  {
+   "delta": 0.02,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 15,
+   "search_value": 0.4125,
+   "heldout_value": 0.36809045226130654,
+   "heldout_full": 0.3454773869346734,
+   "certified": true,
+   "pairs_used": 432
+  },
+  {
+   "delta": 0.02,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4096,
+   "search_value": 0.4125,
+   "heldout_value": 0.36809045226130654,
+   "heldout_full": 0.3454773869346734,
+   "certified": true,
+   "pairs_used": 432
+  },
+  {
+   "delta": 0.05,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4096,
+   "search_value": 0.4125,
+   "heldout_value": 0.36809045226130654,
+   "heldout_full": 0.3454773869346734,
+   "certified": true,
+   "pairs_used": 233
+  },
+  {
+   "delta": 0.05,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 79,
+   "search_value": 0.4125,
+   "heldout_value": 0.36809045226130654,
+   "heldout_full": 0.3454773869346734,
+   "certified": true,
+   "pairs_used": 233
+  },
+  {
+   "delta": 0.05,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 5,
+   "search_value": 0.4125,
+   "heldout_value": 0.36809045226130654,
+   "heldout_full": 0.3454773869346734,
+   "certified": true,
+   "pairs_used": 233
+  },
+  {
+   "delta": 0.05,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 15,
+   "search_value": 0.4125,
+   "heldout_value": 0.36809045226130654,
+   "heldout_full": 0.3454773869346734,
+   "certified": true,
+   "pairs_used": 233
+  },
+  {
+   "delta": 0.05,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4096,
+   "search_value": 0.4125,
+   "heldout_value": 0.36809045226130654,
+   "heldout_full": 0.3454773869346734,
+   "certified": true,
+   "pairs_used": 233
+  }
+ ],
+ "rq5": null
+}

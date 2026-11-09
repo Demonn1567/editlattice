@@ -1,0 +1,24 @@
+[project]
+name = "editlattice"
+version = "0.1.0"
+description = "Attribution, distillation and recombination of self-evolved agent harness lineages"
+requires-python = ">=3.11"
+dependencies = [
+    "httpx>=0.27",
+    "pyyaml>=6.0",
+    "numpy>=1.26",
+    "scipy>=1.13",
+    "pytest>=8.0",
+    "matplotlib>=3.8",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/editlattice"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

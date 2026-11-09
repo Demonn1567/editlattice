@@ -1,0 +1,317 @@
+{
+ "rows": [
+  {
+   "lineage": "constructed_lcb",
+   "benchmark": "lcb",
+   "units": 3,
+   "marked": [
+    1
+   ],
+   "cells": 240,
+   "products": 8,
+   "executions_statement": 1920,
+   "executions_name": 1920,
+   "outcomes_differing": 6
+  },
+  {
+   "lineage": "phaseA2_bird_metaharness_B1_s1",
+   "benchmark": "bird",
+   "units": 4,
+   "marked": [
+    0,
+    3
+   ],
+   "cells": 240,
+   "products": 16,
+   "executions_statement": 3840,
+   "executions_name": 3840,
+   "outcomes_differing": 0
+  },
+  {
+   "lineage": "phaseA2_bird_metaharness_B1_s3",
+   "benchmark": "bird",
+   "units": 1,
+   "marked": [
+    0
+   ],
+   "cells": 240,
+   "products": 2,
+   "executions_statement": 480,
+   "executions_name": 480,
+   "outcomes_differing": 0
+  },
+  {
+   "lineage": "phaseA2_bird_metaharness_B3_s2",
+   "benchmark": "bird",
+   "units": 2,
+   "marked": [
+    1
+   ],
+   "cells": 240,
+   "products": 4,
+   "executions_statement": 960,
+   "executions_name": 960,
+   "outcomes_differing": 0
+  },
+  {
+   "lineage": "phaseA2_bird_metaharness_B3_s3",
+   "benchmark": "bird",
+   "units": 2,
+   "marked": [
+    0
+   ],
+   "cells": 240,
+   "products": 4,
+   "executions_statement": 960,
+   "executions_name": 960,
+   "outcomes_differing": 0
+  },
+  {
+   "lineage": "phaseA2_gsmhard_metaharness_B1_s3",
+   "benchmark": "gsmhard",
+   "units": 2,
+   "marked": [
+    0
+   ],
+   "cells": 240,
+   "products": 4,
+   "executions_statement": 960,
+   "executions_name": 960,
+   "outcomes_differing": 0
+  },
+  {
+   "lineage": "phaseA2_gsmhard_metaharness_B3_s1",
+   "benchmark": "gsmhard",
+   "units": 2,
+   "marked": [
+    0
+   ],
+   "cells": 240,
+   "products": 4,
+   "executions_statement": 960,
+   "executions_name": 960,
+   "outcomes_differing": 0
+  },
+  {
+   "lineage": "phaseA2_lcb_metaharness_B1_s1",
+   "benchmark": "lcb",
+   "units": 2,
+   "marked": [
+    0,
+    1
+   ],
+   "cells": 240,
+   "products": 4,
+   "executions_statement": 480,
+   "executions_name": 960,
+   "outcomes_differing": 0
+  },
+  {
+   "lineage": "phaseA2_lcb_metaharness_B1_s4",
+   "benchmark": "lcb",
+   "units": 2,
+   "marked": [
+    0
+   ],
+   "cells": 240,
+   "products": 4,
+   "executions_statement": 960,
+   "executions_name": 960,
+   "outcomes_differing": 0
+  },
+  {
+   "lineage": "phaseA2_lcb_metaharness_B3_s3",
+   "benchmark": "lcb",
+   "units": 3,
+   "marked": [
+    0,
+    1,
+    2
+   ],
+   "cells": 240,
+   "products": 8,
+   "executions_statement": 960,
+   "executions_name": 1920,
+   "outcomes_differing": 0
+  },
+  {
+   "lineage": "phaseA_bird_metaharness_B1_s3",
+   "benchmark": "bird",
+   "units": 2,
+   "marked": [
+    0
+   ],
+   "cells": 240,
+   "products": 4,
+   "executions_statement": 960,
+   "executions_name": 960,
+   "outcomes_differing": 0
+  },
+  {
+   "lineage": "phaseA_bird_metaharness_B3_s3",
+   "benchmark": "bird",
+   "units": 4,
+   "marked": [
+    3
+   ],
+   "cells": 240,
+   "products": 16,
+   "executions_statement": 3840,
+   "executions_name": 3840,
+   "outcomes_differing": 0
+  },
+  {
+   "lineage": "phaseA_gsmhard_metaharness_B1_s1",
+   "benchmark": "gsmhard",
+   "units": 2,
+   "marked": [
+    0
+   ],
+   "cells": 240,
+   "products": 4,
+   "executions_statement": 960,
+   "executions_name": 960,
+   "outcomes_differing": 0
+  },
+  {
+   "lineage": "phaseA_gsmhard_metaharness_B3_s1",
+   "benchmark": "gsmhard",
+   "units": 1,
+   "marked": [
+    0
+   ],
+   "cells": 240,
+   "products": 2,
+   "executions_statement": 241,
+   "executions_name": 480,
+   "outcomes_differing": 0
+  },
+  {
+   "lineage": "phaseA_gsmhard_metaharness_B3_s2",
+   "benchmark": "gsmhard",
+   "units": 2,
+   "marked": [
+    0
+   ],
+   "cells": 240,
+   "products": 4,
+   "executions_statement": 960,
+   "executions_name": 960,
+   "outcomes_differing": 0
+  },
+  {
+   "lineage": "phaseA_gsmhard_metaharness_B3_s3",
+   "benchmark": "gsmhard",
+   "units": 2,
+   "marked": [
+    0
+   ],
+   "cells": 240,
+   "products": 4,
+   "executions_statement": 960,
+   "executions_name": 960,
+   "outcomes_differing": 0
+  },
+  {
+   "lineage": "phaseA_lcb_metaharness_B1_s1",
+   "benchmark": "lcb",
+   "units": 2,
+   "marked": [
+    1
+   ],
+   "cells": 240,
+   "products": 4,
+   "executions_statement": 960,
+   "executions_name": 960,
+   "outcomes_differing": 4
+  },
+  {
+   "lineage": "phaseA_lcb_metaharness_B1_s2",
+   "benchmark": "lcb",
+   "units": 3,
+   "marked": [
+    2
+   ],
+   "cells": 240,
+   "products": 8,
+   "executions_statement": 960,
+   "executions_name": 960,
+   "outcomes_differing": 0
+  },
+  {
+   "lineage": "phaseA_lcb_metaharness_B1_s3",
+   "benchmark": "lcb",
+   "units": 3,
+   "marked": [
+    2
+   ],
+   "cells": 240,
+   "products": 8,
+   "executions_statement": 1920,
+   "executions_name": 1920,
+   "outcomes_differing": 1
+  },
+  {
+   "lineage": "phaseA_lcb_metaharness_B1_s4",
+   "benchmark": "lcb",
+   "units": 3,
+   "marked": [
+    1
+   ],
+   "cells": 240,
+   "products": 8,
+   "executions_statement": 1920,
+   "executions_name": 1920,
+   "outcomes_differing": 4
+  },
+  {
+   "lineage": "phaseA_lcb_metaharness_B3_s2",
+   "benchmark": "lcb",
+   "units": 3,
+   "marked": [
+    1
+   ],
+   "cells": 240,
+   "products": 8,
+   "executions_statement": 1920,
+   "executions_name": 1920,
+   "outcomes_differing": 0
+  },
+  {
+   "lineage": "phaseA_lcb_metaharness_B3_s4",
+   "benchmark": "lcb",
+   "units": 1,
+   "marked": [
+    0
+   ],
+   "cells": 240,
+   "products": 2,
+   "executions_statement": 480,
+   "executions_name": 480,
+   "outcomes_differing": 0
+  },
+  {
+   "lineage": "planted_gpu",
+   "benchmark": "gsmhard",
+   "units": 4,
+   "marked": [
+    1
+   ],
+   "cells": 240,
+   "products": 16,
+   "executions_statement": 1670,
+   "executions_name": 1686,
+   "outcomes_differing": 0,
+   "note": "clean rerun after DEC-13 (first run built by duplicate processes)"
+  }
+ ],
+ "summary": {
+  "lineages": 23,
+  "executions_statement": 30231,
+  "executions_name": 31926,
+  "product_cells": 35040,
+  "differing": 15,
+  "differing_lcb": 15,
+  "product_cells_lcb": 14880
+ }
+}

@@ -1,0 +1,10 @@
+{
+ "gain": 0.03823529411764706,
+ "low": 0.0058823529411764705,
+ "high": 0.07352941176470588,
+ "seed_accuracy": 0.13823529411764707,
+ "final_accuracy": 0.17647058823529413,
+ "real_gain": true,
+ "lattice": "phaseA3_lcb_metaharness_B1_s2_llama_awq_stmt_heldout.json",
+ "cells": 340
+}

@@ -1,0 +1,202 @@
+{
+ "name": "phaseA3_lcb_metaharness_B3_s3_stmt",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 29-29\n-     prompt = f\"Problem: {task['title']}\\n\\n{task['question']}\"\n+     prompt = f\"\"\"Problem: {task['title']}\\n\\n{task['question']}\\n\\n\n+     Write a complete Python 3 program that:\n+     1. Reads input from standard input\n+     2. Processes the input to compute the correct answer\n+     3. Prints the answer to standard output\n+     4. Must pass all provided public test cases\n+     5. Must be enclosed in triple backticks (```python ... ```) to be properly formatted\n+     \n+     Public tests:\n+     \"\"\" + \"\\n\".join([f\"Input: {test['input']}\\nOutput: {test['output']}\" for test in task['public_tests']])\n",
+   "hunks": [
+    {
+     "start": 28,
+     "end": 29,
+     "replacement": [
+      "    prompt = f\"\"\"Problem: {task['title']}\\n\\n{task['question']}\\n\\n\n",
+      "    Write a complete Python 3 program that:\n",
+      "    1. Reads input from standard input\n",
+      "    2. Processes the input to compute the correct answer\n",
+      "    3. Prints the answer to standard output\n",
+      "    4. Must pass all provided public test cases\n",
+      "    5. Must be enclosed in triple backticks (```python ... ```) to be properly formatted\n",
+      "    \n",
+      "    Public tests:\n",
+      "    \"\"\" + \"\\n\".join([f\"Input: {test['input']}\\nOutput: {test['output']}\" for test in task['public_tests']])\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {
+  "search": {
+   "seed": 0.19583333333333333,
+   "full": 0.2125,
+   "shapley": {
+    "0": {
+     "value": 0.016666666666666663,
+     "low": -0.024999999999999994,
+     "high": 0.05833333333333335,
+     "p": 0.497
+    }
+   },
+   "interaction": {},
+   "matters": {
+    "0": false
+   },
+   "interacts": {},
+   "loo": {
+    "0": 0.016666666666666663
+   },
+   "loi": {
+    "0": 0.016666666666666663
+   }
+  },
+  "heldout": {
+   "seed": 0.25588235294117645,
+   "full": 0.26176470588235295,
+   "shapley": {
+    "0": {
+     "value": 0.005882352941176505,
+     "low": -0.032352941176470584,
+     "high": 0.04411764705882354,
+     "p": 0.848
+    }
+   },
+   "interaction": {},
+   "matters": {
+    "0": false
+   },
+   "interacts": {},
+   "loo": {
+    "0": 0.005882352941176505
+   },
+   "loi": {
+    "0": 0.005882352941176505
+   }
+  },
+  "overfitting_units": []
+ },
+ "rq4": [
+  {
+   "delta": 0.02,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.25588235294117645,
+   "heldout_full": 0.26176470588235295,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.25588235294117645,
+   "heldout_full": 0.26176470588235295,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.25588235294117645,
+   "heldout_full": 0.26176470588235295,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.25588235294117645,
+   "heldout_full": 0.26176470588235295,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.25588235294117645,
+   "heldout_full": 0.26176470588235295,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.05,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.25588235294117645,
+   "heldout_full": 0.26176470588235295,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.05,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.25588235294117645,
+   "heldout_full": 0.26176470588235295,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.05,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.25588235294117645,
+   "heldout_full": 0.26176470588235295,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.05,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.25588235294117645,
+   "heldout_full": 0.26176470588235295,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.05,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.25588235294117645,
+   "heldout_full": 0.26176470588235295,
+   "certified": false,
+   "pairs_used": 340
+  }
+ ],
+ "rq5": null
+}

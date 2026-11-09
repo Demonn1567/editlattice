@@ -1,0 +1,162 @@
+{
+ "name": "pooledA4_gsmhard",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "extract_answer"
+   ],
+   "diff": "@@ seed lines 16-16\n-         return reply.rsplit(\"Answer:\", 1)[1].strip()\n+         answer_part = reply.rsplit(\"Answer:\", 1)[1].strip()\n+         if answer_part.startswith(\"\\\\boxed{\"):\n+             answer_part = answer_part[8:-1]\n+         return answer_part\n",
+   "hunks": [
+    {
+     "start": 15,
+     "end": 16,
+     "replacement": [
+      "        answer_part = reply.rsplit(\"Answer:\", 1)[1].strip()\n",
+      "        if answer_part.startswith(\"\\\\boxed{\"):\n",
+      "            answer_part = answer_part[8:-1]\n",
+      "        return answer_part\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "items": [
+    "extract_answer"
+   ],
+   "diff": "@@ seed lines 14-14\n-     \"\"\"Text after the last 'Answer:', else the whole reply.\"\"\"\n+     \"\"\"Extract the numeric answer from the last line of the reply using regex.\"\"\"\n",
+   "hunks": [
+    {
+     "start": 13,
+     "end": 14,
+     "replacement": [
+      "    \"\"\"Extract the numeric answer from the last line of the reply using regex.\"\"\"\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "items": [
+    "extract_answer"
+   ],
+   "diff": "@@ seed lines 17-17\n-     return reply.strip()\n+     lines = reply.strip().split('\\n')\n+     if not lines:\n+         return ''\n+     last_line = lines[-1]\n+     match = re.search(r'([-+]?\\d*\\.?\\d+[\\d]*)', last_line)\n+     if match:\n+         return match.group(1)\n+     return ''\n",
+   "hunks": [
+    {
+     "start": 16,
+     "end": 17,
+     "replacement": [
+      "    lines = reply.strip().split('\\n')\n",
+      "    if not lines:\n",
+      "        return ''\n",
+      "    last_line = lines[-1]\n",
+      "    match = re.search(r'([-+]?\\d*\\.?\\d+[\\d]*)', last_line)\n",
+      "    if match:\n",
+      "        return match.group(1)\n",
+      "    return ''\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 3,
+   "items": [
+    "extract_answer"
+   ],
+   "diff": "@@ seed lines 14-16\n-     \"\"\"Text after the last 'Answer:', else the whole reply.\"\"\"\n-     if \"Answer:\" in reply:\n-         return reply.rsplit(\"Answer:\", 1)[1].strip()\n+     \"\"\"Text after the last 'Answer:', else the whole reply. Cleans numeric formatting.\"\"\"\n+     if \"Final answer:\" in reply:\n+         answer_str = reply.rsplit(\"Answer:\", 1)[1].strip()\n+         # Clean answer by removing non-digit characters and allowing only decimal points\n+         clean_answer = ''.join(c for c in answer_str if c.isdigit() or c == '.')\n+         return clean_answer\n",
+   "hunks": [
+    {
+     "start": 13,
+     "end": 16,
+     "replacement": [
+      "    \"\"\"Text after the last 'Answer:', else the whole reply. Cleans numeric formatting.\"\"\"\n",
+      "    if \"Final answer:\" in reply:\n",
+      "        answer_str = reply.rsplit(\"Answer:\", 1)[1].strip()\n",
+      "        # Clean answer by removing non-digit characters and allowing only decimal points\n",
+      "        clean_answer = ''.join(c for c in answer_str if c.isdigit() or c == '.')\n",
+      "        return clean_answer\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 4,
+   "items": [
+    "extract_answer"
+   ],
+   "diff": "@@ seed lines 14-14\n-     \"\"\"Text after the last 'Answer:', else the whole reply.\"\"\"\n+     \"\"\"Extract answer from last line or 'Answer:' prefix.\"\"\"\n+     # Check for 'Answer:' prefix\n",
+   "hunks": [
+    {
+     "start": 13,
+     "end": 14,
+     "replacement": [
+      "    \"\"\"Extract answer from last line or 'Answer:' prefix.\"\"\"\n",
+      "    # Check for 'Answer:' prefix\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 5,
+   "items": [
+    "extract_answer"
+   ],
+   "diff": "@@ seed lines 17-16\n+     # Check for LaTeX boxed answers like $$\\boxed{...}$$\n+     import re\n+     match = re.search(r'\\$\\$(?:\\s*boxed\\s*{([^}]*)}\\s*)\\$\\$', reply)\n+     if match:\n+         return match.group(1).strip()\n+     # Fallback to last line if it looks like a number (including decimals)\n+     lines = reply.strip().split('\\n')\n+     last_line = lines[-1].strip()\n+     if re.fullmatch(r'[-+]?\\d*\\.?\\d+', last_line):\n+         return last_line\n",
+   "hunks": [
+    {
+     "start": 16,
+     "end": 16,
+     "replacement": [
+      "    # Check for LaTeX boxed answers like $$\\boxed{...}$$\n",
+      "    import re\n",
+      "    match = re.search(r'\\$\\$(?:\\s*boxed\\s*{([^}]*)}\\s*)\\$\\$', reply)\n",
+      "    if match:\n",
+      "        return match.group(1).strip()\n",
+      "    # Fallback to last line if it looks like a number (including decimals)\n",
+      "    lines = reply.strip().split('\\n')\n",
+      "    last_line = lines[-1].strip()\n",
+      "    if re.fullmatch(r'[-+]?\\d*\\.?\\d+', last_line):\n",
+      "        return last_line\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {},
+ "rq4": [],
+ "rq5": {
+  "pool": [
+   "metaharness_B1_s1.log.jsonl",
+   "metaharness_B1_s3.log.jsonl",
+   "metaharness_B3_s1.log.jsonl",
+   "metaharness_B3_s3.log.jsonl"
+  ],
+  "best_pooled_product": [],
+  "best_single_run": 0,
+  "single_final_product": [
+   0
+  ],
+  "search": {
+   "pooled": 0.5666666666666667,
+   "single": 0.5666666666666667
+  },
+  "heldout": {
+   "pooled": 0.58125,
+   "single": 0.58125,
+   "all_single": {
+    "0": 0.58125,
+    "1": 0.58,
+    "2": 0.58125,
+    "3": 0.58125
+   }
+  },
+  "difference": 0.0,
+  "ci": [
+   0.0,
+   0.0
+  ],
+  "superior_certified": false,
+  "pairs_used": 800
+ }
+}

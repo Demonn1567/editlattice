@@ -1,0 +1,28 @@
+# Phase A2 gain pilot (pre-registered addendum 2026-10-28): 14B proposer via tunnel, prompt v2.
+experiment: gain_pilot2_bird
+benchmark: bird
+seed_harness: src/editlattice/seed_harnesses/bird_oneshot.py
+n_search: 60
+n_validation: 40
+n_streams: 1000
+k_char: 4
+max_iterations: 30
+total_budget_runs: 2500
+proposers: [metaharness]
+gates:
+- name: B1
+- name: B3
+  repeats: 2
+seeds: [1, 2, 3, 4]
+parallel_jobs: 8
+seed_mode: request
+backend: {name: vllm-local, base_url: http://localhost:8000/v1, model: Qwen/Qwen3-4B-AWQ}
+proposer_backend: {name: mlx-mac-tunnel, base_url: http://localhost:8101/v1, model: mlx-community/Qwen3-14B-4bit, max_in_flight: 1, timeout_seconds: 900}
+params: {temperature: 0.7, top_p: 0.95, max_tokens: 768, chat_template_kwargs: {enable_thinking: false}}
+proposer_params: {temperature: 0.7, top_p: 0.95, max_tokens: 3072, chat_template_kwargs: {enable_thinking: false}}
+max_llm_calls: 12
+tuned_choices:
+  B1: gate_greedy()
+  B3: gate_self_harness(repeats=2)
+proposer_prompt_version: 2
+proposer_accept_diff: true

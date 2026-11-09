@@ -1,0 +1,282 @@
+{
+ "name": "phaseA3_bird_metaharness_B1_s1_stmt",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "SYSTEM_PROMPT"
+   ],
+   "diff": "@@ seed lines 12-12\n- Write one SQLite query that answers the user's question.\n+ Write one SQLite query that answers the user's question. Use JOINs where needed to combine related tables.\n+ Use SQLite-specific functions:\n+ - Extract year from date: strftime('%Y', dob)\n+ - Arithmetic: use / for division, not DIVIDE()\n+ When using aggregate functions like MAX or MIN in the WHERE clause, wrap them in a subquery.\n+ To find the second-highest value, use a subquery with ORDER BY and LIMIT, e.g.:\n+     (SELECT A15 FROM district ORDER BY A15 DESC LIMIT 1 OFFSET 1)\n+ Always complete SQL clauses (e.g., BETWEEN, IN) and use exact column/table names from the schema.\n",
+   "hunks": [
+    {
+     "start": 11,
+     "end": 12,
+     "replacement": [
+      "Write one SQLite query that answers the user's question. Use JOINs where needed to combine related tables.\n",
+      "Use SQLite-specific functions:\n",
+      "- Extract year from date: strftime('%Y', dob)\n",
+      "- Arithmetic: use / for division, not DIVIDE()\n",
+      "When using aggregate functions like MAX or MIN in the WHERE clause, wrap them in a subquery.\n",
+      "To find the second-highest value, use a subquery with ORDER BY and LIMIT, e.g.:\n",
+      "    (SELECT A15 FROM district ORDER BY A15 DESC LIMIT 1 OFFSET 1)\n",
+      "Always complete SQL clauses (e.g., BETWEEN, IN) and use exact column/table names from the schema.\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "items": [
+    "schema_text"
+   ],
+   "diff": "@@ seed lines 25-25\n-         described = \", \".join(f\"{info[1]} ({info[2]})\" for info in info_rows)\n+         described = \", \".join(f'\"{info[1]}\" ({info[2]})' for info in info_rows)\n",
+   "hunks": [
+    {
+     "start": 24,
+     "end": 25,
+     "replacement": [
+      "        described = \", \".join(f'\"{info[1]}\" ({info[2]})' for info in info_rows)\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {
+  "search": {
+   "seed": 0.25,
+   "full": 0.3458333333333333,
+   "shapley": {
+    "0": {
+     "value": 0.0625,
+     "low": -0.002083333333333326,
+     "high": 0.12916666666666668,
+     "p": 0.061
+    },
+    "1": {
+     "value": 0.033333333333333326,
+     "low": -0.012500000000000011,
+     "high": 0.08333333333333334,
+     "p": 0.179
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": 0.04166666666666663,
+     "low": -0.004166666666666652,
+     "high": 0.0958333333333333,
+     "p": 0.079
+    }
+   },
+   "matters": {
+    "0": false,
+    "1": false
+   },
+   "interacts": {
+    "0,1": false
+   },
+   "loo": {
+    "0": 0.08333333333333331,
+    "1": 0.05416666666666664
+   },
+   "loi": {
+    "0": 0.041666666666666685,
+    "1": 0.012500000000000011
+   }
+  },
+  "heldout": {
+   "seed": 0.2864321608040201,
+   "full": 0.33291457286432163,
+   "shapley": {
+    "0": {
+     "value": 0.03329145728643218,
+     "low": 0.0012562814070351813,
+     "high": 0.06532663316582915,
+     "p": 0.038
+    },
+    "1": {
+     "value": 0.013190954773869334,
+     "low": -0.011306532663316604,
+     "high": 0.03706030150753771,
+     "p": 0.315
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": -0.0012562814070351536,
+     "low": -0.04145728643216076,
+     "high": 0.03643216080402012,
+     "p": 0.964
+    }
+   },
+   "matters": {
+    "0": false,
+    "1": false
+   },
+   "interacts": {
+    "0,1": false
+   },
+   "loo": {
+    "0": 0.0326633165829146,
+    "1": 0.012562814070351758
+   },
+   "loi": {
+    "0": 0.03391959798994976,
+    "1": 0.013819095477386911
+   }
+  },
+  "overfitting_units": []
+ },
+ "rq4": [
+  {
+   "delta": 0.02,
+   "method": "exact",
+   "product": [
+    0,
+    1
+   ],
+   "units_kept": 2,
+   "queries": 4,
+   "search_value": 0.3458333333333333,
+   "heldout_value": 0.33291457286432163,
+   "heldout_full": 0.33291457286432163,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "greedy_backward",
+   "product": [
+    0,
+    1
+   ],
+   "units_kept": 2,
+   "queries": 3,
+   "search_value": 0.3458333333333333,
+   "heldout_value": 0.33291457286432163,
+   "heldout_full": 0.33291457286432163,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "ddmin",
+   "product": [
+    0,
+    1
+   ],
+   "units_kept": 2,
+   "queries": 3,
+   "search_value": 0.3458333333333333,
+   "heldout_value": 0.33291457286432163,
+   "heldout_full": 0.33291457286432163,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "loo_threshold",
+   "product": [
+    0,
+    1
+   ],
+   "units_kept": 2,
+   "queries": 6,
+   "search_value": 0.3458333333333333,
+   "heldout_value": 0.33291457286432163,
+   "heldout_full": 0.33291457286432163,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "shapley_threshold",
+   "product": [
+    0,
+    1
+   ],
+   "units_kept": 2,
+   "queries": 4,
+   "search_value": 0.3458333333333333,
+   "heldout_value": 0.33291457286432163,
+   "heldout_full": 0.33291457286432163,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.05,
+   "method": "exact",
+   "product": [
+    0,
+    1
+   ],
+   "units_kept": 2,
+   "queries": 4,
+   "search_value": 0.3458333333333333,
+   "heldout_value": 0.33291457286432163,
+   "heldout_full": 0.33291457286432163,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "greedy_backward",
+   "product": [
+    0,
+    1
+   ],
+   "units_kept": 2,
+   "queries": 3,
+   "search_value": 0.3458333333333333,
+   "heldout_value": 0.33291457286432163,
+   "heldout_full": 0.33291457286432163,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "ddmin",
+   "product": [
+    0,
+    1
+   ],
+   "units_kept": 2,
+   "queries": 3,
+   "search_value": 0.3458333333333333,
+   "heldout_value": 0.33291457286432163,
+   "heldout_full": 0.33291457286432163,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "loo_threshold",
+   "product": [
+    0,
+    1
+   ],
+   "units_kept": 2,
+   "queries": 6,
+   "search_value": 0.3458333333333333,
+   "heldout_value": 0.33291457286432163,
+   "heldout_full": 0.33291457286432163,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "shapley_threshold",
+   "product": [
+    0,
+    1
+   ],
+   "units_kept": 2,
+   "queries": 4,
+   "search_value": 0.3458333333333333,
+   "heldout_value": 0.33291457286432163,
+   "heldout_full": 0.33291457286432163,
+   "certified": true,
+   "pairs_used": 121
+  }
+ ],
+ "rq5": null
+}

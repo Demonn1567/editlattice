@@ -1,0 +1,285 @@
+{
+ "name": "phaseA4_bird_metaharness_B3_s3_stmt",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "schema_text"
+   ],
+   "diff": "@@ seed lines 17-17\n-     \"\"\"Every user table with its columns and types.\"\"\"\n+     \"\"\"Every user table with its columns, types, and descriptions.\"\"\"\n",
+   "hunks": [
+    {
+     "start": 16,
+     "end": 17,
+     "replacement": [
+      "    \"\"\"Every user table with its columns, types, and descriptions.\"\"\"\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "items": [
+    "schema_text"
+   ],
+   "diff": "@@ seed lines 25-26\n-         described = \", \".join(f\"{info[1]} ({info[2]})\" for info in info_rows)\n-         lines.append(f\"Table {table}: {described}\")\n+         # Get column descriptions from BIRD's CSV\n+         desc_csv = env.description(table)\n+         desc_lines = desc_csv.strip().split('\\n') if desc_csv else []\n+         desc_dict = {}\n+         for line in desc_lines:\n+             if ',' in line:\n+                 parts = line.split(',', 1)\n+                 if len(parts) >= 2:\n+                     col_name = parts[0].strip()\n+                     desc = parts[1].strip()\n+                     desc_dict[col_name] = desc\n+         described = []\n+         for info in info_rows:\n+             col_name = info[1]\n+             col_type = info[2]\n+             desc = desc_dict.get(col_name, \"No description available\")\n+             described.append(f\"{col_name} ({col_type}) - {desc}\")\n+         described_str = \", \".join(described)\n+         lines.append(f\"Table {table}: {described_str}\")\n",
+   "hunks": [
+    {
+     "start": 24,
+     "end": 26,
+     "replacement": [
+      "        # Get column descriptions from BIRD's CSV\n",
+      "        desc_csv = env.description(table)\n",
+      "        desc_lines = desc_csv.strip().split('\\n') if desc_csv else []\n",
+      "        desc_dict = {}\n",
+      "        for line in desc_lines:\n",
+      "            if ',' in line:\n",
+      "                parts = line.split(',', 1)\n",
+      "                if len(parts) >= 2:\n",
+      "                    col_name = parts[0].strip()\n",
+      "                    desc = parts[1].strip()\n",
+      "                    desc_dict[col_name] = desc\n",
+      "        described = []\n",
+      "        for info in info_rows:\n",
+      "            col_name = info[1]\n",
+      "            col_type = info[2]\n",
+      "            desc = desc_dict.get(col_name, \"No description available\")\n",
+      "            described.append(f\"{col_name} ({col_type}) - {desc}\")\n",
+      "        described_str = \", \".join(described)\n",
+      "        lines.append(f\"Table {table}: {described_str}\")\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {
+  "search": {
+   "seed": 0.2375,
+   "full": 0.3375,
+   "shapley": {
+    "0": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1": {
+     "value": 0.10000000000000003,
+     "low": 0.037500000000000006,
+     "high": 0.1708333333333333,
+     "p": 0.0
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "matters": {
+    "1": true,
+    "0": false
+   },
+   "interacts": {
+    "0,1": false
+   },
+   "loo": {
+    "0": 0.0,
+    "1": 0.10000000000000003
+   },
+   "loi": {
+    "0": 0.0,
+    "1": 0.10000000000000003
+   }
+  },
+  "heldout": {
+   "seed": 0.2889447236180904,
+   "full": 0.32160804020100503,
+   "shapley": {
+    "0": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1": {
+     "value": 0.0326633165829146,
+     "low": -0.007537688442211032,
+     "high": 0.07286432160804024,
+     "p": 0.12
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "matters": {
+    "1": false,
+    "0": false
+   },
+   "interacts": {
+    "0,1": false
+   },
+   "loo": {
+    "0": 0.0,
+    "1": 0.0326633165829146
+   },
+   "loi": {
+    "0": 0.0,
+    "1": 0.0326633165829146
+   }
+  },
+  "overfitting_units": [
+   "1"
+  ]
+ },
+ "rq4": [
+  {
+   "delta": 0.02,
+   "method": "exact",
+   "product": [
+    1
+   ],
+   "units_kept": 1,
+   "queries": 4,
+   "search_value": 0.3375,
+   "heldout_value": 0.32160804020100503,
+   "heldout_full": 0.32160804020100503,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "greedy_backward",
+   "product": [
+    1
+   ],
+   "units_kept": 1,
+   "queries": 4,
+   "search_value": 0.3375,
+   "heldout_value": 0.32160804020100503,
+   "heldout_full": 0.32160804020100503,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "ddmin",
+   "product": [
+    1
+   ],
+   "units_kept": 1,
+   "queries": 4,
+   "search_value": 0.3375,
+   "heldout_value": 0.32160804020100503,
+   "heldout_full": 0.32160804020100503,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "loo_threshold",
+   "product": [
+    1
+   ],
+   "units_kept": 1,
+   "queries": 6,
+   "search_value": 0.3375,
+   "heldout_value": 0.32160804020100503,
+   "heldout_full": 0.32160804020100503,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "shapley_threshold",
+   "product": [
+    1
+   ],
+   "units_kept": 1,
+   "queries": 4,
+   "search_value": 0.3375,
+   "heldout_value": 0.32160804020100503,
+   "heldout_full": 0.32160804020100503,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.05,
+   "method": "exact",
+   "product": [
+    1
+   ],
+   "units_kept": 1,
+   "queries": 4,
+   "search_value": 0.3375,
+   "heldout_value": 0.32160804020100503,
+   "heldout_full": 0.32160804020100503,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "greedy_backward",
+   "product": [
+    1
+   ],
+   "units_kept": 1,
+   "queries": 4,
+   "search_value": 0.3375,
+   "heldout_value": 0.32160804020100503,
+   "heldout_full": 0.32160804020100503,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "ddmin",
+   "product": [
+    1
+   ],
+   "units_kept": 1,
+   "queries": 4,
+   "search_value": 0.3375,
+   "heldout_value": 0.32160804020100503,
+   "heldout_full": 0.32160804020100503,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "loo_threshold",
+   "product": [
+    1
+   ],
+   "units_kept": 1,
+   "queries": 6,
+   "search_value": 0.3375,
+   "heldout_value": 0.32160804020100503,
+   "heldout_full": 0.32160804020100503,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "shapley_threshold",
+   "product": [
+    1
+   ],
+   "units_kept": 1,
+   "queries": 4,
+   "search_value": 0.3375,
+   "heldout_value": 0.32160804020100503,
+   "heldout_full": 0.32160804020100503,
+   "certified": true,
+   "pairs_used": 121
+  }
+ ],
+ "rq5": null
+}

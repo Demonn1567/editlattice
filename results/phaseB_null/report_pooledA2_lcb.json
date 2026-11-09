@@ -1,0 +1,268 @@
+{
+ "name": "pooledA2_lcb",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "extract_code"
+   ],
+   "diff": "@@ seed lines 20-20\n-         return reply.rsplit(\"```python\", 1)[1].split(\"```\", 1)[0].strip()\n+         return reply.split(\"```python\", 1)[1].split(\"```\", 1)[0].strip()\n",
+   "hunks": [
+    {
+     "start": 19,
+     "end": 20,
+     "replacement": [
+      "        return reply.split(\"```python\", 1)[1].split(\"```\", 1)[0].strip()\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "items": [
+    "extract_code"
+   ],
+   "diff": "@@ seed lines 24-24\n-             return parts[-2].strip()\n+             return parts[2].strip()\n",
+   "hunks": [
+    {
+     "start": 23,
+     "end": 24,
+     "replacement": [
+      "            return parts[2].strip()\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "items": [
+    "extract_code"
+   ],
+   "diff": "@@ seed lines 18-24\n-     \"\"\"The last ```python block, else the last code block, else None.\"\"\"\n-     if \"```python\" in reply:\n-         return reply.rsplit(\"```python\", 1)[1].split(\"```\", 1)[0].strip()\n-     if \"```\" in reply:\n-         parts = reply.split(\"```\")\n-         if len(parts) >= 3:\n-             return parts[-2].strip()\n+     \"\"\"Extract the last code block from the reply, regardless of language.\"\"\"\n+     code_blocks = []\n+     in_code_block = False\n+     current_block = []\n+ \n+     for line in reply.splitlines():\n+         if line.startswith(\"```\"):\n+             if in_code_block:\n+                 code_blocks.append(\"\\n\".join(current_block))\n+                 current_block = []\n+             in_code_block = not in_code_block\n+         elif in_code_block:\n+             current_block.append(line)\n+ \n+     if in_code_block and current_block:\n+         code_blocks.append(\"\\n\".join(current_block))\n+     # Handle the case where the reply ends inside a code block\n+     if in_code_block:\n+         code_blocks.append(\"\\n\".join(current_block))\n+ \n+     if code_blocks:\n+         return code_blocks[-1].strip()\n",
+   "hunks": [
+    {
+     "start": 17,
+     "end": 24,
+     "replacement": [
+      "    \"\"\"Extract the last code block from the reply, regardless of language.\"\"\"\n",
+      "    code_blocks = []\n",
+      "    in_code_block = False\n",
+      "    current_block = []\n",
+      "\n",
+      "    for line in reply.splitlines():\n",
+      "        if line.startswith(\"```\"):\n",
+      "            if in_code_block:\n",
+      "                code_blocks.append(\"\\n\".join(current_block))\n",
+      "                current_block = []\n",
+      "            in_code_block = not in_code_block\n",
+      "        elif in_code_block:\n",
+      "            current_block.append(line)\n",
+      "\n",
+      "    if in_code_block and current_block:\n",
+      "        code_blocks.append(\"\\n\".join(current_block))\n",
+      "    # Handle the case where the reply ends inside a code block\n",
+      "    if in_code_block:\n",
+      "        code_blocks.append(\"\\n\".join(current_block))\n",
+      "\n",
+      "    if code_blocks:\n",
+      "        return code_blocks[-1].strip()\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 3,
+   "items": [
+    "extract_code"
+   ],
+   "diff": "@@ seed lines 18-18\n-     \"\"\"The last ```python block, else the last code block, else None.\"\"\"\n+     \"\"\"Extract the last Python code block from the reply.\"\"\"\n",
+   "hunks": [
+    {
+     "start": 17,
+     "end": 18,
+     "replacement": [
+      "    \"\"\"Extract the last Python code block from the reply.\"\"\"\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 4,
+   "items": [
+    "extract_code"
+   ],
+   "diff": "@@ seed lines 20-20\n-         return reply.rsplit(\"```python\", 1)[1].split(\"```\", 1)[0].strip()\n+         # Extract the last ```python block\n+         code_blocks = reply.split(\"```python\")\n+         if len(code_blocks) > 1:\n+             code_block = code_blocks[-1].split(\"```\", 1)[0].strip()\n+             return code_block\n+     # If no ```python block, look for any code block\n",
+   "hunks": [
+    {
+     "start": 19,
+     "end": 20,
+     "replacement": [
+      "        # Extract the last ```python block\n",
+      "        code_blocks = reply.split(\"```python\")\n",
+      "        if len(code_blocks) > 1:\n",
+      "            code_block = code_blocks[-1].split(\"```\", 1)[0].strip()\n",
+      "            return code_block\n",
+      "    # If no ```python block, look for any code block\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 5,
+   "items": [
+    "extract_code"
+   ],
+   "diff": "@@ seed lines 18-24\n-     \"\"\"The last ```python block, else the last code block, else None.\"\"\"\n-     if \"```python\" in reply:\n-         return reply.rsplit(\"```python\", 1)[1].split(\"```\", 1)[0].strip()\n-     if \"```\" in reply:\n-         parts = reply.split(\"```\")\n-         if len(parts) >= 3:\n-             return parts[-2].strip()\n+     import re\n+     match = re.search(r'```python(.*?)```', reply, re.DOTALL)\n+     if match:\n+         return match.group(1).strip()\n+     match = re.search(r'```(.*?)```', reply, re.DOTALL)\n+     if match:\n+         return match.group(1).strip()\n",
+   "hunks": [
+    {
+     "start": 17,
+     "end": 24,
+     "replacement": [
+      "    import re\n",
+      "    match = re.search(r'```python(.*?)```', reply, re.DOTALL)\n",
+      "    if match:\n",
+      "        return match.group(1).strip()\n",
+      "    match = re.search(r'```(.*?)```', reply, re.DOTALL)\n",
+      "    if match:\n",
+      "        return match.group(1).strip()\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 6,
+   "items": [
+    "extract_code"
+   ],
+   "diff": "@@ seed lines 18-24\n-     \"\"\"The last ```python block, else the last code block, else None.\"\"\"\n-     if \"```python\" in reply:\n-         return reply.rsplit(\"```python\", 1)[1].split(\"```\", 1)[0].strip()\n-     if \"```\" in reply:\n-         parts = reply.split(\"```\")\n-         if len(parts) >= 3:\n-             return parts[-2].strip()\n+     \"\"\"Extract the first code block that starts with ```python and ends with ```.\"\"\"\n+     start = reply.find(\"```python\")\n+     if start != -1:\n+         start += len(\"```python\")\n+         end = reply.find(\"```\", start)\n+         if end != -1:\n+             return reply[start:end].strip()\n+     return None\n",
+   "hunks": [
+    {
+     "start": 17,
+     "end": 24,
+     "replacement": [
+      "    \"\"\"Extract the first code block that starts with ```python and ends with ```.\"\"\"\n",
+      "    start = reply.find(\"```python\")\n",
+      "    if start != -1:\n",
+      "        start += len(\"```python\")\n",
+      "        end = reply.find(\"```\", start)\n",
+      "        if end != -1:\n",
+      "            return reply[start:end].strip()\n",
+      "    return None\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 7,
+   "items": [
+    "extract_code"
+   ],
+   "diff": "@@ seed lines 18-18\n-     \"\"\"The last ```python block, else the last code block, else None.\"\"\"\n+     \"\"\"The first ```python block, else the first code block, else None.\"\"\"\n",
+   "hunks": [
+    {
+     "start": 17,
+     "end": 18,
+     "replacement": [
+      "    \"\"\"The first ```python block, else the first code block, else None.\"\"\"\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 8,
+   "items": [
+    "extract_code"
+   ],
+   "diff": "@@ seed lines 24-24\n-             return parts[-2].strip()\n+             return parts[1].strip()\n",
+   "hunks": [
+    {
+     "start": 23,
+     "end": 24,
+     "replacement": [
+      "            return parts[1].strip()\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 9,
+   "items": [
+    "extract_code"
+   ],
+   "diff": "@@ seed lines 17-16\n+ import re\n+ \n",
+   "hunks": [
+    {
+     "start": 16,
+     "end": 16,
+     "replacement": [
+      "import re\n",
+      "\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 10,
+   "items": [
+    "extract_code"
+   ],
+   "diff": "@@ seed lines 18-25\n-     \"\"\"The last ```python block, else the last code block, else None.\"\"\"\n-     if \"```python\" in reply:\n-         return reply.rsplit(\"```python\", 1)[1].split(\"```\", 1)[0].strip()\n-     if \"```\" in reply:\n-         parts = reply.split(\"```\")\n-         if len(parts) >= 3:\n-             return parts[-2].strip()\n-     return None\n+     \"\"\"Extract the first code block that starts with ```python and ends with ```.\"\"\"\n+     # Use regular expression to find all code blocks that start with ```python and end with ```\n+     code_blocks = re.findall(r'```python(.*?)```', reply, re.DOTALL)\n+     # Return the first code block if any\n+     return code_blocks[0].strip() if code_blocks else None\n",
+   "hunks": [
+    {
+     "start": 17,
+     "end": 25,
+     "replacement": [
+      "    \"\"\"Extract the first code block that starts with ```python and ends with ```.\"\"\"\n",
+      "    # Use regular expression to find all code blocks that start with ```python and end with ```\n",
+      "    code_blocks = re.findall(r'```python(.*?)```', reply, re.DOTALL)\n",
+      "    # Return the first code block if any\n",
+      "    return code_blocks[0].strip() if code_blocks else None\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {},
+ "rq4": [],
+ "rq5": {
+  "pool": [
+   "metaharness_B1_s1.log.jsonl",
+   "metaharness_B1_s2.log.jsonl",
+   "metaharness_B1_s4.log.jsonl",
+   "metaharness_B3_s1.log.jsonl",
+   "metaharness_B3_s2.log.jsonl",
+   "metaharness_B3_s3.log.jsonl",
+   "metaharness_B3_s4.log.jsonl"
+  ],
+  "best_pooled_product": [],
+  "best_single_run": 0,
+  "single_final_product": [
+   0,
+   1
+  ],
+  "search": {
+   "pooled": 0.2,
+   "single": 0.2
+  },
+  "heldout": {
+   "pooled": 0.24705882352941178,
+   "single": 0.24705882352941178,
+   "all_single": {
+    "0": 0.24705882352941178,
+    "1": 0.24705882352941178,
+    "2": 0.24705882352941178,
+    "3": 0.24705882352941178,
+    "4": 0.24705882352941178,
+    "5": 0.24705882352941178,
+    "6": 0.24705882352941178
+   }
+  },
+  "difference": 0.0,
+  "ci": [
+   0.0,
+   0.0
+  ],
+  "superior_certified": false,
+  "pairs_used": 340
+ }
+}

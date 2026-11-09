@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.venv*/
+data/
+runs/cache/
+runs/harnesses/
+runs/lattice/
+.DS_Store

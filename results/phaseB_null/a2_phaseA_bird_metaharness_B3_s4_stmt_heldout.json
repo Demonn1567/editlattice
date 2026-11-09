@@ -1,0 +1,1133 @@
+{
+ "summary": {
+  "pairs": 158,
+  "replayed_accuracy": 0.2848101265822785,
+  "fresh_accuracy": 0.2911392405063291,
+  "products_with_p_below_0.05": 0,
+  "products": 2
+ },
+ "rows": [
+  {
+   "product": "",
+   "n": 76,
+   "replayed": 0.2894736842105263,
+   "fresh": 0.2894736842105263,
+   "fisher_p": 1.0
+  },
+  {
+   "product": "0",
+   "n": 82,
+   "replayed": 0.2804878048780488,
+   "fresh": 0.2926829268292683,
+   "fisher_p": 1.0
+  }
+ ],
+ "pairs": [
+  {
+   "product": "0",
+   "task_id": "bird-710",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-48",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-62",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-948",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 1
+  },
+  {
+   "product": "",
+   "task_id": "bird-948",
+   "replicate": 1,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "bird-98",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-98",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-1208",
+   "replicate": 0,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "",
+   "task_id": "bird-1208",
+   "replicate": 1,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "bird-1208",
+   "replicate": 2,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "bird-72",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-529",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-529",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-822",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-1156",
+   "replicate": 1,
+   "replayed": 1.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-945",
+   "replicate": 2,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "",
+   "task_id": "bird-1375",
+   "replicate": 1,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "bird-1028",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-869",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-869",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-208",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-208",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-743",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-743",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-366",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-1359",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-1068",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-665",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-794",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-89",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-1192",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-1192",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-988",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-248",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-248",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-1235",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-1338",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-1189",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-1380",
+   "replicate": 0,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "bird-1380",
+   "replicate": 3,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "",
+   "task_id": "bird-726",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-766",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-766",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-1256",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-1256",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-1115",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-964",
+   "replicate": 3,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "bird-955",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-1460",
+   "replicate": 1,
+   "replayed": 1.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-555",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-796",
+   "replicate": 0,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "bird-796",
+   "replicate": 2,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "bird-796",
+   "replicate": 3,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "",
+   "task_id": "bird-537",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-728",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-1144",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-1435",
+   "replicate": 3,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "bird-1122",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-1350",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-414",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 1
+  },
+  {
+   "product": "",
+   "task_id": "bird-159",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-159",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-960",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-407",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-230",
+   "replicate": 0,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "",
+   "task_id": "bird-892",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-892",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-892",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-892",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-1501",
+   "replicate": 3,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "",
+   "task_id": "bird-213",
+   "replicate": 1,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "",
+   "task_id": "bird-213",
+   "replicate": 2,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "bird-213",
+   "replicate": 2,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "bird-186",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-186",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-186",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-243",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-243",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-772",
+   "replicate": 2,
+   "replayed": 1.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-629",
+   "replicate": 0,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "bird-629",
+   "replicate": 2,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "",
+   "task_id": "bird-1098",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-1098",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-200",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-340",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-340",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-1515",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-1515",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-173",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-173",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-1533",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-994",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-557",
+   "replicate": 2,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "",
+   "task_id": "bird-408",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-408",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-633",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-1157",
+   "replicate": 0,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "bird-1157",
+   "replicate": 2,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "",
+   "task_id": "bird-875",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "bird-875",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 1
+  },
+  {
+   "product": "",
+   "task_id": "bird-1251",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-1251",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-474",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-352",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-415",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-253",
+   "replicate": 0,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "bird-1399",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-1399",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-533",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-533",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-1506",
+   "replicate": 0,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "bird-1312",
+   "replicate": 2,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "",
+   "task_id": "bird-1472",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-904",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-344",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-854",
+   "replicate": 1,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "bird-854",
+   "replicate": 1,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "bird-1107",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-1107",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-1392",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-1231",
+   "replicate": 0,
+   "replayed": 1.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-1231",
+   "replicate": 2,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "",
+   "task_id": "bird-1267",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-1394",
+   "replicate": 3,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "bird-327",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-327",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-1471",
+   "replicate": 2,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "bird-47",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-1331",
+   "replicate": 1,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "",
+   "task_id": "bird-1331",
+   "replicate": 2,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "",
+   "task_id": "bird-1113",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-28",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-1481",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-1481",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-268",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-879",
+   "replicate": 0,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "bird-879",
+   "replicate": 1,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "",
+   "task_id": "bird-879",
+   "replicate": 2,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "",
+   "task_id": "bird-879",
+   "replicate": 3,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "",
+   "task_id": "bird-480",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-1387",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-1175",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-346",
+   "replicate": 3,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "bird-231",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-800",
+   "replicate": 1,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "bird-1162",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "bird-1162",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-1411",
+   "replicate": 0,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "",
+   "task_id": "bird-1411",
+   "replicate": 2,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "",
+   "task_id": "bird-1079",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-733",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-567",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-567",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-567",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-487",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-1247",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "bird-1247",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "bird-563",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  }
+ ]
+}

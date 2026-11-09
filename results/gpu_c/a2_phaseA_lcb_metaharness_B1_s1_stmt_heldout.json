@@ -1,0 +1,958 @@
+{
+ "summary": {
+  "pairs": 131,
+  "replayed_accuracy": 0.2595419847328244,
+  "fresh_accuracy": 0.2595419847328244,
+  "products_with_p_below_0.05": 0,
+  "products": 4
+ },
+ "rows": [
+  {
+   "product": "",
+   "n": 35,
+   "replayed": 0.22857142857142856,
+   "fresh": 0.17142857142857143,
+   "fisher_p": 0.7660114351533384
+  },
+  {
+   "product": "0",
+   "n": 37,
+   "replayed": 0.2972972972972973,
+   "fresh": 0.32432432432432434,
+   "fisher_p": 1.0
+  },
+  {
+   "product": "0,1",
+   "n": 32,
+   "replayed": 0.1875,
+   "fresh": 0.21875,
+   "fisher_p": 1.0
+  },
+  {
+   "product": "1",
+   "n": 27,
+   "replayed": 0.3333333333333333,
+   "fresh": 0.3333333333333333,
+   "fisher_p": 1.0
+  }
+ ],
+ "pairs": [
+  {
+   "product": "0",
+   "task_id": "lcb-abc398_c",
+   "replicate": 1,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-arc194_b",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc387_b",
+   "replicate": 0,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc387_b",
+   "replicate": 2,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "1",
+   "task_id": "lcb-abc387_b",
+   "replicate": 2,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-abc393_a",
+   "replicate": 0,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc393_a",
+   "replicate": 1,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc393_a",
+   "replicate": 2,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "1",
+   "task_id": "lcb-abc393_a",
+   "replicate": 2,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc393_a",
+   "replicate": 3,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-arc189_c",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc396_g",
+   "replicate": 0,
+   "replayed": 1.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc396_g",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-arc192_a",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-arc192_a",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc395_f",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "1",
+   "task_id": "lcb-abc395_f",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-abc380_f",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc395_c",
+   "replicate": 0,
+   "replayed": 1.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc395_c",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc395_c",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 1
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-abc395_c",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc380_e",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 1
+  },
+  {
+   "product": "1",
+   "task_id": "lcb-abc380_e",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-abc398_a",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc399_d",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "1",
+   "task_id": "lcb-abc399_d",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "1",
+   "task_id": "lcb-abc383_a",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-abc399_a",
+   "replicate": 3,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-abc380_c",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc375_f",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc375_f",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc388_d",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-arc193_a",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "1",
+   "task_id": "lcb-arc193_a",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc381_d",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc387_f",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc387_f",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-arc187_b",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-arc187_b",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-arc187_b",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc378_g",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-abc378_g",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc378_g",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc378_g",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc393_e",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-abc393_e",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc379_f",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "1",
+   "task_id": "lcb-arc190_c",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "1",
+   "task_id": "lcb-arc190_c",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc398_b",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc398_b",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-abc398_b",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 1
+  },
+  {
+   "product": "1",
+   "task_id": "lcb-abc398_b",
+   "replicate": 2,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-abc396_d",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc380_d",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-arc195_b",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-arc195_b",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "1",
+   "task_id": "lcb-arc186_c",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "1",
+   "task_id": "lcb-arc192_b",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc388_c",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc388_c",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc391_a",
+   "replicate": 2,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "1",
+   "task_id": "lcb-abc389_a",
+   "replicate": 0,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "",
+   "task_id": "lcb-arc189_b",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-arc189_b",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "1",
+   "task_id": "lcb-arc189_b",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-arc189_b",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "1",
+   "task_id": "lcb-arc189_b",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-abc391_g",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "1",
+   "task_id": "lcb-abc391_g",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc391_g",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc391_g",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc380_a",
+   "replicate": 0,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "1",
+   "task_id": "lcb-abc380_a",
+   "replicate": 0,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-abc380_a",
+   "replicate": 0,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-abc380_a",
+   "replicate": 2,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "1",
+   "task_id": "lcb-abc380_a",
+   "replicate": 3,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc400_e",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc400_e",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc400_e",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc387_c",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "1",
+   "task_id": "lcb-abc387_c",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-arc192_d",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-arc192_d",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-arc192_d",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "1",
+   "task_id": "lcb-abc374_b",
+   "replicate": 0,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-abc374_b",
+   "replicate": 1,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc374_b",
+   "replicate": 2,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc374_b",
+   "replicate": 2,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-abc375_d",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "1",
+   "task_id": "lcb-abc377_f",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc377_f",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "1",
+   "task_id": "lcb-abc376_d",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc376_d",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc390_g",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc390_g",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc390_g",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc400_g",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc400_g",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc400_g",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc400_g",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc392_b",
+   "replicate": 0,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-abc382_f",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-abc382_f",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc394_b",
+   "replicate": 0,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc394_b",
+   "replicate": 3,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "1",
+   "task_id": "lcb-abc394_b",
+   "replicate": 3,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "1",
+   "task_id": "lcb-abc395_b",
+   "replicate": 0,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-abc395_b",
+   "replicate": 0,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc395_b",
+   "replicate": 2,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc386_c",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc385_b",
+   "replicate": 1,
+   "replayed": 1.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc385_b",
+   "replicate": 3,
+   "replayed": 1.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc378_a",
+   "replicate": 3,
+   "replayed": 1.0,
+   "fresh": 1
+  },
+  {
+   "product": "1",
+   "task_id": "lcb-abc377_e",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-abc377_e",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-arc188_a",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-arc188_a",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-arc193_d",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-arc193_d",
+   "replicate": 2,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-arc193_d",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc386_f",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-abc386_f",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0,1",
+   "task_id": "lcb-arc192_e",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "1",
+   "task_id": "lcb-arc192_e",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-arc192_e",
+   "replicate": 3,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "0",
+   "task_id": "lcb-abc391_f",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "1",
+   "task_id": "lcb-abc390_f",
+   "replicate": 0,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc390_f",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  },
+  {
+   "product": "",
+   "task_id": "lcb-abc393_f",
+   "replicate": 1,
+   "replayed": 0.0,
+   "fresh": 0
+  }
+ ]
+}

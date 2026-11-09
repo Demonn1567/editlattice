@@ -1,0 +1,10 @@
+{
+ "gain": 0.02125,
+ "low": -0.035,
+ "high": 0.07625,
+ "seed_accuracy": 0.585,
+ "final_accuracy": 0.60625,
+ "real_gain": false,
+ "lattice": "planted_gpu_stmt_heldout.json",
+ "cells": 800
+}

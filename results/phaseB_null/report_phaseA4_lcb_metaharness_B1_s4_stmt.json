@@ -1,0 +1,193 @@
+{
+ "name": "phaseA4_lcb_metaharness_B1_s4_stmt",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "SYSTEM_PROMPT"
+   ],
+   "diff": "@@ seed lines 14-13\n+ Ensure the code includes all required logic to solve the problem correctly, handles edge cases, and is fully functional. Include a main function and ensure that it is called at the end of the program.\n",
+   "hunks": [
+    {
+     "start": 13,
+     "end": 13,
+     "replacement": [
+      "Ensure the code includes all required logic to solve the problem correctly, handles edge cases, and is fully functional. Include a main function and ensure that it is called at the end of the program.\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {
+  "search": {
+   "seed": 0.19583333333333333,
+   "full": 0.1875,
+   "shapley": {
+    "0": {
+     "value": -0.008333333333333331,
+     "low": -0.05416666666666667,
+     "high": 0.025000000000000022,
+     "p": 0.803
+    }
+   },
+   "interaction": {},
+   "matters": {
+    "0": false
+   },
+   "interacts": {},
+   "loo": {
+    "0": -0.008333333333333331
+   },
+   "loi": {
+    "0": -0.008333333333333331
+   }
+  },
+  "heldout": {
+   "seed": 0.25882352941176473,
+   "full": 0.26176470588235295,
+   "shapley": {
+    "0": {
+     "value": 0.002941176470588225,
+     "low": -0.038235294117647034,
+     "high": 0.047058823529411764,
+     "p": 0.969
+    }
+   },
+   "interaction": {},
+   "matters": {
+    "0": false
+   },
+   "interacts": {},
+   "loo": {
+    "0": 0.002941176470588225
+   },
+   "loi": {
+    "0": 0.002941176470588225
+   }
+  },
+  "overfitting_units": []
+ },
+ "rq4": [
+  {
+   "delta": 0.02,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.25882352941176473,
+   "heldout_full": 0.26176470588235295,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.25882352941176473,
+   "heldout_full": 0.26176470588235295,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.25882352941176473,
+   "heldout_full": 0.26176470588235295,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.25882352941176473,
+   "heldout_full": 0.26176470588235295,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.25882352941176473,
+   "heldout_full": 0.26176470588235295,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.05,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.25882352941176473,
+   "heldout_full": 0.26176470588235295,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.25882352941176473,
+   "heldout_full": 0.26176470588235295,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.25882352941176473,
+   "heldout_full": 0.26176470588235295,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.25882352941176473,
+   "heldout_full": 0.26176470588235295,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.25882352941176473,
+   "heldout_full": 0.26176470588235295,
+   "certified": true,
+   "pairs_used": 121
+  }
+ ],
+ "rq5": null
+}

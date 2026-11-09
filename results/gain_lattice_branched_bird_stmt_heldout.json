@@ -1,0 +1,10 @@
+{
+ "gain": -0.022613065326633167,
+ "low": -0.056532663316582916,
+ "high": 0.008793969849246231,
+ "seed_accuracy": 0.36809045226130654,
+ "final_accuracy": 0.3454773869346734,
+ "real_gain": false,
+ "lattice": "branched_bird_stmt_heldout.json",
+ "cells": 796
+}

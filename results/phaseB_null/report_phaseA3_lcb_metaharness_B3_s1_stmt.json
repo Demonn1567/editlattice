@@ -1,0 +1,203 @@
+{
+ "name": "phaseA3_lcb_metaharness_B3_s1_stmt",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "extract_code"
+   ],
+   "diff": "@@ seed lines 19-25\n-     if \"```python\" in reply:\n-         return reply.rsplit(\"```python\", 1)[1].split(\"```\", 1)[0].strip()\n-     if \"```\" in reply:\n-         parts = reply.split(\"```\")\n-         if len(parts) >= 3:\n-             return parts[-2].strip()\n-     return None\n+     import re\n+     # Find all Python code blocks (```python ... ```), take last\n+     python_blocks = re.findall(r'```[ \\t]*python[ \\t]*([\\s\\S]*?)```[ \\t]*', reply, re.DOTALL)\n+     if python_blocks:\n+         return python_blocks[-1].strip()\n+     # Fallback: find any code block (``` ... ```), take last\n+     code_blocks = re.findall(r'```[ \\t]*([\\s\\S]*?)```[ \\t]*', reply)\n+     if code_blocks:\n+         return code_blocks[-1].strip()\n+     # Final fallback: return the entire reply stripped (if no code blocks found)\n+     return reply.strip()\n",
+   "hunks": [
+    {
+     "start": 18,
+     "end": 25,
+     "replacement": [
+      "    import re\n",
+      "    # Find all Python code blocks (```python ... ```), take last\n",
+      "    python_blocks = re.findall(r'```[ \\t]*python[ \\t]*([\\s\\S]*?)```[ \\t]*', reply, re.DOTALL)\n",
+      "    if python_blocks:\n",
+      "        return python_blocks[-1].strip()\n",
+      "    # Fallback: find any code block (``` ... ```), take last\n",
+      "    code_blocks = re.findall(r'```[ \\t]*([\\s\\S]*?)```[ \\t]*', reply)\n",
+      "    if code_blocks:\n",
+      "        return code_blocks[-1].strip()\n",
+      "    # Final fallback: return the entire reply stripped (if no code blocks found)\n",
+      "    return reply.strip()\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {
+  "search": {
+   "seed": 0.19166666666666668,
+   "full": 0.19166666666666668,
+   "shapley": {
+    "0": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "interaction": {},
+   "matters": {
+    "0": false
+   },
+   "interacts": {},
+   "loo": {
+    "0": 0.0
+   },
+   "loi": {
+    "0": 0.0
+   }
+  },
+  "heldout": {
+   "seed": 0.25882352941176473,
+   "full": 0.25882352941176473,
+   "shapley": {
+    "0": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "interaction": {},
+   "matters": {
+    "0": false
+   },
+   "interacts": {},
+   "loo": {
+    "0": 0.0
+   },
+   "loi": {
+    "0": 0.0
+   }
+  },
+  "overfitting_units": []
+ },
+ "rq4": [
+  {
+   "delta": 0.02,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19166666666666668,
+   "heldout_value": 0.25882352941176473,
+   "heldout_full": 0.25882352941176473,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19166666666666668,
+   "heldout_value": 0.25882352941176473,
+   "heldout_full": 0.25882352941176473,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19166666666666668,
+   "heldout_value": 0.25882352941176473,
+   "heldout_full": 0.25882352941176473,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.19166666666666668,
+   "heldout_value": 0.25882352941176473,
+   "heldout_full": 0.25882352941176473,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19166666666666668,
+   "heldout_value": 0.25882352941176473,
+   "heldout_full": 0.25882352941176473,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.05,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19166666666666668,
+   "heldout_value": 0.25882352941176473,
+   "heldout_full": 0.25882352941176473,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19166666666666668,
+   "heldout_value": 0.25882352941176473,
+   "heldout_full": 0.25882352941176473,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19166666666666668,
+   "heldout_value": 0.25882352941176473,
+   "heldout_full": 0.25882352941176473,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.19166666666666668,
+   "heldout_value": 0.25882352941176473,
+   "heldout_full": 0.25882352941176473,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.19166666666666668,
+   "heldout_value": 0.25882352941176473,
+   "heldout_full": 0.25882352941176473,
+   "certified": true,
+   "pairs_used": 121
+  }
+ ],
+ "rq5": null
+}

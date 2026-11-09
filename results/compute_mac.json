@@ -1,0 +1,20 @@
+{
+ "host": "anonymous",
+ "lattices": {
+  "mlx-community/Meta-Llama-3.1-8B-Instruct-4bit": {
+   "files": 13,
+   "seconds": 165938.09999999998,
+   "executions": 29204,
+   "generated_tokens": 1736662,
+   "nominal_tokens": 7999943
+  },
+  "mlx-community/Qwen3-4B-4bit": {
+   "files": 45,
+   "seconds": 6003.799999999998,
+   "executions": 4668,
+   "generated_tokens": 104339,
+   "nominal_tokens": 1473699
+  }
+ },
+ "evolution_hours": {}
+}

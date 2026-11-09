@@ -1,0 +1,346 @@
+{
+ "name": "constructed_bird_stmt",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "SYSTEM_PROMPT"
+   ],
+   "diff": "@@ seed lines 13-12\n+ Use only tables and columns from the schema, follow the hint exactly, and return only the columns the question asks for.\n",
+   "hunks": [
+    {
+     "start": 12,
+     "end": 12,
+     "replacement": [
+      "Use only tables and columns from the schema, follow the hint exactly, and return only the columns the question asks for.\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "items": [
+    "schema_text"
+   ],
+   "diff": "@@ seed lines 27-26\n+         sample_columns, sample_rows, sample_truncated = env.execute(f'SELECT * FROM \"{table}\" LIMIT 3', max_rows=3)\n+         lines.append(f\"  example rows: {[tuple(str(value)[:40] for value in row) for row in sample_rows]}\")\n",
+   "hunks": [
+    {
+     "start": 26,
+     "end": 26,
+     "replacement": [
+      "        sample_columns, sample_rows, sample_truncated = env.execute(f'SELECT * FROM \"{table}\" LIMIT 3', max_rows=3)\n",
+      "        lines.append(f\"  example rows: {[tuple(str(value)[:40] for value in row) for row in sample_rows]}\")\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 44-43\n+     # Execution-guided repair: run the query; on an error or an empty result, show it to the model and ask for a fix.\n+     for attempt in range(2):\n+         try:\n+             columns, rows, truncated = env.execute(extract_sql(reply), max_rows=5)\n+             problem = None if rows else \"The query returned no rows.\"\n+         except Exception as error:\n+             problem = f\"The query failed: {str(error)[:300]}\"\n+         if problem is None:\n+             break\n+         reply = llm.chat([{\"role\": \"system\", \"content\": SYSTEM_PROMPT}, {\"role\": \"user\", \"content\": prompt},\n+                           {\"role\": \"assistant\", \"content\": reply},\n+                           {\"role\": \"user\", \"content\": problem + \" Fix the query. Put it in one ```sql code block.\"}])\n",
+   "hunks": [
+    {
+     "start": 43,
+     "end": 43,
+     "replacement": [
+      "    # Execution-guided repair: run the query; on an error or an empty result, show it to the model and ask for a fix.\n",
+      "    for attempt in range(2):\n",
+      "        try:\n",
+      "            columns, rows, truncated = env.execute(extract_sql(reply), max_rows=5)\n",
+      "            problem = None if rows else \"The query returned no rows.\"\n",
+      "        except Exception as error:\n",
+      "            problem = f\"The query failed: {str(error)[:300]}\"\n",
+      "        if problem is None:\n",
+      "            break\n",
+      "        reply = llm.chat([{\"role\": \"system\", \"content\": SYSTEM_PROMPT}, {\"role\": \"user\", \"content\": prompt},\n",
+      "                          {\"role\": \"assistant\", \"content\": reply},\n",
+      "                          {\"role\": \"user\", \"content\": problem + \" Fix the query. Put it in one ```sql code block.\"}])\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {
+  "search": {
+   "seed": 0.25833333333333336,
+   "full": 0.39166666666666666,
+   "shapley": {
+    "0": {
+     "value": -0.028472222222222232,
+     "low": -0.06180555555555556,
+     "high": 0.004861111111111122,
+     "p": 0.102
+    },
+    "1": {
+     "value": 0.07569444444444441,
+     "low": 0.006944444444444438,
+     "high": 0.14444444444444443,
+     "p": 0.033
+    },
+    "2": {
+     "value": 0.08611111111111111,
+     "low": 0.03680555555555555,
+     "high": 0.14236111111111113,
+     "p": 0.0
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": -0.02291666666666664,
+     "low": -0.08124999999999999,
+     "high": 0.03958333333333333,
+     "p": 0.467
+    },
+    "0,2": {
+     "value": -0.01874999999999999,
+     "low": -0.04583333333333334,
+     "high": 0.004166666666666638,
+     "p": 0.127
+    },
+    "1,2": {
+     "value": -0.002083333333333326,
+     "low": -0.06874999999999999,
+     "high": 0.05833333333333335,
+     "p": 0.979
+    }
+   },
+   "matters": {
+    "2": true,
+    "1": false,
+    "0": false
+   },
+   "interacts": {
+    "0,2": false,
+    "0,1": false,
+    "1,2": false
+   },
+   "loo": {
+    "0": -0.04999999999999999,
+    "1": 0.0625,
+    "2": 0.07500000000000001
+   },
+   "loi": {
+    "0": -0.00833333333333336,
+    "1": 0.08749999999999997,
+    "2": 0.09583333333333333
+   }
+  },
+  "heldout": {
+   "seed": 0.30402010050251255,
+   "full": 0.3706030150753769,
+   "shapley": {
+    "0": {
+     "value": -0.009212730318257959,
+     "low": -0.033710217755443875,
+     "high": 0.0163316582914573,
+     "p": 0.468
+    },
+    "1": {
+     "value": 0.03287269681742046,
+     "low": -0.006072026800670019,
+     "high": 0.07181742043551087,
+     "p": 0.093
+    },
+    "2": {
+     "value": 0.04292294807370185,
+     "low": 0.025963149078726978,
+     "high": 0.06281407035175877,
+     "p": 0.0
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": -0.028266331658291455,
+     "low": -0.06407035175879397,
+     "high": 0.008793969849246241,
+     "p": 0.142
+    },
+    "0,2": {
+     "value": 0.014447236180904544,
+     "low": -0.0006281407035175768,
+     "high": 0.03077889447236179,
+     "p": 0.064
+    },
+    "1,2": {
+     "value": -0.0018844221105527859,
+     "low": -0.026381909547738697,
+     "high": 0.01947236180904524,
+     "p": 0.876
+    }
+   },
+   "matters": {
+    "2": true,
+    "1": false,
+    "0": false
+   },
+   "interacts": {
+    "0,2": false,
+    "0,1": false,
+    "1,2": false
+   },
+   "loo": {
+    "0": -0.016331658291457274,
+    "1": 0.017587939698492483,
+    "2": 0.04899497487437188
+   },
+   "loi": {
+    "0": -0.0025125628140703626,
+    "1": 0.047738693467336724,
+    "2": 0.03643216080402012
+   }
+  },
+  "overfitting_units": [
+   "1"
+  ]
+ },
+ "rq4": [
+  {
+   "delta": 0.02,
+   "method": "exact",
+   "product": [
+    1,
+    2
+   ],
+   "units_kept": 2,
+   "queries": 8,
+   "search_value": 0.44166666666666665,
+   "heldout_value": 0.3869346733668342,
+   "heldout_full": 0.3706030150753769,
+   "certified": true,
+   "pairs_used": 643
+  },
+  {
+   "delta": 0.02,
+   "method": "greedy_backward",
+   "product": [
+    1,
+    2
+   ],
+   "units_kept": 2,
+   "queries": 6,
+   "search_value": 0.44166666666666665,
+   "heldout_value": 0.3869346733668342,
+   "heldout_full": 0.3706030150753769,
+   "certified": true,
+   "pairs_used": 643
+  },
+  {
+   "delta": 0.02,
+   "method": "ddmin",
+   "product": [
+    1,
+    2
+   ],
+   "units_kept": 2,
+   "queries": 5,
+   "search_value": 0.44166666666666665,
+   "heldout_value": 0.3869346733668342,
+   "heldout_full": 0.3706030150753769,
+   "certified": true,
+   "pairs_used": 643
+  },
+  {
+   "delta": 0.02,
+   "method": "loo_threshold",
+   "product": [
+    1,
+    2
+   ],
+   "units_kept": 2,
+   "queries": 8,
+   "search_value": 0.44166666666666665,
+   "heldout_value": 0.3869346733668342,
+   "heldout_full": 0.3706030150753769,
+   "certified": true,
+   "pairs_used": 643
+  },
+  {
+   "delta": 0.02,
+   "method": "shapley_threshold",
+   "product": [
+    1,
+    2
+   ],
+   "units_kept": 2,
+   "queries": 8,
+   "search_value": 0.44166666666666665,
+   "heldout_value": 0.3869346733668342,
+   "heldout_full": 0.3706030150753769,
+   "certified": true,
+   "pairs_used": 643
+  },
+  {
+   "delta": 0.05,
+   "method": "exact",
+   "product": [
+    2
+   ],
+   "units_kept": 1,
+   "queries": 8,
+   "search_value": 0.3541666666666667,
+   "heldout_value": 0.34045226130653267,
+   "heldout_full": 0.3706030150753769,
+   "certified": false,
+   "pairs_used": 796
+  },
+  {
+   "delta": 0.05,
+   "method": "greedy_backward",
+   "product": [
+    2
+   ],
+   "units_kept": 1,
+   "queries": 7,
+   "search_value": 0.3541666666666667,
+   "heldout_value": 0.34045226130653267,
+   "heldout_full": 0.3706030150753769,
+   "certified": false,
+   "pairs_used": 796
+  },
+  {
+   "delta": 0.05,
+   "method": "ddmin",
+   "product": [
+    1
+   ],
+   "units_kept": 1,
+   "queries": 4,
+   "search_value": 0.3458333333333333,
+   "heldout_value": 0.35175879396984927,
+   "heldout_full": 0.3706030150753769,
+   "certified": false,
+   "pairs_used": 796
+  },
+  {
+   "delta": 0.05,
+   "method": "loo_threshold",
+   "product": [
+    2
+   ],
+   "units_kept": 1,
+   "queries": 7,
+   "search_value": 0.3541666666666667,
+   "heldout_value": 0.34045226130653267,
+   "heldout_full": 0.3706030150753769,
+   "certified": false,
+   "pairs_used": 796
+  },
+  {
+   "delta": 0.05,
+   "method": "shapley_threshold",
+   "product": [
+    2
+   ],
+   "units_kept": 1,
+   "queries": 8,
+   "search_value": 0.3541666666666667,
+   "heldout_value": 0.34045226130653267,
+   "heldout_full": 0.3706030150753769,
+   "certified": false,
+   "pairs_used": 796
+  }
+ ],
+ "rq5": null
+}

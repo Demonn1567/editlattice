@@ -1,0 +1,248 @@
+{
+ "name": "phaseA_gsmhard_metaharness_B3_s3_stmt",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "extract_answer"
+   ],
+   "diff": "@@ seed lines 14-14\n-     \"\"\"Text after the last 'Answer:', else the whole reply.\"\"\"\n+     \"\"\"Extract the answer from the reply, handling various formats.\"\"\"\n+     # Look for the first occurrence of \"Answer:\" and take the text after it\n",
+   "hunks": [
+    {
+     "start": 13,
+     "end": 14,
+     "replacement": [
+      "    \"\"\"Extract the answer from the reply, handling various formats.\"\"\"\n",
+      "    # Look for the first occurrence of \"Answer:\" and take the text after it\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "items": [
+    "extract_answer"
+   ],
+   "diff": "@@ seed lines 16-16\n-         return reply.rsplit(\"Answer:\", 1)[1].strip()\n+         return reply.split(\"Answer:\", 1)[1].strip()\n+     # If no answer found, return the whole reply\n+     return reply.strip()\n",
+   "hunks": [
+    {
+     "start": 15,
+     "end": 16,
+     "replacement": [
+      "        return reply.split(\"Answer:\", 1)[1].strip()\n",
+      "    # If no answer found, return the whole reply\n",
+      "    return reply.strip()\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {
+  "search": {
+   "seed": 0.5666666666666667,
+   "full": 0.5666666666666667,
+   "shapley": {
+    "0": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "matters": {
+    "0": false,
+    "1": false
+   },
+   "interacts": {
+    "0,1": false
+   },
+   "loo": {
+    "0": 0.0,
+    "1": 0.0
+   },
+   "loi": {
+    "0": 0.0,
+    "1": 0.0
+   }
+  },
+  "heldout": {
+   "seed": 0.5775,
+   "full": 0.5775,
+   "shapley": {
+    "0": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "matters": {
+    "0": false,
+    "1": false
+   },
+   "interacts": {
+    "0,1": false
+   },
+   "loo": {
+    "0": 0.0,
+    "1": 0.0
+   },
+   "loi": {
+    "0": 0.0,
+    "1": 0.0
+   }
+  },
+  "overfitting_units": []
+ },
+ "rq4": [
+  {
+   "delta": 0.02,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.5666666666666667,
+   "heldout_value": 0.5775,
+   "heldout_full": 0.5775,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.5666666666666667,
+   "heldout_value": 0.5775,
+   "heldout_full": 0.5775,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 3,
+   "search_value": 0.5666666666666667,
+   "heldout_value": 0.5775,
+   "heldout_full": 0.5775,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 5,
+   "search_value": 0.5666666666666667,
+   "heldout_value": 0.5775,
+   "heldout_full": 0.5775,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.5666666666666667,
+   "heldout_value": 0.5775,
+   "heldout_full": 0.5775,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.05,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.5666666666666667,
+   "heldout_value": 0.5775,
+   "heldout_full": 0.5775,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.5666666666666667,
+   "heldout_value": 0.5775,
+   "heldout_full": 0.5775,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 3,
+   "search_value": 0.5666666666666667,
+   "heldout_value": 0.5775,
+   "heldout_full": 0.5775,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 5,
+   "search_value": 0.5666666666666667,
+   "heldout_value": 0.5775,
+   "heldout_full": 0.5775,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.5666666666666667,
+   "heldout_value": 0.5775,
+   "heldout_full": 0.5775,
+   "certified": true,
+   "pairs_used": 121
+  }
+ ],
+ "rq5": null
+}

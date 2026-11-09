@@ -1,0 +1,323 @@
+{
+ "name": "constructed_lcb_stmt",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "SYSTEM_PROMPT"
+   ],
+   "diff": "@@ seed lines 14-13\n+ Read all input at once with sys.stdin, mind the constraints, and print exactly the required output format.\n",
+   "hunks": [
+    {
+     "start": 13,
+     "end": 13,
+     "replacement": [
+      "Read all input at once with sys.stdin, mind the constraints, and print exactly the required output format.\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 29-29\n-     prompt = f\"Problem: {task['title']}\\n\\n{task['question']}\"\n+     prompt = f\"Problem: {task['title']}\\n\\n{task['question']}\\n\\nThink about the time limit before choosing an algorithm.\"\n",
+   "hunks": [
+    {
+     "start": 28,
+     "end": 29,
+     "replacement": [
+      "    prompt = f\"Problem: {task['title']}\\n\\n{task['question']}\\n\\nThink about the time limit before choosing an algorithm.\"\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 31-30\n+     # Self-repair on the public examples: run the program, and on the first failing example ask for a fix (two rounds).\n+     for attempt in range(2):\n+         code = extract_code(reply)\n+         failure = None\n+         for test in task.get(\"public_tests\", []):\n+             result = env.run_python(code or \"\", test[\"input\"], 6.0)\n+             if result.timed_out or result.returncode != 0 or result.stdout.strip() != test[\"output\"].strip():\n+                 failure = (test, result)\n+                 break\n+         if code is None or failure is None:\n+             break\n+         test, result = failure\n+         feedback = (f\"Your program fails on this example.\\nInput:\\n{test['input']}\\nExpected output:\\n{test['output']}\\n\"\n+                     f\"Your output:\\n{result.stdout[-1000:]}\\nErrors:\\n{result.stderr[-1000:]}\\n\"\n+                     \"Fix the program. Put the whole corrected program in one ```python code block.\")\n+         reply = llm.chat([{\"role\": \"system\", \"content\": SYSTEM_PROMPT}, {\"role\": \"user\", \"content\": prompt},\n+                           {\"role\": \"assistant\", \"content\": reply}, {\"role\": \"user\", \"content\": feedback}])\n",
+   "hunks": [
+    {
+     "start": 30,
+     "end": 30,
+     "replacement": [
+      "    # Self-repair on the public examples: run the program, and on the first failing example ask for a fix (two rounds).\n",
+      "    for attempt in range(2):\n",
+      "        code = extract_code(reply)\n",
+      "        failure = None\n",
+      "        for test in task.get(\"public_tests\", []):\n",
+      "            result = env.run_python(code or \"\", test[\"input\"], 6.0)\n",
+      "            if result.timed_out or result.returncode != 0 or result.stdout.strip() != test[\"output\"].strip():\n",
+      "                failure = (test, result)\n",
+      "                break\n",
+      "        if code is None or failure is None:\n",
+      "            break\n",
+      "        test, result = failure\n",
+      "        feedback = (f\"Your program fails on this example.\\nInput:\\n{test['input']}\\nExpected output:\\n{test['output']}\\n\"\n",
+      "                    f\"Your output:\\n{result.stdout[-1000:]}\\nErrors:\\n{result.stderr[-1000:]}\\n\"\n",
+      "                    \"Fix the program. Put the whole corrected program in one ```python code block.\")\n",
+      "        reply = llm.chat([{\"role\": \"system\", \"content\": SYSTEM_PROMPT}, {\"role\": \"user\", \"content\": prompt},\n",
+      "                          {\"role\": \"assistant\", \"content\": reply}, {\"role\": \"user\", \"content\": feedback}])\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {
+  "search": {
+   "seed": 0.21666666666666667,
+   "full": 0.20416666666666666,
+   "shapley": {
+    "0": {
+     "value": -0.03750000000000001,
+     "low": -0.07569444444444443,
+     "high": -0.006944444444444453,
+     "p": 0.016
+    },
+    "1": {
+     "value": 0.0020833333333333355,
+     "low": -0.01805555555555556,
+     "high": 0.023611111111111117,
+     "p": 0.859
+    },
+    "2": {
+     "value": 0.02291666666666666,
+     "low": 0.0041666666666666605,
+     "high": 0.04444444444444444,
+     "p": 0.017
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": 0.039583333333333345,
+     "low": 0.0062500000000000056,
+     "high": 0.07916666666666666,
+     "p": 0.014
+    },
+    "0,2": {
+     "value": 0.006249999999999992,
+     "low": -0.010416666666666671,
+     "high": 0.02708333333333332,
+     "p": 0.553
+    },
+    "1,2": {
+     "value": -0.006249999999999992,
+     "low": -0.029166666666666674,
+     "high": 0.014583333333333337,
+     "p": 0.61
+    }
+   },
+   "matters": {
+    "0": true,
+    "2": true,
+    "1": false
+   },
+   "interacts": {
+    "0,1": true,
+    "0,2": false,
+    "1,2": false
+   },
+   "loo": {
+    "0": -0.012500000000000011,
+    "1": 0.020833333333333343,
+    "2": 0.024999999999999994
+   },
+   "loi": {
+    "0": -0.05833333333333335,
+    "1": -0.012500000000000011,
+    "2": 0.024999999999999994
+   }
+  },
+  "heldout": {
+   "seed": 0.23823529411764705,
+   "full": 0.2676470588235294,
+   "shapley": {
+    "0": {
+     "value": 0.010294117647058829,
+     "low": -0.024999999999999984,
+     "high": 0.04607843137254902,
+     "p": 0.615
+    },
+    "1": {
+     "value": -0.005882352941176464,
+     "low": -0.024999999999999998,
+     "high": 0.014215686274509788,
+     "p": 0.535
+    },
+    "2": {
+     "value": 0.024999999999999994,
+     "low": 0.010294117647058842,
+     "high": 0.04215686274509803,
+     "p": 0.0
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": -0.019117647058823573,
+     "low": -0.04852941176470585,
+     "high": 0.00735294117647059,
+     "p": 0.16
+    },
+    "0,2": {
+     "value": 0.0014705882352940985,
+     "low": -0.013235294117647081,
+     "high": 0.019117647058823517,
+     "p": 0.898
+    },
+    "1,2": {
+     "value": -0.007352941176470562,
+     "low": -0.029411764705882373,
+     "high": 0.011764705882352941,
+     "p": 0.531
+    }
+   },
+   "matters": {
+    "2": true,
+    "1": false,
+    "0": false
+   },
+   "interacts": {
+    "0,1": false,
+    "1,2": false,
+    "0,2": false
+   },
+   "loo": {
+    "0": 0.002941176470588225,
+    "1": -0.017647058823529405,
+    "2": 0.023529411764705882
+   },
+   "loi": {
+    "0": 0.020588235294117685,
+    "1": 0.00882352941176473,
+    "2": 0.02941176470588236
+   }
+  },
+  "overfitting_units": []
+ },
+ "rq4": [
+  {
+   "delta": 0.02,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 8,
+   "search_value": 0.21666666666666667,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.2676470588235294,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 7,
+   "search_value": 0.21666666666666667,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.2676470588235294,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.21666666666666667,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.2676470588235294,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 6,
+   "search_value": 0.21666666666666667,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.2676470588235294,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 8,
+   "search_value": 0.21666666666666667,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.2676470588235294,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.05,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 8,
+   "search_value": 0.21666666666666667,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.2676470588235294,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.05,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 7,
+   "search_value": 0.21666666666666667,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.2676470588235294,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.05,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 3,
+   "search_value": 0.21666666666666667,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.2676470588235294,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.05,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 6,
+   "search_value": 0.21666666666666667,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.2676470588235294,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.05,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 8,
+   "search_value": 0.21666666666666667,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.2676470588235294,
+   "certified": false,
+   "pairs_used": 340
+  }
+ ],
+ "rq5": null
+}

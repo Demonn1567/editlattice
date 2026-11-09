@@ -1,0 +1,211 @@
+{
+ "name": "phaseA_bird_metaharness_B3_s2_stmt",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 44-44\n-     return {\"answer\": extract_sql(reply)}\n+     sql = extract_sql(reply)\n+     \n+     # Properly quote string values in WHERE clauses\n+     def quote_value(value):\n+         if isinstance(value, str):\n+             return f\"'{value}'\"\n+         return value\n+     \n+     # Replace values in WHERE clauses with quoted values\n+     import re\n+     where_pattern = re.compile(r'WHERE\\s+([^=]+)=([^ ]+)')\n+     def replace_where(match):\n+         key = match.group(1)\n+         value = match.group(2)\n+         return f\"WHERE {key}={quote_value(value)}\"\n+     \n+     sql = where_pattern.sub(replace_where, sql)\n+     \n+     return {\"answer\": sql}\n",
+   "hunks": [
+    {
+     "start": 43,
+     "end": 44,
+     "replacement": [
+      "    sql = extract_sql(reply)\n",
+      "    \n",
+      "    # Properly quote string values in WHERE clauses\n",
+      "    def quote_value(value):\n",
+      "        if isinstance(value, str):\n",
+      "            return f\"'{value}'\"\n",
+      "        return value\n",
+      "    \n",
+      "    # Replace values in WHERE clauses with quoted values\n",
+      "    import re\n",
+      "    where_pattern = re.compile(r'WHERE\\s+([^=]+)=([^ ]+)')\n",
+      "    def replace_where(match):\n",
+      "        key = match.group(1)\n",
+      "        value = match.group(2)\n",
+      "        return f\"WHERE {key}={quote_value(value)}\"\n",
+      "    \n",
+      "    sql = where_pattern.sub(replace_where, sql)\n",
+      "    \n",
+      "    return {\"answer\": sql}\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {
+  "search": {
+   "seed": 0.25833333333333336,
+   "full": 0.25833333333333336,
+   "shapley": {
+    "0": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "interaction": {},
+   "matters": {
+    "0": false
+   },
+   "interacts": {},
+   "loo": {
+    "0": 0.0
+   },
+   "loi": {
+    "0": 0.0
+   }
+  },
+  "heldout": {
+   "seed": 0.2914572864321608,
+   "full": 0.2914572864321608,
+   "shapley": {
+    "0": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "interaction": {},
+   "matters": {
+    "0": false
+   },
+   "interacts": {},
+   "loo": {
+    "0": 0.0
+   },
+   "loi": {
+    "0": 0.0
+   }
+  },
+  "overfitting_units": []
+ },
+ "rq4": [
+  {
+   "delta": 0.02,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.25833333333333336,
+   "heldout_value": 0.2914572864321608,
+   "heldout_full": 0.2914572864321608,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.25833333333333336,
+   "heldout_value": 0.2914572864321608,
+   "heldout_full": 0.2914572864321608,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.25833333333333336,
+   "heldout_value": 0.2914572864321608,
+   "heldout_full": 0.2914572864321608,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.25833333333333336,
+   "heldout_value": 0.2914572864321608,
+   "heldout_full": 0.2914572864321608,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.25833333333333336,
+   "heldout_value": 0.2914572864321608,
+   "heldout_full": 0.2914572864321608,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.05,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.25833333333333336,
+   "heldout_value": 0.2914572864321608,
+   "heldout_full": 0.2914572864321608,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.25833333333333336,
+   "heldout_value": 0.2914572864321608,
+   "heldout_full": 0.2914572864321608,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.25833333333333336,
+   "heldout_value": 0.2914572864321608,
+   "heldout_full": 0.2914572864321608,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.25833333333333336,
+   "heldout_value": 0.2914572864321608,
+   "heldout_full": 0.2914572864321608,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.25833333333333336,
+   "heldout_value": 0.2914572864321608,
+   "heldout_full": 0.2914572864321608,
+   "certified": true,
+   "pairs_used": 121
+  }
+ ],
+ "rq5": null
+}

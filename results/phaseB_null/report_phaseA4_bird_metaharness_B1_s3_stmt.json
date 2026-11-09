@@ -1,0 +1,333 @@
+{
+ "name": "phaseA4_bird_metaharness_B1_s3_stmt",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "schema_text"
+   ],
+   "diff": "@@ seed lines 24-23\n+         # Get column descriptions from env.description for richer context\n+         desc = env.description(table)\n+         if desc:\n+             lines.append(f\"Table {table} (Description: {desc})\")\n",
+   "hunks": [
+    {
+     "start": 23,
+     "end": 23,
+     "replacement": [
+      "        # Get column descriptions from env.description for richer context\n",
+      "        desc = env.description(table)\n",
+      "        if desc:\n",
+      "            lines.append(f\"Table {table} (Description: {desc})\")\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "items": [
+    "extract_sql"
+   ],
+   "diff": "@@ seed lines 38-38\n-     return reply.strip()\n+     return \"\"\n",
+   "hunks": [
+    {
+     "start": 37,
+     "end": 38,
+     "replacement": [
+      "    return \"\"\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 44-44\n-     return {\"answer\": extract_sql(reply)}\n+     sql = extract_sql(reply)\n+     if not sql:\n+         return {\"answer\": \"\"}\n+     try:\n+         columns, rows, truncated = env.execute(sql, max_rows=50)\n+         return {\"answer\": sql}\n+     except Exception as e:\n+         # Attempt to repair SQL by quoting column names with spaces\n+         repaired_sql = sql.replace(\"(\", \" \\\"\").replace(\")\", \"\\\" \")\n+         try:\n+             columns, rows, truncated = env.execute(repaired_sql, max_rows=50)\n+             return {\"answer\": repaired_sql}\n+         except Exception:\n+             return {\"answer\": \"\"}\n",
+   "hunks": [
+    {
+     "start": 43,
+     "end": 44,
+     "replacement": [
+      "    sql = extract_sql(reply)\n",
+      "    if not sql:\n",
+      "        return {\"answer\": \"\"}\n",
+      "    try:\n",
+      "        columns, rows, truncated = env.execute(sql, max_rows=50)\n",
+      "        return {\"answer\": sql}\n",
+      "    except Exception as e:\n",
+      "        # Attempt to repair SQL by quoting column names with spaces\n",
+      "        repaired_sql = sql.replace(\"(\", \" \\\"\").replace(\")\", \"\\\" \")\n",
+      "        try:\n",
+      "            columns, rows, truncated = env.execute(repaired_sql, max_rows=50)\n",
+      "            return {\"answer\": repaired_sql}\n",
+      "        except Exception:\n",
+      "            return {\"answer\": \"\"}\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {
+  "search": {
+   "seed": 0.25416666666666665,
+   "full": 0.2916666666666667,
+   "shapley": {
+    "0": {
+     "value": 0.03958333333333336,
+     "low": -0.029166666666666674,
+     "high": 0.11458333333333333,
+     "p": 0.238
+    },
+    "1": {
+     "value": -0.002083333333333326,
+     "low": -0.0062500000000000056,
+     "high": 0.0,
+     "p": 0.754
+    },
+    "2": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": -0.004166666666666652,
+     "low": -0.012500000000000011,
+     "high": 0.0,
+     "p": 0.754
+    },
+    "0,2": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,2": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "matters": {
+    "0": false,
+    "1": false,
+    "2": false
+   },
+   "interacts": {
+    "0,1": false,
+    "0,2": false,
+    "1,2": false
+   },
+   "loo": {
+    "0": 0.03750000000000003,
+    "1": -0.004166666666666652,
+    "2": 0.0
+   },
+   "loi": {
+    "0": 0.041666666666666685,
+    "1": 0.0,
+    "2": 0.0
+   }
+  },
+  "heldout": {
+   "seed": 0.2864321608040201,
+   "full": 0.27889447236180903,
+   "shapley": {
+    "0": {
+     "value": 0.011934673366834153,
+     "low": -0.03517587939698494,
+     "high": 0.057160804020100514,
+     "p": 0.615
+    },
+    "1": {
+     "value": -0.01947236180904524,
+     "low": -0.032663316582914576,
+     "high": -0.008793969849246214,
+     "p": 0.0
+    },
+    "2": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": -0.03894472361809048,
+     "low": -0.06532663316582915,
+     "high": -0.017587939698492427,
+     "p": 0.0
+    },
+    "0,2": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,2": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "matters": {
+    "1": true,
+    "0": false,
+    "2": false
+   },
+   "interacts": {
+    "0,1": true,
+    "0,2": false,
+    "1,2": false
+   },
+   "loo": {
+    "0": -0.007537688442211088,
+    "1": -0.03894472361809048,
+    "2": 0.0
+   },
+   "loi": {
+    "0": 0.031407035175879394,
+    "1": 0.0,
+    "2": 0.0
+   }
+  },
+  "overfitting_units": []
+ },
+ "rq4": [
+  {
+   "delta": 0.02,
+   "method": "exact",
+   "product": [
+    0
+   ],
+   "units_kept": 1,
+   "queries": 8,
+   "search_value": 0.29583333333333334,
+   "heldout_value": 0.3178391959798995,
+   "heldout_full": 0.27889447236180903,
+   "certified": true,
+   "pairs_used": 134
+  },
+  {
+   "delta": 0.02,
+   "method": "greedy_backward",
+   "product": [
+    0
+   ],
+   "units_kept": 1,
+   "queries": 7,
+   "search_value": 0.29583333333333334,
+   "heldout_value": 0.3178391959798995,
+   "heldout_full": 0.27889447236180903,
+   "certified": true,
+   "pairs_used": 134
+  },
+  {
+   "delta": 0.02,
+   "method": "ddmin",
+   "product": [
+    0
+   ],
+   "units_kept": 1,
+   "queries": 3,
+   "search_value": 0.29583333333333334,
+   "heldout_value": 0.3178391959798995,
+   "heldout_full": 0.27889447236180903,
+   "certified": true,
+   "pairs_used": 134
+  },
+  {
+   "delta": 0.02,
+   "method": "loo_threshold",
+   "product": [
+    0
+   ],
+   "units_kept": 1,
+   "queries": 7,
+   "search_value": 0.29583333333333334,
+   "heldout_value": 0.3178391959798995,
+   "heldout_full": 0.27889447236180903,
+   "certified": true,
+   "pairs_used": 134
+  },
+  {
+   "delta": 0.02,
+   "method": "shapley_threshold",
+   "product": [
+    0
+   ],
+   "units_kept": 1,
+   "queries": 8,
+   "search_value": 0.29583333333333334,
+   "heldout_value": 0.3178391959798995,
+   "heldout_full": 0.27889447236180903,
+   "certified": true,
+   "pairs_used": 134
+  },
+  {
+   "delta": 0.05,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 8,
+   "search_value": 0.25416666666666665,
+   "heldout_value": 0.2864321608040201,
+   "heldout_full": 0.27889447236180903,
+   "certified": true,
+   "pairs_used": 373
+  },
+  {
+   "delta": 0.05,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 7,
+   "search_value": 0.25416666666666665,
+   "heldout_value": 0.2864321608040201,
+   "heldout_full": 0.27889447236180903,
+   "certified": true,
+   "pairs_used": 373
+  },
+  {
+   "delta": 0.05,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 3,
+   "search_value": 0.25416666666666665,
+   "heldout_value": 0.2864321608040201,
+   "heldout_full": 0.27889447236180903,
+   "certified": true,
+   "pairs_used": 373
+  },
+  {
+   "delta": 0.05,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 6,
+   "search_value": 0.25416666666666665,
+   "heldout_value": 0.2864321608040201,
+   "heldout_full": 0.27889447236180903,
+   "certified": true,
+   "pairs_used": 373
+  },
+  {
+   "delta": 0.05,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 8,
+   "search_value": 0.25416666666666665,
+   "heldout_value": 0.2864321608040201,
+   "heldout_full": 0.27889447236180903,
+   "certified": true,
+   "pairs_used": 373
+  }
+ ],
+ "rq5": null
+}

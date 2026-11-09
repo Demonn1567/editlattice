@@ -1,0 +1,323 @@
+{
+ "name": "phaseA_lcb_metaharness_B1_s4_stmt",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "SYSTEM_PROMPT"
+   ],
+   "diff": "@@ seed lines 14-14\n- Put the whole program in one ```python code block.\"\"\"\n+ Put the whole program in one ```python code block.\n+ Make sure to test your solution with the given examples and handle all edge cases.\n+ \"\"\"\n",
+   "hunks": [
+    {
+     "start": 13,
+     "end": 14,
+     "replacement": [
+      "Put the whole program in one ```python code block.\n",
+      "Make sure to test your solution with the given examples and handle all edge cases.\n",
+      "\"\"\"\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 29-29\n-     prompt = f\"Problem: {task['title']}\\n\\n{task['question']}\"\n+     prompt = f\"Problem: {task['title']}\\n\\n{task['question']}\\n\\n\" + \\\n+              \"Please ensure your code handles all edge cases and test the solution with the given examples.\"\n",
+   "hunks": [
+    {
+     "start": 28,
+     "end": 29,
+     "replacement": [
+      "    prompt = f\"Problem: {task['title']}\\n\\n{task['question']}\\n\\n\" + \\\n",
+      "             \"Please ensure your code handles all edge cases and test the solution with the given examples.\"\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 31-31\n-     return {\"answer\": extract_code(reply)}\n+     code = extract_code(reply)\n+     \n+     # Execute the code against the provided test cases\n+     results = []\n+     for test in task[\"public_tests\"]:\n+         stdin = test[\"input\"]\n+         expected_output = test[\"output\"]\n+         result = env.run_python(code, stdin, timeout_seconds=5)\n+         actual_output = result.stdout.strip()\n+         \n+         # Check if the output matches the expected output\n+         results.append(actual_output == expected_output)\n+     \n+     return {\"answer\": code, \"results\": results}\n",
+   "hunks": [
+    {
+     "start": 30,
+     "end": 31,
+     "replacement": [
+      "    code = extract_code(reply)\n",
+      "    \n",
+      "    # Execute the code against the provided test cases\n",
+      "    results = []\n",
+      "    for test in task[\"public_tests\"]:\n",
+      "        stdin = test[\"input\"]\n",
+      "        expected_output = test[\"output\"]\n",
+      "        result = env.run_python(code, stdin, timeout_seconds=5)\n",
+      "        actual_output = result.stdout.strip()\n",
+      "        \n",
+      "        # Check if the output matches the expected output\n",
+      "        results.append(actual_output == expected_output)\n",
+      "    \n",
+      "    return {\"answer\": code, \"results\": results}\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {
+  "search": {
+   "seed": 0.19583333333333333,
+   "full": 0.20416666666666666,
+   "shapley": {
+    "0": {
+     "value": 0.0020833333333333394,
+     "low": -0.02500000000000001,
+     "high": 0.033333333333333326,
+     "p": 0.972
+    },
+    "1": {
+     "value": 0.006249999999999992,
+     "low": -0.008333333333333337,
+     "high": 0.022916666666666665,
+     "p": 0.497
+    },
+    "2": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": -0.020833333333333343,
+     "low": -0.04999999999999999,
+     "high": 0.00416666666666668,
+     "p": 0.119
+    },
+    "0,2": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,2": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "matters": {
+    "1": false,
+    "0": false,
+    "2": false
+   },
+   "interacts": {
+    "0,1": false,
+    "0,2": false,
+    "1,2": false
+   },
+   "loo": {
+    "0": -0.008333333333333331,
+    "1": -0.00416666666666668,
+    "2": 0.0
+   },
+   "loi": {
+    "0": 0.012500000000000011,
+    "1": 0.016666666666666663,
+    "2": 0.0
+   }
+  },
+  "heldout": {
+   "seed": 0.26176470588235295,
+   "full": 0.26176470588235295,
+   "shapley": {
+    "0": {
+     "value": -0.00735294117647059,
+     "low": -0.0323529411764706,
+     "high": 0.019117647058823517,
+     "p": 0.637
+    },
+    "1": {
+     "value": 0.007352941176470589,
+     "low": -0.008823529411764702,
+     "high": 0.026470588235294135,
+     "p": 0.465
+    },
+    "2": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": -0.0029411764705881693,
+     "low": -0.04999999999999999,
+     "high": 0.04117647058823526,
+     "p": 0.927
+    },
+    "0,2": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1,2": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "matters": {
+    "1": false,
+    "0": false,
+    "2": false
+   },
+   "interacts": {
+    "0,1": false,
+    "0,2": false,
+    "1,2": false
+   },
+   "loo": {
+    "0": -0.008823529411764675,
+    "1": 0.005882352941176505,
+    "2": 0.0
+   },
+   "loi": {
+    "0": -0.005882352941176505,
+    "1": 0.008823529411764675,
+    "2": 0.0
+   }
+  },
+  "overfitting_units": []
+ },
+ "rq4": [
+  {
+   "delta": 0.02,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 8,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.26176470588235295,
+   "heldout_full": 0.26176470588235295,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 7,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.26176470588235295,
+   "heldout_full": 0.26176470588235295,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 3,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.26176470588235295,
+   "heldout_full": 0.26176470588235295,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 6,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.26176470588235295,
+   "heldout_full": 0.26176470588235295,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 8,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.26176470588235295,
+   "heldout_full": 0.26176470588235295,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.05,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 8,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.26176470588235295,
+   "heldout_full": 0.26176470588235295,
+   "certified": true,
+   "pairs_used": 141
+  },
+  {
+   "delta": 0.05,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 7,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.26176470588235295,
+   "heldout_full": 0.26176470588235295,
+   "certified": true,
+   "pairs_used": 141
+  },
+  {
+   "delta": 0.05,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 3,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.26176470588235295,
+   "heldout_full": 0.26176470588235295,
+   "certified": true,
+   "pairs_used": 141
+  },
+  {
+   "delta": 0.05,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 6,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.26176470588235295,
+   "heldout_full": 0.26176470588235295,
+   "certified": true,
+   "pairs_used": 141
+  },
+  {
+   "delta": 0.05,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 8,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.26176470588235295,
+   "heldout_full": 0.26176470588235295,
+   "certified": true,
+   "pairs_used": 141
+  }
+ ],
+ "rq5": null
+}

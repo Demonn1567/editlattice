@@ -1,0 +1,10 @@
+{
+ "gain": 0.03235294117647059,
+ "low": -0.0029411764705882353,
+ "high": 0.07058823529411765,
+ "seed_accuracy": 0.27647058823529413,
+ "final_accuracy": 0.3088235294117647,
+ "real_gain": false,
+ "lattice": "constructed_lcb_bf16full_stmt_heldout.json",
+ "cells": 340
+}

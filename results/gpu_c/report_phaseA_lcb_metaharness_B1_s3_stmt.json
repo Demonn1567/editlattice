@@ -1,0 +1,308 @@
+{
+ "name": "phaseA_lcb_metaharness_B1_s3_stmt",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "SYSTEM_PROMPT"
+   ],
+   "diff": "@@ seed lines 12-12\n- SYSTEM_PROMPT = \"\"\"You are an expert competitive programmer.\n+ SYSTEM_PROMPT = \"\"\"You are an expert competitive programmer specializing in mathematical and combinatorial problems.\n",
+   "hunks": [
+    {
+     "start": 11,
+     "end": 12,
+     "replacement": [
+      "SYSTEM_PROMPT = \"\"\"You are an expert competitive programmer specializing in mathematical and combinatorial problems.\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "items": [
+    "SYSTEM_PROMPT"
+   ],
+   "diff": "@@ seed lines 14-14\n- Put the whole program in one ```python code block.\"\"\"\n+ Put the whole program in one ```python code block.\n+ Make sure to handle large numbers with modulo operations and use efficient algorithms where necessary.\"\"\"\n",
+   "hunks": [
+    {
+     "start": 13,
+     "end": 14,
+     "replacement": [
+      "Put the whole program in one ```python code block.\n",
+      "Make sure to handle large numbers with modulo operations and use efficient algorithms where necessary.\"\"\"\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 29-29\n-     prompt = f\"Problem: {task['title']}\\n\\n{task['question']}\"\n+     prompt = f\"Problem: {task['title']}\\n\\n{task['question']}\\n\\nPlease ensure your code handles all edge cases and is optimized for performance.\"\n",
+   "hunks": [
+    {
+     "start": 28,
+     "end": 29,
+     "replacement": [
+      "    prompt = f\"Problem: {task['title']}\\n\\n{task['question']}\\n\\nPlease ensure your code handles all edge cases and is optimized for performance.\"\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {
+  "search": {
+   "seed": 0.19583333333333333,
+   "full": 0.19583333333333333,
+   "shapley": {
+    "0": {
+     "value": 0.008333333333333335,
+     "low": -0.0111111111111111,
+     "high": 0.029861111111111102,
+     "p": 0.401
+    },
+    "1": {
+     "value": -0.02291666666666666,
+     "low": -0.06458333333333333,
+     "high": 0.011805555555555555,
+     "p": 0.226
+    },
+    "2": {
+     "value": 0.014583333333333328,
+     "low": -0.0048611111111111155,
+     "high": 0.03750000000000001,
+     "p": 0.168
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": 0.02500000000000001,
+     "low": 0.0,
+     "high": 0.05416666666666667,
+     "p": 0.058
+    },
+    "0,2": {
+     "value": -0.04166666666666667,
+     "low": -0.07708333333333334,
+     "high": -0.010416666666666685,
+     "p": 0.003
+    },
+    "1,2": {
+     "value": 0.004166666666666666,
+     "low": -0.02083333333333335,
+     "high": 0.033333333333333326,
+     "p": 0.785
+    }
+   },
+   "matters": {
+    "2": false,
+    "1": false,
+    "0": false
+   },
+   "interacts": {
+    "0,2": true,
+    "0,1": false,
+    "1,2": false
+   },
+   "loo": {
+    "0": 0.0,
+    "1": -0.008333333333333331,
+    "2": -0.00416666666666668
+   },
+   "loi": {
+    "0": 0.016666666666666663,
+    "1": -0.037500000000000006,
+    "2": 0.033333333333333326
+   }
+  },
+  "heldout": {
+   "seed": 0.23823529411764705,
+   "full": 0.25588235294117645,
+   "shapley": {
+    "0": {
+     "value": -0.0019607843137254876,
+     "low": -0.022549019607843144,
+     "high": 0.017156862745098023,
+     "p": 0.83
+    },
+    "1": {
+     "value": 0.0024509803921568636,
+     "low": -0.023529411764705882,
+     "high": 0.027941176470588254,
+     "p": 0.819
+    },
+    "2": {
+     "value": 0.017156862745098027,
+     "low": -0.00392156862745098,
+     "high": 0.040196078431372545,
+     "p": 0.104
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": -0.013235294117647067,
+     "low": -0.04264705882352943,
+     "high": 0.016176470588235306,
+     "p": 0.392
+    },
+    "0,2": {
+     "value": -0.0014705882352941402,
+     "low": -0.03529411764705884,
+     "high": 0.0338235294117647,
+     "p": 0.988
+    },
+    "1,2": {
+     "value": 0.019117647058823517,
+     "low": -0.010294117647058842,
+     "high": 0.0514705882352941,
+     "p": 0.23
+    }
+   },
+   "matters": {
+    "2": false,
+    "1": false,
+    "0": false
+   },
+   "interacts": {
+    "1,2": false,
+    "0,1": false,
+    "0,2": false
+   },
+   "loo": {
+    "0": -0.011764705882352955,
+    "1": 0.002941176470588225,
+    "2": 0.023529411764705854
+   },
+   "loi": {
+    "0": 0.0029411764705882526,
+    "1": -0.002941176470588225,
+    "2": 0.0058823529411764774
+   }
+  },
+  "overfitting_units": []
+ },
+ "rq4": [
+  {
+   "delta": 0.02,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 8,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.25588235294117645,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 7,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.25588235294117645,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 3,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.25588235294117645,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 6,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.25588235294117645,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.02,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 8,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.25588235294117645,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.05,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 8,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.25588235294117645,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.05,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 7,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.25588235294117645,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.05,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 3,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.25588235294117645,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.05,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 6,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.25588235294117645,
+   "certified": false,
+   "pairs_used": 340
+  },
+  {
+   "delta": 0.05,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 8,
+   "search_value": 0.19583333333333333,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.25588235294117645,
+   "certified": false,
+   "pairs_used": 340
+  }
+ ],
+ "rq5": null
+}

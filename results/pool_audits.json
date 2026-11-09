@@ -1,0 +1,82 @@
+{
+ "pooledA2_bird": {
+  "units": 11,
+  "products": 432,
+  "cells": 10,
+  "checked": 4320,
+  "mismatches": 0,
+  "executions": 4320
+ },
+ "pooledA2_gsmhard": {
+  "units": 8,
+  "products": 34,
+  "cells": 10,
+  "checked": 340,
+  "mismatches": 0,
+  "executions": 340
+ },
+ "pooledA2_lcb": {
+  "units": 11,
+  "products": 62,
+  "cells": 10,
+  "checked": 620,
+  "mismatches": 0,
+  "executions": 320
+ },
+ "pooledA3_bird": {
+  "units": 13,
+  "products": 432,
+  "cells": 10,
+  "checked": 4320,
+  "mismatches": 0,
+  "executions": 4320
+ },
+ "pooledA3_gsmhard": {
+  "units": 11,
+  "products": 288,
+  "cells": 10,
+  "checked": 2880,
+  "mismatches": 0,
+  "executions": 2880
+ },
+ "pooledA3_lcb": {
+  "units": 9,
+  "products": 84,
+  "cells": 10,
+  "checked": 840,
+  "mismatches": 0,
+  "executions": 840
+ },
+ "pooledA4_gsmhard": {
+  "units": 6,
+  "products": 21,
+  "cells": 10,
+  "checked": 210,
+  "mismatches": 0,
+  "executions": 210
+ },
+ "pooledA4_lcb": {
+  "units": 8,
+  "products": 64,
+  "cells": 10,
+  "checked": 640,
+  "mismatches": 0,
+  "executions": 640
+ },
+ "pooledA_bird": {
+  "units": 11,
+  "products": 300,
+  "cells": 10,
+  "checked": 3000,
+  "mismatches": 0,
+  "executions": 3000
+ },
+ "pooledA_gsmhard": {
+  "units": 10,
+  "products": 124,
+  "cells": 10,
+  "checked": 1240,
+  "mismatches": 0,
+  "executions": 1240
+ }
+}

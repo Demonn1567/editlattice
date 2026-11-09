@@ -1,0 +1,88 @@
+{
+ "benchmark": "lcb",
+ "n_tasks": 85,
+ "replicates": 4,
+ "model": "Qwen/Qwen3-4B-AWQ",
+ "loops": [
+  {
+   "loop": "metaharness_B1_s1",
+   "accepted": 2,
+   "gain": 0.01764705882352941,
+   "low": -0.020588235294117647,
+   "high": 0.058823529411764705,
+   "seed_accuracy": 0.25,
+   "final_accuracy": 0.2676470588235294,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B1_s2",
+   "accepted": 4,
+   "gain": 0.04411764705882353,
+   "low": 0.008823529411764706,
+   "high": 0.08235294117647059,
+   "seed_accuracy": 0.25,
+   "final_accuracy": 0.29411764705882354,
+   "real_gain": true
+  },
+  {
+   "loop": "metaharness_B1_s3",
+   "accepted": 2,
+   "gain": 0.014705882352941176,
+   "low": -0.026470588235294117,
+   "high": 0.05588235294117647,
+   "seed_accuracy": 0.25,
+   "final_accuracy": 0.2647058823529412,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B1_s4",
+   "accepted": 3,
+   "gain": 0.029411764705882353,
+   "low": -0.008823529411764706,
+   "high": 0.07352941176470588,
+   "seed_accuracy": 0.25,
+   "final_accuracy": 0.27941176470588236,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B3_s1",
+   "accepted": 2,
+   "gain": 0.0,
+   "low": 0.0,
+   "high": 0.0,
+   "seed_accuracy": 0.25,
+   "final_accuracy": 0.25,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B3_s2",
+   "accepted": 1,
+   "gain": 0.0,
+   "low": 0.0,
+   "high": 0.0,
+   "seed_accuracy": 0.25,
+   "final_accuracy": 0.25,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B3_s3",
+   "accepted": 3,
+   "gain": 0.020588235294117647,
+   "low": -0.014705882352941176,
+   "high": 0.061764705882352944,
+   "seed_accuracy": 0.25,
+   "final_accuracy": 0.27058823529411763,
+   "real_gain": false
+  },
+  {
+   "loop": "metaharness_B3_s4",
+   "accepted": 2,
+   "gain": 0.0,
+   "low": -0.023529411764705882,
+   "high": 0.023529411764705882,
+   "seed_accuracy": 0.25,
+   "final_accuracy": 0.25,
+   "real_gain": false
+  }
+ ]
+}

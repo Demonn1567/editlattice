@@ -1,0 +1,99 @@
+{
+ "name": "gsm_demo",
+ "split": "search",
+ "n_cells": 8,
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "SYSTEM_PROMPT"
+   ],
+   "diff": "@@ seed lines 8-9\n- SYSTEM_PROMPT = \"\"\"Solve the math word problem.\n- Think step by step, then end your reply with a final line of the form:\n+ SYSTEM_PROMPT = \"\"\"Solve the math word problem by writing a short Python program that prints only the final number.\n+ Put the program in one ```python code block, then end your reply with a final line of the form:\n"
+  },
+  {
+   "index": 1,
+   "items": [
+    "extract_answer"
+   ],
+   "diff": "@@ seed lines 16-17\n-         return reply.rsplit(\"Answer:\", 1)[1].strip()\n-     return reply.strip()\n+         return reply.rsplit(\"Answer:\", 1)[1].strip().replace(\",\", \"\")\n+     return reply.strip().replace(\",\", \"\")\n"
+  },
+  {
+   "index": 2,
+   "items": [
+    "solve"
+   ],
+   "diff": "@@ seed lines 22-21\n+     if \"```python\" in reply:\n+         code = reply.split(\"```python\", 1)[1].split(\"```\", 1)[0]\n+         result = env.run_python(code)\n+         if result.returncode == 0 and result.stdout.strip():\n+             return {\"answer\": result.stdout.strip().splitlines()[-1]}\n"
+  }
+ ],
+ "values": {
+  "": 0.375,
+  "0": 0.375,
+  "1": 0.375,
+  "2": 0.375,
+  "0,1": 0.375,
+  "0,1,2": 0.625,
+  "0,2": 0.625,
+  "1,2": 0.375
+ },
+ "shapley": {
+  "0": {
+   "value": 0.125,
+   "low": 0.0,
+   "high": 0.25
+  },
+  "1": {
+   "value": 0.0,
+   "low": 0.0,
+   "high": 0.0
+  },
+  "2": {
+   "value": 0.125,
+   "low": 0.0,
+   "high": 0.25
+  }
+ },
+ "interaction": {
+  "0,1": {
+   "value": 0.0,
+   "low": 0.0,
+   "high": 0.0
+  },
+  "0,2": {
+   "value": 0.25,
+   "low": 0.0,
+   "high": 0.5
+  },
+  "1,2": {
+   "value": 0.0,
+   "low": 0.0,
+   "high": 0.0
+  }
+ },
+ "mobius": {
+  "": 0.375,
+  "0": 0.0,
+  "1": 0.0,
+  "2": 0.0,
+  "0,1": 0.0,
+  "0,2": 0.25,
+  "1,2": 0.0,
+  "0,1,2": 0.0
+ },
+ "loo": {
+  "0": 0.25,
+  "1": 0.0,
+  "2": 0.25
+ },
+ "loi": {
+  "0": 0.0,
+  "1": 0.0,
+  "2": 0.0
+ },
+ "cost": {
+  "executions": 57,
+  "brute_force_runs": 64,
+  "generated_tokens": 3974,
+  "nominal_tokens": 14928,
+  "mismatches": 0
+ }
+}

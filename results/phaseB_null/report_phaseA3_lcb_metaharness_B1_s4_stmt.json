@@ -1,0 +1,202 @@
+{
+ "name": "phaseA3_lcb_metaharness_B1_s4_stmt",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "extract_code"
+   ],
+   "diff": "@@ seed lines 18-18\n-     \"\"\"The last ```python block, else the last code block, else None.\"\"\"\n+     \"\"\"Extract code from model reply, handling both code blocks and 'Final answer:' format.\"\"\"\n+     # Handle 'Final answer: ...' format\n+     if \"Final answer:\" in reply:\n+         code_part = reply.split(\"Final answer:\", 1)[-1].strip()\n+         # If code_part contains triple backticks, extract the middle part\n+         if code_part.startswith(\"```\") and code_part.endswith(\"```\"):\n+             return code_part[3:-3].strip()\n+         return code_part  # Return raw code if no backticks\n+ \n+     # Fallback to code block extraction\n",
+   "hunks": [
+    {
+     "start": 17,
+     "end": 18,
+     "replacement": [
+      "    \"\"\"Extract code from model reply, handling both code blocks and 'Final answer:' format.\"\"\"\n",
+      "    # Handle 'Final answer: ...' format\n",
+      "    if \"Final answer:\" in reply:\n",
+      "        code_part = reply.split(\"Final answer:\", 1)[-1].strip()\n",
+      "        # If code_part contains triple backticks, extract the middle part\n",
+      "        if code_part.startswith(\"```\") and code_part.endswith(\"```\"):\n",
+      "            return code_part[3:-3].strip()\n",
+      "        return code_part  # Return raw code if no backticks\n",
+      "\n",
+      "    # Fallback to code block extraction\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {
+  "search": {
+   "seed": 0.2,
+   "full": 0.2,
+   "shapley": {
+    "0": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "interaction": {},
+   "matters": {
+    "0": false
+   },
+   "interacts": {},
+   "loo": {
+    "0": 0.0
+   },
+   "loi": {
+    "0": 0.0
+   }
+  },
+  "heldout": {
+   "seed": 0.25588235294117645,
+   "full": 0.25588235294117645,
+   "shapley": {
+    "0": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "interaction": {},
+   "matters": {
+    "0": false
+   },
+   "interacts": {},
+   "loo": {
+    "0": 0.0
+   },
+   "loi": {
+    "0": 0.0
+   }
+  },
+  "overfitting_units": []
+ },
+ "rq4": [
+  {
+   "delta": 0.02,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.2,
+   "heldout_value": 0.25588235294117645,
+   "heldout_full": 0.25588235294117645,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.2,
+   "heldout_value": 0.25588235294117645,
+   "heldout_full": 0.25588235294117645,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.2,
+   "heldout_value": 0.25588235294117645,
+   "heldout_full": 0.25588235294117645,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.2,
+   "heldout_value": 0.25588235294117645,
+   "heldout_full": 0.25588235294117645,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.2,
+   "heldout_value": 0.25588235294117645,
+   "heldout_full": 0.25588235294117645,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.05,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.2,
+   "heldout_value": 0.25588235294117645,
+   "heldout_full": 0.25588235294117645,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.2,
+   "heldout_value": 0.25588235294117645,
+   "heldout_full": 0.25588235294117645,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.2,
+   "heldout_value": 0.25588235294117645,
+   "heldout_full": 0.25588235294117645,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.2,
+   "heldout_value": 0.25588235294117645,
+   "heldout_full": 0.25588235294117645,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.2,
+   "heldout_value": 0.25588235294117645,
+   "heldout_full": 0.25588235294117645,
+   "certified": true,
+   "pairs_used": 121
+  }
+ ],
+ "rq5": null
+}

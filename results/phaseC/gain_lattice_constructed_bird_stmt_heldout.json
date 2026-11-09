@@ -1,0 +1,10 @@
+{
+ "gain": 0.06658291457286432,
+ "low": 0.016331658291457288,
+ "high": 0.12060301507537688,
+ "seed_accuracy": 0.30402010050251255,
+ "final_accuracy": 0.3706030150753769,
+ "real_gain": true,
+ "lattice": "constructed_bird_stmt_heldout.json",
+ "cells": 796
+}

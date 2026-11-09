@@ -1,0 +1,246 @@
+{
+ "name": "phaseA2_bird_metaharness_B3_s3_stmt",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "schema_text"
+   ],
+   "diff": "@@ seed lines 17-17\n-     \"\"\"Every user table with its columns and types.\"\"\"\n+     \"\"\"Every user table with its columns and types and descriptions.\"\"\"\n",
+   "hunks": [
+    {
+     "start": 16,
+     "end": 17,
+     "replacement": [
+      "    \"\"\"Every user table with its columns and types and descriptions.\"\"\"\n"
+     ]
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "items": [
+    "schema_text"
+   ],
+   "diff": "@@ seed lines 26-26\n-         lines.append(f\"Table {table}: {described}\")\n+         desc = env.description(table)\n+         lines.append(f\"Table {table}: {described} | {desc}\")\n",
+   "hunks": [
+    {
+     "start": 25,
+     "end": 26,
+     "replacement": [
+      "        desc = env.description(table)\n",
+      "        lines.append(f\"Table {table}: {described} | {desc}\")\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {
+  "search": {
+   "seed": 0.25416666666666665,
+   "full": 0.25833333333333336,
+   "shapley": {
+    "0": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1": {
+     "value": 0.004166666666666707,
+     "low": -0.07499999999999998,
+     "high": 0.07500000000000001,
+     "p": 0.955
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "matters": {
+    "1": false,
+    "0": false
+   },
+   "interacts": {
+    "0,1": false
+   },
+   "loo": {
+    "0": 0.0,
+    "1": 0.004166666666666707
+   },
+   "loi": {
+    "0": 0.0,
+    "1": 0.004166666666666707
+   }
+  },
+  "heldout": {
+   "seed": 0.29773869346733667,
+   "full": 0.30778894472361806,
+   "shapley": {
+    "0": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    },
+    "1": {
+     "value": 0.010050251256281395,
+     "low": -0.030150753768844185,
+     "high": 0.047738693467336696,
+     "p": 0.664
+    }
+   },
+   "interaction": {
+    "0,1": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "matters": {
+    "1": false,
+    "0": false
+   },
+   "interacts": {
+    "0,1": false
+   },
+   "loo": {
+    "0": 0.0,
+    "1": 0.010050251256281395
+   },
+   "loi": {
+    "0": 0.0,
+    "1": 0.010050251256281395
+   }
+  },
+  "overfitting_units": []
+ },
+ "rq4": [
+  {
+   "delta": 0.02,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.25416666666666665,
+   "heldout_value": 0.29773869346733667,
+   "heldout_full": 0.30778894472361806,
+   "certified": false,
+   "pairs_used": 796
+  },
+  {
+   "delta": 0.02,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.25416666666666665,
+   "heldout_value": 0.29773869346733667,
+   "heldout_full": 0.30778894472361806,
+   "certified": false,
+   "pairs_used": 796
+  },
+  {
+   "delta": 0.02,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 3,
+   "search_value": 0.25416666666666665,
+   "heldout_value": 0.29773869346733667,
+   "heldout_full": 0.30778894472361806,
+   "certified": false,
+   "pairs_used": 796
+  },
+  {
+   "delta": 0.02,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 5,
+   "search_value": 0.25416666666666665,
+   "heldout_value": 0.29773869346733667,
+   "heldout_full": 0.30778894472361806,
+   "certified": false,
+   "pairs_used": 796
+  },
+  {
+   "delta": 0.02,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.25416666666666665,
+   "heldout_value": 0.29773869346733667,
+   "heldout_full": 0.30778894472361806,
+   "certified": false,
+   "pairs_used": 796
+  },
+  {
+   "delta": 0.05,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.25416666666666665,
+   "heldout_value": 0.29773869346733667,
+   "heldout_full": 0.30778894472361806,
+   "certified": true,
+   "pairs_used": 755
+  },
+  {
+   "delta": 0.05,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.25416666666666665,
+   "heldout_value": 0.29773869346733667,
+   "heldout_full": 0.30778894472361806,
+   "certified": true,
+   "pairs_used": 755
+  },
+  {
+   "delta": 0.05,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 3,
+   "search_value": 0.25416666666666665,
+   "heldout_value": 0.29773869346733667,
+   "heldout_full": 0.30778894472361806,
+   "certified": true,
+   "pairs_used": 755
+  },
+  {
+   "delta": 0.05,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 5,
+   "search_value": 0.25416666666666665,
+   "heldout_value": 0.29773869346733667,
+   "heldout_full": 0.30778894472361806,
+   "certified": true,
+   "pairs_used": 755
+  },
+  {
+   "delta": 0.05,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.25416666666666665,
+   "heldout_value": 0.29773869346733667,
+   "heldout_full": 0.30778894472361806,
+   "certified": true,
+   "pairs_used": 755
+  }
+ ],
+ "rq5": null
+}

@@ -1,0 +1,199 @@
+{
+ "name": "phaseA2_lcb_metaharness_B3_s1_stmt",
+ "units": [
+  {
+   "index": 0,
+   "items": [
+    "extract_code"
+   ],
+   "diff": "@@ seed lines 18-24\n-     \"\"\"The last ```python block, else the last code block, else None.\"\"\"\n-     if \"```python\" in reply:\n-         return reply.rsplit(\"```python\", 1)[1].split(\"```\", 1)[0].strip()\n-     if \"```\" in reply:\n-         parts = reply.split(\"```\")\n-         if len(parts) >= 3:\n-             return parts[-2].strip()\n+     import re\n+     match = re.search(r'```python(.*?)```', reply, re.DOTALL)\n+     if match:\n+         return match.group(1).strip()\n+     match = re.search(r'```(.*?)```', reply, re.DOTALL)\n+     if match:\n+         return match.group(1).strip()\n",
+   "hunks": [
+    {
+     "start": 17,
+     "end": 24,
+     "replacement": [
+      "    import re\n",
+      "    match = re.search(r'```python(.*?)```', reply, re.DOTALL)\n",
+      "    if match:\n",
+      "        return match.group(1).strip()\n",
+      "    match = re.search(r'```(.*?)```', reply, re.DOTALL)\n",
+      "    if match:\n",
+      "        return match.group(1).strip()\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "rq3": {
+  "search": {
+   "seed": 0.2,
+   "full": 0.2,
+   "shapley": {
+    "0": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "interaction": {},
+   "matters": {
+    "0": false
+   },
+   "interacts": {},
+   "loo": {
+    "0": 0.0
+   },
+   "loi": {
+    "0": 0.0
+   }
+  },
+  "heldout": {
+   "seed": 0.23823529411764705,
+   "full": 0.23823529411764705,
+   "shapley": {
+    "0": {
+     "value": 0.0,
+     "low": 0.0,
+     "high": 0.0,
+     "p": 1.0
+    }
+   },
+   "interaction": {},
+   "matters": {
+    "0": false
+   },
+   "interacts": {},
+   "loo": {
+    "0": 0.0
+   },
+   "loi": {
+    "0": 0.0
+   }
+  },
+  "overfitting_units": []
+ },
+ "rq4": [
+  {
+   "delta": 0.02,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.2,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.23823529411764705,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.2,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.23823529411764705,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.2,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.23823529411764705,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.2,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.23823529411764705,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.02,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.2,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.23823529411764705,
+   "certified": true,
+   "pairs_used": 308
+  },
+  {
+   "delta": 0.05,
+   "method": "exact",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.2,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.23823529411764705,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "greedy_backward",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.2,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.23823529411764705,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "ddmin",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.2,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.23823529411764705,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "loo_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 4,
+   "search_value": 0.2,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.23823529411764705,
+   "certified": true,
+   "pairs_used": 121
+  },
+  {
+   "delta": 0.05,
+   "method": "shapley_threshold",
+   "product": [],
+   "units_kept": 0,
+   "queries": 2,
+   "search_value": 0.2,
+   "heldout_value": 0.23823529411764705,
+   "heldout_full": 0.23823529411764705,
+   "certified": true,
+   "pairs_used": 121
+  }
+ ],
+ "rq5": null
+}
