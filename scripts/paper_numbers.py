@@ -277,10 +277,11 @@ def constructed(lines: list[str]) -> None:
         return
     names = {"gsmhard": "GSM-Hard", "lcb": "LiveCodeBench", "bird": "BIRD"}
     table = ["\\begin{table}[t]", "\\centering",
-             "\\caption{Constructed lineages (Phase C, registered before any lattice): held-out gain of the full lineage over the "
-             "seed and held-out Shapley values with 95\\% CIs, in points (U0 prompt, U1 auxiliary change, U2 technique). "
-             "$^\\ast$: interval excludes 0 after Holm correction. Distilled: exact smallest product within $\\delta=2$ points "
-             "on search cells, and whether it was certified non-inferior on held-out cells.}",
+             "\\caption{Constructed lineages of Phase C, registered before any of their lattices ran. Gain: held-out gain "
+             "of the full lineage over its seed. U0 (prompt), U1 (auxiliary change), U2 (technique): held-out Shapley values "
+             "with 95\\% CIs. All values in points; $^\\ast$ marks an interval that excludes 0 after Holm correction. "
+             "Distilled: the smallest product within $\\delta=2$ points on the search cells, found exactly, and whether "
+             "the held-out test certified it as non-inferior.}",
              "\\label{tab:constructed}", "\\small", "\\resizebox{\\textwidth}{!}{\\begin{tabular}{lllllll}", "\\toprule",
              "Benchmark & gain & U0 & U1 & U2 & distilled & certified \\\\", "\\midrule"]
     for bench in ("gsmhard", "lcb", "bird"):
@@ -378,8 +379,8 @@ def transfer_lineages(lines: list[str]) -> None:
              "\\caption{Transfer (RQ6) of the constructed lineages and the evolved real-gain lineages, in full. Held-out "
              "Shapley values in points under each solver setting, and the gain of the full lineage over the seed with its "
              "95\\% task-bootstrap interval. Qwen3-4B settings: AWQ at $T{=}0.7$ (the setting of evolution and of every "
-             "other analysis), AWQ at $T{=}1.0$, and bf16. Llama-3.1-8B in two builds: 4-bit MLX on a laptop and AWQ "
-             "INT4 under vLLM on the GPU. $^\\dagger$: a real gain under the registered criterion. $^\\ast$: "
+             "other analysis), AWQ at $T{=}1.0$, and bf16. Llama-3.1-8B was run twice, once as a 4-bit MLX build on a "
+             "laptop and once as AWQ INT4 under vLLM on the GPU. $^\\dagger$: a real gain under the registered criterion. $^\\ast$: "
              "exploratory, not registered. The first evolved BIRD lineage has two units.}",
              "\\label{tab:transfer-lineages}", "\\small", "\\begin{tabular}{llrrrl}", "\\toprule",
              "Lineage & Solver & U0 & U1 & U2 & gain \\\\", "\\midrule"]

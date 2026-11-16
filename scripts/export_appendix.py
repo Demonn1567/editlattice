@@ -73,9 +73,9 @@ def lineages_table() -> None:
     lines = ["{\\footnotesize\\setlength{\\tabcolsep}{4pt}", "\\begin{longtable}{lllrrrrrrl}",
              "\\caption{Every evolved lineage without a real gain. Units: net units; inert: change no held-out outcome; "
              "helps and harms: held-out Shapley interval excludes 0 after Holm correction; overfit: search interval "
-             "above 0, held-out not. Executions: search and held-out lattices, against brute force. Audit: (product, "
-             "cell) pairs checked against runs alone, and mismatches. Fresh: pairs rerun on private streams, and "
-             "products with Fisher $p<0.05$.}\\label{tab:all-lineages}\\\\",
+             "above 0, held-out not. Executions: what the search and held-out lattices ran, next to the brute-force "
+             "count. Audit: how many (product, cell) pairs were compared with runs alone, and how many disagreed. "
+             "Fresh: pairs rerun on private streams, and products with Fisher $p<0.05$.}\\label{tab:all-lineages}\\\\",
              "\\toprule", "Phase & Benchmark & Loop & units & inert & helps & harms & overfit & executions & audit; fresh \\\\",
              "\\midrule", "\\endfirsthead",
              "\\toprule", "Phase & Benchmark & Loop & units & inert & helps & harms & overfit & executions & audit; fresh \\\\",
@@ -251,7 +251,7 @@ def predictions_table() -> None:
     p2 = dividend < 1e-15 and all(reads[s][3] == 0 and report[s]["shapley"]["3"]["value"] == 0 and
                                   all(e["value"] == 0 for k, e in report[s]["interaction"].items() if "3" in k.split(","))
                                   for s in splits)
-    add("P2", "planted: dead helper U3 is never read; its Shapley value, interactions and M\\\"obius terms are 0", p2,
+    add("P2", "planted: no run ever calls the helper U3, so its Shapley value, interactions and M\\\"obius terms are 0", p2,
         f"read by 0 of {num(len(runs['search']))} and 0 of {num(len(runs['heldout']))} runs; dividends below $10^{{-15}}$", True)
     add("P3", "planted: I(U0,U2) $>0$", all(report[s]["interaction"]["0,2"]["value"] > 0 for s in splits),
         f"{ci(report['search']['interaction']['0,2'])} search, {ci(report['heldout']['interaction']['0,2'])} held-out", True)
@@ -340,7 +340,7 @@ def predictions_table() -> None:
     branched = json.loads((RESULTS / "branched.json").read_text())
     names = {"bird": "BIRD", "lcb": "LiveCodeBench"}
     width = {"bird": 4, "lcb": 3}
-    add("R1", "branched: 0 mismatches in both exhaustive audits", all(b["audit"]["mismatches"] == 0 for b in branched.values()),
+    add("R1", "branched: the exhaustive audits find no mismatch", all(b["audit"]["mismatches"] == 0 for b in branched.values()),
         "; ".join(f"{names[k]} {b['audit']['mismatches']} of {num(b['audit']['checked'])}" for k, b in branched.items()), True)
     add("R2", "branched: read width at most 4 (BIRD) and 3 (LiveCodeBench), so at most 16 and 8 executions per cell",
         all(b[s]["max_read_width"] <= width[k] and b[s]["max_leaves_per_cell"] <= 2 ** width[k] for k, b in branched.items() for s in ("search", "heldout")),
@@ -366,7 +366,7 @@ def predictions_table() -> None:
 
     table = ["{\\small\\setlength{\\LTcapwidth}{\\textwidth}",
              "\\begin{longtable}{l>{\\raggedright\\arraybackslash}p{0.34\\textwidth}l>{\\raggedright\\arraybackslash}p{0.42\\textwidth}}",
-             f"\\caption{{Every registered prediction and its outcome ({sum(outcomes)} of {len(outcomes)} held). Evidence is in "
+             f"\\caption{{Registered predictions and what happened ({sum(outcomes)} of {len(outcomes)} held). Evidence is in "
              "points where it is a value; intervals are 95\\% bootstrap intervals. P: planted lineage, both splits; S: synthetic "
              "scaling study; C: constructed lineages, held-out cells; A4: the reasoning proposer at 8B; R: branched lineages (RQ1c); Q: pooled lattices.}",
              "\\label{tab:predictions}\\\\", "\\toprule", "ID & Prediction & Outcome & Evidence \\\\", "\\midrule", "\\endfirsthead",
