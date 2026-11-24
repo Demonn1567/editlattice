@@ -136,7 +136,7 @@ def settings_table() -> None:
     lines = ["\\begin{table}[ht]", "\\centering", "\\caption{Settings of the evolution phases, read from the configuration files. "
              "The three benchmarks of a phase share every setting except the data, the seed harness, the proposer request "
              "timeout (an operational setting) and the solver's output budget on LiveCodeBench. Every held-out gain check "
-             "and lattice uses 768 solver tokens on every benchmark (Appendix~\\ref{app:deviations}).}", "\\label{tab:settings}",
+             "and lattice uses 768 solver tokens on every benchmark (Section~\\ref{app:deviations}).}", "\\label{tab:settings}",
              "\\small", "\\resizebox{\\textwidth}{!}{\\begin{tabular}{lllll}", "\\toprule", "Setting & Phase A & Phase A2 & Phase A3 & Phase A4 \\\\", "\\midrule"]
     for label, get in rows:
         lines.append(f"{label} & " + " & ".join(get(configs[p]).replace("_", "\\_") for p, _ in phases) + " \\\\")
@@ -368,7 +368,7 @@ def predictions_table() -> None:
              "\\begin{longtable}{l>{\\raggedright\\arraybackslash}p{0.34\\textwidth}l>{\\raggedright\\arraybackslash}p{0.42\\textwidth}}",
              f"\\caption{{Registered predictions and what happened ({sum(outcomes)} of {len(outcomes)} held). Evidence is in "
              "points where it is a value; intervals are 95\\% bootstrap intervals. P: planted lineage, both splits; S: synthetic "
-             "scaling study; C: constructed lineages, held-out cells; A4: the reasoning proposer at 8B; R: branched lineages (RQ1c); Q: pooled lattices.}",
+             "scaling study; C: constructed lineages, held-out cells; A4: the reasoning proposer at 8B; R: branched lineages; Q: pooled lattices.}",
              "\\label{tab:predictions}\\\\", "\\toprule", "ID & Prediction & Outcome & Evidence \\\\", "\\midrule", "\\endfirsthead",
              "\\toprule", "ID & Prediction & Outcome & Evidence \\\\", "\\midrule", "\\endhead", "\\bottomrule", "\\endfoot"]
     table += rows + ["\\end{longtable}", "}"]

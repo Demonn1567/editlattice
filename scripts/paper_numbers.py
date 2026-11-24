@@ -77,7 +77,7 @@ def rq2(lines: list[str]) -> None:
     budgets = data["budgets"]
     estimators = [("permutation", "Permutation sampling"), ("kernelshap", "KernelSHAP"), ("plugin_exact", "Plug-in exact"),
                   ("loo", "Leave-one-out"), ("loi", "Leave-one-in")]
-    table = ["\\begin{table}[t]", "\\centering", "\\caption{RQ2: mean absolute error of Shapley estimates against the exact lattice "
+    table = ["\\begin{table}[t]", "\\centering", "\\caption{Mean absolute error of Shapley estimates against the exact lattice "
              "(planted lineage, held-out cells, 20 repetitions), in points, coupled (replayed streams) / independent streams, at "
              "equal budgets of task-runs.}", "\\label{tab:rq2}", "\\small", "\\begin{tabular}{l" + "c" * len(budgets) + "}", "\\toprule",
              "Estimator & " + " & ".join(f"{b:,}".replace(",", "{,}") for b in budgets) + " \\\\", "\\midrule"]
@@ -115,7 +115,7 @@ def scaling(lines: list[str]) -> None:
         return
     rows = json.loads(path.read_text())["rows"]
     table = ["\\begin{table}[t]", "\\centering",
-             "\\caption{RQ1b: tree exploration on a synthetic family with $m$ units and routes of $L$ steps, over "
+             "\\caption{Tree exploration on a synthetic family with $m$ units and routes of $L$ steps, over "
              "48 cells. Columns: executions, brute-force runs ($48\\cdot 2^m$) and read width $w$. Times are in seconds, "
              "for the static analysis, the closed-form attribution and the exact optimisation. The optimisation uses the "
              "node MILP, or enumeration ($^e$) for the dense rows with $m>10$. Mismatches against plain runs: 0 in every row.}",
@@ -249,7 +249,7 @@ def null_group(lines: list[str]) -> None:
               macro("PoolALcbBrute", num(sizes["A_lcb"]["products"] * (60 + 85) * 4)),
               macro("PoolAFourBirdProducts", num(sizes["A4_bird"]["products"]))]
     table = ["\\begin{table}[t]", "\\centering",
-             "\\caption{Recombination (RQ5) over every loop of a phase on a benchmark. Columns: conflict-free products of the "
+             "\\caption{Recombination over every loop of a phase on a benchmark. Columns: conflict-free products of the "
              "pool, executions over search and held-out cells, the product chosen on search cells, and its held-out difference "
              "to the best single final harness. Differences are in points, with 95\\% task-bootstrap intervals. The registered "
              "certification (anytime-valid superiority test, $\\alpha=0.05$) succeeds for none. Where the chosen product is the "
@@ -277,7 +277,7 @@ def constructed(lines: list[str]) -> None:
         return
     names = {"gsmhard": "GSM-Hard", "lcb": "LiveCodeBench", "bird": "BIRD"}
     table = ["\\begin{table}[t]", "\\centering",
-             "\\caption{Constructed lineages of Phase C, registered before any of their lattices ran. Gain: held-out gain "
+             "\\caption{Constructed lineages, registered before any of their lattices ran. Gain: held-out gain "
              "of the full lineage over its seed. U0 (prompt), U1 (auxiliary change), U2 (technique): held-out Shapley values "
              "with 95\\% CIs. All values in points; $^\\ast$ marks an interval that excludes 0 after Holm correction. "
              "Distilled: the smallest product within $\\delta=2$ points on the search cells, found exactly, and whether "
@@ -337,7 +337,7 @@ def transfer(lines: list[str]) -> None:
               "Qwen3-4B AWQ T0.7": "Qwen3-4B, AWQ, $T{=}0.7$", "Qwen3-4B AWQ T1.0": "Qwen3-4B, AWQ, $T{=}1.0$", "Qwen3-4B bf16 T0.7": "Qwen3-4B, bf16, $T{=}0.7$",
               "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)": "Llama-3.1-8B, AWQ (vLLM), $T{=}0.7^\\ast$"}
     table = ["\\begin{table}[t]", "\\centering",
-             "\\caption{Transfer (RQ6) on the planted lineage. Columns: held-out Shapley values in points for each solver "
+             "\\caption{Transfer on the planted lineage. Columns: held-out Shapley values in points for each solver "
              "setting, and the gain of the full lineage over the seed with its 95\\% CI. $^\\dagger$: a real gain under the "
              "registered criterion, applied post hoc. $^\\ast$: exploratory, not registered.}",
              "\\label{tab:transfer}", "\\small", "\\begin{tabular}{lrrrrl}", "\\toprule",
@@ -376,7 +376,7 @@ def transfer_lineages(lines: list[str]) -> None:
               "Llama-3.1-8B MLX 4-bit T0.7 (Mac, exploratory)": "Llama, MLX$^\\ast$",
               "Llama-3.1-8B AWQ vLLM T0.7 (GPU, exploratory)": "Llama, AWQ$^\\ast$"}
     table = ["\\begin{table}[p]", "\\centering",
-             "\\caption{Transfer (RQ6) of the constructed lineages and the evolved real-gain lineages, in full. Held-out "
+             "\\caption{Transfer of the constructed lineages and the evolved real-gain lineages, in full. Held-out "
              "Shapley values in points under each solver setting, and the gain of the full lineage over the seed with its "
              "95\\% task-bootstrap interval. Qwen3-4B settings: AWQ at $T{=}0.7$ (the setting of evolution and of every "
              "other analysis), AWQ at $T{=}1.0$, and bf16. Llama-3.1-8B was run twice, once as a 4-bit MLX build on a "
@@ -505,11 +505,11 @@ def transfer_summary(lines: list[str]) -> None:
         return json.loads((RESULTS / "transfer_gain" / f"gain_lattice_{name}_stmt_heldout.json").read_text())
 
     table = ["\\begin{table}[t]", "\\centering",
-             "\\caption{Transfer (RQ6) in summary. Carrier: the unit with the largest held-out Shapley value under the "
+             "\\caption{Transfer in summary. Carrier: the unit with the largest held-out Shapley value under the "
              "evolution setting (Qwen3-4B, AWQ, $T{=}0.7$). First: settings in which it still ranks first. Real gain: settings "
              "in which the full lineage has a real gain over the seed. The two Llama-3.1-8B builds (MLX and AWQ): do they rank "
-             "the same unit first, and do they agree on whether the gain is real? Appendix~\\ref{app:full} gives every value.}",
-             "\\label{tab:transfer-summary}", "\\small", "\\begin{tabular}{llcccc}", "\\toprule",
+             "the same unit first, and do they agree on whether the gain is real? Every value is given in \\FullResultsWhere{}.}",
+             "\\label{tab:transfer-summary}", "\\small", "\\resizebox{\\linewidth}{!}{\\begin{tabular}{llcccc}", "\\toprule",
              "Lineage & carrier & first & real gain & same first & same verdict \\\\", "\\midrule"]
     agree_top = agree_real = 0
     large_units = large_same_sign = 0
@@ -533,7 +533,7 @@ def transfer_summary(lines: list[str]) -> None:
         counts[key] = (first, reals, len(settings))
         table.append(f"{label} & U{carrier} & {first}/{len(settings)} & {reals}/{len(settings)} & "
                      f"{'yes' if same_top else 'no'} & {'yes' if same_real else 'no'} \\\\")
-    table += ["\\bottomrule", "\\end{tabular}", "\\end{table}"]
+    table += ["\\bottomrule", "\\end{tabular}}", "\\end{table}"]
     (PAPER / "tables" / "transfer_summary.tex").write_text("\n".join(table) + "\n")
     technique = [k for k, _, _ in rows if not k.startswith("phaseA3")]
     # Stated in words: the technique unit of the planted and constructed lineages ranks first in every setting; the two
@@ -565,7 +565,7 @@ def cost_table(lines: list[str]) -> None:
         return
     groups = json.loads(path.read_text())
     labels = {"prior": "Earlier BIRD lineages", "planted": "Planted (every solver)", "constructed": "Constructed",
-              "evolved": "Evolved (Phases A to A4)", "pooled": "Pooled recombination", "branched": "Branched (RQ1c)"}
+              "evolved": "Evolved (Phases A to A4)", "pooled": "Pooled recombination", "branched": "Branched"}
     share = lambda a, b: a / b  # noqa: E731
     pc = lambda x: f"{100 * x:.0f}\\%" if x >= 0.095 else f"{100 * x:.1f}\\%"  # noqa: E731
     table = ["\\begin{table}[t]", "\\centering",
@@ -574,14 +574,14 @@ def cost_table(lines: list[str]) -> None:
              "generated, as a share of the tokens the same executions would have generated without replay. Exploration "
              "skips runs only where runs differ in what they read; replay saves generation wherever runs send the same "
              "request.}",
-             "\\label{tab:cost}", "\\small", "\\begin{tabular}{lrcrr}", "\\toprule",
+             "\\label{tab:cost}", "\\small", "\\resizebox{\\linewidth}{!}{\\begin{tabular}{lrcrr}", "\\toprule",
              "Lineages & lattices & units & executions & generated tokens \\\\", "\\midrule"]
     for key in ("prior", "planted", "constructed", "evolved", "pooled", "branched"):
         g = groups[key]
         units = str(g["units_min"]) if g["units_min"] == g["units_max"] else f"{g['units_min']} to {g['units_max']}"
         table.append(f"{labels[key]} & {g['lattices']} & {units} & {pc(share(g['executions'], g['brute_force']))} & "
                      f"{pc(share(g['generated_tokens'], g['nominal_tokens']))} \\\\")
-    table += ["\\bottomrule", "\\end{tabular}", "\\end{table}"]
+    table += ["\\bottomrule", "\\end{tabular}}", "\\end{table}"]
     (PAPER / "tables" / "cost.tex").write_text("\n".join(table) + "\n")
     ex = {k: share(g["executions"], g["brute_force"]) for k, g in groups.items()}
     tok = {k: share(g["generated_tokens"], g["nominal_tokens"]) for k, g in groups.items()}
@@ -611,7 +611,7 @@ def branched(lines: list[str]) -> None:
 
     names = {"bird": ("BIRD", "Bird"), "lcb": ("LiveCodeBench", "Lcb")}
     table = ["\\begin{table}[t]", "\\centering",
-             "\\caption{RQ1c: branched lineages, 12 units each, most of them on failure paths (4{,}096 products). Audit: "
+             "\\caption{Branched lineages, 12 units each, most of them on failure paths (4{,}096 products). Audit: "
              "(product, cell) pairs of the exhaustive brute-force audit and mismatches. Executions: held-out executions "
              "against brute force, mean and largest number per cell, and the largest number of units one run read. Tokens: "
              "generated tokens as a share of the tokens the same executions would have generated without replay. Fresh: "

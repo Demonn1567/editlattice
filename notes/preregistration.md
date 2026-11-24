@@ -262,3 +262,36 @@ audit: 10 search tasks x 1 replicate, every conflict-free product run alone (--b
 same units (same loop logs, DEC-19 rule), same read model as the pooled lattice, the pool's own namespace.
 Prediction: 0 mismatches in every pool. Reported whatever the outcome. Runs after stage_branched on the GPU.
 Script: scripts/gpu/stage_pool_audit.sh.
+
+## Addendum 2026-11-24 (before running): Phase A5, evolution from multi-step seed harnesses
+Why: written after every earlier result. In Phases A to A4 every loop started from a
+one-call seed, so every accepted edit sat in code that every run executes, and exploration ran 88-100% of the
+brute-force executions on evolved lineages; the large savings were shown only on constructed (branched) lineages.
+Phase A5 asks the same questions of lineages that evolution itself produces from seeds with branching control flow.
+Design (all else as Phase A3: prompt v2, proposer thinking on, max_tokens 6144, reasoning text stripped before edits are
+parsed, gates B1 and B3 (repeats 2), seeds 1-4, at most 30 iterations, 2,500 task-runs, the registered splits, CRN
+streams, the D8 real-gain criterion):
+- Seed harnesses (existing files, unchanged): src/editlattice/seed_harnesses/bird_react.py (ReAct agent with schema tools,
+  at most 8 steps), bird_modular.py (capabilities as primitives activated per question by a router), lcb_repair.py
+  (generate, run the public tests, repair up to 3 times). GSM-Hard has no multi-step seed in the code base and is not run.
+- Proposer: Qwen/Qwen3-14B-AWQ under vLLM 0.8.5 on the RTX A4000, sharing the card with the solver (Qwen3-4B-AWQ) during
+  evolution. To fit both, the proposer keeps its KV cache in fp8 (e5m2; e4m3 is not supported on this GPU) and both
+  servers use chunked prefill (proposer 1,024 and solver 2,048 tokens per step); neither changes what a model computes
+  for a request beyond KV-cache rounding in the proposer. The proposer is the 14B model of Phase A3 in another
+  quantisation (AWQ instead of MLX 4-bit), one request at a time (max_in_flight 1, as in A3). The solver gets 768 output
+  tokens on both benchmarks during evolution, as in every evaluation, so the LiveCodeBench mismatch of DEC-16 does not recur.
+- Every held-out gain check (199 BIRD and 85 LiveCodeBench tasks x 4) and every Phase B lattice runs afterwards with the
+  solver alone on the A4000 (scripts/gpu/serve.sh lattice), the build used by all other phases.
+- Phase B on every A5 lineage with accepted edits: statement-level tree exploration, search 60 x 4 and all held-out x 4,
+  exhaustive brute-force audit on 10 search tasks x 1 (every product, with --brute-all above 12 units), fresh-run
+  audit on 10% of held-out (product, cell) pairs, RQ3/RQ4 report.
+Predictions, fixed now:
+- F1: 0 mismatches in every brute-force audit of A5 lineages.
+- F2: summed over the held-out lattices of A5 lineages, exploration runs fewer executions relative to brute force than
+  over the evolved lineages of Phases A to A4 (93%).
+- F3: at least one A5 loop is a real-gain loop (A3, the same proposer model with thinking, had 3 of 24).
+- F4: in the fresh-run audits, no product's replayed and fresh accuracy differ (Fisher p < 0.05) beyond the rate expected
+  by chance at the number of products tested.
+Order: bird_react, bird_modular, lcb_repair; the 8 loops of a seed run concurrently, as in earlier phases. Reported whatever the
+outcome; nothing is tuned on held-out data; no loop is rerun or dropped because of its result.
+Configs: configs/gain_pilot5_{birdreact,birdmodular,lcbrepair}.yaml. Script: scripts/gpu/stage_a5.sh.

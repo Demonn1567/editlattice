@@ -1,7 +1,8 @@
-# Harness Lineages Are Product Lines: code, data and results
+# EditLattice: code, data and results
 
-This material accompanies the submission "Harness Lineages Are Product Lines: Exact, Replay-Coupled
-Attribution, Distillation and Recombination of Self-Evolved Agent Harnesses". It contains the method, the
+This repository accompanies the paper "Which self-made edits matter? Exact attribution for self-improving
+language-model agents through variational replay" by Krish Sharma and Jatin Bedi (Thapar Institute of Engineering and
+Technology). It contains the method, the
 experiment drivers, the registered analysis plan, the decision log and every result file from which the
 paper's numbers, tables and figures are generated.
 
@@ -13,12 +14,12 @@ paper's numbers, tables and figures are generated.
   * `tree.py`: exploration over ordered reads, closed-form attribution from the leaves and exact
     optimisation over the leaves.
   * `attribution.py`, `distill.py`, `estimators.py`: Shapley values, interactions, Möbius dividends, the
-    task bootstrap, distillation with the anytime-valid certificate and the sampled estimators of RQ2.
+    task bootstrap, distillation with the anytime-valid certificate and the sampled Shapley estimators compared in the paper.
   * `evolution/`, `proposers/`, `gates/`: the evolution loop, the proposer and the acceptance gates.
   * `benchmarks/`, `seed_harnesses/`: GSM-Hard, LiveCodeBench and BIRD, and the seed harnesses.
 * `examples/`: the planted lineage, the constructed lineages and the branched lineages.
 * `tests/`: 113 tests, including fuzz tests of exactness, negative controls and a regression test for every
-  defect listed in the paper's deviations appendix.
+  defect listed in the deviations section of the supplementary material.
 * `notes/preregistration.md`: the analysis plan and its addenda, each committed before the runs it governs.
 * `notes/decisions.md`: every deviation from the plan (DEC-1 to DEC-20) with its evidence.
 * `notes/theory.md`: proofs.
@@ -47,7 +48,7 @@ Qwen3-4B-AWQ (see `configs/`).
 | --- | --- |
 | Every number and main-text table | `python scripts/paper_numbers.py` |
 | Every figure | `python scripts/make_figures.py` |
-| Appendix tables and listings, the worked example and the registered predictions | `python scripts/export_appendix.py` |
+| Supplementary tables and listings, the worked example and the registered predictions | `python scripts/export_appendix.py` |
 | Sizes of the pooled lattices | `python scripts/pool_sizes.py` |
 | Summaries of the branched lineages and of the pooled-lattice audits | `python scripts/branched_summary.py` and `python scripts/pool_audit_summary.py`, which read the lattice files written by the stage scripts |
 
@@ -60,3 +61,11 @@ The stage scripts in `scripts/gpu/` run the study on one 16 GB GPU. The 14B prop
 the MLX build of the exploratory Llama runs used a separate machine; `scripts/mac_llama_transfer2.sh` and the helpers in
 `runs/` were used there. `scripts/run_evolution.py` runs one evolution loop, and `scripts/run_lattice.py`
 explores one lattice (`--brute` adds the exhaustive audit).
+
+Phase A5 (evolution from multi-step seed harnesses) was registered in `notes/preregistration.md` on 2026-11-24 and
+runs from `scripts/gpu/stage_a5.sh` with the `configs/gain_pilot5_*.yaml` settings; its results are added to
+`results/` when the runs finish.
+
+## Citation and licence
+
+`CITATION.cff` gives the citation. The code and the result files are released under the MIT licence (`LICENSE`).

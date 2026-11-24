@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this software or these results, please cite them as below."
+title: "EditLattice: code, data and results for exact attribution of self-improving language-model agents through variational replay"
+type: software
+authors:
+  - family-names: Sharma
+    given-names: Krish
+    affiliation: "Department of Computer Science and Engineering, Thapar Institute of Engineering and Technology, Patiala, India"
+  - family-names: Bedi
+    given-names: Jatin
+    email: jatin.bedi@thapar.edu
+    affiliation: "Department of Computer Science and Engineering, Thapar Institute of Engineering and Technology, Patiala, India"
+license: MIT
+repository-code: "https://github.com/Demonn1567/editlattice"
+keywords:
+  - attribution
+  - Shapley values
+  - language-model agents
+  - self-improvement
+  - replay

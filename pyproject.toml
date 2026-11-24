@@ -2,6 +2,8 @@
 name = "editlattice"
 version = "0.1.0"
 description = "Attribution, distillation and recombination of self-evolved agent harness lineages"
+license = {text = "MIT"}
+authors = [{name = "Krish Sharma"}, {name = "Jatin Bedi", email = "jatin.bedi@thapar.edu"}]
 requires-python = ">=3.11"
 dependencies = [
     "httpx>=0.27",

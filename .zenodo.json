@@ -1,0 +1,12 @@
+{
+  "title": "EditLattice: code, data and results for exact attribution of self-improving language-model agents through variational replay",
+  "upload_type": "software",
+  "description": "Code, registered analysis plan, decision log and every result file behind the paper \"Which self-made edits matter? Exact attribution for self-improving language-model agents through variational replay\". The scripts regenerate every number, table and figure of the paper from the stored results.",
+  "creators": [
+    {"name": "Sharma, Krish", "affiliation": "Thapar Institute of Engineering and Technology"},
+    {"name": "Bedi, Jatin", "affiliation": "Thapar Institute of Engineering and Technology"}
+  ],
+  "license": "MIT",
+  "keywords": ["attribution", "Shapley values", "language-model agents", "self-improvement", "replay"],
+  "access_right": "open"
+}

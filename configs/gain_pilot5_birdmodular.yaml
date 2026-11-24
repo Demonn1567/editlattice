@@ -1,0 +1,29 @@
+# Phase A5 gain pilot (pre-registered addendum 2026-11-24): Phase A3 from a multi-step seed, proposer and solver on the A4000.
+experiment: gain_pilot5_birdmodular
+benchmark: bird
+seed_harness: src/editlattice/seed_harnesses/bird_modular.py
+n_search: 60
+n_validation: 40
+n_streams: 1000
+k_char: 4
+max_iterations: 30
+total_budget_runs: 2500
+proposers: [metaharness]
+gates:
+- name: B1
+- name: B3
+  repeats: 2
+seeds: [1, 2, 3, 4]
+parallel_jobs: 8
+seed_mode: request
+backend: {name: vllm-local, base_url: http://localhost:8000/v1, model: Qwen/Qwen3-4B-AWQ}
+proposer_backend: {name: vllm-a4000-proposer, base_url: http://localhost:8100/v1, model: Qwen/Qwen3-14B-AWQ, max_in_flight: 1, timeout_seconds: 2700}
+params: {temperature: 0.7, top_p: 0.95, max_tokens: 768, chat_template_kwargs: {enable_thinking: false}}
+proposer_params: {temperature: 0.7, top_p: 0.95, max_tokens: 6144, chat_template_kwargs: {enable_thinking: true}}
+max_llm_calls: 12
+tuned_choices:
+  B1: gate_greedy()
+  B3: gate_self_harness(repeats=2)
+proposer_prompt_version: 2
+proposer_accept_diff: true
+proposer_strip_thinking: true
