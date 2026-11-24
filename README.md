@@ -1,5 +1,7 @@
 # EditLattice: code, data and results
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24512751.svg)](https://doi.org/10.5281/zenodo.24512751)
+
 This repository accompanies the paper "Which self-made edits matter? Exact attribution for self-improving
 language-model agents through variational replay" by Krish Sharma and Jatin Bedi (Thapar Institute of Engineering and
 Technology). It contains the method, the
@@ -68,4 +70,5 @@ runs from `scripts/gpu/stage_a5.sh` with the `configs/gain_pilot5_*.yaml` settin
 
 ## Citation and licence
 
-`CITATION.cff` gives the citation. The code and the result files are released under the MIT licence (`LICENSE`).
+The archived versions are on Zenodo under the DOI 10.5281/zenodo.24512751, which always resolves to the latest
+version. `CITATION.cff` gives the citation. The code and the result files are released under the MIT licence (`LICENSE`).
